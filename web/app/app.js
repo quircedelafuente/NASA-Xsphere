@@ -19,7 +19,10 @@ const EXPLAIN = [
   'Pluto was found in 1930 by blinking two photos of the same patch of sky. This is the same idea, in infrared.',
 ];
 const CLASS_LABEL = { 'known-star': 'known star', 'known-asteroid': 'known asteroid', variable: 'variable', artefact: 'artefact',
-  'candidate-mover': 'candidate mover', 'candidate-change': 'candidate change' };
+  'candidate-mover': 'candidate mover', 'candidate-change': 'candidate change', 'unknown-static': 'unidentified static' };
+// chunk B report (processing/discovery): position per visit, motion significance
+const srcXY = (s, v) => { const p = s.positions?.find(q => q.visit === v) || s.positions?.[0] || s; return [p.x, p.y]; };
+const srcSig = s => s.max_sigma ?? s.motion?.sig ?? null;
 
 let aladin = null, overlay = null, cat = null, targets = [];
 let V = null;            // current result: {kind, title, bands:{band: {base, man, imgs, diffs}}, band, report, target}
@@ -135,8 +138,8 @@ function scanZone(ra, dec, w, h) {
   const dra = w / 120 / Math.cos(dec * Math.PI / 180), ddec = h / 120;
   overlay?.add(A.polygon([[ra - dra, dec - ddec], [ra + dra, dec - ddec], [ra + dra, dec + ddec], [ra - dra, dec + ddec]]));
   runJob(post('/scan', { box: { ra_deg: ra, dec_deg: dec, w_arcmin: w, h_arcmin: h }, band: 'D4' }), async j => {
-    const bands = { [j.report.band]: await loadBundle(j.report.bundle) };
-    cat?.addSources(j.report.sources.filter(s => s.class !== 'artefact').map(s => A.source(s.ra_deg, s.dec_deg, { name: s.id })));
+    const bands = j.report.bundle ? { D4: await loadBundle(j.report.bundle) } : {};
+    cat?.addSources(j.report.sources.filter(s => s.class !== 'artefact').map(s => { const p = s.positions?.[0] || s; return A.source(p.ra_deg, p.dec_deg, { name: s.id }); }));
     present({ kind: 'scan', title: `Zone ${w.toFixed(1)}′ × ${h.toFixed(1)}′`, bands, report: j.report, warnings: [], center: { ra_deg: ra, dec_deg: dec } });
   });
 }
@@ -191,7 +194,8 @@ function draw() {
     }
     if (V.report) for (const s of V.report.sources) {
       if (s.class === 'artefact' && picked !== s.id) continue;
-      const X = (s.x + .5) * S, Y = (N - 1 - s.y + .5) * S;
+      const [sx, sy] = srcXY(s, ep); const k = N / (V.report.zone ? Math.round(V.report.zone.w_arcmin * 60 / 3.075) : N);
+      const X = (sx * k + .5) * S, Y = (N - 1 - sy * k + .5) * S;
       g.strokeStyle = picked === s.id ? '#f0a43a' : (s.class.startsWith('candidate') ? '#c792ff' : 'rgba(92,196,137,.8)');
       g.lineWidth = picked === s.id ? 3 : 1.5; g.beginPath(); g.arc(X, Y, 14, 0, 7); g.stroke();
     }
@@ -216,12 +220,12 @@ function renderScan() {
   show('#scanCard', V.kind === 'scan'); if (V.kind !== 'scan') return;
   const r = V.report, s = r.summary;
   $('#scanText').textContent = r.summary_text;
-  $('#counts').innerHTML = [['known-star', s.known_star], ['known-asteroid', s.known_asteroid], ['variable', s.variable], ['candidate', s.candidate], ['artefact', s.artefact]]
+  $('#counts').innerHTML = [['known-star', s.known_star], ['known-asteroid', s.known_asteroid], ['variable', s.variable], ['candidate', s.candidate], ['unknown-static', s.unknown_static], ['artefact', s.artefact]]
     .filter(x => x[1]).map(([k, n]) => `<span class="pill p-${k}">${n} ${CLASS_LABEL[k] || 'candidates'}</span>`).join('');
-  $('#sources').innerHTML = r.sources.map(x => `<li data-id="${x.id}"><span><span class="pill p-${x.class}">${CLASS_LABEL[x.class] || x.class}</span> <span class="mono note">${Math.round(x.max_sigma)}σ · ${Math.round(x.confidence * 100)}%</span></span><span class="why">${x.reason}</span></li>`).join('');
-  $('#scanMethod').textContent = `Checked: Gaia ${r.checks.gaia}, known asteroids ${r.checks.asteroids}. ${r.photos_used} of ${r.photos_available} photos, ${r.visits} visits. "Candidate" means unexplained so far, not a discovery.`;
+  $('#sources').innerHTML = r.sources.map(x => `<li data-id="${x.id}"><span><span class="pill p-${x.class}">${CLASS_LABEL[x.class] || x.class}</span> <span class="mono note">${srcSig(x) != null ? Math.round(srcSig(x)) + 'σ · ' : ''}${Math.round(x.confidence * 100)}%${x.motion?.speed_arcsec_yr ? ' · ' + x.motion.speed_arcsec_yr.toFixed(2) + '″/yr ' + (x.motion.direction || '') : ''}</span></span><span class="why">${x.reason}</span></li>`).join('');
+  $('#scanMethod').textContent = `Checked against Gaia DR3, CatWISE, AllWISE, 2MASS and known asteroids. ${r.photos_used ?? '?'} of ${r.photos_available ?? '?'} photos, ${Array.isArray(r.visits) ? r.visits.length : r.visits} visits${r.first_date ? ` (${r.first_date} to ${r.last_date})` : ''}. "Candidate" means unexplained so far, not a discovery.`;
 }
-$('#sources').onclick = e => { const li = e.target.closest('li'); if (!li) return; picked = li.dataset.id; const s = V.report.sources.find(x => x.id === picked);
+$('#sources').onclick = e => { const li = e.target.closest('li'); if (!li) return; picked = li.dataset.id; const s0 = V.report.sources.find(x => x.id === picked); const s = s0.positions?.[0] || s0;
   document.querySelectorAll('#sources li').forEach(x => x.setAttribute('aria-current', x === li)); mapGo(s.ra_deg, s.dec_deg, 0.05); mode = 'diff';
   document.querySelectorAll('#modes button').forEach(x => x.setAttribute('aria-pressed', x.dataset.m === 'diff')); draw(); };
 

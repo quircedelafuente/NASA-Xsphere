@@ -1,4 +1,5 @@
 """A6 · HTTP API (contract I1). Run: uvicorn engine.api:app --app-dir backend --port 8000"""
+import json, math
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -90,15 +91,115 @@ def obj(tid: str):
 def targets():
     return [dict(id=t['id'], name=t['name'], kind=t['kind'], default_band=t['default_band']) for t in config.targets()]
 
+# ---------- C4 bundles for the product UI (web/, Niklas): pre-built (processing) + live (engine), one URL scheme ----------
+# Niklas's data layer (web/src/ui/lib/data.ts) reads /bundles/index.json, /bundles/<id>/meta.json, /bundles/<id>/<band>/manifest.json,
+# frame files, /bundles/<id>/spectrum.json and /bundles/flags.json. Pre-built bundles lack meta/spectrum and nest the WCS under
+# `grid`, so this adapter fills those in without changing processing's files. Live results appear as id "live-<job key>".
+from fastapi.responses import FileResponse, JSONResponse
+PREBUILT = config.ROOT / 'web' / 'public' / 'bundles'
+REPORTS = config.ROOT / 'processing' / 'discovery' / 'reports'
+
+def _bundle_dir(bid: str):
+    if bid.startswith('live-'):
+        d = config.CACHE / 'live' / bid[5:]
+    else:
+        d = PREBUILT / bid
+    if '..' in bid or '/' in bid or not d.exists():
+        raise HTTPException(404, dict(error='not-found', message=f'No bundle "{bid}".'))
+    return d
+
+def _norm_manifest(m: dict) -> dict:
+    g = m.get('grid', {})
+    m.setdefault('nx', g.get('nx')); m.setdefault('ny', g.get('ny')); m.setdefault('wcs', g.get('wcs'))
+    lam = m.get('lam_range_um') or [None, None]
+    for f in m.get('frames', []):
+        if lam[0] is not None:
+            f.setdefault('lam_mean_um', round((lam[0] + lam[1]) / 2, 3))
+    return m
+
+@app.get('/bundles/index.json')
+def b_index():
+    idx = json.loads((PREBUILT / 'index.json').read_text()) if (PREBUILT / 'index.json').exists() else []
+    kinds = {t['id']: t['kind'] for t in config.targets()}
+    for e in idx:
+        e['kind'] = kinds.get(e['id'], e.get('kind'))
+    return idx
+
+@app.get('/bundles/flags.json')
+def b_flags():
+    return config.flags_dictionary() or {}
+
+@app.get('/bundles/{bid}/meta.json')
+def b_meta(bid: str):
+    d = _bundle_dir(bid)
+    t = next((x for x in config.targets() if x['id'] == bid), None)
+    if t is None:   # live result: describe the field
+        j = json.loads((d / 'job.json').read_text()) if (d / 'job.json').exists() else {}
+        c = j.get('center') or j.get('box') or {}
+        t = dict(id=bid, name=(j.get('target') or {}).get('name') or f"Field {c.get('ra_deg', 0):.4f} {c.get('dec_deg', 0):+.4f}",
+                 aliases=[], kind='custom', ra_deg=c.get('ra_deg'), dec_deg=c.get('dec_deg'), ref_epoch=2016.0,
+                 pmra_masyr=0.0, pmdec_masyr=0.0, default_band=next(iter((j.get('bands') or {'D4': 1})), 'D4'))
+    mans = sorted(d.glob('*/manifest.json'))
+    m = json.loads(mans[0].read_text()) if mans else {'frames': []}
+    epochs = [dict(id=f['epoch'], label=f.get('label', ''), mjd_start=f['mjd'], mjd_end=f['mjd'], n=f.get('n_exposures')) for f in m['frames']]
+    return {**t, 'epochs': epochs, 'release': config.COLLECTIONS}
+
+@app.get('/bundles/{bid}/spectrum.json')
+def b_spectrum(bid: str):
+    p = REPORTS / f'{bid}.json'
+    if bid.startswith('live-'):
+        p = _bundle_dir(bid) / 'report.json'
+    if not p.exists():
+        raise HTTPException(404, dict(error='not-found', message='No spectrum for this object yet.'))
+    r = json.loads(p.read_text())
+    t = next((x for x in config.targets() if x['id'] == bid), None)
+    src = r['sources'][0] if r.get('sources') else None
+    if t and r.get('sources'):
+        # the target's own source: same Gaia id in the cross-match, else nearest to its motion-corrected position at that visit
+        gid = (t.get('astrometry_source') or '').replace('Gaia DR3 ', '')
+        hit = [s for s in r['sources'] if any(str(c.get('id')) == gid for c in s.get('crossmatch', []))] if gid.isdigit() else []
+        if hit:
+            src = hit[0]
+        else:
+            def d(s):
+                p0 = s['positions'][0]; ra, dec = R.propagate(t, 2000.0 + (p0['mjd'] + 2400000.5 - 2451545.0) / 365.25)
+                return 9e9 if s.get('class') == 'artefact' else math.hypot((p0['ra_deg'] - ra) * math.cos(math.radians(dec)), p0['dec_deg'] - dec)
+            src = min(r['sources'], key=d)
+    pts = [dict(wl_um=x['lam_um'], bw_um=0.0, flux=x['flux'], err=x['err'], mjd=next((p['mjd'] for p in src['positions'] if p['visit'] == x['visit']), 0),
+                epoch=x['visit'], det=x['band'], flagged=x.get('quality') not in (None, 'ok')) for x in (src or {}).get('spectrum', [])]
+    return dict(target_id=bid, aperture_px=3, units='µJy (aperture photometry, processing/discovery)', points=pts,
+                official_tool='https://irsa.ipac.caltech.edu/applications/spherex/tool-spectrophotometry')
+
+@app.get('/bundles/{bid}/{band}/manifest.json')
+def b_manifest(bid: str, band: str):
+    p = _bundle_dir(bid) / band / 'manifest.json'
+    if '..' in band or not p.exists():
+        raise HTTPException(404, dict(error='not-found', message=f'No band {band} for "{bid}".'))
+    return JSONResponse(_norm_manifest(json.loads(p.read_text())))
+
+@app.get('/bundles/{bid}/{band}/{name}')
+def b_file(bid: str, band: str, name: str):
+    p = _bundle_dir(bid) / band / name
+    if '..' in band + name or '/' in name or not p.is_file():
+        raise HTTPException(404)
+    return FileResponse(p)
+
+@app.get('/reports/{bid}.json')
+def b_report(bid: str):
+    p = (_bundle_dir(bid) / 'report.json') if bid.startswith('live-') else REPORTS / f'{bid}.json'
+    if not p.exists():
+        raise HTTPException(404, dict(error='not-found', message='No scan report for this object yet.'))
+    return FileResponse(p)
+
 # results: live bundles + reports (engine cache) and the pre-built bundles (processing) — same C4 format
 (config.CACHE / 'live').mkdir(parents=True, exist_ok=True)
 app.mount('/live', StaticFiles(directory=config.CACHE / 'live'), name='live')
-_prebuilt = config.ROOT / 'web' / 'public' / 'bundles'
-if _prebuilt.exists():
-    app.mount('/bundles', StaticFiles(directory=_prebuilt), name='bundles')
 _lib3d = config.ROOT / 'web' / 'lib3d'
 if _lib3d.exists():
     app.mount('/lib3d', StaticFiles(directory=_lib3d), name='lib3d')
-_appdir = config.ROOT / 'web' / 'app'
-if _appdir.exists():
-    app.mount('/', StaticFiles(directory=_appdir, html=True), name='app')   # the app screen (mounted last: catches /)
+_explore = config.ROOT / 'web' / 'app'
+if _explore.exists():
+    app.mount('/explore', StaticFiles(directory=_explore, html=True), name='explore')   # any spot + zone scans (engine UI)
+_dist = config.ROOT / 'web' / 'dist'
+if _dist.exists():
+    app.mount('/', StaticFiles(directory=_dist, html=True), name='product')   # Niklas's product UI build (npm run build)
