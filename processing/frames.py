@@ -109,11 +109,11 @@ def process_exposure(exp, center, grid_wcs, shape, half):
             "det": exp["det"], "epoch": exp["epoch"], "obs_id": exp["obs_id"]}
 
 
-def build_frames(target, exps, center=None, workers=8, log=print):
+def build_frames(target, exps, center=None, workers=8, log=print, nx=None, ny=None):
     """Returns (grid_wcs, shape, frames) where frames is a list of per-epoch co-adds."""
     mjds = np.array([e["mjd"] for e in exps])
     center = center or sky_at(target, float(mjds.mean()))
-    grid_wcs, shape = common_grid(center)
+    grid_wcs, shape = common_grid(center, nx, ny)
     half = int(np.ceil(max(shape) * 0.75)) + 4                 # covers the rotated grid
     log(f"{len(exps)} exposures, grid {shape[1]}x{shape[0]} centred at "
         f"{center.ra.deg:.5f} {center.dec.deg:+.5f}; reading sections from S3 ...")
