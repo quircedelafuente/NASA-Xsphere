@@ -6,7 +6,8 @@ const show = (id, on = true) => { $(id).hidden = !on; };
 const API = '';                                  // same origin as the engine (uvicorn serves this folder)
 const SURVEYS = {
   spherex: 'https://irsa.ipac.caltech.edu/data/hips/SPHEREx/spherex_allsky_cube',   // NASA SPHEREx all-sky (DR1)
-  wise: 'CDS/P/unWISE/color-W2-W1W2-W1', dss: 'CDS/P/DSS2/color',
+  // by URL from IRSA mirrors: CDS's own tile server (alasky) answered 404 on the IE network
+  wise: 'https://irsa.ipac.caltech.edu/data/hips/CDS/2MASS/Color', dss: 'https://irsa.ipac.caltech.edu/data/hips/CDS/DSS2/color',
 };
 let APPEAR = {};   // web/lib3d/appearance.json: 3D dials per target, each tagged with how we know it
 const EXPLAIN = [
@@ -36,17 +37,16 @@ const post = (p, body) => api(p, { method: 'POST', headers: { 'Content-Type': 'a
 async function initMap() {
   try {
     await A.init;
-    aladin = A.aladin('#map', { fov: 2, target: '269.45 4.77', cooFrame: 'ICRSd', showReticle: false, showCooGridControl: true,
+    aladin = A.aladin('#map', { log: false, fov: 2, target: '269.45 4.77', cooFrame: 'ICRSd', showReticle: false, showCooGridControl: true,
       showProjectionControl: false, showFullscreenControl: false, showLayersControl: false, showSimbadPointerControl: false });
-    setSurvey('spherex');
+    setSurvey('dss');   // SPHEREx cube tiles render near-black with the default stretch
     overlay = A.graphicOverlay({ color: '#f0a43a', lineWidth: 2 }); aladin.addOverlay(overlay);
     cat = A.catalog({ name: 'Scan', sourceSize: 16, color: '#c792ff', shape: 'circle' }); aladin.addCatalog(cat);
   } catch (e) { $('#maphint').textContent = 'The sky map could not load (check the internet connection). Search still works.'; }
 }
 function setSurvey(k) {
   if (!aladin) return;
-  try { aladin.setBaseImageLayer(k === 'spherex' ? A.imageHiPS(SURVEYS.spherex, { name: 'SPHEREx' }) : aladin.newImageSurvey(SURVEYS[k])); }
-  catch { try { aladin.setImageSurvey(SURVEYS[k]); } catch { /* keep current */ } }
+  try { aladin.setBaseImageLayer(A.imageHiPS(SURVEYS[k], { name: k })); } catch { /* keep current */ }
   document.querySelectorAll('#surveys button').forEach(b => b.setAttribute('aria-pressed', b.dataset.s === k));
 }
 $('#surveys').onclick = e => { const b = e.target.closest('button'); if (b) setSurvey(b.dataset.s); };
