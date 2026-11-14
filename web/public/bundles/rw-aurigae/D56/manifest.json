@@ -1,0 +1,289 @@
+{
+ "target_id": "rw-aurigae",
+ "name": "RW Aurigae",
+ "band": "D56",
+ "lam_range_um": [
+  3.83,
+  5.0
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    76.956089860723,
+    30.401127055551
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.03072,
+  "vmax": 7.08062,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "Sep 2025",
+   "mjd": 60931.8138,
+   "date": "2025-09-13",
+   "n_exposures": 37,
+   "detectors": [
+    "D5",
+    "D6"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    76.956089,
+    30.401131
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 1,
+   "label": "Feb 2026",
+   "mjd": 61099.9638,
+   "date": "2026-02-28",
+   "n_exposures": 38,
+   "detectors": [
+    "D5",
+    "D6"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    76.95609,
+    30.401127
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 2,
+   "label": "Sep 2026",
+   "mjd": 61297.0777,
+   "date": "2026-09-14",
+   "n_exposures": 37,
+   "detectors": [
+    "D5",
+    "D6"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    76.95609,
+    30.401123
+   ],
+   "saturated_at_target": true
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 32,
+     "y": 31,
+     "sigma": 10.1,
+     "npix": 4,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 29,
+     "y": 33,
+     "sigma": -6.8,
+     "npix": 8,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 29,
+     "y": 29,
+     "sigma": -6.6,
+     "npix": 6,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 25,
+     "y": 27,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 33,
+     "y": 33,
+     "sigma": -7.8,
+     "npix": 33,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 31,
+     "sigma": 7.5,
+     "npix": 2,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 23,
+     "y": 32,
+     "sigma": -5.4,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 25,
+     "sigma": -5.4,
+     "npix": 5,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 39,
+     "y": 31,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 37,
+     "y": 28,
+     "sigma": -5.0,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 33,
+     "y": 33,
+     "sigma": -7.8,
+     "npix": 34,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 32,
+     "y": 28,
+     "sigma": -5.9,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 25,
+     "sigma": -5.6,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 39,
+     "y": 28,
+     "sigma": -5.2,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 39,
+     "y": 36,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60931.8138,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61099.9638,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61297.0777,
+   "x": 31.5,
+   "y": 31.5
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": [
+  "saturated core: brightness at the target is not reliable; use the difference view / a redder band"
+ ]
+}

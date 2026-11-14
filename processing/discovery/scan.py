@@ -122,7 +122,7 @@ def scan(stacks_dir, network=True, thr=5.0, max_pm_arcsec_yr=12.0, log=print):
     zone = {"ra_deg": round(ra0, 6), "dec_deg": round(dec0, 6), "w_arcmin": round(w_arcmin, 2), "h_arcmin": round(ny * stk["pix"] / 60, 2)}
     info = {"detection_sigma": thr, "psf_fwhm_px": round(fwhm, 2), "link_tolerance_px": round(linfo["tol_px"], 2),
             "max_motion_arcsec_yr": max_pm_arcsec_yr, "rules": Rr.get("_source"), "names_from": xinfo["name_source"],
-            "catalog_counts": xinfo["catalog_counts"], "pixel_arcsec": stk["pix"], "stacks": stk["dir"],
+            "catalog_counts": xinfo["catalog_counts"], "catalog_sources": xinfo.get("catalog_sources", {}), "pixel_arcsec": stk["pix"], "stacks": stk["dir"],
             "runtime_s": round(time.time() - t_start, 1)}
     rep = R.build(zone, stk, sources, info)
     log(f"  B7 {rep['summary']}")

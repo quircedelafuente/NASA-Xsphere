@@ -1,0 +1,241 @@
+{
+ "target_id": "barnards-star",
+ "name": "Barnard's Star",
+ "band": "D56",
+ "lam_range_um": [
+  3.83,
+  5.0
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    269.44622456884,
+    4.768767364906
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.02921,
+  "vmax": 23.85021,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "Aug 2025",
+   "mjd": 60911.0151,
+   "date": "2025-08-24",
+   "n_exposures": 35,
+   "detectors": [
+    "D5",
+    "D6"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.43,
+    32.43
+   ],
+   "target_radec": [
+    269.446348,
+    4.76718
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 1,
+   "label": "Mar 2026",
+   "mjd": 61123.2183,
+   "date": "2026-03-24",
+   "n_exposures": 43,
+   "detectors": [
+    "D5",
+    "D6"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.5,
+    31.45
+   ],
+   "target_radec": [
+    269.446218,
+    4.768852
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 2,
+   "label": "Aug 2026",
+   "mjd": 61273.0419,
+   "date": "2026-08-21",
+   "n_exposures": 41,
+   "detectors": [
+    "D5",
+    "D6"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.56,
+    30.76
+   ],
+   "target_radec": [
+    269.446126,
+    4.770033
+   ],
+   "saturated_at_target": true
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 31,
+     "y": 30,
+     "sigma": 9.5,
+     "npix": 19,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 34,
+     "sigma": -9.2,
+     "npix": 22,
+     "kind": "moved",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 32,
+     "y": 30,
+     "sigma": 11.7,
+     "npix": 49,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 34,
+     "sigma": -11.7,
+     "npix": 48,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 33,
+     "y": 29,
+     "sigma": 8.4,
+     "npix": 18,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 29,
+     "y": 33,
+     "sigma": -7.5,
+     "npix": 16,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 44,
+     "y": 27,
+     "sigma": 5.2,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 17,
+     "y": 35,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 16,
+     "y": 34,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60911.0151,
+   "x": 31.43,
+   "y": 32.43
+  },
+  {
+   "mjd": 61123.2183,
+   "x": 31.5,
+   "y": 31.45
+  },
+  {
+   "mjd": 61273.0419,
+   "x": 31.56,
+   "y": 30.76
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": [
+  "saturated core: brightness at the target is not reliable; use the difference view / a redder band"
+ ]
+}

@@ -1,0 +1,350 @@
+{
+ "target_id": "rw-aurigae",
+ "name": "RW Aurigae",
+ "band": "D2",
+ "lam_range_um": [
+  1.1,
+  1.62
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    76.95608985923,
+    30.401127068906
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.03372,
+  "vmax": 5.62157,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "Sep 2025",
+   "mjd": 60927.4224,
+   "date": "2025-09-09",
+   "n_exposures": 18,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    76.956089,
+    30.401131
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 1,
+   "label": "Mar 2026",
+   "mjd": 61103.4603,
+   "date": "2026-03-04",
+   "n_exposures": 19,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    76.95609,
+    30.401127
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 2,
+   "label": "Sep 2026",
+   "mjd": 61296.093,
+   "date": "2026-09-13",
+   "n_exposures": 18,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    76.95609,
+    30.401123
+   ],
+   "saturated_at_target": true
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 34,
+     "y": 31,
+     "sigma": 6.8,
+     "npix": 15,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 61,
+     "y": 9,
+     "sigma": -6.0,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 22,
+     "y": 48,
+     "sigma": 5.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 45,
+     "sigma": 5.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 32,
+     "sigma": -5.7,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 25,
+     "y": 46,
+     "sigma": 5.6,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 31,
+     "sigma": 5.3,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 29,
+     "y": 28,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 36,
+     "y": 5,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 62,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 30,
+     "y": 31,
+     "sigma": 7.1,
+     "npix": 5,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 32,
+     "sigma": 6.0,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 37,
+     "y": 3,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 27,
+     "y": 32,
+     "sigma": 8.2,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 22,
+     "y": 48,
+     "sigma": -6.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 45,
+     "sigma": -6.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 37,
+     "y": 30,
+     "sigma": -6.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 34,
+     "y": 31,
+     "sigma": -5.9,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 33,
+     "sigma": -5.7,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 37,
+     "y": 4,
+     "sigma": -5.7,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 61,
+     "y": 9,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 25,
+     "y": 46,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 26,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60927.4224,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61103.4603,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61296.093,
+   "x": 31.5,
+   "y": 31.5
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": [
+  "saturated core: brightness at the target is not reliable; use the difference view / a redder band"
+ ]
+}

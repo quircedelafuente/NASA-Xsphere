@@ -36,25 +36,90 @@ def _cached(key, fn):
     return val
 
 
-def query_irsa(name, ra, dec, radius_deg):
+# Backups with the same data when IRSA's catalogue service is down (it was, 14 Nov 2026). Rows come back with the
+# CATS column names, so the matching below does not care where they came from.
+IRSA_TIMEOUT = 30                                          # s; then try the backup instead of retrying for minutes
+VIZIER = "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv"   # Harvard mirror (Strasbourg timed out on IE Wi-Fi)
+VIZ = {"CatWISE2020": ("II/365/catwise", {"source_name": "Name", "ra": "RA_ICRS", "dec": "DE_ICRS", "pmra": "pmRA",
+                                          "pmdec": "pmDE", "w1mpro": "W1mproPM", "w2mpro": "W2mproPM", "meanobsmjd": "MJD"},
+                       ("W2mproPM", "<16")),
+       "AllWISE": ("II/328/allwise", {"designation": "AllWISE", "ra": "RAJ2000", "dec": "DEJ2000", "pmra": "pmRA",
+                                      "pmdec": "pmDE", "w1mpro": "W1mag", "w2mpro": "W2mag"}, ("W2mag", "<16")),
+       "2MASS": ("II/246/out", {"designation": "2MASS", "ra": "RAJ2000", "dec": "DEJ2000", "k_m": "Kmag", "jdate": "JD"},
+                 ("Kmag", "<15"))}
+
+
+def _num(x):
+    x = x.strip()
+    if x == "":
+        return None
+    for f in (int, float):
+        try:
+            return f(x)
+        except ValueError:
+            pass
+    return x
+
+
+def _irsa(q):
+    from concurrent.futures import ThreadPoolExecutor
     from astroquery.ipac.irsa import Irsa
+    pool = ThreadPoolExecutor(1)
+    try:
+        t = pool.submit(lambda: Irsa.query_tap(q).to_table()).result(timeout=IRSA_TIMEOUT)
+    finally:
+        pool.shutdown(wait=False)                          # a hung IRSA call is left behind, not waited for
+    return [{c: (None if np.ma.is_masked(r[c]) else (r[c].item() if hasattr(r[c], "item") else str(r[c])))
+             for c in t.colnames} for r in t]
+
+
+def _esa_gaia(q):
+    import csv, io
+    r = requests.get("https://gea.esac.esa.int/tap-server/tap/sync", timeout=60,
+                     params={"REQUEST": "doQuery", "LANG": "ADQL", "FORMAT": "csv",
+                             "QUERY": q.replace("gaia_dr3_source", "gaiadr3.gaia_source")})
+    r.raise_for_status()
+    return [{k: _num(v) for k, v in row.items()} for row in csv.DictReader(io.StringIO(r.text))]
+
+
+def _vizier(name, ra, dec, radius_deg):
+    src, cols, (ck, cv) = VIZ[name]
+    r = requests.get(VIZIER, timeout=60, params={"-source": src, "-c": f"{ra:.6f} {dec:+.6f}", "-c.rd": f"{radius_deg:.5f}",
+                                                 "-out": ",".join(cols.values()), "-out.max": "unlimited", "-mime": "tsv", ck: cv})
+    r.raise_for_status()
+    lines = [ln for ln in r.text.splitlines() if ln.strip() and not ln.startswith("#")]
+    inv = {v: k for k, v in cols.items()}
+    head = lines[0].split("\t") if lines else []
+    if "ra" not in [inv.get(h) for h in head]:
+        raise RuntimeError(f"VizieR {src}: unexpected reply")
+    return [{inv[h]: _num(x) for h, x in zip(head, ln.split("\t")) if h in inv} for ln in lines[3:]]   # header, units, dashes
+
+
+def query_catalog(name, ra, dec, radius_deg):
+    """(rows, source): IRSA first, then the backup (ESA for Gaia, VizieR Harvard for the rest). ([], 'unavailable') if all fail."""
     tab, cols, cut, _ = CATS[name]
     q = (f"SELECT {cols} FROM {tab} WHERE CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',{ra:.6f},{dec:.6f},{radius_deg:.5f}))=1"
          f" AND {cut}")
+    key = f"{name}|{ra:.5f}|{dec:.5f}|{radius_deg:.4f}"
+    old = CACHE / (hashlib.md5(key.encode()).hexdigest() + ".json")   # IRSA results cached before backups existed
+    if old.exists():
+        return json.loads(old.read_text()), "IRSA"
+    backup = ("ESA Gaia archive", lambda: _esa_gaia(q)) if name == "Gaia DR3" else \
+             ("VizieR (Harvard mirror)", lambda: _vizier(name, ra, dec, radius_deg))
 
     def run():
-        for k in range(3):
+        for src, fn in (("IRSA", lambda: _irsa(q)), backup, backup):   # backup twice: the mirror sometimes fails once
             try:
-                t = Irsa.query_tap(q).to_table()
-                rows = []
-                for r in t:
-                    rows.append({c: (None if np.ma.is_masked(r[c]) else (r[c].item() if hasattr(r[c], "item") else str(r[c])))
-                                 for c in t.colnames})
-                return rows
+                return {"rows": fn(), "source": src}
             except Exception:
-                time.sleep(3 * (k + 1))
+                continue
         return None
-    return _cached(f"{name}|{ra:.5f}|{dec:.5f}|{radius_deg:.4f}", run) or []
+    v = _cached("v2|" + key, run)
+    return (v["rows"], v["source"]) if v else ([], "unavailable")
+
+
+def query_irsa(name, ra, dec, radius_deg):
+    return query_catalog(name, ra, dec, radius_deg)[0]
 
 
 def skybot(ra, dec, radius_deg, mjd):
@@ -123,12 +188,12 @@ def _propagate(ra, dec, pmra, pmdec, ep0, ep1):
 def crossmatch(tracks, stk, ra0, dec0, radius_deg, network=True, log=print):
     """Adds t['crossmatch'] (list) and t['cat_pm'] (best catalogue pm) to each track (tracks carry sky motion)."""
     years = stk["year"]
-    cats = {}
+    cats, cat_src = {}, {}
     if network:
         for name in CATS:
             t0 = time.time()
-            cats[name] = query_irsa(name, ra0, dec0, radius_deg)
-            log(f"    {name}: {len(cats[name])} sources ({time.time() - t0:.0f}s)")
+            cats[name], cat_src[name] = query_catalog(name, ra0, dec0, radius_deg)
+            log(f"    {name}: {len(cats[name])} sources from {cat_src[name]} ({time.time() - t0:.0f}s)")
     simbad = simbad_names(ra0, dec0, radius_deg) if network else None
     names = simbad if simbad is not None else []
     name_source = "SIMBAD" if simbad is not None else "team targets.json (SIMBAD unreachable)"
@@ -195,7 +260,7 @@ def crossmatch(tracks, stk, ra0, dec0, radius_deg, network=True, log=print):
                            "sep_arcsec": round(sep, 2), "pmra_masyr": tg.get("pmra_masyr"),
                            "pmdec_masyr": tg.get("pmdec_masyr")})
         t["crossmatch"] = xm
-    return {"name_source": name_source, "catalog_counts": {k: len(v) for k, v in cats.items()}}
+    return {"name_source": name_source, "catalog_counts": {k: len(v) for k, v in cats.items()}, "catalog_sources": cat_src}
 
 
 def asteroids_for(singles, stk, ra0, dec0, radius_deg, network=True):
