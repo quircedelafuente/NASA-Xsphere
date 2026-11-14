@@ -24,6 +24,20 @@ def _weekly():
     threading.Thread(target=loop, daemon=True).start()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['GET', 'POST'], allow_headers=['*'])   # public, read-only data
 
+@app.middleware('http')
+async def cache_headers(request, call_next):
+    """Hashed build files never change → keep a year; frames → a day (sw.js refreshes them); pages/sw.js/JSON → always revalidate."""
+    r = await call_next(request)
+    p = request.url.path
+    if r.status_code == 200 and 'cache-control' not in r.headers:
+        if p.startswith('/assets/'):
+            r.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+        elif p.endswith(('.f32', '.png')):
+            r.headers['Cache-Control'] = 'public, max-age=86400'
+        else:
+            r.headers['Cache-Control'] = 'no-cache'
+    return r
+
 class ViewReq(BaseModel):
     ra_deg: float = Field(ge=0, lt=360)
     dec_deg: float = Field(ge=-90, le=90)
@@ -169,6 +183,17 @@ def b_spectrum(bid: str):
                 epoch=x['visit'], det=x['band'], flagged=x.get('quality') not in (None, 'ok')) for x in (src or {}).get('spectrum', [])]
     return dict(target_id=bid, aperture_px=3, units='µJy (aperture photometry, processing/discovery)', points=pts,
                 official_tool='https://irsa.ipac.caltech.edu/applications/spherex/tool-spectrophotometry')
+
+@app.get('/bundles/{bid}/gaia.json')
+def b_gaia(bid: str):
+    """Gaia DR3 stars in the field for the viewer's overlay (chunk B's cached IRSA query, G < 19.5)."""
+    from processing.discovery.crossmatch import query_irsa
+    m = b_meta(bid)
+    if m.get('ra_deg') is None:
+        raise HTTPException(404, dict(error='not-found', message='No position for this field.'))
+    rows = query_irsa('Gaia DR3', m['ra_deg'], m['dec_deg'], 0.08)   # covers the 393.6″ square's corners
+    return dict(ref_epoch=2016.0, sources=[dict(ra_deg=r['ra'], dec_deg=r['dec'], pmra_masyr=r['pmra'] or 0.0, pmdec_masyr=r['pmdec'] or 0.0,
+                                               plx_mas=r['parallax'] or 0.0, gmag=r['phot_g_mean_mag']) for r in rows])
 
 @app.get('/bundles/{bid}/{band}/manifest.json')
 def b_manifest(bid: str, band: str):

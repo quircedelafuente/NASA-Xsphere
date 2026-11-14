@@ -8,3 +8,4 @@ numpy
 scipy
 pillow
 pyyaml
+truststore   # only needed on networks that inspect HTTPS (e.g. IE Wi-Fi)

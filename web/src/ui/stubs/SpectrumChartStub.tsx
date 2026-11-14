@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react';
 import type { MolBand, SpectrumJson } from '../lib/contracts';
 import { MOLECULES } from '../copy';
 import { formatMjd } from '../lib/astro';
+import { lightCurvePoints } from '../lib/lightcurve';
 
 interface Props {
   spectrum: SpectrumJson;
@@ -21,9 +22,9 @@ export function SpectrumChartStub({ spectrum, highlightBands, view = 'spectrum',
   const pts = useMemo(() => spectrum.points.filter((p) => !p.flagged), [spectrum]);
 
   if (view === 'lightcurve') {
-    // median flux per epoch in 1.1–1.6 µm (D2-ish window)
+    const { det, rough, points } = lightCurvePoints(spectrum);
     const byEpoch = new Map<number, { mjd: number; f: number[] }>();
-    pts.filter((p) => p.wl_um > 1.1 && p.wl_um < 1.6).forEach((p) => {
+    points.forEach((p) => {
       const e = byEpoch.get(p.epoch) ?? { mjd: p.mjd, f: [] };
       e.f.push(p.flux);
       byEpoch.set(p.epoch, e);
@@ -43,6 +44,7 @@ export function SpectrumChartStub({ spectrum, highlightBands, view = 'spectrum',
             <title>{`${formatMjd(s.mjd)}: ${s.f.toFixed(0)}`}</title>
           </circle>
         ))}
+        <text x={W - PAD.r} y={PAD.t + 10} className="tick" textAnchor="end">{`${det}${rough ? ' · saturated, rough' : ''}`}</text>
         <text x={PAD.l} y={H - 8} className="tick">{formatMjd(x0)}</text>
         <text x={W - PAD.r} y={H - 8} className="tick" textAnchor="end">{formatMjd(x1)}</text>
       </svg>

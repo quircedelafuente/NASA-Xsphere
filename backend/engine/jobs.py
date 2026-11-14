@@ -49,7 +49,7 @@ def run_view(job, ra, dec, bands, per_epoch, target):
             job.update(current_band=band, n_photos_band=len(exps), progress=0.05 + 0.9 * i / len(bands))
             if not exps:
                 job['warnings'].append(f'{band}: no photos'); continue
-            man, _ = pipeline.build_band(t, band, exps, center, LIVE / job['key'] / band, log=_log(job))
+            man = pipeline.build_band(t, band, exps, center, LIVE / job['key'] / band, log=_log(job))
             if man is None:
                 job['warnings'].append(f'{band}: fewer than 2 visits, nothing to compare'); continue
             job['bands'][band] = f"/live/{job['key']}/{band}/manifest.json"

@@ -1,12 +1,13 @@
 /**
  * Tiny inline-SVG chart for the floating card:
- *  - 'lightcurve': mean 1.1–1.6 µm brightness per visit, current visit highlighted (variable stars)
+ *  - 'lightcurve': brightness per visit in the band with the most clean visits (lib/lightcurve.ts), current visit highlighted (variable stars)
  *  - 'spectrum'  : brightness vs wavelength for one visit, with H₂O / CH₄ / CO₂ / CO bands shaded (brown dwarfs)
  * Clicking it opens the full SpectrumPanel. Colours: Okabe–Ito sky blue + orange, no red–green.
  */
 import { useMemo } from 'react';
 import type { SpectrumJson } from '../lib/contracts';
 import { MOLECULES } from '../copy';
+import { lightCurvePoints } from '../lib/lightcurve';
 
 const W = 300, H = 64, PAD = 4;
 
@@ -17,8 +18,7 @@ export function MiniChart({ spectrum, kind, visit, onOpen, flash }: {
     if (!spectrum || spectrum.points.length === 0) return null;
     if (kind === 'lightcurve') {
       const by = new Map<number, { mjd: number; sum: number; n: number }>();
-      for (const p of spectrum.points) {
-        if (p.flagged || p.wl_um < 1.1 || p.wl_um > 1.62) continue;
+      for (const p of lightCurvePoints(spectrum).points) {
         const e = by.get(p.epoch) ?? { mjd: p.mjd, sum: 0, n: 0 };
         e.sum += p.flux; e.n += 1;
         by.set(p.epoch, e);
@@ -39,7 +39,8 @@ export function MiniChart({ spectrum, kind, visit, onOpen, flash }: {
   const sx = (x: number) => PAD + ((x - x0) / Math.max(1e-9, x1 - x0)) * (W - 2 * PAD);
   const sy = (y: number) => H - PAD - ((y - y0) / Math.max(1e-9, y1 - y0)) * (H - 2 * PAD - 10);
   const path = data.map((d, i) => `${i ? 'L' : 'M'}${sx(d.x).toFixed(1)},${sy(d.y).toFixed(1)}`).join(' ');
-  const title = kind === 'lightcurve' ? 'Brightness at each visit' : 'Brightness by wavelength';
+  const rough = kind === 'lightcurve' && !!spectrum && lightCurvePoints(spectrum).rough;
+  const title = kind === 'lightcurve' ? `Brightness at each visit${rough ? ' · saturated, rough' : ''}` : 'Brightness by wavelength';
   const desc = kind === 'lightcurve'
     ? `Light curve over ${data.length} visits. Open for the full chart.`
     : 'Spectrum from 0.75 to 5 micrometres with water and methane bands marked. Open for the full chart.';
