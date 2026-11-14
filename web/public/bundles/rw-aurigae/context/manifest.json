@@ -1,0 +1,132 @@
+{
+ "target_id": "rw-aurigae",
+ "band": "D4",
+ "grid": {
+  "nx": 96,
+  "ny": 96,
+  "pix_arcsec": 6.15,
+  "center": [
+   76.956077,
+   30.401224
+  ],
+  "origin": "top-left, north up"
+ },
+ "note": "Context only: other telescopes, other resolution and colour. Never subtracted from SPHEREx; each frame has its own stretch.",
+ "frames": [
+  {
+   "survey": "2MASS",
+   "filter": "Ks 2.2 \u00b5m",
+   "kind": "archive",
+   "mjd": 51509.0,
+   "date": "1999-11-27",
+   "year": 1999.9,
+   "png": "c0.png",
+   "target_px": [
+    47.51,
+    47.44
+   ]
+  },
+  {
+   "survey": "AllWISE",
+   "filter": "W1 3.4 \u00b5m",
+   "kind": "archive",
+   "mjd": 55449.381,
+   "date": "2010-09-10",
+   "year": 2010.69,
+   "png": "c1.png",
+   "target_px": [
+    47.5,
+    47.49
+   ]
+  },
+  {
+   "survey": "NEOWISE",
+   "filter": "W1 3.4 \u00b5m",
+   "kind": "archive",
+   "mjd": 60355.045,
+   "date": "2024-02-15",
+   "year": 2024.12,
+   "png": "c2.png",
+   "target_px": [
+    47.49,
+    47.55
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 60921.134,
+   "date": "2025-09-03",
+   "year": 2025.67,
+   "png": "c3.png",
+   "target_px": [
+    47.49,
+    47.56
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 61106.838,
+   "date": "2026-03-07",
+   "year": 2026.18,
+   "png": "c4.png",
+   "target_px": [
+    47.49,
+    47.56
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 61289.607,
+   "date": "2026-09-06",
+   "year": 2026.68,
+   "png": "c5.png",
+   "target_px": [
+    47.49,
+    47.56
+   ]
+  }
+ ],
+ "track": [
+  {
+   "year": 1999.9,
+   "x": 47.51,
+   "y": 47.44
+  },
+  {
+   "year": 2010.69,
+   "x": 47.5,
+   "y": 47.49
+  },
+  {
+   "year": 2024.12,
+   "x": 47.49,
+   "y": 47.55
+  },
+  {
+   "year": 2025.67,
+   "x": 47.49,
+   "y": 47.56
+  },
+  {
+   "year": 2026.18,
+   "x": 47.49,
+   "y": 47.56
+  },
+  {
+   "year": 2026.68,
+   "x": 47.49,
+   "y": 47.56
+  }
+ ],
+ "credits": [
+  "2MASS: UMass/IPAC-Caltech, NASA/NSF",
+  "WISE/NEOWISE: NASA/JPL-Caltech/UCLA",
+  "Data via NASA/IPAC IRSA"
+ ]
+}

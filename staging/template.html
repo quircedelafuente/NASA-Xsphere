@@ -91,6 +91,7 @@ tr.hl td{background:color-mix(in srgb,var(--accent) 14%,transparent)}
           <button id="m-blink" aria-pressed="true">Blink</button>
           <button id="m-diff" aria-pressed="false">Difference</button>
           <button id="m-side" aria-pressed="false">Side by side</button>
+          <button id="m-ctx" aria-pressed="false">Long baseline</button>
         </div>
         <button class="btn" id="play">Pause</button>
         <label class="chk">Speed <input id="speed" type="range" min="0.5" max="6" step="0.5" value="1.5"></label>
@@ -101,6 +102,7 @@ tr.hl td{background:color-mix(in srgb,var(--accent) 14%,transparent)}
         <div class="compass">N<br>E&nbsp;←&nbsp;·</div>
       </div>
       <div class="grid-side" id="sidegrid" hidden></div>
+      <p class="note" id="ctxnote" hidden>Older images of a wider patch from other NASA telescopes (2MASS, WISE, NEOWISE), then SPHEREx on the same grid. Context only: different resolution and colour, each frame with its own contrast, never subtracted from SPHEREx.</p>
       <div class="timeline" id="timeline" aria-label="Epochs"></div>
       <div class="controls" id="diffctl" hidden>
         <label class="chk">Compare <select id="pair"></select></label>
@@ -146,8 +148,7 @@ function tabs(){
 }
 function render(){
   tabs();const d=T();
-  $("timeline").innerHTML="";
-  d.frames.forEach((f,i)=>{const b=document.createElement("button");b.textContent=f.date;b.onclick=()=>{st.frame=i;st.playing=false;syncPlay();draw()};$("timeline").append(b)});
+  timeline();
   $("pair").innerHTML=d.diffs.map((x,i)=>`<option value="${i}">${d.frames[x.to].date} − ${d.frames[x.from].date}</option>`).join("");
   $("pair").value=st.pair;
   const s=d.stretch;
@@ -167,6 +168,12 @@ function render(){
   } else {$("orientnote").textContent="No orientation data for this target.";$("bars").innerHTML=""}
   setMode(st.mode);
 }
+const seq=()=>st.mode==="ctx"&&T().ctx?T().ctx.frames:T().frames;
+function timeline(){
+  $("timeline").innerHTML="";
+  seq().forEach((f,i)=>{const b=document.createElement("button");b.textContent=st.mode==="ctx"?`${f.survey} ${f.year.toFixed(1)}`:f.date;
+    b.onclick=()=>{st.frame=i;st.playing=false;syncPlay();draw()};$("timeline").append(b)});
+}
 function cands(){
   const d=T(),x=d.diffs[st.pair];
   $("pairlbl").textContent=x?`· ${d.frames[x.to].date} vs ${d.frames[x.from].date}`:"";
@@ -174,7 +181,10 @@ function cands(){
   [...$("cands").querySelectorAll("tr[data-i]")].forEach(r=>{r.onmouseenter=()=>{st.hover=+r.dataset.i;draw()};r.onmouseleave=()=>{st.hover=-1;draw()}});
 }
 function setMode(m){
-  st.mode=m;["blink","diff","side"].forEach(k=>$("m-"+k).setAttribute("aria-pressed",k===m));
+  if(m==="ctx"&&!T().ctx)m="blink";
+  if((m==="ctx")!==(st.mode==="ctx"))st.frame=0;
+  st.mode=m;["blink","diff","side","ctx"].forEach(k=>$("m-"+k).setAttribute("aria-pressed",k===m));
+  $("m-ctx").disabled=!T().ctx;$("ctxnote").hidden=m!=="ctx";timeline();
   $("diffctl").hidden=m!=="diff";$("stage").hidden=m==="side";$("sidegrid").hidden=m!=="side";
   $("timeline").hidden=m==="diff";
   if(m==="side")side();cands();draw();
@@ -199,6 +209,14 @@ function draw(){
   if(st.mode==="blink"){const f=d.frames[st.frame],i=img(f.img);if(i.complete)ctx.drawImage(i,0,0,cv.width,cv.height);
     overlays(ctx,s,st.frame,false);$("hud").textContent=`${d.band}  ${f.date}`;$("hudr").textContent=`${st.frame+1}/${d.frames.length} · ${f.n} exp${f.sat?" · saturated":""}`;
     [...$("timeline").children].forEach((b,i)=>b.setAttribute("aria-current",i===st.frame));}
+  else if(st.mode==="ctx"){const c=d.ctx,f=c.frames[st.frame%c.frames.length],i=img(f.img),n=c.n,k=cv.width/n;
+    if(i.complete)ctx.drawImage(i,0,0,cv.width,cv.height);
+    if($("o-track").checked){ctx.strokeStyle="rgba(255,190,80,.85)";ctx.lineWidth=1.5;ctx.beginPath();
+      c.frames.forEach((g,j)=>{const X=(g.px[0]+.5)*k,Y=(g.px[1]+.5)*k;j?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});ctx.stroke()}
+    if($("o-cross").checked){const X=(f.px[0]+.5)*k,Y=(f.px[1]+.5)*k,a=7,b=20;ctx.strokeStyle="#7CFC9A";ctx.lineWidth=2;ctx.beginPath();
+      [[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx,dy])=>{ctx.moveTo(X+dx*a,Y+dy*a);ctx.lineTo(X+dx*b,Y+dy*b)});ctx.stroke()}
+    $("hud").textContent=`${f.survey} · ${f.filter}`;$("hudr").textContent=`${f.year.toFixed(1)} · ${(n*6.15/60).toFixed(1)}′ field`;
+    [...$("timeline").children].forEach((b,j)=>b.setAttribute("aria-current",j===st.frame));}
   else if(st.mode==="diff"){const x=d.diffs[st.pair],i=img(x.img);if(i.complete)ctx.drawImage(i,0,0,cv.width,cv.height);
     overlays(ctx,s,x.to,true);$("hud").textContent=`${d.frames[x.to].date} − ${d.frames[x.from].date}`;$("hudr").textContent="σ units";}
 }
@@ -213,16 +231,16 @@ function syncPlay(){$("play").textContent=st.playing?"Pause":"Play"}
 let last=0;
 function tick(ts){
   const fps=+$("speed").value;
-  if(st.playing&&st.mode==="blink"&&ts-last>1000/fps){last=ts;st.frame=(st.frame+1)%T().frames.length;draw()}
+  if(st.playing&&(st.mode==="blink"||st.mode==="ctx")&&ts-last>1000/fps){last=ts;st.frame=(st.frame+1)%seq().length;draw()}
   requestAnimationFrame(tick);
 }
-$("m-blink").onclick=()=>setMode("blink");$("m-diff").onclick=()=>setMode("diff");$("m-side").onclick=()=>setMode("side");
+$("m-blink").onclick=()=>setMode("blink");$("m-diff").onclick=()=>setMode("diff");$("m-side").onclick=()=>setMode("side");$("m-ctx").onclick=()=>setMode("ctx");
 $("play").onclick=()=>{st.playing=!st.playing;syncPlay()};
 $("pair").onchange=e=>{st.pair=+e.target.value;cands();draw()};
 ["o-cross","o-track","o-stars","o-mask","o-cands"].forEach(id=>$(id).onchange=()=>{draw();if(st.mode==="side")side()});
 document.addEventListener("keydown",e=>{if(e.target.tagName==="SELECT"||e.target.tagName==="INPUT")return;
   if(e.key===" "){e.preventDefault();st.playing=!st.playing;syncPlay()}
-  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){st.playing=false;syncPlay();const n=T().frames.length;st.frame=(st.frame+(e.key==="ArrowRight"?1:n-1))%n;draw()}});
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){st.playing=false;syncPlay();const n=seq().length;st.frame=(st.frame+(e.key==="ArrowRight"?1:n-1))%n;draw()}});
 if(matchMedia("(prefers-reduced-motion: reduce)").matches){st.playing=false;syncPlay()}
 render();requestAnimationFrame(tick);
 </script>

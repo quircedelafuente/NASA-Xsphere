@@ -587,8 +587,8 @@
    "sources": "NIR water band; verify"
   },
   {
-   "id": "h2o-3.0",
-   "label": "Water ice 3.0 um",
+   "id": "h2o-3.05",
+   "label": "Water ice 3.05 um",
    "plain": "Water ice absorbs strongly here",
    "detector": "D4",
    "window_um": [
@@ -605,7 +605,7 @@
      3.6
     ]
    ],
-   "sources": "SPHEREx ices science case; verify"
+   "sources": "verified: feature at 3.05 um, spherex.caltech.edu/page/the-origin-of-water-in-planetary-systems; window edges approximate"
   },
   {
    "id": "ch4-1.6",
@@ -689,7 +689,7 @@
      4.5
     ]
    ],
-   "sources": "SPHEREx ices science case; verify"
+   "sources": "verified: feature at 4.27 um (same page); window edges approximate"
   },
   {
    "id": "co-4.67",
@@ -710,8 +710,8 @@
      4.95
     ]
    ],
-   "sources": "SPHEREx ices science case; verify"
+   "sources": "verified: feature at 4.67 um (same page); window edges approximate"
   }
  ],
- "status": "molecule windows approximate, MUST be checked against the SPHEREx cube channels and the Supplement before showing in the UI"
+ "status": "ice features H2O 3.05, CO2 4.27, CO 4.67 um confirmed from SPHEREx site (JWST-based); window/continuum edges and the NIR water and methane bands are approximate (standard spectroscopy, not yet checked against cube channels). Check before showing in the UI."
 }

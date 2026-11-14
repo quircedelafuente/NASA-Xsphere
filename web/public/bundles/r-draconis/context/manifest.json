@@ -1,0 +1,240 @@
+{
+ "target_id": "r-draconis",
+ "band": "D4",
+ "grid": {
+  "nx": 96,
+  "ny": 96,
+  "pix_arcsec": 6.15,
+  "center": [
+   248.167426,
+   66.755005
+  ],
+  "origin": "top-left, north up"
+ },
+ "note": "Context only: other telescopes, other resolution and colour. Never subtracted from SPHEREx; each frame has its own stretch.",
+ "frames": [
+  {
+   "survey": "2MASS",
+   "filter": "Ks 2.2 \u00b5m",
+   "kind": "archive",
+   "mjd": 51324.0,
+   "date": "1999-05-26",
+   "year": 1999.4,
+   "png": "c0.png",
+   "target_px": [
+    47.45,
+    47.51
+   ]
+  },
+  {
+   "survey": "AllWISE",
+   "filter": "W1 3.4 \u00b5m",
+   "kind": "archive",
+   "mjd": 55356.296,
+   "date": "2010-06-09",
+   "year": 2010.44,
+   "png": "c1.png",
+   "target_px": [
+    47.49,
+    47.5
+   ]
+  },
+  {
+   "survey": "NEOWISE",
+   "filter": "W1 3.4 \u00b5m",
+   "kind": "archive",
+   "mjd": 60446.56,
+   "date": "2024-05-16",
+   "year": 2024.37,
+   "png": "c2.png",
+   "target_px": [
+    47.54,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 60832.477,
+   "date": "2025-06-06",
+   "year": 2025.43,
+   "png": "c3.png",
+   "target_px": [
+    47.54,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 60871.068,
+   "date": "2025-07-15",
+   "year": 2025.53,
+   "png": "c4.png",
+   "target_px": [
+    47.54,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 60916.49,
+   "date": "2025-08-29",
+   "year": 2025.66,
+   "png": "c5.png",
+   "target_px": [
+    47.54,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 60930.17,
+   "date": "2025-09-12",
+   "year": 2025.7,
+   "png": "c6.png",
+   "target_px": [
+    47.54,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 60965.384,
+   "date": "2025-10-17",
+   "year": 2025.79,
+   "png": "c7.png",
+   "target_px": [
+    47.54,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 60987.836,
+   "date": "2025-11-08",
+   "year": 2025.85,
+   "png": "c8.png",
+   "target_px": [
+    47.54,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 61242.291,
+   "date": "2026-07-21",
+   "year": 2026.55,
+   "png": "c9.png",
+   "target_px": [
+    47.55,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 61270.857,
+   "date": "2026-08-18",
+   "year": 2026.63,
+   "png": "c10.png",
+   "target_px": [
+    47.55,
+    47.49
+   ]
+  },
+  {
+   "survey": "SPHEREx",
+   "filter": "D4",
+   "kind": "spherex",
+   "mjd": 61293.713,
+   "date": "2026-09-10",
+   "year": 2026.69,
+   "png": "c11.png",
+   "target_px": [
+    47.55,
+    47.49
+   ]
+  }
+ ],
+ "track": [
+  {
+   "year": 1999.4,
+   "x": 47.45,
+   "y": 47.51
+  },
+  {
+   "year": 2010.44,
+   "x": 47.49,
+   "y": 47.5
+  },
+  {
+   "year": 2024.37,
+   "x": 47.54,
+   "y": 47.49
+  },
+  {
+   "year": 2025.43,
+   "x": 47.54,
+   "y": 47.49
+  },
+  {
+   "year": 2025.53,
+   "x": 47.54,
+   "y": 47.49
+  },
+  {
+   "year": 2025.66,
+   "x": 47.54,
+   "y": 47.49
+  },
+  {
+   "year": 2025.7,
+   "x": 47.54,
+   "y": 47.49
+  },
+  {
+   "year": 2025.79,
+   "x": 47.54,
+   "y": 47.49
+  },
+  {
+   "year": 2025.85,
+   "x": 47.54,
+   "y": 47.49
+  },
+  {
+   "year": 2026.55,
+   "x": 47.55,
+   "y": 47.49
+  },
+  {
+   "year": 2026.63,
+   "x": 47.55,
+   "y": 47.49
+  },
+  {
+   "year": 2026.69,
+   "x": 47.55,
+   "y": 47.49
+  }
+ ],
+ "credits": [
+  "2MASS: UMass/IPAC-Caltech, NASA/NSF",
+  "WISE/NEOWISE: NASA/JPL-Caltech/UCLA",
+  "Data via NASA/IPAC IRSA"
+ ]
+}
