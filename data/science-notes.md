@@ -21,7 +21,7 @@ Positions/pm in the app come from `data/targets.json`, not from here.
 4. It is approaching us at **~110 km/s** (−110.6 km/s) and will be closest around **AD 11,800**, at ~3.8 light-years (sources differ: 3.75–3.85 ly, 11,700–11,800). [L✓] Wikipedia, Britannica; say 'about 12,000 years' / 'about 3.8 ly'.
 5. Caveat: it's bright in SPHEREx; its core is saturated (NaN) in all 168 D1–D3 frames we checked. Use D5/D6 or the difference view; the motion is still measurable. [M]
 
-## ε Indi B (`epsilon-indi-b`) — Ba and Bb
+## ε Indi B (`eps-indi-b`) — Ba and Bb
 1. A pair of **brown dwarfs** (spectral types T1–1.5 and T6) orbiting the star ε Indi A at **~3.64 pc** (3.638 pc, Gaia EDR3 parallax of A). Dynamical masses **66.92 ± 0.36 and 53.25 ± 0.29 Jupiter masses**; system age ~3.5 Gyr. [L✓] https://arxiv.org/abs/2205.08077. The pair is a fraction of an arcsecond–few arcsec apart (separation not verified [L]), far below the 6.15″ pixel, so we see a single blob.
 2. Proper motion 4.68″/yr = 0.76 px/yr, moves with its parent star. Gaia DR3 6412596012146801152 (G=18.0). [M]
 3. Brown dwarfs are brighter in the red end of SPHEREx (D5/D6) than in the blue; methane makes them dim around 1.6, 2.2 and 3.3 µm. [L] 
