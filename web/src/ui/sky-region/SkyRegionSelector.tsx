@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type PointerEvent } from 'react';
-import { createSkyViewer, type SkyViewer } from './aladin';
+import { createSkyViewer, SURVEYS, type SkyViewer, type SurveyKey } from './aladin';
 import { regionAt, type SkyRegion } from './geometry';
 import './sky-region.css';
 
@@ -21,6 +21,7 @@ export function SkyRegionSelector({ onRegionSelected }: SkyRegionSelectorProps) 
   const [selection, setSelection] = useState<SkyRegion | null>(null);
   const [submission, setSubmission] = useState<'idle' | 'pending' | 'done'>('idle');
   const [error, setError] = useState('');
+  const [survey, setSurvey] = useState<SurveyKey>('dss');
   const helpId = useId();
 
   useEffect(() => {
@@ -108,6 +109,11 @@ export function SkyRegionSelector({ onRegionSelected }: SkyRegionSelectorProps) 
           onClick={() => { setSelecting(!selecting); gesture.current = null; }}>
           {selecting ? 'Stop selecting' : 'Select region'}
         </button>
+        <label className="sky-region__survey">Background{' '}
+          <select value={survey} disabled={!ready} onChange={(e) => { const k = e.target.value as SurveyKey; setSurvey(k); viewer.current?.setSurvey(k); }}>
+            {(Object.keys(SURVEYS) as SurveyKey[]).map((k) => <option key={k} value={k}>{SURVEYS[k].name}</option>)}
+          </select>
+        </label>
         <span>ICRS · Fixed square · 0.1° × 0.1°</span>
       </div>
       <p id={helpId} className="sky-region__help">

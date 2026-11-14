@@ -8,11 +8,13 @@ declare module 'aladin-lite' {
     getSize(): [number, number];
     addOverlay(overlay: Overlay): void;
     removeOverlay(overlay: Overlay): void;
+    setBaseImageLayer(layer: unknown): void;
   }
   const A: {
     init: Promise<unknown>;
     aladin(container: HTMLElement, options: Record<string, unknown>): Viewer;
     graphicOverlay(options: Record<string, unknown>): Overlay;
+    imageHiPS(url: string, options?: Record<string, unknown>): unknown;
     polygon(vertices: [number, number][], options?: Record<string, unknown>): unknown;
   };
   export default A;

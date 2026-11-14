@@ -17,3 +17,5 @@
 .sky-region__status { margin: 0; padding: 0 24px 20px; }
 .sky-region__error { color: #ffbcb4; margin: 0; padding: 0 24px 20px; }
 @media (max-width: 600px) { .sky-region__toolbar, .sky-region__footer { padding: 16px; } .sky-region dl { gap: 18px; } .sky-region__toolbar span { font-size: 12px; } }
+.sky-region__survey { color: #b0bfce; font-size: 14px; }
+.sky-region__survey select { font: inherit; color: #edf4fa; background: #1b3140; border: 1px solid #557483; border-radius: 7px; padding: 8px 10px; margin-left: 6px; }

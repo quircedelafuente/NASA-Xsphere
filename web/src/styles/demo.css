@@ -11,3 +11,4 @@ body { margin: 0; }
 .demo pre { font: 14px/1.7 ui-monospace, Consolas, monospace; color: #6ee7d0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .demo footer { margin-top: 24px; line-height: 1.6; }
 .demo a { color: #b4c8dc; }
+.demo__sources { display: grid; gap: 6px; padding-left: 20px; }

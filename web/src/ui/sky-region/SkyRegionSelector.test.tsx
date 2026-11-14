@@ -4,7 +4,7 @@ import { StrictMode } from 'react';
 import { SkyRegionSelector } from './SkyRegionSelector';
 import { createSkyViewer } from './aladin';
 
-vi.mock('./aladin', () => ({ createSkyViewer: vi.fn() }));
+vi.mock('./aladin', () => ({ createSkyViewer: vi.fn(), SURVEYS: { spherex: { name: 'SPHEREx', url: 'x' } } }));
 afterEach(cleanup);
 
 async function setup(callback = vi.fn()) {
@@ -12,7 +12,7 @@ async function setup(callback = vi.fn()) {
   const drawRegion = vi.fn();
   vi.mocked(createSkyViewer).mockImplementation(async (host) => {
     host.append(document.createElement('canvas'));
-    return { pixelToSky, drawRegion, dispose: () => host.remove() };
+    return { pixelToSky, drawRegion, setSurvey: vi.fn(), dispose: () => host.remove() };
   });
   render(<StrictMode><SkyRegionSelector onRegionSelected={callback} /></StrictMode>);
   await waitFor(() => expect((screen.getByText('Select region') as HTMLButtonElement).disabled).toBe(false));
