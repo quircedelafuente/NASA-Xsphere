@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D object library</title>
+<style>
+:root{--ink:#06080e;--panel:#111827;--line:#26324a;--fg:#e8edf5;--mute:#8f9bb0;--ir:#f0a43a;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--fg);font:14px/1.5 system-ui,sans-serif;padding:16px}
+h1{font-size:18px;margin:0 0 4px}.note{color:var(--mute);font-size:12.5px;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.view{height:260px}.meta{padding:10px 12px;display:grid;gap:6px}.meta b{font-size:15px}
+.row{display:flex;gap:6px;flex-wrap:wrap}button{background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 9px;cursor:pointer;font-size:12.5px}
+button[aria-pressed=true]{border-color:var(--ir)}.tag{font:11px ui-monospace,monospace;color:var(--mute)}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head><body>
+<h1>3D object library (chunk A8)</h1>
+<p class="note">One model per class, dials from data. Illustrations, not observations. Values below are placeholders until chunk C's <code>science/classes.json</code> and notes give cited numbers.</p>
+<div class="grid" id="grid"></div>
+<script type="module">
+import { renderObject } from './lib3d.js';
+const ITEMS = [
+  { title: "Barnard's Star", cls: 'red-dwarf', temp_K: 3200, tag: 'red dwarf · mover', flare: true },
+  { title: 'ε Indi Ba + Bb', cls: 'brown-dwarf', temp_K: 1300, temp2_K: 1000, binary: true, tag: 'brown-dwarf pair · mover' },
+  { title: 'WISE 0855−0714', cls: 'brown-dwarf', temp_K: 700, tag: 'coldest brown dwarf · mover (shown warmer: at ~250 K it would be black to the eye)' },
+  { title: 'RW Aurigae', cls: 'young-star', temp_K: 4000, tag: 'young star · variable (dimming)', flare: true },
+  { title: 'R Draconis', cls: 'mira', temp_K: 2600, tag: 'pulsating giant · variable (≈245 d, sped up)' },
+  { title: 'Asteroid (class model)', cls: 'asteroid', tag: 'for zone-scan candidates' },
+  { title: 'Comet (class model)', cls: 'comet', tag: 'e.g. 3I/ATLAS' },
+];
+const grid = document.getElementById('grid');
+for (const it of ITEMS) {
+  const card = document.createElement('div'); card.className = 'card';
+  card.innerHTML = `<div class="view"></div><div class="meta"><b>${it.title}</b><span class="tag">${it.cls} · ${it.tag}</span>
+    <div class="row"><button data-v="eye" aria-pressed="true">Human eye</button><button data-v="ir" aria-pressed="false">SPHEREx infrared</button>${it.flare ? '<button data-f>Flare</button>' : ''}</div></div>`;
+  grid.appendChild(card);
+  const ctl = renderObject(card.querySelector('.view'), it);
+  card.querySelector('.row').onclick = e => { const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.f !== undefined) return ctl.flare();
+    ctl.setView(b.dataset.v); card.querySelectorAll('[data-v]').forEach(x => x.setAttribute('aria-pressed', x === b)); };
+}
+</script></body></html>
