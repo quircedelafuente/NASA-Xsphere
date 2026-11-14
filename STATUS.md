@@ -10,7 +10,7 @@ If your row hasn't moved in 3 h, write what's blocking you in the last column.
 | D-3 Flag dictionary | Sean | done | 2026-11-14 | checked vs real FLAGS header; awaiting Quirce on hard-mask vs saturation |
 | D-4 Science notes | Sean | downhill | 2026-11-14 | most facts verified; open: Barnard type, eps Indi separation, R Dra period (VSX), Taurus |
 | D-5 Band/molecule windows | Sean | downhill | 2026-11-14 | ice lines verified; NIR H2O/CH4 windows + edges still approximate |
-| C3 Class rules `science/classes.json` (+ `science/notes/`) | Sean | downhill | 2026-11-14 | on branch c/infrared-colour; classifier thresholds unchanged; Mira sources + asteroid numbers still to open/check |
+| C3 Class rules `science/classes.json` (+ `science/notes/`) | Sean | downhill | 2026-11-14 | on branch c/science-layer; classifier thresholds unchanged; Mira sources + asteroid numbers still to open/check |
 | D-6 Archival positions (+ ~Gaia field) | Yasen | not started | | |
 | D-7 Release script + bundle QA | Yasen + Sean | not started | | |
 | P0 Spike Barnard | Quirce | not started | | |
