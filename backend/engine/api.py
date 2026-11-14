@@ -5,14 +5,29 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from . import config, jobs, resolve as R
 
-app = FastAPI(title='SPHEREx Blink engine', version='0.1')
+app = FastAPI(title='SPHEREx Blink engine', version='0.2')
+
+@app.on_event('startup')
+def _weekly():
+    import os, threading, time
+    if os.environ.get('WATCH_WEEKLY') != '1':
+        return
+    def loop():
+        from . import watch
+        while True:
+            time.sleep(7 * 24 * 3600)
+            try:
+                watch.refresh()
+            except Exception as e:   # never take the API down because NASA was busy
+                print('weekly check failed:', e)
+    threading.Thread(target=loop, daemon=True).start()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['GET', 'POST'], allow_headers=['*'])   # public, read-only data
 
 class ViewReq(BaseModel):
     ra_deg: float = Field(ge=0, lt=360)
     dec_deg: float = Field(ge=-90, le=90)
     bands: list[str] | None = None          # C4 band ids: D1..D6, D56. Default: the target's band + one more
-    per_epoch: int | None = Field(8, ge=1, le=60)   # photos per detector per visit (None = all; pre-warm uses all)
+    per_epoch: int | None = Field(None, ge=1, le=60)   # photos per detector per visit; None = automatic (matches the pre-warm cache)
     target_id: str | None = None
 
 class Box(BaseModel):
@@ -81,6 +96,9 @@ app.mount('/live', StaticFiles(directory=config.CACHE / 'live'), name='live')
 _prebuilt = config.ROOT / 'web' / 'public' / 'bundles'
 if _prebuilt.exists():
     app.mount('/bundles', StaticFiles(directory=_prebuilt), name='bundles')
+_lib3d = config.ROOT / 'web' / 'lib3d'
+if _lib3d.exists():
+    app.mount('/lib3d', StaticFiles(directory=_lib3d), name='lib3d')
 _appdir = config.ROOT / 'web' / 'app'
 if _appdir.exists():
     app.mount('/', StaticFiles(directory=_appdir, html=True), name='app')   # the app screen (mounted last: catches /)

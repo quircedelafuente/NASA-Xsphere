@@ -1,0 +1,10 @@
+{
+  "_about": "3D dials per target. Each value says how we know it: measured, calculated, literature (needs [L✓] in data/science-notes.md) or assumed. science/classes.json (chunk C) overrides class defaults when it exists.",
+  "barnards-star": {"cls": "red-dwarf", "temp_K": {"value": 3200, "how": "literature", "note": "M4 dwarf; check against data/science-notes.md"}},
+  "eps-indi-b": {"cls": "brown-dwarf", "binary": true,
+                 "temp_K": {"value": 1300, "how": "assumed", "note": "Ba is an early-T dwarf (~1300 K typical)"},
+                 "temp2_K": {"value": 1000, "how": "assumed", "note": "Bb is a later-T dwarf (~1000 K typical)"}},
+  "wise-0855": {"cls": "brown-dwarf", "temp_K": {"value": 700, "how": "assumed", "note": "Real ~250 K would render black; shown warmer so it is visible. Label this in the UI."}},
+  "rw-aurigae": {"cls": "young-star", "temp_K": {"value": 4000, "how": "assumed", "note": "T Tauri star, K-type range"}},
+  "r-draconis": {"cls": "mira", "temp_K": {"value": 2600, "how": "assumed", "note": "Mira variables ~2500–3000 K"}, "period_days": {"value": 245, "how": "literature", "note": "data/science-notes.md"}}
+}

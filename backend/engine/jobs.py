@@ -63,8 +63,15 @@ def run_view(job, ra, dec, bands, per_epoch, target):
         job.update(status='error', error=code if code in ('outside-coverage', 'nasa-busy') else 'internal', message=msg,
                    trace=traceback.format_exc()[-1500:])
 
-def start_view(ra, dec, bands=None, per_epoch=8, target=None):
+def per_epoch_for(n_visits):
+    """~60 photos per detector in total: 12 per visit for 3–5 visits, fewer for monthly deep fields (R Draconis ~18 visits)."""
+    return max(3, min(12, 60 // max(n_visits, 1)))
+
+def start_view(ra, dec, bands=None, per_epoch=None, target=None):
+    """per_epoch None = automatic: same choice as the pre-warm, so the app hits the pre-warmed cache."""
     bands = bands or default_bands(target)
+    if per_epoch is None:
+        per_epoch = per_epoch_for(len(inventory.summary(inventory.query(ra, dec))))
     key = _key('v', round(ra, 4), round(dec, 4), bands, per_epoch)
     return _start(key, dict(kind='view', center=dict(ra_deg=ra, dec_deg=dec), target=target, per_epoch=per_epoch),
                   run_view, ra, dec, bands, per_epoch, target)

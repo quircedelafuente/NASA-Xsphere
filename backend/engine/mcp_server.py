@@ -29,7 +29,7 @@ def list_targets() -> list:
 
 @mcp.tool()
 def view_sky(query: str = '', ra_deg: float | None = None, dec_deg: float | None = None, bands: list[str] | None = None,
-             per_epoch: int = 8, wait_seconds: int = 900) -> dict:
+             per_epoch: int | None = None, wait_seconds: int = 900) -> dict:
     """Fetch SPHEREx photos of a spot ON DEMAND (by name or RA/Dec), align them, co-add per visit and compute what changed
     (sigma difference images + change candidates). Returns the bundle folders (C4: manifest.json, frames, diffs). Cached."""
     target = None

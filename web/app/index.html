@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPHEREx Blink</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="app.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head><body>
+<header class="top">
+  <div class="brand">SPHEREx Blink<small>working name · NASA Space Apps 2026</small></div>
+  <form id="search" class="search" role="search" autocomplete="off">
+    <label for="q" class="sr">Star name or coordinates</label>
+    <input id="q" placeholder="Search a star (e.g. Barnard's Star) or coordinates (269.45 4.77)">
+    <button type="submit">Show</button>
+    <ul id="suggest" class="suggest" hidden></ul>
+  </form>
+  <div class="chips" id="chips" aria-label="Test targets"></div>
+  <button id="drawBtn" class="ghost" aria-pressed="false" title="Drag a box on the map to check it for anything that moved or changed">Draw a zone</button>
+</header>
+
+<main class="layout">
+  <section class="mapwrap" aria-label="Sky map">
+    <div id="map"></div>
+    <div id="drawLayer" hidden><div id="rect" hidden></div></div>
+    <div class="maptools">
+      <div class="seg" role="group" aria-label="Map survey" id="surveys">
+        <button data-s="spherex" aria-pressed="true">SPHEREx</button>
+        <button data-s="wise" aria-pressed="false">WISE</button>
+        <button data-s="dss" aria-pressed="false">Visible</button>
+      </div>
+    </div>
+    <p class="maphint" id="maphint">Search a star, pick a test target, or <b>Draw a zone</b> to scan an area for anything that moved.</p>
+  </section>
+
+  <aside class="panel" id="panel" aria-live="polite">
+    <div id="intro" class="card intro">
+      <h1>See the infrared sky change</h1>
+      <p>NASA's SPHEREx telescope photographs the whole sky every six months in 102 infrared colours. Pick a spot and this tool fetches its photos from NASA, lines them up, and plays them like a flip-book, so anything that moves or changes stands out.</p>
+      <ol class="steps"><li>Search or click a test target.</li><li>Watch the blink. Toggle <b>Changes only</b>.</li><li>Or draw a zone and get a list of everything that changed, each checked against known stars and asteroids.</li></ol>
+    </div>
+
+    <div id="wait" class="card" hidden>
+      <h2 id="waitTitle">Asking NASA…</h2>
+      <div class="bar"><i id="bar"></i></div>
+      <p class="mono note" id="waitStep"></p>
+      <div class="explain" id="explain"></div>
+    </div>
+
+    <div id="result" hidden>
+      <div class="card">
+        <div class="titlerow"><span class="kind" id="kind"></span><span class="note" id="where"></span></div>
+        <h1 id="title"></h1>
+        <p id="blurb"></p>
+        <div id="warnings"></div>
+      </div>
+      <div class="card viewer">
+        <div class="stagebox"><canvas id="stage" width="512" height="512" aria-label="Blink viewer"></canvas>
+          <div class="hud mono" id="hud"></div><div class="legend mono" id="legend"></div></div>
+        <div class="controls">
+          <button id="play" aria-pressed="false">Pause</button>
+          <label class="mono note">speed <input type="range" id="speed" min="0.5" max="2" step="0.5" value="1"></label>
+          <div class="seg" role="group" aria-label="View" id="modes">
+            <button data-m="blink" aria-pressed="true">Blink</button><button data-m="diff" aria-pressed="false">Changes only</button><button data-m="pair" aria-pressed="false">First vs last</button>
+          </div>
+          <label class="note"><input type="checkbox" id="cross" checked> Crosshair</label>
+        </div>
+        <div class="seg" role="group" aria-label="Infrared band" id="bands"></div>
+        <div class="strip" id="strip"></div>
+        <p class="note" id="modeHelp"></p>
+      </div>
+      <div class="card" id="scanCard" hidden>
+        <h2>What changed in this zone</h2>
+        <p id="scanText"></p>
+        <div class="counts" id="counts"></div>
+        <ol class="sources" id="sources"></ol>
+        <p class="note" id="scanMethod"></p>
+      </div>
+      <div class="card" id="threeCard" hidden>
+        <h2>What it might look like</h2>
+        <div class="three" id="three"></div>
+        <div class="seg" role="group" aria-label="3D view"><button data-v="eye" aria-pressed="true">Human eye</button><button data-v="ir" aria-pressed="false">SPHEREx infrared</button></div>
+        <div class="counts" id="threeDials"></div>
+        <p class="note">Illustration, not a photo: SPHEREx sees this object as a single point of light. Each dial says how we know it.</p>
+      </div>
+      <div class="card"><h2>Share</h2><div class="share"><code id="link"></code><button class="ghost" id="copy">Copy link</button></div></div>
+    </div>
+
+    <div id="error" class="card error" hidden></div>
+  </aside>
+</main>
+<footer class="foot">Data: NASA SPHEREx (DR1 + QR3) via IRSA/Caltech, Gaia DR3 (ESA), SkyBoT (IMCCE). This publication makes use of data products from SPHEREx, a joint project of JPL and Caltech funded by NASA.</footer>
+<script type="module" src="app.js"></script>
+</body></html>

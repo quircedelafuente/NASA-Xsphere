@@ -1,0 +1,11 @@
+# Render blueprint (optional). Region virginia = next to NASA's S3 copy in us-east-1 (fast pixel reads).
+services:
+  - type: web
+    name: spherex-blink
+    runtime: docker
+    region: virginia
+    plan: free          # free web services sleep when idle and lose the disk cache on restart; a paid plan + disk keeps it
+    healthCheckPath: /targets
+    envVars:
+      - key: WATCH_WEEKLY
+        value: "1"
