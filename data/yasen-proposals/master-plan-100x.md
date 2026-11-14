@@ -166,3 +166,25 @@ Every number shown to users traces to a source (Data role, `SOURCES.md`).
 2. Hackathon extras = P2 colour slider + P3 "What is it?" + P7 3D object. **Recommend yes** (the three things WiseView can't do).
 3. P4 time machine only if CP2 is green. **Recommend yes.**
 4. Product name: Niklas's call by H+2 (working name "SPHEREx Blink").
+
+## 10. Added from the team discussion (14 Nov, kick-off)
+| Idea from the discussion | Where it goes | Note |
+|---|---|---|
+| **Map first:** the user sees a sky map, zooms in, and only then does the tool download from NASA | D2 → on-demand (WORKSPLIT.md), P1 | Sky map = NASA's all-sky tiles, no compute on our side |
+| **Start downloading while the user zooms in** (prefetch) | Chunk A (A4/A6) | Cuts the 20–60 s wait |
+| **Use the 20–30 s wait** (progress, explainer, fun facts) | P9 | Was joked as "ads"; use it for learning instead |
+| **Draw a square → autonomous movement scan → report** ("33 stars, 12 comets, 1 unknown") | P3 + zone scan (chunk B) | Max ~30′ × 30′ for the MVP |
+| **Fuzzy name search** ("closest match to what you typed") | Chunk A2 resolver | Aliases + Sesame fallback |
+| **Like the forest-health tool:** select an area → pull past images → heat map | Zone scan output can include a **change heat map** | Cheap add-on to the difference image |
+| **One cheap LLM API** (teammate has a DeepSeek key), not called in real time per view | Zone report (B7) | Once per zone, cached; key only on the server |
+| **3D model library by class**, picked by what the object is likely to be | Chunk A8 + C3 `classes.json` | Not generated from the image itself |
+| **Comet: render from data** (size guessed from brightness) | A8 class "comet" | Labelled illustration |
+| **AI photo enhancement** (e.g. upscaling) | **Not on science images.** Only in the 3D/illustration layer, watermarked | Enhancement invents detail; judges score Validity, and Space Apps requires AI images to be watermarked |
+| **Package as a tool others can plug in:** own API + MCP, deploy-ready | A6 API + A9 MCP; embeddable view by URL | Deploy-ready without paying to host everyone's compute |
+| **Keep up to date weekly** | A7 watcher | Appends new visits only |
+| **Don't store raw data**, only processed results | A4/A7 cache | Matches the data-budget numbers in §4 |
+| **Start with one part, test, then grow** | WORKSPLIT: fixture-first, Barnard end-to-end first | |
+| **Align all photos to the same orientation** before comparing | A5 merger (reprojection) | Done in our sample |
+| **Object type: known objects from catalogues, unknown ones inferred** | B3 cross-match + B4 classifier | |
+| **Python for data + AI** | D10 already | |
+| **Cloud credits are limited** | Work split by plan size (WORKSPLIT.md) | |
