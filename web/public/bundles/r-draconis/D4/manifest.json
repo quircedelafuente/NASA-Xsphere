@@ -1,0 +1,680 @@
+{
+ "target_id": "r-draconis",
+ "name": "R Draconis",
+ "band": "D4",
+ "lam_range_um": [
+  2.42,
+  3.82
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    248.1672273128,
+    66.755027217076
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.01913,
+  "vmax": 44.14417,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "Jun 2025",
+   "mjd": 60832.4768,
+   "date": "2025-06-06",
+   "n_exposures": 4,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167241,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 1,
+   "label": "Jul 2025",
+   "mjd": 60871.0683,
+   "date": "2025-07-15",
+   "n_exposures": 17,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167239,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 2,
+   "label": "Aug 2025",
+   "mjd": 60916.4897,
+   "date": "2025-08-29",
+   "n_exposures": 7,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167237,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 3,
+   "label": "Sep 2025",
+   "mjd": 60930.1698,
+   "date": "2025-09-12",
+   "n_exposures": 94,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e3.f32",
+   "err_f32": "e3_err.f32",
+   "png": "e3.png",
+   "mask_png": "e3_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167237,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 4,
+   "label": "Oct 2025",
+   "mjd": 60965.3839,
+   "date": "2025-10-17",
+   "n_exposures": 42,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e4.f32",
+   "err_f32": "e4_err.f32",
+   "png": "e4.png",
+   "mask_png": "e4_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167235,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 5,
+   "label": "Nov 2025",
+   "mjd": 60987.8358,
+   "date": "2025-11-08",
+   "n_exposures": 31,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e5.f32",
+   "err_f32": "e5_err.f32",
+   "png": "e5.png",
+   "mask_png": "e5_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167234,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 6,
+   "label": "Jul 2026",
+   "mjd": 61242.2913,
+   "date": "2026-07-21",
+   "n_exposures": 59,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e6.f32",
+   "err_f32": "e6_err.f32",
+   "png": "e6.png",
+   "mask_png": "e6_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167224,
+    66.755028
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 7,
+   "label": "Aug 2026",
+   "mjd": 61270.8572,
+   "date": "2026-08-18",
+   "n_exposures": 218,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e7.f32",
+   "err_f32": "e7_err.f32",
+   "png": "e7.png",
+   "mask_png": "e7_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167223,
+    66.755028
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 8,
+   "label": "Sep 2026",
+   "mjd": 61293.7129,
+   "date": "2026-09-10",
+   "n_exposures": 112,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e8.f32",
+   "err_f32": "e8_err.f32",
+   "png": "e8.png",
+   "mask_png": "e8_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167222,
+    66.755028
+   ],
+   "saturated_at_target": true
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 34,
+     "y": 2,
+     "sigma": 13.9,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 61,
+     "y": 28,
+     "sigma": 13.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 32,
+     "y": 19,
+     "sigma": 10.7,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 0,
+     "sigma": 10.4,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 40,
+     "y": 34,
+     "sigma": -7.9,
+     "npix": 40,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 35,
+     "sigma": -7.3,
+     "npix": 3,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 34,
+     "y": 38,
+     "sigma": -6.8,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 36,
+     "y": 33,
+     "sigma": -6.7,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 2,
+     "y": 8,
+     "sigma": 6.1,
+     "npix": 5,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 9,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 29,
+     "y": 5,
+     "sigma": 5.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 5,
+     "y": 11,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 6,
+     "y": 4,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 32,
+     "y": 38,
+     "sigma": -5.0,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 0,
+   "to": 3,
+   "f32": "diff_3_0.f32",
+   "png": "diff_3_0.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 0,
+   "to": 4,
+   "f32": "diff_4_0.f32",
+   "png": "diff_4_0.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 0,
+   "to": 5,
+   "f32": "diff_5_0.f32",
+   "png": "diff_5_0.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 0,
+   "to": 6,
+   "f32": "diff_6_0.f32",
+   "png": "diff_6_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 61,
+     "y": 28,
+     "sigma": 7.9,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 34,
+     "y": 2,
+     "sigma": 7.8,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 0,
+     "sigma": 6.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 32,
+     "y": 19,
+     "sigma": 5.3,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 7,
+   "f32": "diff_7_0.f32",
+   "png": "diff_7_0.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 0,
+   "to": 8,
+   "f32": "diff_8_0.f32",
+   "png": "diff_8_0.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 2,
+   "to": 3,
+   "f32": "diff_3_2.f32",
+   "png": "diff_3_2.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 27,
+     "y": 34,
+     "sigma": 5.9,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 3,
+   "to": 4,
+   "f32": "diff_4_3.f32",
+   "png": "diff_4_3.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 4,
+   "to": 5,
+   "f32": "diff_5_4.f32",
+   "png": "diff_5_4.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 29,
+     "y": 35,
+     "sigma": 8.1,
+     "npix": 32,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 50,
+     "y": 63,
+     "sigma": -7.2,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 55,
+     "y": 60,
+     "sigma": -5.7,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 22,
+     "y": 32,
+     "sigma": -5.4,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 23,
+     "y": 31,
+     "sigma": -5.4,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 30,
+     "y": 30,
+     "sigma": -5.4,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 62,
+     "y": 61,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 25,
+     "y": 29,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 5,
+   "to": 6,
+   "f32": "diff_6_5.f32",
+   "png": "diff_6_5.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 6,
+   "to": 7,
+   "f32": "diff_7_6.f32",
+   "png": "diff_7_6.png",
+   "units": "sigma",
+   "candidates": []
+  },
+  {
+   "from": 7,
+   "to": 8,
+   "f32": "diff_8_7.f32",
+   "png": "diff_8_7.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 59,
+     "y": 3,
+     "sigma": -9.7,
+     "npix": 12,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 3,
+     "y": 1,
+     "sigma": -7.9,
+     "npix": 4,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 33,
+     "sigma": -6.3,
+     "npix": 13,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 53,
+     "y": 2,
+     "sigma": -6.0,
+     "npix": 6,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60832.4768,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60871.0683,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60916.4897,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60930.1698,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60965.3839,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60987.8358,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61242.2913,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61270.8572,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61293.7129,
+   "x": 31.5,
+   "y": 31.5
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": [
+  "saturated core: brightness at the target is not reliable; use the difference view / a redder band"
+ ]
+}

@@ -18,3 +18,13 @@ bands:
   default_brown_dwarf: D56
 targets_file: data/targets.json
 bundles_dir: web/public/bundles
+flags:                    # until Data delivers C3 (data/flags.json)
+  hard_mask_bits: [6, 9, 10, 11, 17, 19, 25, 27]   # NONFUNC MISSING_DATA HOT COLD PERSIST OUTLIER STREAK SNOWBALL
+  saturation_bits: [1, 26]                        # OVERFLOW, BLOOM -> mask layer + warning
+change:                   # the "what changed" part (Quirce)
+  reference: first        # D18: diffs vs the first epoch (+ consecutive pairs also exported)
+  units: sigma            # D19: (Ej-Ei)/sqrt(err_i^2+err_j^2), background scatter rescaled to 1
+  sys_frac: 0.1           # 10% systematic floor per pixel (lambda mix inside a band, PSF, calibration)
+  candidate_sigma: 5      # D20: |diff| >= 5 sigma -> listed as a change "candidate"
+  max_candidates: 20
+cache_dir: processing/cache   # raw sections from S3 (gitignored)

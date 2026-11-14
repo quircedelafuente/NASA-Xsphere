@@ -1,0 +1,10 @@
+astropy>=7
+astroquery
+reproject>=0.13
+fsspec
+aiohttp
+requests
+numpy
+scipy
+pillow
+pyyaml
