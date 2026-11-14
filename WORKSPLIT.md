@@ -6,7 +6,7 @@
 |---|---|---|---|---|
 | **A · On-demand engine + 3D library** | **Yasen** (Max plan) | **largest** | `backend/`, `data/`, `web/lib3d/` | `a/...` |
 | **B · Discovery engine** (find movers, classify) | **Quirce** (Max plan) | **large** | `processing/` | `b/...` |
-| **C · Science layer** (flags, molecules, templates, texts) | **Sean** (Pro plan) | **small** | `science/` | `c/...` |
+| **C · Science layer** (flags, molecules, templates, texts) | **Sean** (Pro plan) | **small** | `data/flags.json`, `data/bands.json`, `data/science-notes.md`, `science/classes.json` | `c/...` |
 
 Giorgi and Niklas: Giorgi pairs with Quirce on B (light curves B6 + spectra B5 are a clean split). Niklas starts the frontend design against the API mock (`contracts/api.md`) and owns the frontend phase. *(Assumption: confirm in chat.)*
 
@@ -90,13 +90,14 @@ GET  /object/barnards-star         → targets.json entry + latest report + scie
 | B8 | Tests on synthetic injected movers (known speed) → recovery rate | Recovers ≥ 1 px/yr movers in the fixture field |
 
 ## Chunk C · Sean · science layer (small)
-**Paste into your agent:** *"Read WORKSPLIT.md, contracts/science.md, research/01-data.md and the SPHEREx Explanatory Supplement. Build chunk C in `science/` only. Every number needs a citation."*
+**Status 14 Nov 16:00: C1, C2, C4 delivered on `main`** (`data/flags.json`, `data/bands.json`, `data/science-notes.md`, `data/scripts/build_flags_bands.py`). The engine already uses `data/flags.json` (hard mask minus saturation/TRANSIENT bits, per its saturation note).
+**Paste into your agent:** *"Read WORKSPLIT.md, contracts/science.md and data/science-notes.md. Build C3 in `science/classes.json`, then turn the [L] tags in data/science-notes.md into [L✓]. Every number needs a citation."*
 | # | Task | Done when |
 |---|---|---|
-| C1 | `science/flags.json`: flag bits → hard / soft / info + plain-English text (C3) | Bits read from a real FLAGS header |
-| C2 | `science/bands.json`: molecule windows (water ice ~3.0, CH₄/PAH ~3.3, CO₂ ~4.27, CO ~4.67 µm) with citations | Used by the colour-slider presets |
-| C3 | `science/classes.json`: per class: spectral-shape rules (which bands dip or rise), typical temperature/size ranges, and the 3D appearance dials | B4 and A8 read it without questions |
-| C4 | `science/notes/<target>.md`: 3–5 cited facts per test target + the numbers still marked "verify" in targets.json (WISE 0855 pm/parallax; Barnard's planets) | Every number in the app has a source |
+| C1 | `data/flags.json` (C3) | ✅ delivered |
+| C2 | `data/bands.json` (molecule windows) | ✅ delivered |
+| C3 | `science/classes.json`: per class (red-dwarf, brown-dwarf, mira, young-star, asteroid, comet, star): spectral-shape rules, temperature/size ranges, 3D appearance dials, plain-English line | B4 and A8 read it without questions |
+| C4 | `data/science-notes.md` | ✅ drafted; next: re-check every [L] against its link → [L✓]; add WISE 0855 proper motion + parallax with citation |
 
 ---
 

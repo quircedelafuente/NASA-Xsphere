@@ -1,0 +1,57 @@
+[
+ {
+  "id": "barnards-star",
+  "name": "Barnard's Star",
+  "kind": "high-proper-motion star",
+  "bands": [
+   "D4"
+  ],
+  "default_band": "D4",
+  "n_epochs": 3,
+  "thumb": "barnards-star/D4/e0.png"
+ },
+ {
+  "id": "eps-indi-b",
+  "name": "Epsilon Indi B",
+  "kind": "brown dwarf binary",
+  "bands": [
+   "D56"
+  ],
+  "default_band": "D56",
+  "n_epochs": 4,
+  "thumb": "eps-indi-b/D56/e0.png"
+ },
+ {
+  "id": "wise-0855",
+  "name": "WISE 0855-0714",
+  "kind": "coldest known brown dwarf",
+  "bands": [
+   "D56"
+  ],
+  "default_band": "D56",
+  "n_epochs": 3,
+  "thumb": "wise-0855/D56/e0.png"
+ },
+ {
+  "id": "rw-aurigae",
+  "name": "RW Aurigae",
+  "kind": "variable young star",
+  "bands": [
+   "D4"
+  ],
+  "default_band": "D4",
+  "n_epochs": 3,
+  "thumb": "rw-aurigae/D4/e0.png"
+ },
+ {
+  "id": "r-draconis",
+  "name": "R Draconis",
+  "kind": "Mira variable",
+  "bands": [
+   "D4"
+  ],
+  "default_band": "D4",
+  "n_epochs": 9,
+  "thumb": "r-draconis/D4/e0.png"
+ }
+]

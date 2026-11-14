@@ -1,0 +1,2010 @@
+{
+ "target_id": "r-draconis",
+ "name": "R Draconis",
+ "band": "D4",
+ "lam_range_um": [
+  2.42,
+  3.82
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    248.1672273128,
+    66.755027217076
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.00872,
+  "vmax": 402.72662,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "Jun 2025",
+   "mjd": 60832.4768,
+   "date": "2025-06-06",
+   "n_exposures": 4,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167241,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 1,
+   "label": "Jul 2025",
+   "mjd": 60871.0683,
+   "date": "2025-07-15",
+   "n_exposures": 17,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167239,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 2,
+   "label": "Aug 2025",
+   "mjd": 60916.4897,
+   "date": "2025-08-29",
+   "n_exposures": 7,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167237,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 3,
+   "label": "Sep 2025",
+   "mjd": 60930.1698,
+   "date": "2025-09-12",
+   "n_exposures": 94,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e3.f32",
+   "err_f32": "e3_err.f32",
+   "png": "e3.png",
+   "mask_png": "e3_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167237,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 4,
+   "label": "Oct 2025",
+   "mjd": 60965.3839,
+   "date": "2025-10-17",
+   "n_exposures": 42,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e4.f32",
+   "err_f32": "e4_err.f32",
+   "png": "e4.png",
+   "mask_png": "e4_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167235,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 5,
+   "label": "Nov 2025",
+   "mjd": 60987.8358,
+   "date": "2025-11-08",
+   "n_exposures": 31,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e5.f32",
+   "err_f32": "e5_err.f32",
+   "png": "e5.png",
+   "mask_png": "e5_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167234,
+    66.755026
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 6,
+   "label": "Jul 2026",
+   "mjd": 61242.2913,
+   "date": "2026-07-21",
+   "n_exposures": 59,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e6.f32",
+   "err_f32": "e6_err.f32",
+   "png": "e6.png",
+   "mask_png": "e6_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167224,
+    66.755028
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 7,
+   "label": "Aug 2026",
+   "mjd": 61270.8572,
+   "date": "2026-08-18",
+   "n_exposures": 218,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e7.f32",
+   "err_f32": "e7_err.f32",
+   "png": "e7.png",
+   "mask_png": "e7_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167223,
+    66.755028
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 8,
+   "label": "Sep 2026",
+   "mjd": 61293.7129,
+   "date": "2026-09-10",
+   "n_exposures": 112,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e8.f32",
+   "err_f32": "e8_err.f32",
+   "png": "e8.png",
+   "mask_png": "e8_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167222,
+    66.755028
+   ],
+   "saturated_at_target": true
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 35.1,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 23.8,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 28,
+     "sigma": -13.8,
+     "npix": 10,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 12.8,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 36,
+     "sigma": -12.2,
+     "npix": 3,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 36,
+     "y": 32,
+     "sigma": -11.3,
+     "npix": 7,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 28,
+     "y": 29,
+     "sigma": -11.1,
+     "npix": 7,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 0,
+     "y": 8,
+     "sigma": 10.3,
+     "npix": 7,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 62,
+     "y": 63,
+     "sigma": 10.1,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 36,
+     "sigma": -9.9,
+     "npix": 2,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 63,
+     "y": 55,
+     "sigma": 9.2,
+     "npix": 9,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 28,
+     "y": 35,
+     "sigma": -8.8,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 1,
+     "y": 60,
+     "sigma": 8.3,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 0,
+     "sigma": 8.2,
+     "npix": 8,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 60,
+     "y": 1,
+     "sigma": 7.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 20,
+     "y": 60,
+     "sigma": 7.3,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 58,
+     "sigma": 7.3,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 13,
+     "y": 63,
+     "sigma": 6.8,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 58,
+     "y": 52,
+     "sigma": 6.5,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 51,
+     "y": 63,
+     "sigma": 6.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 14.4,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 10.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 62,
+     "y": 62,
+     "sigma": 5.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 0,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 36,
+     "y": 32,
+     "sigma": -5.1,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 3,
+   "f32": "diff_3_0.f32",
+   "png": "diff_3_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 17.9,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 13.0,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 62,
+     "y": 63,
+     "sigma": 7.2,
+     "npix": 5,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 0,
+     "sigma": 6.5,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 58,
+     "sigma": 6.2,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 6.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 6,
+     "sigma": 6.0,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 21,
+     "y": 62,
+     "sigma": 5.9,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 61,
+     "y": 56,
+     "sigma": 5.8,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 59,
+     "y": 63,
+     "sigma": 5.6,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 20,
+     "y": 60,
+     "sigma": 5.6,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 3,
+     "y": 0,
+     "sigma": 5.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 35,
+     "y": 34,
+     "sigma": -5.3,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 1,
+     "y": 60,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 22,
+     "y": 61,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 0,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 36,
+     "y": 32,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 4,
+   "f32": "diff_4_0.f32",
+   "png": "diff_4_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 19.8,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 14.7,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 63,
+     "sigma": 8.5,
+     "npix": 13,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 21,
+     "y": 62,
+     "sigma": 8.1,
+     "npix": 8,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 0,
+     "sigma": 7.4,
+     "npix": 15,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 14,
+     "y": 63,
+     "sigma": 7.3,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 58,
+     "sigma": 6.9,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 3,
+     "y": 63,
+     "sigma": 6.7,
+     "npix": 14,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 51,
+     "y": 63,
+     "sigma": 6.6,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 6.6,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 7,
+     "sigma": 6.3,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 56,
+     "sigma": 6.1,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 2,
+     "sigma": 5.9,
+     "npix": 8,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 17,
+     "y": 10,
+     "sigma": 5.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 19,
+     "y": 48,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 6,
+     "y": 0,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 35,
+     "y": 34,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 57,
+     "y": 62,
+     "sigma": 5.0,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 5,
+   "f32": "diff_5_0.f32",
+   "png": "diff_5_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 22.7,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 16.1,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 8.2,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 1,
+     "y": 0,
+     "sigma": 7.7,
+     "npix": 15,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 20,
+     "y": 60,
+     "sigma": 7.5,
+     "npix": 5,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 7,
+     "sigma": 7.1,
+     "npix": 7,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 35,
+     "y": 34,
+     "sigma": -7.1,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 36,
+     "sigma": -6.9,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 36,
+     "y": 32,
+     "sigma": -6.8,
+     "npix": 4,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 63,
+     "y": 63,
+     "sigma": 6.7,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 22,
+     "y": 61,
+     "sigma": 6.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 58,
+     "sigma": 6.5,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 14,
+     "y": 63,
+     "sigma": 6.2,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 35,
+     "y": 29,
+     "sigma": -6.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 63,
+     "y": 2,
+     "sigma": 6.1,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 32,
+     "sigma": -6.1,
+     "npix": 6,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 1,
+     "y": 60,
+     "sigma": 5.9,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 28,
+     "y": 35,
+     "sigma": -5.9,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 30,
+     "y": 36,
+     "sigma": -5.8,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 61,
+     "y": 56,
+     "sigma": 5.5,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 6,
+   "f32": "diff_6_0.f32",
+   "png": "diff_6_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 28.4,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 20.8,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 62,
+     "y": 63,
+     "sigma": 13.7,
+     "npix": 58,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 0,
+     "sigma": 12.7,
+     "npix": 48,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 22,
+     "y": 61,
+     "sigma": 12.3,
+     "npix": 12,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 14,
+     "y": 63,
+     "sigma": 11.2,
+     "npix": 9,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 1,
+     "y": 60,
+     "sigma": 10.2,
+     "npix": 31,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 51,
+     "y": 63,
+     "sigma": 9.9,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 2,
+     "sigma": 9.4,
+     "npix": 18,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 17,
+     "y": 10,
+     "sigma": 9.3,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 9.0,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 56,
+     "y": 59,
+     "sigma": 8.3,
+     "npix": 5,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 8,
+     "y": 6,
+     "sigma": 7.9,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 19,
+     "y": 48,
+     "sigma": 7.7,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 57,
+     "y": 7,
+     "sigma": 6.6,
+     "npix": 5,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 3,
+     "y": 45,
+     "sigma": 6.4,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 39,
+     "sigma": 6.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 6,
+     "sigma": 6.3,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 36,
+     "sigma": -5.9,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 35,
+     "y": 34,
+     "sigma": -5.9,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 7,
+   "f32": "diff_7_0.f32",
+   "png": "diff_7_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 21.0,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 15.4,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 62,
+     "y": 63,
+     "sigma": 9.8,
+     "npix": 42,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 0,
+     "sigma": 8.5,
+     "npix": 30,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 20,
+     "y": 60,
+     "sigma": 8.0,
+     "npix": 7,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 7.4,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 14,
+     "y": 63,
+     "sigma": 7.2,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 1,
+     "y": 60,
+     "sigma": 6.8,
+     "npix": 8,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 51,
+     "y": 63,
+     "sigma": 6.7,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 0,
+     "sigma": 6.4,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 6,
+     "y": 0,
+     "sigma": 6.1,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 60,
+     "y": 1,
+     "sigma": 6.0,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 63,
+     "sigma": 5.9,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 17,
+     "y": 10,
+     "sigma": 5.7,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 56,
+     "y": 59,
+     "sigma": 5.3,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 4,
+     "y": 8,
+     "sigma": 5.0,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 8,
+   "f32": "diff_8_0.f32",
+   "png": "diff_8_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 55,
+     "y": 24,
+     "sigma": 16.6,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 27,
+     "y": 15,
+     "sigma": 11.8,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 23,
+     "y": 2,
+     "sigma": 6.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 63,
+     "sigma": 5.9,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 32,
+     "y": 28,
+     "sigma": 5.3,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 34,
+     "y": 29,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 30,
+     "y": 28,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 2,
+   "to": 3,
+   "f32": "diff_3_2.f32",
+   "png": "diff_3_2.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 35,
+     "y": 31,
+     "sigma": -8.9,
+     "npix": 3,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 34,
+     "y": 34,
+     "sigma": -8.6,
+     "npix": 4,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 34,
+     "y": 29,
+     "sigma": -8.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 28,
+     "sigma": -7.7,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 30,
+     "y": 35,
+     "sigma": -7.6,
+     "npix": 5,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 30,
+     "y": 28,
+     "sigma": -7.6,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 28,
+     "y": 30,
+     "sigma": -6.6,
+     "npix": 3,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 1,
+     "y": 62,
+     "sigma": 5.9,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 48,
+     "y": 0,
+     "sigma": 5.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 29,
+     "y": 29,
+     "sigma": -5.7,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 47,
+     "y": 1,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 15,
+     "y": 63,
+     "sigma": 5.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 17,
+     "y": 61,
+     "sigma": 5.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 3,
+   "to": 4,
+   "f32": "diff_4_3.f32",
+   "png": "diff_4_3.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 6,
+     "y": 63,
+     "sigma": 8.2,
+     "npix": 11,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 2,
+     "y": 62,
+     "sigma": 7.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 34,
+     "y": 34,
+     "sigma": -6.8,
+     "npix": 3,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 0,
+     "y": 61,
+     "sigma": 6.1,
+     "npix": 4,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 35,
+     "y": 30,
+     "sigma": -6.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 21,
+     "y": 60,
+     "sigma": 6.0,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 50,
+     "sigma": 6.0,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 1,
+     "y": 6,
+     "sigma": -5.9,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 10,
+     "y": 0,
+     "sigma": -5.9,
+     "npix": 4,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 12,
+     "y": 63,
+     "sigma": 5.8,
+     "npix": 7,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 32,
+     "y": 28,
+     "sigma": -5.7,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 61,
+     "y": 1,
+     "sigma": 5.6,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 60,
+     "y": 0,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 35,
+     "sigma": -5.4,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 27,
+     "y": 32,
+     "sigma": -5.4,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 28,
+     "y": 34,
+     "sigma": -5.3,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 35,
+     "y": 33,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": true
+    }
+   ]
+  },
+  {
+   "from": 4,
+   "to": 5,
+   "f32": "diff_5_4.f32",
+   "png": "diff_5_4.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 32,
+     "y": 29,
+     "sigma": -14.2,
+     "npix": 2,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 32,
+     "y": 34,
+     "sigma": -12.4,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 29,
+     "y": 31,
+     "sigma": -10.0,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 60,
+     "y": 63,
+     "sigma": -8.3,
+     "npix": 41,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 30,
+     "sigma": -8.2,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 34,
+     "sigma": 7.3,
+     "npix": 9,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 34,
+     "y": 32,
+     "sigma": -7.3,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 35,
+     "y": 32,
+     "sigma": 7.0,
+     "npix": 4,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 47,
+     "y": 63,
+     "sigma": -6.7,
+     "npix": 3,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 34,
+     "y": 29,
+     "sigma": 6.6,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 2,
+     "y": 62,
+     "sigma": -6.4,
+     "npix": 5,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 30,
+     "sigma": -6.1,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 28,
+     "sigma": 5.9,
+     "npix": 3,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 4,
+     "y": 63,
+     "sigma": -5.3,
+     "npix": 3,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 58,
+     "y": 3,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 55,
+     "y": 1,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 5,
+   "to": 6,
+   "f32": "diff_6_5.f32",
+   "png": "diff_6_5.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 32,
+     "y": 34,
+     "sigma": 10.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 33,
+     "sigma": 10.4,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 32,
+     "y": 29,
+     "sigma": 9.0,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 31,
+     "sigma": 8.3,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 58,
+     "y": 61,
+     "sigma": 8.1,
+     "npix": 34,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 54,
+     "sigma": 6.6,
+     "npix": 5,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 57,
+     "sigma": 5.4,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 6,
+   "to": 7,
+   "f32": "diff_7_6.f32",
+   "png": "diff_7_6.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 31,
+     "y": 29,
+     "sigma": -11.8,
+     "npix": 8,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 34,
+     "y": 35,
+     "sigma": 5.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 9,
+     "y": 1,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 0,
+     "y": 4,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 8,
+     "y": 0,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 7,
+   "to": 8,
+   "f32": "diff_8_7.f32",
+   "png": "diff_8_7.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 31,
+     "y": 29,
+     "sigma": 12.3,
+     "npix": 16,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 61,
+     "y": 63,
+     "sigma": -9.7,
+     "npix": 21,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 1,
+     "y": 0,
+     "sigma": -8.3,
+     "npix": 8,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 3,
+     "y": 63,
+     "sigma": -8.2,
+     "npix": 6,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 62,
+     "y": 1,
+     "sigma": -7.3,
+     "npix": 10,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 20,
+     "y": 60,
+     "sigma": -7.2,
+     "npix": 6,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 36,
+     "sigma": 7.0,
+     "npix": 9,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 12,
+     "y": 63,
+     "sigma": -6.5,
+     "npix": 8,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 61,
+     "sigma": -6.3,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 51,
+     "y": 63,
+     "sigma": -6.1,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 17,
+     "y": 10,
+     "sigma": -5.6,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 2,
+     "y": 22,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 9,
+     "sigma": 5.0,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 56,
+     "y": 59,
+     "sigma": -5.0,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60832.4768,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60871.0683,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60916.4897,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60930.1698,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60965.3839,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 60987.8358,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61242.2913,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61270.8572,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61293.7129,
+   "x": 31.5,
+   "y": 31.5
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": [
+  "saturated core: brightness at the target is not reliable; use the difference view / a redder band"
+ ]
+}
