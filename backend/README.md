@@ -12,17 +12,16 @@ python backend/tests/test_resolve.py                                         # n
 ```
 
 ## Modules (`backend/engine/`)
-| File | Task | What |
-|---|---|---|
-| `resolve.py` | A2 | Name (fuzzy, aliases, typos) or coordinates (decimal / sexagesimal) → RA/Dec; known targets motion-corrected; CDS Sesame fallback |
-| `inventory.py` | A3 | Live SIA query on the 4 collections in config.yaml → photos per band, grouped into visits (D4 rule); cached 6 h |
-| `fetch.py` | A4 | Only the needed pixels: S3 byte ranges, IRSA cutout fallback, retries; every cut cached on disk |
-| `merge.py` | A5 | Reproject onto one TAN grid (3.075″/px), median per band × visit, PNG frames + difference frames, quick spectrum points, **writes I2 stacks** |
-| `jobs.py` | A6/A7 | Background jobs, progress, visit-by-visit partial results, result cache (`cache/views/<key>/`) |
-| `api.py` | A6 | Contract I1: `/resolve`, `/view`, `/view/{job}`, `/scan` (returns stacks until chunk B is merged), `/object/{id}`, `/targets`, `/files/...` |
-| `prewarm.py` | A7 | Pre-load the 5 targets; re-run weekly (only new photos download) |
-| `mcp_server.py` | A9 | MCP tools: `resolve_object`, `list_targets`, `view_sky`, `view_status` (mcp ≥ 2) |
-| `devpage.html` | – | Developer test page at `/` (not the product UI) |
+| File | What |
+|---|---|
+| `resolve.py` | Name (fuzzy, aliases, typos) or coordinates → RA/Dec; known targets motion-corrected; CDS Sesame fallback |
+| `inventory.py` | Live SIA query (4 collections) → photos per detector, grouped into visits; cached 6 h |
+| `pipeline.py` | **Bridge to Quirce's engine**: live photos → `processing.frames.build_frames` (S3 sections, zodi + background, Sean's flags via config, inverse-variance co-add, outlier clipping) → `processing.change` (σ differences, candidates) → `processing.export` (C4 bundle). Live and pre-built bundles share one format |
+| `scan.py` | Zone scan: bundle on a zone-sized grid → candidates grouped into sources → Gaia DR3 (propagated) + SkyBoT (per visit) → sorted with a one-line reason; optional single LLM summary (env `SCAN_LLM_URL/KEY`) |
+| `jobs.py` | Background jobs, progress, cache (`cache/live/<job>/`) |
+| `api.py` | I1: `/resolve`, `/view`, `/scan`, `/view|scan/{job}`, `/object/{id}`, `/targets`; static `/live/…` (live bundles + reports), `/bundles/…` (pre-built), `/` (app) |
+| `prewarm.py` | Pre-load the 5 targets with all photos |
+| `mcp_server.py` | MCP tools: `resolve_object`, `list_targets`, `view_sky`, `scan_zone`, `job_status` |
 
 ## Measured (14 Nov, IE Wi-Fi)
 - Name → coordinates: instant. Photo list for Barnard: 358 photos, 6.5 s.
@@ -30,6 +29,7 @@ python backend/tests/test_resolve.py                                         # n
 - A server in AWS us-east-1 (next to the data) should be several times faster: the team measured 0.5–2.5 s per read from a server. ⚠ Hosting needs a decision.
 
 ## Known gaps
-- Flags: no hard mask until `science/flags.json` (chunk C) exists; then it is applied automatically.
-- Spectrum points are a quick 3×3 sum (uncalibrated); chunk B does proper photometry.
-- `/scan` wiring to `processing.scan` happens at integration (A10).
+- Masking uses processing's flag list in config.yaml (Quirce); Sean's data/flags.json should replace it there.
+- Zone grids > 64 px swap processing's CFG grid size under a lock (shortcut; better: a grid-size parameter in build_frames).
+- No spectrum yet (was a quick sum in the removed merge.py); belongs to processing (B5).
+- Sorting rules are interim in scan.py; `processing.classify` replaces them automatically when it exists.

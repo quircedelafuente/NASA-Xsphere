@@ -43,7 +43,7 @@ def query(ra, dec, radius_deg=0.0003, collections=None):
         if 'dataproduct_subtype' in res.colnames and r['dataproduct_subtype'] != 'science':
             continue
         url = str(r['access_url'])
-        rows.append(dict(obs_id=str(r['obs_id']), band=str(r['energy_bandpassname'])[-2:], mjd=float(r['t_min']),
+        rows.append(dict(obs_id=str(r['obs_id']), band=str(r['energy_bandpassname'])[-2:], mjd=float(0.5 * (r['t_min'] + r['t_max'])),   # mid-exposure, as processing/
                          collection=str(r['obs_collection']), https=url,
                          s3=url.replace(config.IRSA + 'ibe/data/spherex/', config.S3_BASE)))
     vmap = _visits([r['mjd'] for r in rows])

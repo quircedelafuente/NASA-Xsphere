@@ -1,8 +1,7 @@
 """A6 · HTTP API (contract I1). Run: uvicorn engine.api:app --app-dir backend --port 8000"""
-import json, pathlib
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from . import config, jobs, resolve as R
 
@@ -12,9 +11,8 @@ app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['GET', 'P
 class ViewReq(BaseModel):
     ra_deg: float = Field(ge=0, lt=360)
     dec_deg: float = Field(ge=-90, le=90)
-    fov_arcmin: float = Field(3.0, ge=1, le=10)
-    bands: list[str] = Field(default_factory=lambda: list(config.BANDS))
-    per_visit: int = Field(6, ge=1, le=20)
+    bands: list[str] | None = None          # C4 band ids: D1..D6, D56. Default: the target's band + one more
+    per_epoch: int | None = Field(8, ge=1, le=60)   # photos per detector per visit (None = all; pre-warm uses all)
     target_id: str | None = None
 
 class Box(BaseModel):
@@ -25,6 +23,8 @@ class Box(BaseModel):
 
 class ScanReq(BaseModel):
     box: Box
+    band: str = 'D4'
+    per_epoch: int = Field(6, ge=1, le=30)
 
 def _target(tid):
     for t in config.targets():
@@ -41,18 +41,19 @@ def resolve(q: str):
 
 @app.post('/view')
 def view(req: ViewReq):
-    bad = [b for b in req.bands if b not in config.BANDS]
+    from processing.bands import BANDS
+    bad = [b for b in (req.bands or []) if b not in BANDS]
     if bad:
-        raise HTTPException(422, dict(error='bad-band', message=f'Unknown band(s) {bad}; use D1–D6.'))
+        raise HTTPException(422, dict(error='bad-band', message=f'Unknown band(s) {bad}; use {list(BANDS)}.'))
     t = _target(req.target_id) if req.target_id else None
-    key = jobs.start_view(req.ra_deg, req.dec_deg, req.fov_arcmin, req.bands, req.per_visit, t)
-    return {'job': key}
+    return {'job': jobs.start_view(req.ra_deg, req.dec_deg, req.bands, req.per_epoch, t)}
 
 @app.get('/view/{key}')
-def view_status(key: str):
-    j = jobs.JOBS.get(key) or jobs.cached(key)
+@app.get('/scan/{key}')
+def job_status(key: str):
+    j = jobs.get(key)
     if not j:
-        raise HTTPException(404, dict(error='unknown-job', message='This view is not known. Start it with POST /view.'))
+        raise HTTPException(404, dict(error='unknown-job', message='This job is not known. Start it with POST /view or /scan.'))
     return {k: v for k, v in j.items() if k != 'trace'}
 
 @app.post('/scan')
@@ -60,12 +61,7 @@ def scan(req: ScanReq):
     b = req.box
     if max(b.w_arcmin, b.h_arcmin) > config.MAX_ZONE_ARCMIN:
         raise HTTPException(422, dict(error='zone-too-large', message=f'Draw a zone up to {config.MAX_ZONE_ARCMIN}′ wide for now.'))
-    try:   # chunk B (processing/) plugs in here; until it is merged, return the merged images so B can be tested against them
-        from processing import scan as discover   # noqa: F401
-    except ImportError:
-        key = jobs.start_view(b.ra_deg, b.dec_deg, max(b.w_arcmin, b.h_arcmin), list(config.BANDS), 4)
-        return {'job': key, 'note': 'Discovery engine (chunk B) not merged yet: this job returns the merged images (I2) for the zone.'}
-    raise HTTPException(501, dict(error='not-wired', message='processing.scan found; wiring happens at integration (A10).'))
+    return {'job': jobs.start_scan(b.ra_deg, b.dec_deg, b.w_arcmin, b.h_arcmin, req.band, req.per_epoch)}
 
 @app.get('/object/{tid}')
 def obj(tid: str):
@@ -79,16 +75,12 @@ def obj(tid: str):
 def targets():
     return [dict(id=t['id'], name=t['name'], kind=t['kind'], default_band=t['default_band']) for t in config.targets()]
 
-@app.get('/files/{key}/{name}')
-def files(key: str, name: str):
-    if name not in ('stacks.npz', 'stacks.json', 'view.json') or not key.startswith('v_') or '/' in key or '..' in key:
-        raise HTTPException(404)
-    p = config.CACHE / 'views' / key / name
-    if not p.exists():
-        raise HTTPException(404)
-    return FileResponse(p)
-
-@app.get('/', response_class=HTMLResponse)
-def dev_page():
-    """Developer test page (not the product UI, which is Niklas's)."""
-    return (pathlib.Path(__file__).parent / 'devpage.html').read_text()
+# results: live bundles + reports (engine cache) and the pre-built bundles (processing) — same C4 format
+(config.CACHE / 'live').mkdir(parents=True, exist_ok=True)
+app.mount('/live', StaticFiles(directory=config.CACHE / 'live'), name='live')
+_prebuilt = config.ROOT / 'web' / 'public' / 'bundles'
+if _prebuilt.exists():
+    app.mount('/bundles', StaticFiles(directory=_prebuilt), name='bundles')
+_appdir = config.ROOT / 'web' / 'app'
+if _appdir.exists():
+    app.mount('/', StaticFiles(directory=_appdir, html=True), name='app')   # the app screen (mounted last: catches /)

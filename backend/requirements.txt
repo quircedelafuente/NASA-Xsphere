@@ -3,6 +3,8 @@ astropy>=6
 reproject
 numpy
 pillow
+pyyaml
+scipy
 pyvo
 fsspec
 aiohttp
