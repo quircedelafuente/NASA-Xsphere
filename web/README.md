@@ -25,6 +25,7 @@ The stubs in `src/ui/stubs/` follow C6 and can be deleted after that.
 ## Files
 - `src/ui/lib/url.ts` — C5 URL scheme (parse/write)
 - `src/ui/lib/contracts.ts` — TS types for C1/C3/C4/C6
+- `src/ui/lib/palette.ts` — false colour of the frames (tint by wavelength; `?palette=grey` or Advanced → “Colour by wavelength” turns it off). Mirror of `processing/palette.py`
 - `src/ui/lib/data.ts` — bundle loading + mock fallback, name/coordinate resolution
 - `src/ui/copy.ts` — **all UI text**; target facts are placeholders until C7 lands
 - `src/pages/Landing.tsx`, `src/pages/Viewer.tsx` — the two screens (+ `/embed`)

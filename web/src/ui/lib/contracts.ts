@@ -88,6 +88,8 @@ export interface ManifestFrame {
 export interface Manifest {
   target_id: string;
   band: BandId;
+  /** Band window (C4). Its centre picks the false-colour tint. */
+  lam_range_um?: [number, number];
   /** Grid size. Not in the C4 example; optional, default 64×64 (D7). */
   nx?: number;
   ny?: number;
@@ -157,6 +159,8 @@ export interface BlinkCanvasProps {
   onFrameChange?: (i: number) => void;
   /** Optional extension: invert greyscale. */
   invert?: boolean;
+  /** Optional extension: false colour by wavelength ('infrared', default) or the plain 'grey' frames. See ui/lib/palette.ts. */
+  palette?: 'infrared' | 'grey';
   /** Optional extension: epochs the user switched off in Advanced. */
   excludeEpochs?: number[];
 }

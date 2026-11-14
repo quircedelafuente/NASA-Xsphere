@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { BlinkCanvasProps } from '../lib/contracts';
 import { MAX_FPS } from '../lib/url';
 import { pixelToSky } from '../lib/astro';
+import { frameLut, maskRgb, sequenceLambda } from '../lib/palette';
 
 function stretchValue(v: number, a: number, vmin: number, vmax: number) {
   const t = (v - vmin) / (vmax - vmin);
@@ -23,6 +24,7 @@ function robustSigma(arr: Float32Array) {
 
 export function BlinkCanvasStub(props: BlinkCanvasProps) {
   const { manifest, frames, mode, frameIndex, playing, fps, stretch, zoom, overlays, onPixelClick, onFrameChange, invert, excludeEpochs } = props;
+  const palette = props.palette ?? 'infrared';
   const nx = manifest.nx ?? 64;
   const ny = manifest.ny ?? 64;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -69,6 +71,9 @@ export function BlinkCanvasStub(props: BlinkCanvasProps) {
     c.height = H;
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0, 0, W, H);
+    const lam = sequenceLambda(manifest);
+    const lut = frameLut(mode === 'diff' ? 'grey' : palette, lam); // Difference stays grey (dark–bright pair on grey)
+    const mk = maskRgb(palette, lam);
 
     panels.forEach((fi, p) => {
       const img = ctx.createImageData(nx, ny);
@@ -84,8 +89,8 @@ export function BlinkCanvasStub(props: BlinkCanvasProps) {
         else g = stretchValue(v, stretch.a, stretch.vmin, stretch.vmax);
         if (invert) g = 1 - g;
         const o = k * 4;
-        if (masked && overlays.flags) { img.data[o] = 230; img.data[o + 1] = 159; img.data[o + 2] = 0; } // orange (CB-safe)
-        else { const b = Math.round(g * 255); img.data[o] = b; img.data[o + 1] = b; img.data[o + 2] = b; }
+        if (masked && overlays.flags) { img.data[o] = mk[0]; img.data[o + 1] = mk[1]; img.data[o + 2] = mk[2]; } // Okabe–Ito, never a colour of the palette
+        else { const b = Math.round(g * 255) * 3; img.data[o] = lut[b]; img.data[o + 1] = lut[b + 1]; img.data[o + 2] = lut[b + 2]; }
         img.data[o + 3] = 255;
       }
       const off = document.createElement('canvas');
@@ -137,7 +142,7 @@ export function BlinkCanvasStub(props: BlinkCanvasProps) {
         ctx.setLineDash([]);
       }
     });
-  }, [frames, diffs, mode, frameIndex, stretch, zoom, overlays, invert, manifest, nx, ny, active]);
+  }, [frames, diffs, mode, frameIndex, stretch, zoom, overlays, invert, palette, manifest, nx, ny, active]);
 
   const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!onPixelClick || mode === 'side') return;

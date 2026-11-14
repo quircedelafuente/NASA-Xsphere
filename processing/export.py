@@ -8,6 +8,7 @@ from PIL import Image, ImageDraw
 
 from .bands import lam_range
 from .config import CFG
+from .palette import colourise
 
 SCALE = 6          # preview upscale (nearest neighbour, D7)
 
@@ -51,17 +52,30 @@ def _cross(draw, x, y, color=(0, 255, 120)):
         draw.line([X + dx * 6, Y + dy * 6, X + dx * 18, Y + dy * 18], fill=color, width=2)
 
 
+def save_previews(out, title, band, items):
+    """Preview images in false colour (one tint per band, processing/palette.py): e<N>.png + blink.gif.
+    items: [(epoch, grey uint8 frame already north-up, target pixel [x, y], date label)]. The .f32 data are not touched."""
+    lam = sum(lam_range(band)) / 2          # one wavelength for the whole sequence: the tint never changes between frames
+    gif = []
+    for e, u8, tpx, date in items:
+        rgb = Image.fromarray(colourise(u8, lam))
+        rgb.save(Path(out) / f"e{e}.png")
+        g = _big(rgb); dr = ImageDraw.Draw(g)
+        _cross(dr, *tpx); dr.text((6, 6), f"{title}  {band}  {date}", fill=(255, 255, 0))
+        gif.append(g)
+    gif[0].save(Path(out) / "blink.gif", save_all=True, append_images=gif[1:], duration=600, loop=0)
+
+
 def export_bundle(out_dir, target, band, grid_wcs, shape, frames, changes, source, warnings_):
     out = Path(out_dir); out.mkdir(parents=True, exist_ok=True)
     ny, nx = shape
     vmin, vmax, aa = sequence_stretch(frames)
-    man_frames, track, gif = [], [], []
+    man_frames, track, previews = [], [], []
     for f in frames:
         e = f["epoch"]
         to_web(f["flux"]).astype("<f4").tofile(out / f"e{e}.f32")
         to_web(f["err"]).astype("<f4").tofile(out / f"e{e}_err.f32")
         u8 = to_web(asinh_u8(f["flux"], vmin, vmax, aa))
-        Image.fromarray(u8).save(out / f"e{e}.png")
         m = np.zeros((ny, nx, 4), np.uint8); m[to_web(f["sat"])] = (255, 80, 0, 140)
         Image.fromarray(m, "RGBA").save(out / f"e{e}_mask.png")
         tpx = web_px(f["target_fits_px"], ny)
@@ -75,10 +89,8 @@ def export_bundle(out_dir, target, band, grid_wcs, shape, frames, changes, sourc
                            "saturated_at_target": bool(f["sat"][int(round(f["target_fits_px"][1])) % ny,
                                                               int(round(f["target_fits_px"][0])) % nx])})
         track.append({"mjd": round(f["mjd"], 4), "x": tpx[0], "y": tpx[1]})
-        g = _big(Image.fromarray(u8).convert("RGB")); dr = ImageDraw.Draw(g)
-        _cross(dr, *tpx); dr.text((6, 6), f"{target['name']}  {band}  {date}", fill=(255, 255, 0))
-        gif.append(g)
-    gif[0].save(out / "blink.gif", save_all=True, append_images=gif[1:], duration=600, loop=0)
+        previews.append((e, u8, tpx, date))
+    save_previews(out, target["name"], band, previews)
 
     man_diffs, strip = [], []
     for c in changes:
@@ -112,6 +124,7 @@ def export_bundle(out_dir, target, band, grid_wcs, shape, frames, changes, sourc
                          "crpix": [h["CRPIX1"], ny + 1 - h["CRPIX2"]], "cdelt": [h["CDELT1"], -h["CDELT2"]]}},
         "units": "MJy/sr (zodi- and background-subtracted)",
         "stretch": {"method": "asinh", "a": aa, "vmin": round(vmin, 5), "vmax": round(vmax, 5), "scope": "sequence"},
+        "preview_colour": "false colour, one tint per band by wavelength (processing/palette.py); .f32 files are the data",
         "frames": man_frames, "diffs": man_diffs, "target_track": track,
         "previews": {"blink_gif": "blink.gif", "changes_png": "changes.png" if strip else None},
         "warnings": warnings_,
