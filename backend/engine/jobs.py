@@ -32,10 +32,10 @@ def run_view(job, ra, dec, fov_arcmin, bands, per_visit, target=None):
         vis = inventory.summary(rows)
         job.update(status='fetching', progress=0.05, visits=vis, n_photos_total=len(rows), n_photos_used=len(sel))
         out_wcs, n = merge.grid(ra, dec, fov_arcmin)
-        fl = config.flags_dictionary(); hard = fl.get('hard_mask_bits', []) if fl else []
+        hard, sat_bits = config.hard_mask_bits()
         pos = (lambda mjd: _target_pos(target, mjd)) if target else (lambda mjd: (ra, dec))
         V = len(vis); stacks = np.full((len(bands), V, n, n), np.nan, np.float32); counts = np.zeros((len(bands), V), np.int16)
-        spectrum, done = [], 0
+        spectrum, done, saturated = [], 0, 0
         with ThreadPoolExecutor(FETCH_PARALLEL) as ex:
             for v in range(V):                      # visit by visit, oldest first: the UI can show visit 1 early
                 vrows = [r for r in sel if r['visit'] == v]
@@ -47,6 +47,10 @@ def run_view(job, ra, dec, fov_arcmin, bands, per_visit, target=None):
                         stacks[bi, v] = s; counts[bi, v] = len(reps)
                 for r, c in cuts:
                     if c is not None:
+                        xi, yi = int(round(c['x'])), int(round(c['y']))
+                        core = c['flags'][max(yi - 1, 0):yi + 2, max(xi - 1, 0):xi + 2]
+                        if any(((core >> b) & 1).any() for b in sat_bits):
+                            saturated += 1
                         f = merge.aperture_flux(c)
                         if f is not None and np.isfinite(c['lam']):
                             spectrum.append(dict(lam=round(c['lam'], 4), flux=round(f, 3), det=r['band'], ep=v, mjd=round(c['mjd'], 4)))
@@ -58,6 +62,7 @@ def run_view(job, ra, dec, fov_arcmin, bands, per_visit, target=None):
                                   dict(center=dict(ra_deg=ra, dec_deg=dec), target=target['id'] if target else None, spectrum_points=spectrum))
         result = dict(status='done', progress=1.0, key=key, center=dict(ra_deg=ra, dec_deg=dec), fov_arcmin=fov_arcmin, grid_px=n,
                       grid_arcsec=config.GRID_ARCSEC, visits=vis, n_photos_total=len(rows), n_photos_used=len(sel),
+                      saturated_core_photos=saturated, warnings=(['saturated-target: the star is too bright for the detector in some photos; its centre shows as white and brightness there is a lower limit'] if saturated else []),
                       counts={b: counts[i].tolist() for i, b in enumerate(bands)},
                       bands=merge.frames(stacks, bands, vis), spectrum=spectrum, target=target,
                       tracks=[dict(visit=x['id'], **dict(zip(('ra_deg', 'dec_deg'), pos(_mid_mjd(rows, x['id']))))) for x in vis],

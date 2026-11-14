@@ -29,6 +29,17 @@ def targets():
     return json.loads((ROOT / 'data' / 'targets.json').read_text())
 
 def flags_dictionary():
-    """Sean's science/flags.json when it exists (chunk C); otherwise no hard mask, flags are only reported."""
-    p = ROOT / 'science' / 'flags.json'
-    return json.loads(p.read_text()) if p.exists() else None
+    """Sean's flag dictionary (C3): data/flags.json (or science/flags.json). None → no hard mask, flags only reported."""
+    for p in (ROOT / 'data' / 'flags.json', ROOT / 'science' / 'flags.json'):
+        if p.exists():
+            return json.loads(p.read_text())
+    return None
+
+def hard_mask_bits():
+    """Hard bits minus saturation bits and TRANSIENT: per data/flags.json saturation_note, those sit on the core of
+    saturated targets (Barnard, RW Aur) in every frame, so masking them would erase the target. They become a warning instead."""
+    f = flags_dictionary()
+    if not f:
+        return [], []
+    sat = set(f.get('saturation_bits', [])) | {0}
+    return sorted(set(f.get('hard_mask_bits', [])) - sat), sorted(sat)
