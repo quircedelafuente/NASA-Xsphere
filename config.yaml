@@ -1,0 +1,20 @@
+# Shared configuration (owner: Quirce). Adding a SPHEREx release = add it here and re-run inventory + precompute.
+spherex:
+  collections: [spherex_dr1, spherex_dr1_deep, spherex_qr3, spherex_qr3_deep]   # D3 — never QR2
+  s3_bucket: nasa-irsa-spherex
+  pixel_arcsec: 6.15
+epochs:
+  gap_days: 60            # D4
+  split_long_groups_by_month: true
+grid:                     # D7
+  nx: 64
+  ny: 64
+  pix_arcsec: 6.15
+stretch:                  # D8
+  method: asinh
+  a: 0.1
+  percentiles: [0.5, 99.5]
+bands:
+  default_brown_dwarf: D56
+targets_file: data/targets.json
+bundles_dir: web/public/bundles
