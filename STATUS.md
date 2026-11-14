@@ -7,9 +7,9 @@ If your row hasn't moved in 3 h, write what's blocking you in the last column.
 |---|---|---|---|---|
 | D-1 Target catalogue | Yasen | not started | | |
 | D-2 Coverage inventory | Yasen | not started | | |
-| D-3 Flag dictionary | Sean | downhill | 2026-11-14 | draft in data/, needs review (molecule windows + [L] facts unverified) |
-| D-4 Science notes | Sean | downhill | 2026-11-14 | draft in data/, needs review (molecule windows + [L] facts unverified) |
-| D-5 Band/molecule windows | Sean | downhill | 2026-11-14 | draft in data/, needs review (molecule windows + [L] facts unverified) |
+| D-3 Flag dictionary | Sean | done | 2026-11-14 | checked vs real FLAGS header; awaiting Quirce on hard-mask vs saturation |
+| D-4 Science notes | Sean | downhill | 2026-11-14 | most facts verified; open: Barnard type, eps Indi separation, R Dra period (VSX), Taurus |
+| D-5 Band/molecule windows | Sean | downhill | 2026-11-14 | ice lines verified; NIR H2O/CH4 windows + edges still approximate |
 | D-6 Archival positions (+ ~Gaia field) | Yasen | not started | | |
 | D-7 Release script + bundle QA | Yasen + Sean | not started | | |
 | P0 Spike Barnard | Quirce | not started | | |

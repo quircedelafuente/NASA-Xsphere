@@ -69,17 +69,17 @@ def mol(id, label, plain, det, win, left, right, sources):
 M = [
  mol("h2o-1.4", "Water 1.4 um", "Water vapour/ice absorbs here", "D2", [1.33, 1.50], [1.22, 1.30], [1.55, 1.62], "NIR water band; Explanatory Supplement; verify"),
  mol("h2o-1.9", "Water 1.9 um", "Water vapour/ice absorbs here", "D3", [1.80, 2.00], [1.65, 1.75], [2.05, 2.20], "NIR water band; verify"),
- mol("h2o-3.0", "Water ice 3.0 um", "Water ice absorbs strongly here", "D4", [2.85, 3.20], [2.50, 2.75], [3.35, 3.60], "SPHEREx ices science case; verify"),
+ mol("h2o-3.05", "Water ice 3.05 um", "Water ice absorbs strongly here", "D4", [2.85, 3.20], [2.50, 2.75], [3.35, 3.60], "verified: feature at 3.05 um, spherex.caltech.edu/page/the-origin-of-water-in-planetary-systems; window edges approximate"),
  mol("ch4-1.6", "Methane 1.6 um", "Methane in cold brown dwarfs and planets", "D2", [1.58, 1.72], [1.50, 1.56], [1.74, 1.80], "T dwarf CH4 band; verify"),
  mol("ch4-2.2", "Methane 2.2 um", "Methane in cold brown dwarfs", "D3", [2.15, 2.40], [2.05, 2.12], [2.42, 2.50], "T dwarf CH4 band; verify"),
  mol("ch4-3.3", "Methane 3.3 um", "Strongest methane band; cold brown dwarfs are dark here", "D4", [3.20, 3.45], [2.90, 3.10], [3.55, 3.75], "T/Y dwarf CH4 fundamental; verify"),
- mol("co2-4.27", "Carbon dioxide 4.27 um", "CO2 ice and gas absorb here", "D5", [4.20, 4.34], [4.05, 4.15], [4.40, 4.50], "SPHEREx ices science case; verify"),
- mol("co-4.67", "Carbon monoxide 4.67 um", "CO ice and gas absorb here", "D6", [4.60, 4.75], [4.45, 4.55], [4.80, 4.95], "SPHEREx ices science case; verify"),
+ mol("co2-4.27", "Carbon dioxide 4.27 um", "CO2 ice and gas absorb here", "D5", [4.20, 4.34], [4.05, 4.15], [4.40, 4.50], "verified: feature at 4.27 um (same page); window edges approximate"),
+ mol("co-4.67", "Carbon monoxide 4.67 um", "CO ice and gas absorb here", "D6", [4.60, 4.75], [4.45, 4.55], [4.80, 4.95], "verified: feature at 4.67 um (same page); window edges approximate"),
 ]
 bands = {"detectors": dets,
  "bands": {**{d: {"detectors": [d], "lam_um": dets[d]["lam_um"], "plain": f"{dets[d]['lam_um'][0]}-{dets[d]['lam_um'][1]} um"} for d in DET},
            "D56": {"detectors": ["D5", "D6"], "lam_um": [3.83, 5.00], "plain": "3.8-5.0 um: best for cold brown dwarfs (they glow here)"}},
  "rule": "Never blink across bands; ALL is for pretty context only.",
- "molecules": M, "status": "molecule windows approximate, MUST be checked against the SPHEREx cube channels and the Supplement before showing in the UI"}
+ "molecules": M, "status": "ice features H2O 3.05, CO2 4.27, CO 4.67 um confirmed from SPHEREx site (JWST-based); window/continuum edges and the NIR water and methane bands are approximate (standard spectroscopy, not yet checked against cube channels). Check before showing in the UI."}
 (OUT / "bands.json").write_text(json.dumps(bands, indent=1) + "\n")
 print("ok", len(F), "flags;", len(M), "molecule windows")
