@@ -3,7 +3,10 @@
 import A from 'https://cdn.jsdelivr.net/npm/aladin-lite@3.8.2/dist/aladin.js';   // ES module build
 const $ = s => document.querySelector(s);
 const show = (id, on = true) => { $(id).hidden = !on; };
-const API = '';                                  // same origin as the engine (uvicorn serves this folder)
+const API = '';
+// a catalogue nobody could reach means "not checked", not "no known star here"
+const catalogWarnings = rep => Object.entries(rep?.method?.catalog_sources || {}).filter(([, s]) => s === 'unavailable')
+  .map(([c]) => `${c} could not be reached, so objects were not checked against it: "unknown" may be a known star.`);                                  // same origin as the engine (uvicorn serves this folder)
 const SURVEYS = {
   spherex: 'https://irsa.ipac.caltech.edu/data/hips/SPHEREx/spherex_allsky_cube',   // NASA SPHEREx all-sky (DR1)
   // by URL from IRSA mirrors: CDS's own tile server (alasky) answered 404 on the IE network
@@ -140,7 +143,7 @@ function scanZone(ra, dec, w, h) {
   runJob(post('/scan', { box: { ra_deg: ra, dec_deg: dec, w_arcmin: w, h_arcmin: h }, band: 'D4' }), async j => {
     const bands = j.report.bundle ? { D4: await loadBundle(j.report.bundle) } : {};
     cat?.addSources(j.report.sources.filter(s => s.class !== 'artefact').map(s => { const p = s.positions?.[0] || s; return A.source(p.ra_deg, p.dec_deg, { name: s.id }); }));
-    present({ kind: 'scan', title: `Zone ${w.toFixed(1)}′ × ${h.toFixed(1)}′`, bands, report: j.report, warnings: [], center: { ra_deg: ra, dec_deg: dec } });
+    present({ kind: 'scan', title: `Zone ${w.toFixed(1)}′ × ${h.toFixed(1)}′`, bands, report: j.report, warnings: catalogWarnings(j.report), center: { ra_deg: ra, dec_deg: dec } });
   });
 }
 
