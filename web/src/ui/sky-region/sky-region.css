@@ -1,0 +1,19 @@
+.sky-region { color: #edf4fa; background: #111c2b; border: 1px solid #2b3c50; border-radius: 14px; overflow: hidden; }
+.sky-region__toolbar, .sky-region__footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 24px; flex-wrap: wrap; }
+.sky-region__toolbar span, .sky-region__help, .sky-region__status { color: #b0bfce; font-size: 14px; }
+.sky-region button { font: inherit; font-weight: 650; border: 1px solid #557483; border-radius: 7px; padding: 11px 18px; background: #1b3140; color: #edf4fa; cursor: pointer; }
+.sky-region button[aria-pressed="true"] { border-color: #6ee7d0; color: #6ee7d0; }
+.sky-region button:disabled { opacity: .45; cursor: not-allowed; }
+.sky-region button:focus-visible { outline: 3px solid #6ee7d0; outline-offset: 3px; }
+.sky-region button.sky-region__submit { color: #082b27; background: #6ee7d0; border-color: #6ee7d0; }
+.sky-region__help { margin: 0; padding: 0 24px 16px; min-height: 20px; }
+.sky-region__map { height: clamp(340px, 53vh, 560px); width: 100%; position: relative; background: #050a12; touch-action: none; }
+.sky-region__viewer { width: 100%; height: 100%; }
+.sky-region__map--selecting canvas { cursor: crosshair !important; }
+.sky-region dl { display: flex; gap: 32px; flex-wrap: wrap; margin: 0; }
+.sky-region dt { color: #b0bfce; font-size: 12px; margin-bottom: 7px; }
+.sky-region dd { margin: 0; font-family: ui-monospace, Consolas, monospace; font-size: 16px; }
+.sky-region small { color: #b0bfce; font-size: 12px; }
+.sky-region__status { margin: 0; padding: 0 24px 20px; }
+.sky-region__error { color: #ffbcb4; margin: 0; padding: 0 24px 20px; }
+@media (max-width: 600px) { .sky-region__toolbar, .sky-region__footer { padding: 16px; } .sky-region dl { gap: 18px; } .sky-region__toolbar span { font-size: 12px; } }

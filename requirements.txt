@@ -1,0 +1,10 @@
+# Optional Python 3.11+ dependencies for the EXISTING research scripts in spikes/.
+# The sky selector is React/TypeScript: install its libraries with `cd web; npm ci`.
+# pip cannot install React, Vite, TypeScript, or Aladin Lite.
+numpy>=1.26,<3
+pandas>=2.2,<3
+astropy>=6.1,<8
+astroquery>=0.4.7,<0.5
+reproject>=0.14,<1
+fsspec>=2024.6
+s3fs>=2024.6

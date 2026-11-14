@@ -13,6 +13,9 @@ found Pluto in 1930, for NASA's newest all-sky survey.
 Must work on: **Barnard's Star · ε Indi B · WISE 0855−0714 · RW Aurigae · R Draconis**.
 
 ## Start here (everyone, 15 min)
+The standalone sky-region selector is ready to run in [`web/`](web/README.md).
+See that guide for installation, VS Code debugging, the callback handoff, and acceptance checks.
+
 1. Read this file and **[PLAN.md](PLAN.md)** (timeline, checkpoints, cut order).
 2. Read **your role file**:
 

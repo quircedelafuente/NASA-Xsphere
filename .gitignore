@@ -8,3 +8,5 @@ dist/
 *.fits
 cache/
 .env*
+.tools/
+*.tsbuildinfo

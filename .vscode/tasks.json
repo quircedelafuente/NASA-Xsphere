@@ -1,0 +1,44 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start sky selector dev server",
+      "type": "process",
+      "command": "node",
+      "args": ["node_modules/vite/bin/vite.js", "--host", "127.0.0.1"],
+      "windows": {
+        "command": "powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-NonInteractive",
+          "-Command",
+          "$ErrorActionPreference = 'Stop'; $nodePath = Join-Path $env:XSPHERE_WORKSPACE '.tools/node-v22.23.5-win-x64/node.exe'; if (!(Test-Path -LiteralPath $nodePath)) { $nodePath = (Get-Command node -ErrorAction Stop).Source }; & $nodePath node_modules/vite/bin/vite.js --host 127.0.0.1; exit $LASTEXITCODE"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/web",
+        "env": {
+          "XSPHERE_WORKSPACE": "${workspaceFolder}",
+          "NO_COLOR": "1"
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "sky-selector-vite",
+        "pattern": {
+          "regexp": "^ERROR (.+):(\\d+): (.*)$",
+          "file": 1,
+          "line": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "VITE.*",
+          "endsPattern": "Local:.*http://127\\.0\\.0\\.1:5173/"
+        }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "runOptions": { "instanceLimit": 1 }
+    }
+  ]
+}
