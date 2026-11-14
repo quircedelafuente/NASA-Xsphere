@@ -1,0 +1,5468 @@
+{
+ "zone": {
+  "ra_deg": 248.16723,
+  "dec_deg": 66.755024,
+  "w_arcmin": 5.74,
+  "h_arcmin": 5.74
+ },
+ "generated_utc": "2026-11-14T15:37:36Z",
+ "visits": 18,
+ "bands": [
+  "D4",
+  "D5",
+  "D6"
+ ],
+ "first_date": "2025-04-24",
+ "last_date": "2026-09-25",
+ "summary": {
+  "sources": 35,
+  "known_star": 5,
+  "known_asteroid": 0,
+  "variable": 1,
+  "artefact": 29,
+  "candidate": 0,
+  "unknown_static": 0
+ },
+ "sources": [
+  {
+   "id": "s001",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "1648328016354496384",
+     "sep_arcsec": 0.53,
+     "epoch": 2016.0,
+     "pmra_masyr": -20.6,
+     "pmdec_masyr": 6.1,
+     "phot_g_mean_mag": 6.374,
+     "bp_rp": 3.282,
+     "parallax": 1.251
+    },
+    {
+     "cat": "2MASS",
+     "id": "16324023+6645180",
+     "sep_arcsec": 4.13,
+     "epoch": 1999.4,
+     "k_m": 2.438
+    },
+    {
+     "cat": "team targets.json",
+     "id": "R Draconis",
+     "kind": "variable",
+     "sep_arcsec": 0.53,
+     "pmra_masyr": -20.643,
+     "pmdec_masyr": 6.149
+    }
+   ],
+   "flux": {
+    "D4": [
+     null,
+     null,
+     null,
+     12537646.28,
+     1573865.99,
+     10346108.86,
+     20988032.98,
+     18676029.61,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     26677595.58,
+     16604190.68,
+     5677123.16
+    ],
+    "D5": [
+     null,
+     null,
+     33190983.43,
+     21329829.5,
+     null,
+     null,
+     null,
+     23959614.33,
+     32634961.37,
+     null,
+     null,
+     null,
+     null,
+     null,
+     18080086.06,
+     null,
+     null,
+     null
+    ],
+    "D6": [
+     25272373.67,
+     26773650.59,
+     22970468.74,
+     null,
+     null,
+     null,
+     null,
+     null,
+     21832187.08,
+     21744223.33,
+     23254713.16,
+     24178581.76,
+     15838019.96,
+     12708628.75,
+     11499796.9,
+     null,
+     null,
+     null
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 26.6,
+    "pmdec_masyr": -165.6,
+    "sig_pm_masyr": 878.0,
+    "speed_arcsec_yr": 0.168,
+    "direction": "south",
+    "sig": 0.2,
+    "chance_lines_expected": 0.0,
+    "fit_rms_px": 0.5,
+    "n_visits": 18
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60792.8901,
+     "ra_deg": 248.166148,
+     "dec_deg": 66.754981,
+     "x": 56.0,
+     "y": 55.45,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.166148,
+     "dec_deg": 66.754913,
+     "x": 56.0,
+     "y": 55.37,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 60838.576,
+     "ra_deg": 248.166964,
+     "dec_deg": 66.754704,
+     "x": 55.62,
+     "y": 55.13,
+     "detected": true
+    },
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.167495,
+     "dec_deg": 66.754436,
+     "x": 55.38,
+     "y": 54.81,
+     "detected": true
+    },
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.167945,
+     "dec_deg": 66.755002,
+     "x": 55.17,
+     "y": 55.47,
+     "detected": true
+    },
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.168007,
+     "dec_deg": 66.754958,
+     "x": 55.14,
+     "y": 55.42,
+     "detected": true
+    },
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.167714,
+     "dec_deg": 66.754906,
+     "x": 55.28,
+     "y": 55.36,
+     "detected": true
+    },
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.169368,
+     "dec_deg": 66.754451,
+     "x": 54.51,
+     "y": 54.83,
+     "detected": true
+    },
+    {
+     "visit": 8,
+     "mjd": 61024.496,
+     "ra_deg": 248.167519,
+     "dec_deg": 66.754996,
+     "x": 55.37,
+     "y": 55.47,
+     "detected": true
+    },
+    {
+     "visit": 9,
+     "mjd": 61046.7934,
+     "ra_deg": 248.167919,
+     "dec_deg": 66.755218,
+     "x": 55.18,
+     "y": 55.73,
+     "detected": true
+    },
+    {
+     "visit": 10,
+     "mjd": 61092.511,
+     "ra_deg": 248.167365,
+     "dec_deg": 66.755238,
+     "x": 55.44,
+     "y": 55.75,
+     "detected": true
+    },
+    {
+     "visit": 11,
+     "mjd": 61115.9092,
+     "ra_deg": 248.16723,
+     "dec_deg": 66.755451,
+     "x": 55.5,
+     "y": 56.0,
+     "detected": true
+    },
+    {
+     "visit": 12,
+     "mjd": 61140.9593,
+     "ra_deg": 248.167132,
+     "dec_deg": 66.754908,
+     "x": 55.55,
+     "y": 55.36,
+     "detected": true
+    },
+    {
+     "visit": 13,
+     "mjd": 61170.631,
+     "ra_deg": 248.16723,
+     "dec_deg": 66.755207,
+     "x": 55.5,
+     "y": 55.71,
+     "detected": true
+    },
+    {
+     "visit": 14,
+     "mjd": 61209.4189,
+     "ra_deg": 248.166581,
+     "dec_deg": 66.754967,
+     "x": 55.8,
+     "y": 55.43,
+     "detected": true
+    },
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.166629,
+     "dec_deg": 66.754692,
+     "x": 55.78,
+     "y": 55.11,
+     "detected": true
+    },
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.167205,
+     "dec_deg": 66.75416,
+     "x": 55.51,
+     "y": 54.49,
+     "detected": true
+    },
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.167401,
+     "dec_deg": 66.754687,
+     "x": 55.42,
+     "y": 55.11,
+     "detected": true
+    }
+   ],
+   "class": "variable",
+   "confidence": 0.65,
+   "reason": "Static, but its D4 brightness changed by a factor 16.95 across visits (halo light: the core is saturated); known as (R Draconis).",
+   "appearance_class": "mira",
+   "flags": [
+    "saturated-core"
+   ],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 12537646.28,
+     "err": 271028.6,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 1573865.99,
+     "err": 93579.67,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 10346108.86,
+     "err": 135105.88,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 20988032.98,
+     "err": 82228.14,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 18676029.61,
+     "err": 259613.11,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 26677595.58,
+     "err": 98343.39,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 16604190.68,
+     "err": 134789.73,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 5677123.16,
+     "err": 218586.2,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 33190983.43,
+     "err": 47726.34,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 21329829.5,
+     "err": 43910.87,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 23959614.33,
+     "err": 31892.54,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 8,
+     "flux": 32634961.37,
+     "err": 35420.31,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 14,
+     "flux": 18080086.06,
+     "err": 30432.18,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 25272373.67,
+     "err": 54195.85,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 26773650.59,
+     "err": 41232.99,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 22970468.74,
+     "err": 64254.7,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 8,
+     "flux": 21832187.08,
+     "err": 57354.65,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 9,
+     "flux": 21744223.33,
+     "err": 54508.19,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 10,
+     "flux": 23254713.16,
+     "err": 60423.19,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 11,
+     "flux": 24178581.76,
+     "err": 55390.58,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 12,
+     "flux": 15838019.96,
+     "err": 43065.4,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 13,
+     "flux": 12708628.75,
+     "err": 39284.26,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 14,
+     "flux": 11499796.9,
+     "err": 38719.69,
+     "quality": "halo-only"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 12537646.28,
+     "err": 271028.6,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 1573865.99,
+     "err": 93579.67,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 10346108.86,
+     "err": 135105.88,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 20988032.98,
+     "err": 82228.14,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 18676029.61,
+     "err": 259613.11,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 26677595.58,
+     "err": 98343.39,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 16604190.68,
+     "err": 134789.73,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 5677123.16,
+     "err": 218586.2,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D5",
+     "flux": 33190983.43,
+     "err": 47726.34,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 21329829.5,
+     "err": 43910.87,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 23959614.33,
+     "err": 31892.54,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D5",
+     "flux": 32634961.37,
+     "err": 35420.31,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D5",
+     "flux": 18080086.06,
+     "err": 30432.18,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60792.8901,
+     "band": "D6",
+     "flux": 25272373.67,
+     "err": 54195.85,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 26773650.59,
+     "err": 41232.99,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D6",
+     "flux": 22970468.74,
+     "err": 64254.7,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D6",
+     "flux": 21832187.08,
+     "err": 57354.65,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61046.7934,
+     "band": "D6",
+     "flux": 21744223.33,
+     "err": 54508.19,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61092.511,
+     "band": "D6",
+     "flux": 23254713.16,
+     "err": 60423.19,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61115.9092,
+     "band": "D6",
+     "flux": 24178581.76,
+     "err": 55390.58,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61140.9593,
+     "band": "D6",
+     "flux": 15838019.96,
+     "err": 43065.4,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61170.631,
+     "band": "D6",
+     "flux": 12708628.75,
+     "err": 39284.26,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D6",
+     "flux": 11499796.9,
+     "err": 38719.69,
+     "quality": "halo-only"
+    }
+   ]
+  },
+  {
+   "id": "s002",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "1648328119433021824",
+     "sep_arcsec": 0.63,
+     "epoch": 2016.0,
+     "pmra_masyr": -64.1,
+     "pmdec_masyr": 21.5,
+     "phot_g_mean_mag": 14.295,
+     "bp_rp": 0.863,
+     "parallax": 1.752
+    },
+    {
+     "cat": "2MASS",
+     "id": "16324714+6646409",
+     "sep_arcsec": 11.67,
+     "epoch": 1999.4,
+     "k_m": 12.792
+    }
+   ],
+   "flux": {
+    "D4": [
+     null,
+     null,
+     3805.64,
+     3960.24,
+     3045.62,
+     3108.07,
+     3663.55,
+     3035.99,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     3580.15,
+     3656.12,
+     3164.67
+    ],
+    "D5": [
+     null,
+     null,
+     2166.39,
+     3870.39,
+     null,
+     null,
+     null,
+     2346.91,
+     2318.16,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1717.56,
+     null,
+     null,
+     null
+    ],
+    "D6": [
+     2207.58,
+     2174.0,
+     3123.29,
+     null,
+     null,
+     null,
+     null,
+     null,
+     2666.77,
+     2821.4,
+     1336.22,
+     1846.98,
+     1731.19,
+     1633.43,
+     2586.81,
+     null,
+     null,
+     null
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -434.9,
+    "pmdec_masyr": 281.6,
+    "sig_pm_masyr": 380.9,
+    "speed_arcsec_yr": 0.518,
+    "direction": "north-west",
+    "sig": 1.4,
+    "chance_lines_expected": 0.0,
+    "fit_rms_px": 0.33,
+    "n_visits": 18
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60792.8901,
+     "ra_deg": 248.194754,
+     "dec_deg": 66.777785,
+     "x": 42.79,
+     "y": 82.15,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.194673,
+     "dec_deg": 66.778341,
+     "x": 42.83,
+     "y": 82.8,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 60838.576,
+     "ra_deg": 248.196249,
+     "dec_deg": 66.778321,
+     "x": 42.1,
+     "y": 82.78,
+     "detected": true
+    },
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.196113,
+     "dec_deg": 66.778357,
+     "x": 42.17,
+     "y": 82.82,
+     "detected": true
+    },
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.194763,
+     "dec_deg": 66.778469,
+     "x": 42.79,
+     "y": 82.95,
+     "detected": true
+    },
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.19487,
+     "dec_deg": 66.778369,
+     "x": 42.74,
+     "y": 82.83,
+     "detected": true
+    },
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.19481,
+     "dec_deg": 66.778367,
+     "x": 42.77,
+     "y": 82.83,
+     "detected": true
+    },
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.195023,
+     "dec_deg": 66.77837,
+     "x": 42.67,
+     "y": 82.83,
+     "detected": true
+    },
+    {
+     "visit": 8,
+     "mjd": 61024.496,
+     "ra_deg": 248.196113,
+     "dec_deg": 66.778363,
+     "x": 42.17,
+     "y": 82.83,
+     "detected": true
+    },
+    {
+     "visit": 9,
+     "mjd": 61046.7934,
+     "ra_deg": 248.194575,
+     "dec_deg": 66.77779,
+     "x": 42.88,
+     "y": 82.16,
+     "detected": true
+    },
+    {
+     "visit": 10,
+     "mjd": 61092.511,
+     "ra_deg": 248.194695,
+     "dec_deg": 66.778384,
+     "x": 42.82,
+     "y": 82.85,
+     "detected": true
+    },
+    {
+     "visit": 11,
+     "mjd": 61115.9092,
+     "ra_deg": 248.194875,
+     "dec_deg": 66.778341,
+     "x": 42.74,
+     "y": 82.8,
+     "detected": true
+    },
+    {
+     "visit": 12,
+     "mjd": 61140.9593,
+     "ra_deg": 248.196015,
+     "dec_deg": 66.778333,
+     "x": 42.21,
+     "y": 82.79,
+     "detected": true
+    },
+    {
+     "visit": 13,
+     "mjd": 61170.631,
+     "ra_deg": 248.194784,
+     "dec_deg": 66.778401,
+     "x": 42.78,
+     "y": 82.87,
+     "detected": true
+    },
+    {
+     "visit": 14,
+     "mjd": 61209.4189,
+     "ra_deg": 248.195032,
+     "dec_deg": 66.778367,
+     "x": 42.67,
+     "y": 82.83,
+     "detected": true
+    },
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.194903,
+     "dec_deg": 66.778335,
+     "x": 42.73,
+     "y": 82.79,
+     "detected": true
+    },
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.194873,
+     "dec_deg": 66.778341,
+     "x": 42.74,
+     "y": 82.8,
+     "detected": true
+    },
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.194798,
+     "dec_deg": 66.778375,
+     "x": 42.77,
+     "y": 82.84,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 1648328119433021824 (0.63\u2033). Motion 0.5\u00b10.4\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 3805.64,
+     "err": 1882.71,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 3960.24,
+     "err": 1298.24,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 3045.62,
+     "err": 1097.4,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 3108.07,
+     "err": 922.49,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 3663.55,
+     "err": 768.69,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 3035.99,
+     "err": 992.35,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 3580.15,
+     "err": 705.38,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 3656.12,
+     "err": 789.55,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 3164.67,
+     "err": 1158.96,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 2166.39,
+     "err": 1730.55,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 3870.39,
+     "err": 1276.99,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 2346.91,
+     "err": 748.8,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 8,
+     "flux": 2318.16,
+     "err": 1036.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 14,
+     "flux": 1717.56,
+     "err": 1003.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 2207.58,
+     "err": 896.75,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 2174.0,
+     "err": 1017.78,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 3123.29,
+     "err": 1021.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 8,
+     "flux": 2666.77,
+     "err": 709.27,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 9,
+     "flux": 2821.4,
+     "err": 934.04,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 10,
+     "flux": 1336.22,
+     "err": 954.64,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 11,
+     "flux": 1846.98,
+     "err": 775.54,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 12,
+     "flux": 1731.19,
+     "err": 614.23,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 13,
+     "flux": 1633.43,
+     "err": 518.66,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 14,
+     "flux": 2586.81,
+     "err": 400.43,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60838.576,
+     "band": "D4",
+     "flux": 3805.64,
+     "err": 1882.71,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 3960.24,
+     "err": 1298.24,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 3045.62,
+     "err": 1097.4,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 3108.07,
+     "err": 922.49,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 3663.55,
+     "err": 768.69,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 3035.99,
+     "err": 992.35,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 3580.15,
+     "err": 705.38,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 3656.12,
+     "err": 789.55,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 3164.67,
+     "err": 1158.96,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D5",
+     "flux": 2166.39,
+     "err": 1730.55,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 3870.39,
+     "err": 1276.99,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 2346.91,
+     "err": 748.8,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D5",
+     "flux": 2318.16,
+     "err": 1036.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D5",
+     "flux": 1717.56,
+     "err": 1003.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60792.8901,
+     "band": "D6",
+     "flux": 2207.58,
+     "err": 896.75,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 2174.0,
+     "err": 1017.78,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D6",
+     "flux": 3123.29,
+     "err": 1021.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D6",
+     "flux": 2666.77,
+     "err": 709.27,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61046.7934,
+     "band": "D6",
+     "flux": 2821.4,
+     "err": 934.04,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61092.511,
+     "band": "D6",
+     "flux": 1336.22,
+     "err": 954.64,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61115.9092,
+     "band": "D6",
+     "flux": 1846.98,
+     "err": 775.54,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61140.9593,
+     "band": "D6",
+     "flux": 1731.19,
+     "err": 614.23,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61170.631,
+     "band": "D6",
+     "flux": 1633.43,
+     "err": 518.66,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D6",
+     "flux": 2586.81,
+     "err": 400.43,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s003",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "1648328085073287040",
+     "sep_arcsec": 0.18,
+     "epoch": 2016.0,
+     "pmra_masyr": -1.2,
+     "pmdec_masyr": 3.9,
+     "phot_g_mean_mag": 14.204,
+     "bp_rp": 0.614,
+     "parallax": 0.849
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J163257.19+664636.9",
+     "sep_arcsec": 2.15,
+     "epoch": 2010.5,
+     "pmra_masyr": 134.0,
+     "pmdec_masyr": -33.0,
+     "w1mpro": 12.953,
+     "w2mpro": 12.958
+    },
+    {
+     "cat": "2MASS",
+     "id": "16325721+6646370",
+     "sep_arcsec": 13.67,
+     "epoch": 1999.4,
+     "k_m": 13.284
+    }
+   ],
+   "flux": {
+    "D4": [
+     null,
+     null,
+     1609.57,
+     2324.46,
+     1334.19,
+     1669.22,
+     2036.43,
+     1809.48,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     2133.37,
+     1805.19,
+     1699.56
+    ],
+    "D5": [
+     null,
+     null,
+     858.52,
+     1356.82,
+     null,
+     null,
+     null,
+     1071.12,
+     1279.89,
+     null,
+     null,
+     null,
+     null,
+     null,
+     827.07,
+     null,
+     null,
+     null
+    ],
+    "D6": [
+     857.18,
+     918.21,
+     742.4,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1207.29,
+     985.41,
+     657.04,
+     904.01,
+     891.47,
+     915.96,
+     864.97,
+     null,
+     null,
+     null
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -513.8,
+    "pmdec_masyr": 36.7,
+    "sig_pm_masyr": 365.9,
+    "speed_arcsec_yr": 0.515,
+    "direction": "west",
+    "sig": 1.4,
+    "chance_lines_expected": 0.0,
+    "fit_rms_px": 0.22,
+    "n_visits": 18
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60792.8901,
+     "ra_deg": 248.238215,
+     "dec_deg": 66.777029,
+     "x": 22.73,
+     "y": 81.28,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.239292,
+     "dec_deg": 66.776925,
+     "x": 22.23,
+     "y": 81.16,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 60838.576,
+     "ra_deg": 248.239454,
+     "dec_deg": 66.77683,
+     "x": 22.16,
+     "y": 81.05,
+     "detected": true
+    },
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.239251,
+     "dec_deg": 66.77689,
+     "x": 22.25,
+     "y": 81.12,
+     "detected": true
+    },
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.238056,
+     "dec_deg": 66.776932,
+     "x": 22.8,
+     "y": 81.17,
+     "detected": true
+    },
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.238102,
+     "dec_deg": 66.776913,
+     "x": 22.78,
+     "y": 81.14,
+     "detected": true
+    },
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.23809,
+     "dec_deg": 66.776905,
+     "x": 22.79,
+     "y": 81.14,
+     "detected": true
+    },
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.238187,
+     "dec_deg": 66.776902,
+     "x": 22.74,
+     "y": 81.13,
+     "detected": true
+    },
+    {
+     "visit": 8,
+     "mjd": 61024.496,
+     "ra_deg": 248.238205,
+     "dec_deg": 66.776829,
+     "x": 22.74,
+     "y": 81.05,
+     "detected": true
+    },
+    {
+     "visit": 9,
+     "mjd": 61046.7934,
+     "ra_deg": 248.238091,
+     "dec_deg": 66.776854,
+     "x": 22.79,
+     "y": 81.08,
+     "detected": true
+    },
+    {
+     "visit": 10,
+     "mjd": 61092.511,
+     "ra_deg": 248.238363,
+     "dec_deg": 66.776961,
+     "x": 22.66,
+     "y": 81.2,
+     "detected": true
+    },
+    {
+     "visit": 11,
+     "mjd": 61115.9092,
+     "ra_deg": 248.238098,
+     "dec_deg": 66.776926,
+     "x": 22.78,
+     "y": 81.16,
+     "detected": true
+    },
+    {
+     "visit": 12,
+     "mjd": 61140.9593,
+     "ra_deg": 248.238062,
+     "dec_deg": 66.776942,
+     "x": 22.8,
+     "y": 81.18,
+     "detected": true
+    },
+    {
+     "visit": 13,
+     "mjd": 61170.631,
+     "ra_deg": 248.238043,
+     "dec_deg": 66.777018,
+     "x": 22.81,
+     "y": 81.27,
+     "detected": true
+    },
+    {
+     "visit": 14,
+     "mjd": 61209.4189,
+     "ra_deg": 248.239304,
+     "dec_deg": 66.776863,
+     "x": 22.23,
+     "y": 81.09,
+     "detected": true
+    },
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.238057,
+     "dec_deg": 66.776898,
+     "x": 22.8,
+     "y": 81.13,
+     "detected": true
+    },
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.238091,
+     "dec_deg": 66.776917,
+     "x": 22.79,
+     "y": 81.15,
+     "detected": true
+    },
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.238196,
+     "dec_deg": 66.776922,
+     "x": 22.74,
+     "y": 81.16,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 1648328085073287040 (0.18\u2033). Motion 0.5\u00b10.4\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1609.57,
+     "err": 566.11,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 2324.46,
+     "err": 391.68,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 1334.19,
+     "err": 392.8,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 1669.22,
+     "err": 278.4,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 2036.43,
+     "err": 251.19,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 1809.48,
+     "err": 313.5,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 2133.37,
+     "err": 228.32,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 1805.19,
+     "err": 268.42,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 1699.56,
+     "err": 344.32,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 858.52,
+     "err": 536.36,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 1356.82,
+     "err": 461.32,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 1071.12,
+     "err": 275.85,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 8,
+     "flux": 1279.89,
+     "err": 336.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 14,
+     "flux": 827.07,
+     "err": 334.61,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 857.18,
+     "err": 348.3,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 918.21,
+     "err": 436.14,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 742.4,
+     "err": 377.52,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 8,
+     "flux": 1207.29,
+     "err": 250.04,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 9,
+     "flux": 985.41,
+     "err": 334.32,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 10,
+     "flux": 657.04,
+     "err": 313.49,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 11,
+     "flux": 904.01,
+     "err": 271.04,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 12,
+     "flux": 891.47,
+     "err": 235.21,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 13,
+     "flux": 915.96,
+     "err": 223.14,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 14,
+     "flux": 864.97,
+     "err": 178.36,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60838.576,
+     "band": "D4",
+     "flux": 1609.57,
+     "err": 566.11,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 2324.46,
+     "err": 391.68,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 1334.19,
+     "err": 392.8,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 1669.22,
+     "err": 278.4,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 2036.43,
+     "err": 251.19,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 1809.48,
+     "err": 313.5,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 2133.37,
+     "err": 228.32,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 1805.19,
+     "err": 268.42,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 1699.56,
+     "err": 344.32,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D5",
+     "flux": 858.52,
+     "err": 536.36,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 1356.82,
+     "err": 461.32,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 1071.12,
+     "err": 275.85,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D5",
+     "flux": 1279.89,
+     "err": 336.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D5",
+     "flux": 827.07,
+     "err": 334.61,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60792.8901,
+     "band": "D6",
+     "flux": 857.18,
+     "err": 348.3,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 918.21,
+     "err": 436.14,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D6",
+     "flux": 742.4,
+     "err": 377.52,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D6",
+     "flux": 1207.29,
+     "err": 250.04,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61046.7934,
+     "band": "D6",
+     "flux": 985.41,
+     "err": 334.32,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61092.511,
+     "band": "D6",
+     "flux": 657.04,
+     "err": 313.49,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61115.9092,
+     "band": "D6",
+     "flux": 904.01,
+     "err": 271.04,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61140.9593,
+     "band": "D6",
+     "flux": 891.47,
+     "err": 235.21,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61170.631,
+     "band": "D6",
+     "flux": 915.96,
+     "err": 223.14,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D6",
+     "flux": 864.97,
+     "err": 178.36,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s004",
+   "crossmatch": [
+    {
+     "cat": "2MASS",
+     "id": "16325764+6645369",
+     "sep_arcsec": 11.81,
+     "epoch": 1999.4,
+     "k_m": 14.926
+    }
+   ],
+   "flux": {
+    "D4": [
+     null,
+     null,
+     1590.2,
+     1869.43,
+     785.86,
+     1230.62,
+     1317.2,
+     1457.47,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1358.19,
+     1342.88,
+     1096.02
+    ],
+    "D5": [
+     null,
+     null,
+     970.82,
+     988.72,
+     null,
+     null,
+     null,
+     907.6,
+     855.69,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1126.31,
+     null,
+     null,
+     null
+    ],
+    "D6": [
+     1699.98,
+     1164.49,
+     1178.76,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1068.09,
+     1308.2,
+     765.64,
+     744.88,
+     1243.79,
+     765.02,
+     782.61,
+     null,
+     null,
+     null
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 197.5,
+    "pmdec_masyr": -361.0,
+    "sig_pm_masyr": 553.3,
+    "speed_arcsec_yr": 0.411,
+    "direction": "south-east",
+    "sig": 0.7,
+    "chance_lines_expected": 0.0,
+    "fit_rms_px": 0.25,
+    "n_visits": 15
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60792.8901,
+     "ra_deg": 248.239735,
+     "dec_deg": 66.760781,
+     "x": 22.01,
+     "y": 62.26,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.24,
+     "dec_deg": 66.760573,
+     "x": 21.88,
+     "y": 62.02,
+     "detected": false
+    },
+    {
+     "visit": 2,
+     "mjd": 60838.576,
+     "ra_deg": 248.239773,
+     "dec_deg": 66.760498,
+     "x": 21.99,
+     "y": 61.93,
+     "detected": true
+    },
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.239921,
+     "dec_deg": 66.760766,
+     "x": 21.92,
+     "y": 62.24,
+     "detected": true
+    },
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.240043,
+     "dec_deg": 66.760541,
+     "x": 21.86,
+     "y": 61.98,
+     "detected": false
+    },
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.240284,
+     "dec_deg": 66.760399,
+     "x": 21.75,
+     "y": 61.81,
+     "detected": true
+    },
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.240463,
+     "dec_deg": 66.760484,
+     "x": 21.67,
+     "y": 61.91,
+     "detected": true
+    },
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.240259,
+     "dec_deg": 66.760335,
+     "x": 21.76,
+     "y": 61.74,
+     "detected": true
+    },
+    {
+     "visit": 8,
+     "mjd": 61024.496,
+     "ra_deg": 248.239786,
+     "dec_deg": 66.760463,
+     "x": 21.98,
+     "y": 61.89,
+     "detected": true
+    },
+    {
+     "visit": 9,
+     "mjd": 61046.7934,
+     "ra_deg": 248.239725,
+     "dec_deg": 66.760614,
+     "x": 22.01,
+     "y": 62.06,
+     "detected": true
+    },
+    {
+     "visit": 10,
+     "mjd": 61092.511,
+     "ra_deg": 248.24011,
+     "dec_deg": 66.760493,
+     "x": 21.83,
+     "y": 61.92,
+     "detected": false
+    },
+    {
+     "visit": 11,
+     "mjd": 61115.9092,
+     "ra_deg": 248.240067,
+     "dec_deg": 66.760467,
+     "x": 21.85,
+     "y": 61.89,
+     "detected": true
+    },
+    {
+     "visit": 12,
+     "mjd": 61140.9593,
+     "ra_deg": 248.239951,
+     "dec_deg": 66.760535,
+     "x": 21.91,
+     "y": 61.97,
+     "detected": true
+    },
+    {
+     "visit": 13,
+     "mjd": 61170.631,
+     "ra_deg": 248.24003,
+     "dec_deg": 66.760794,
+     "x": 21.87,
+     "y": 62.28,
+     "detected": true
+    },
+    {
+     "visit": 14,
+     "mjd": 61209.4189,
+     "ra_deg": 248.240079,
+     "dec_deg": 66.759915,
+     "x": 21.85,
+     "y": 61.25,
+     "detected": true
+    },
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.240192,
+     "dec_deg": 66.760534,
+     "x": 21.8,
+     "y": 61.97,
+     "detected": true
+    },
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.240168,
+     "dec_deg": 66.760559,
+     "x": 21.81,
+     "y": 62.0,
+     "detected": true
+    },
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.240328,
+     "dec_deg": 66.760491,
+     "x": 21.73,
+     "y": 61.92,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches 2MASS 16325764+6645369 (11.81\u2033). Motion 0.4\u00b10.6\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1590.2,
+     "err": 1162.82,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 1869.43,
+     "err": 786.04,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 785.86,
+     "err": 619.97,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 1230.62,
+     "err": 480.01,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 1317.2,
+     "err": 402.62,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 1457.47,
+     "err": 582.74,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 1358.19,
+     "err": 402.73,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 1342.88,
+     "err": 420.33,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 1096.02,
+     "err": 600.11,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 970.82,
+     "err": 894.96,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 988.72,
+     "err": 899.19,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 907.6,
+     "err": 581.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 8,
+     "flux": 855.69,
+     "err": 733.56,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 14,
+     "flux": 1126.31,
+     "err": 470.44,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 1699.98,
+     "err": 592.86,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 1164.49,
+     "err": 810.34,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 1178.76,
+     "err": 654.31,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 8,
+     "flux": 1068.09,
+     "err": 454.73,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 9,
+     "flux": 1308.2,
+     "err": 465.82,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 10,
+     "flux": 765.64,
+     "err": 489.35,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 11,
+     "flux": 744.88,
+     "err": 551.64,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 12,
+     "flux": 1243.79,
+     "err": 405.79,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 13,
+     "flux": 765.02,
+     "err": 384.51,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 14,
+     "flux": 782.61,
+     "err": 309.09,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60838.576,
+     "band": "D4",
+     "flux": 1590.2,
+     "err": 1162.82,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 1869.43,
+     "err": 786.04,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 785.86,
+     "err": 619.97,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 1230.62,
+     "err": 480.01,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 1317.2,
+     "err": 402.62,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 1457.47,
+     "err": 582.74,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 1358.19,
+     "err": 402.73,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 1342.88,
+     "err": 420.33,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 1096.02,
+     "err": 600.11,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D5",
+     "flux": 970.82,
+     "err": 894.96,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 988.72,
+     "err": 899.19,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 907.6,
+     "err": 581.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D5",
+     "flux": 855.69,
+     "err": 733.56,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D5",
+     "flux": 1126.31,
+     "err": 470.44,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60792.8901,
+     "band": "D6",
+     "flux": 1699.98,
+     "err": 592.86,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 1164.49,
+     "err": 810.34,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D6",
+     "flux": 1178.76,
+     "err": 654.31,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D6",
+     "flux": 1068.09,
+     "err": 454.73,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61046.7934,
+     "band": "D6",
+     "flux": 1308.2,
+     "err": 465.82,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61092.511,
+     "band": "D6",
+     "flux": 765.64,
+     "err": 489.35,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61115.9092,
+     "band": "D6",
+     "flux": 744.88,
+     "err": 551.64,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61140.9593,
+     "band": "D6",
+     "flux": 1243.79,
+     "err": 405.79,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61170.631,
+     "band": "D6",
+     "flux": 765.02,
+     "err": 384.51,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D6",
+     "flux": 782.61,
+     "err": 309.09,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s005",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "1648328359951193216",
+     "sep_arcsec": 1.76,
+     "epoch": 2016.0,
+     "pmra_masyr": 4.1,
+     "pmdec_masyr": 11.4,
+     "phot_g_mean_mag": 15.711,
+     "bp_rp": 1.361,
+     "parallax": 1.313
+    },
+    {
+     "cat": "2MASS",
+     "id": "16325473+6647277",
+     "sep_arcsec": 2.71,
+     "epoch": 1999.4,
+     "k_m": 13.255
+    }
+   ],
+   "flux": {
+    "D4": [
+     null,
+     null,
+     2169.94,
+     2439.69,
+     1923.32,
+     2116.58,
+     2561.16,
+     2201.6,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     2662.11,
+     2402.95,
+     2054.19
+    ],
+    "D5": [
+     null,
+     null,
+     1672.42,
+     1485.34,
+     null,
+     null,
+     null,
+     1317.27,
+     1606.21,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1552.81,
+     null,
+     null,
+     null
+    ],
+    "D6": [
+     1269.21,
+     1237.65,
+     1311.1,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1150.09,
+     1098.89,
+     1112.5,
+     1116.37,
+     1147.74,
+     1193.93,
+     1198.82,
+     null,
+     null,
+     null
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -10.2,
+    "pmdec_masyr": -28.1,
+    "sig_pm_masyr": 325.8,
+    "speed_arcsec_yr": 0.03,
+    "direction": "south",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0,
+    "fit_rms_px": 0.04,
+    "n_visits": 18
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60792.8901,
+     "ra_deg": 248.229041,
+     "dec_deg": 66.791462,
+     "x": 26.98,
+     "y": 98.17,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.229074,
+     "dec_deg": 66.791454,
+     "x": 26.97,
+     "y": 98.16,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 60838.576,
+     "ra_deg": 248.228961,
+     "dec_deg": 66.791448,
+     "x": 27.02,
+     "y": 98.16,
+     "detected": true
+    },
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.228984,
+     "dec_deg": 66.791444,
+     "x": 27.01,
+     "y": 98.15,
+     "detected": true
+    },
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.228925,
+     "dec_deg": 66.791391,
+     "x": 27.04,
+     "y": 98.09,
+     "detected": true
+    },
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.22895,
+     "dec_deg": 66.791412,
+     "x": 27.02,
+     "y": 98.11,
+     "detected": true
+    },
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.228956,
+     "dec_deg": 66.791412,
+     "x": 27.02,
+     "y": 98.11,
+     "detected": true
+    },
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.229005,
+     "dec_deg": 66.791423,
+     "x": 27.0,
+     "y": 98.13,
+     "detected": true
+    },
+    {
+     "visit": 8,
+     "mjd": 61024.496,
+     "ra_deg": 248.229034,
+     "dec_deg": 66.79144,
+     "x": 26.99,
+     "y": 98.15,
+     "detected": true
+    },
+    {
+     "visit": 9,
+     "mjd": 61046.7934,
+     "ra_deg": 248.229081,
+     "dec_deg": 66.79145,
+     "x": 26.96,
+     "y": 98.16,
+     "detected": true
+    },
+    {
+     "visit": 10,
+     "mjd": 61092.511,
+     "ra_deg": 248.229202,
+     "dec_deg": 66.791441,
+     "x": 26.91,
+     "y": 98.15,
+     "detected": true
+    },
+    {
+     "visit": 11,
+     "mjd": 61115.9092,
+     "ra_deg": 248.22903,
+     "dec_deg": 66.791443,
+     "x": 26.99,
+     "y": 98.15,
+     "detected": true
+    },
+    {
+     "visit": 12,
+     "mjd": 61140.9593,
+     "ra_deg": 248.228978,
+     "dec_deg": 66.791436,
+     "x": 27.01,
+     "y": 98.14,
+     "detected": true
+    },
+    {
+     "visit": 13,
+     "mjd": 61170.631,
+     "ra_deg": 248.228982,
+     "dec_deg": 66.791413,
+     "x": 27.01,
+     "y": 98.12,
+     "detected": true
+    },
+    {
+     "visit": 14,
+     "mjd": 61209.4189,
+     "ra_deg": 248.229037,
+     "dec_deg": 66.791432,
+     "x": 26.98,
+     "y": 98.14,
+     "detected": true
+    },
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.228961,
+     "dec_deg": 66.791429,
+     "x": 27.02,
+     "y": 98.13,
+     "detected": true
+    },
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.228946,
+     "dec_deg": 66.791417,
+     "x": 27.03,
+     "y": 98.12,
+     "detected": true
+    },
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.22898,
+     "dec_deg": 66.791424,
+     "x": 27.01,
+     "y": 98.13,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 1648328359951193216 (1.76\u2033). Motion 0.0\u00b10.3\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 2169.94,
+     "err": 233.38,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 2439.69,
+     "err": 199.61,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 1923.32,
+     "err": 168.1,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 2116.58,
+     "err": 130.52,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 2561.16,
+     "err": 117.41,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 2201.6,
+     "err": 140.66,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 2662.11,
+     "err": 96.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 2402.95,
+     "err": 124.31,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 2054.19,
+     "err": 165.78,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 1672.42,
+     "err": 203.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 1485.34,
+     "err": 207.4,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 1317.27,
+     "err": 128.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 8,
+     "flux": 1606.21,
+     "err": 158.63,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 14,
+     "flux": 1552.81,
+     "err": 104.93,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 1269.21,
+     "err": 137.34,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 1237.65,
+     "err": 160.76,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 1311.1,
+     "err": 187.26,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 8,
+     "flux": 1150.09,
+     "err": 134.8,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 9,
+     "flux": 1098.89,
+     "err": 163.11,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 10,
+     "flux": 1112.5,
+     "err": 121.3,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 11,
+     "flux": 1116.37,
+     "err": 134.22,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 12,
+     "flux": 1147.74,
+     "err": 101.82,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 13,
+     "flux": 1193.93,
+     "err": 95.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 14,
+     "flux": 1198.82,
+     "err": 91.32,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60838.576,
+     "band": "D4",
+     "flux": 2169.94,
+     "err": 233.38,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 2439.69,
+     "err": 199.61,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 1923.32,
+     "err": 168.1,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 2116.58,
+     "err": 130.52,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 2561.16,
+     "err": 117.41,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 2201.6,
+     "err": 140.66,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 2662.11,
+     "err": 96.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 2402.95,
+     "err": 124.31,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 2054.19,
+     "err": 165.78,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D5",
+     "flux": 1672.42,
+     "err": 203.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 1485.34,
+     "err": 207.4,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 1317.27,
+     "err": 128.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D5",
+     "flux": 1606.21,
+     "err": 158.63,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D5",
+     "flux": 1552.81,
+     "err": 104.93,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60792.8901,
+     "band": "D6",
+     "flux": 1269.21,
+     "err": 137.34,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 1237.65,
+     "err": 160.76,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D6",
+     "flux": 1311.1,
+     "err": 187.26,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D6",
+     "flux": 1150.09,
+     "err": 134.8,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61046.7934,
+     "band": "D6",
+     "flux": 1098.89,
+     "err": 163.11,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61092.511,
+     "band": "D6",
+     "flux": 1112.5,
+     "err": 121.3,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61115.9092,
+     "band": "D6",
+     "flux": 1116.37,
+     "err": 134.22,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61140.9593,
+     "band": "D6",
+     "flux": 1147.74,
+     "err": 101.82,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61170.631,
+     "band": "D6",
+     "flux": 1193.93,
+     "err": 95.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D6",
+     "flux": 1198.82,
+     "err": 91.32,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s006",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "1648327226079824640",
+     "sep_arcsec": 0.82,
+     "epoch": 2016.0,
+     "pmra_masyr": -0.4,
+     "pmdec_masyr": -3.9,
+     "phot_g_mean_mag": 13.753,
+     "bp_rp": 0.714,
+     "parallax": 0.953
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J163252.73+664336.2",
+     "sep_arcsec": 2.13,
+     "epoch": 2010.5,
+     "pmra_masyr": 94.0,
+     "pmdec_masyr": -173.0,
+     "w1mpro": 12.309,
+     "w2mpro": 12.32
+    },
+    {
+     "cat": "2MASS",
+     "id": "16325275+6643363",
+     "sep_arcsec": 1.55,
+     "epoch": 1999.4,
+     "k_m": 12.495
+    }
+   ],
+   "flux": {
+    "D4": [
+     null,
+     null,
+     3313.88,
+     3488.71,
+     2764.21,
+     2838.78,
+     3756.8,
+     3435.78,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     3750.93,
+     3370.72,
+     2862.41
+    ],
+    "D5": [
+     null,
+     null,
+     2006.79,
+     1638.84,
+     null,
+     null,
+     null,
+     1915.98,
+     2031.31,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1957.86,
+     null,
+     null,
+     null
+    ],
+    "D6": [
+     1537.23,
+     2042.9,
+     1717.72,
+     null,
+     null,
+     null,
+     null,
+     null,
+     1290.82,
+     1499.08,
+     1511.42,
+     1634.33,
+     1387.66,
+     1734.87,
+     1524.3,
+     null,
+     null,
+     null
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -28.7,
+    "pmdec_masyr": 3.3,
+    "sig_pm_masyr": 292.8,
+    "speed_arcsec_yr": 0.029,
+    "direction": "west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0,
+    "fit_rms_px": 0.06,
+    "n_visits": 18
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60792.8901,
+     "ra_deg": 248.21989,
+     "dec_deg": 66.72647,
+     "x": 31.14,
+     "y": 22.08,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.220148,
+     "dec_deg": 66.726523,
+     "x": 31.02,
+     "y": 22.14,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 60838.576,
+     "ra_deg": 248.220128,
+     "dec_deg": 66.72651,
+     "x": 31.03,
+     "y": 22.13,
+     "detected": true
+    },
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.220219,
+     "dec_deg": 66.726543,
+     "x": 30.99,
+     "y": 22.17,
+     "detected": true
+    },
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.220095,
+     "dec_deg": 66.726564,
+     "x": 31.05,
+     "y": 22.19,
+     "detected": true
+    },
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.220061,
+     "dec_deg": 66.72651,
+     "x": 31.06,
+     "y": 22.13,
+     "detected": true
+    },
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.220035,
+     "dec_deg": 66.726522,
+     "x": 31.07,
+     "y": 22.14,
+     "detected": true
+    },
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.220141,
+     "dec_deg": 66.726524,
+     "x": 31.02,
+     "y": 22.14,
+     "detected": true
+    },
+    {
+     "visit": 8,
+     "mjd": 61024.496,
+     "ra_deg": 248.220066,
+     "dec_deg": 66.7265,
+     "x": 31.06,
+     "y": 22.12,
+     "detected": true
+    },
+    {
+     "visit": 9,
+     "mjd": 61046.7934,
+     "ra_deg": 248.220067,
+     "dec_deg": 66.726401,
+     "x": 31.06,
+     "y": 22.0,
+     "detected": true
+    },
+    {
+     "visit": 10,
+     "mjd": 61092.511,
+     "ra_deg": 248.220064,
+     "dec_deg": 66.726445,
+     "x": 31.06,
+     "y": 22.05,
+     "detected": true
+    },
+    {
+     "visit": 11,
+     "mjd": 61115.9092,
+     "ra_deg": 248.220204,
+     "dec_deg": 66.726497,
+     "x": 31.0,
+     "y": 22.11,
+     "detected": true
+    },
+    {
+     "visit": 12,
+     "mjd": 61140.9593,
+     "ra_deg": 248.22013,
+     "dec_deg": 66.726508,
+     "x": 31.03,
+     "y": 22.13,
+     "detected": true
+    },
+    {
+     "visit": 13,
+     "mjd": 61170.631,
+     "ra_deg": 248.220172,
+     "dec_deg": 66.726557,
+     "x": 31.01,
+     "y": 22.18,
+     "detected": true
+    },
+    {
+     "visit": 14,
+     "mjd": 61209.4189,
+     "ra_deg": 248.220005,
+     "dec_deg": 66.726508,
+     "x": 31.09,
+     "y": 22.13,
+     "detected": true
+    },
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.220059,
+     "dec_deg": 66.726536,
+     "x": 31.06,
+     "y": 22.16,
+     "detected": true
+    },
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.220008,
+     "dec_deg": 66.726514,
+     "x": 31.09,
+     "y": 22.13,
+     "detected": true
+    },
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.22009,
+     "dec_deg": 66.726517,
+     "x": 31.05,
+     "y": 22.14,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 1648327226079824640 (0.82\u2033). Motion 0.0\u00b10.3\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 3313.88,
+     "err": 548.34,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 3488.71,
+     "err": 403.47,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 2764.21,
+     "err": 385.8,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 2838.78,
+     "err": 340.65,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 3756.8,
+     "err": 269.79,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 3435.78,
+     "err": 336.26,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 3750.93,
+     "err": 222.86,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 3370.72,
+     "err": 245.07,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 2862.41,
+     "err": 385.24,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 2006.79,
+     "err": 471.32,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 1638.84,
+     "err": 492.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 1915.98,
+     "err": 316.47,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 8,
+     "flux": 2031.31,
+     "err": 347.57,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 14,
+     "flux": 1957.86,
+     "err": 289.63,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 1537.23,
+     "err": 326.17,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 2042.9,
+     "err": 328.64,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 1717.72,
+     "err": 340.36,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 8,
+     "flux": 1290.82,
+     "err": 334.17,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 9,
+     "flux": 1499.08,
+     "err": 340.49,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 10,
+     "flux": 1511.42,
+     "err": 335.86,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 11,
+     "flux": 1634.33,
+     "err": 289.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 12,
+     "flux": 1387.66,
+     "err": 245.67,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 13,
+     "flux": 1734.87,
+     "err": 177.75,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 14,
+     "flux": 1524.3,
+     "err": 172.36,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60838.576,
+     "band": "D4",
+     "flux": 3313.88,
+     "err": 548.34,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 3488.71,
+     "err": 403.47,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 2764.21,
+     "err": 385.8,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 2838.78,
+     "err": 340.65,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 3756.8,
+     "err": 269.79,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 3435.78,
+     "err": 336.26,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 3750.93,
+     "err": 222.86,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 3370.72,
+     "err": 245.07,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 2862.41,
+     "err": 385.24,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D5",
+     "flux": 2006.79,
+     "err": 471.32,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 1638.84,
+     "err": 492.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 1915.98,
+     "err": 316.47,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D5",
+     "flux": 2031.31,
+     "err": 347.57,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D5",
+     "flux": 1957.86,
+     "err": 289.63,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60792.8901,
+     "band": "D6",
+     "flux": 1537.23,
+     "err": 326.17,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 2042.9,
+     "err": 328.64,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60838.576,
+     "band": "D6",
+     "flux": 1717.72,
+     "err": 340.36,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61024.496,
+     "band": "D6",
+     "flux": 1290.82,
+     "err": 334.17,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61046.7934,
+     "band": "D6",
+     "flux": 1499.08,
+     "err": 340.49,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61092.511,
+     "band": "D6",
+     "flux": 1511.42,
+     "err": 335.86,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61115.9092,
+     "band": "D6",
+     "flux": 1634.33,
+     "err": 289.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61140.9593,
+     "band": "D6",
+     "flux": 1387.66,
+     "err": 245.67,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61170.631,
+     "band": "D6",
+     "flux": 1734.87,
+     "err": 177.75,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D6",
+     "flux": 1524.3,
+     "err": 172.36,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s007",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     null
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     218445.67
+    ]
+   },
+   "positions": [
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.164053,
+     "dec_deg": 66.746105,
+     "x": 56.97,
+     "y": 45.06,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 734) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 218445.67,
+     "err": 35050.93,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 218445.67,
+     "err": 35050.93,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s008",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     123342.99
+    ],
+    "D5": [
+     189904.73
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.18806,
+     "dec_deg": 66.748654,
+     "x": 45.87,
+     "y": 48.04,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 717) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 123342.99,
+     "err": 14736.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 189904.73,
+     "err": 23700.06,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 123342.99,
+     "err": 14736.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 189904.73,
+     "err": 23700.06,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s009",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     136679.13
+    ],
+    "D5": [
+     218797.3
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.159447,
+     "dec_deg": 66.745222,
+     "x": 59.1,
+     "y": 44.02,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 688) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 136679.13,
+     "err": 15329.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 218797.3,
+     "err": 24383.52,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 136679.13,
+     "err": 15329.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 218797.3,
+     "err": 24383.52,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s010",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     112295.7
+    ],
+    "D5": [
+     190498.08
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.144339,
+     "dec_deg": 66.759637,
+     "x": 66.07,
+     "y": 60.9,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 664) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 112295.7,
+     "err": 15452.68,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 190498.08,
+     "err": 24331.49,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 112295.7,
+     "err": 15452.68,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 190498.08,
+     "err": 24331.49,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s011",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     110603.29
+    ],
+    "D5": [
+     198060.07
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.153263,
+     "dec_deg": 66.746063,
+     "x": 61.96,
+     "y": 45.01,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 654) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 110603.29,
+     "err": 14771.92,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 198060.07,
+     "err": 23595.63,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 110603.29,
+     "err": 14771.92,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 198060.07,
+     "err": 23595.63,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s012",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     84807.32
+    ],
+    "D5": [
+     119835.16
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.151017,
+     "dec_deg": 66.762105,
+     "x": 62.99,
+     "y": 63.79,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 481) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 84807.32,
+     "err": 17065.71,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 119835.16,
+     "err": 18362.91,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 84807.32,
+     "err": 17065.71,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 119835.16,
+     "err": 18362.91,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s013",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     null
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     170066.91
+    ]
+   },
+   "positions": [
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.159934,
+     "dec_deg": 66.764601,
+     "x": 58.87,
+     "y": 66.71,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 474) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 170066.91,
+     "err": 24658.7,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 170066.91,
+     "err": 24658.7,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s014",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     null
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     139822.52
+    ]
+   },
+   "positions": [
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.189578,
+     "dec_deg": 66.761233,
+     "x": 45.18,
+     "y": 62.77,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 412) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 139822.52,
+     "err": 16791.28,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 139822.52,
+     "err": 16791.28,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s015",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     53000.89
+    ],
+    "D5": [
+     138349.63
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 3,
+     "mjd": 60867.4167,
+     "ra_deg": 248.179107,
+     "dec_deg": 66.76476,
+     "x": 50.01,
+     "y": 66.9,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 408) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 3,
+     "flux": 53000.89,
+     "err": 15840.44,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 3,
+     "flux": 138349.63,
+     "err": 22623.25,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60867.4167,
+     "band": "D4",
+     "flux": 53000.89,
+     "err": 15840.44,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60867.4167,
+     "band": "D5",
+     "flux": 138349.63,
+     "err": 22623.25,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s016",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     null
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     145111.86
+    ]
+   },
+   "positions": [
+    {
+     "visit": 1,
+     "mjd": 60803.0812,
+     "ra_deg": 248.194167,
+     "dec_deg": 66.756355,
+     "x": 43.05,
+     "y": 57.06,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 402) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 145111.86,
+     "err": 18641.64,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60803.0812,
+     "band": "D6",
+     "flux": 145111.86,
+     "err": 18641.64,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s017",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     4887.34
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.215772,
+     "dec_deg": 66.753787,
+     "x": 33.07,
+     "y": 54.06,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 26) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 4887.34,
+     "err": 1771.49,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 4887.34,
+     "err": 1771.49,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s018",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     4870.55
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.217745,
+     "dec_deg": 66.753608,
+     "x": 32.16,
+     "y": 53.85,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 25) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 4870.55,
+     "err": 1550.55,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 4870.55,
+     "err": 1550.55,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s019",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     3900.34
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.217794,
+     "dec_deg": 66.753646,
+     "x": 32.14,
+     "y": 53.9,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 20) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 3900.34,
+     "err": 1643.41,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 3900.34,
+     "err": 1643.41,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s020",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     4842.72
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.217765,
+     "dec_deg": 66.753618,
+     "x": 32.15,
+     "y": 53.86,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 20) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 4842.72,
+     "err": 2104.81,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 4842.72,
+     "err": 2104.81,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s021",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     2947.82
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.217671,
+     "dec_deg": 66.753681,
+     "x": 32.19,
+     "y": 53.94,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 18) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 2947.82,
+     "err": 1773.8,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 2947.82,
+     "err": 1773.8,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s022",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     4349.16
+    ],
+    "D5": [
+     4665.08
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.217754,
+     "dec_deg": 66.75383,
+     "x": 32.15,
+     "y": 54.11,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 18) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 4349.16,
+     "err": 2300.98,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 4665.08,
+     "err": 1973.25,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 4349.16,
+     "err": 2300.98,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 4665.08,
+     "err": 1973.25,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s023",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1513.43
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.188471,
+     "dec_deg": 66.782081,
+     "x": 45.7,
+     "y": 87.18,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 13) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 1513.43,
+     "err": 465.12,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 1513.43,
+     "err": 465.12,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s024",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     null
+    ],
+    "D5": [
+     3842.57
+    ],
+    "D6": [
+     1944.31
+    ]
+   },
+   "positions": [
+    {
+     "visit": 14,
+     "mjd": 61209.4189,
+     "ra_deg": 248.21578,
+     "dec_deg": 66.753676,
+     "x": 33.07,
+     "y": 53.93,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 12) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 14,
+     "flux": 3842.57,
+     "err": 2066.59,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 14,
+     "flux": 1944.31,
+     "err": 1297.44,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61209.4189,
+     "band": "D5",
+     "flux": 3842.57,
+     "err": 2066.59,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61209.4189,
+     "band": "D6",
+     "flux": 1944.31,
+     "err": 1297.44,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s025",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     5123.45
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.215808,
+     "dec_deg": 66.753521,
+     "x": 33.05,
+     "y": 53.75,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 12) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 5123.45,
+     "err": 2215.31,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 5123.45,
+     "err": 2215.31,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s026",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1323.63
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 5,
+     "mjd": 60930.1698,
+     "ra_deg": 248.188655,
+     "dec_deg": 66.782066,
+     "x": 45.61,
+     "y": 87.16,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 8) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 5,
+     "flux": 1323.63,
+     "err": 675.17,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60930.1698,
+     "band": "D4",
+     "flux": 1323.63,
+     "err": 675.17,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s027",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1482.58
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 17,
+     "mjd": 61293.7129,
+     "ra_deg": 248.188636,
+     "dec_deg": 66.782018,
+     "x": 45.62,
+     "y": 87.1,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.55,
+   "reason": "Seen in only one visit (S/N 8) and no known asteroid there: a transient, an uncatalogued asteroid or an artefact. Worth a look in the single exposures.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 17,
+     "flux": 1482.58,
+     "err": 812.35,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61293.7129,
+     "band": "D4",
+     "flux": 1482.58,
+     "err": 812.35,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s028",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1417.32
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.103608,
+     "dec_deg": 66.758849,
+     "x": 84.89,
+     "y": 59.99,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 7) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 1417.32,
+     "err": 829.65,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 1417.32,
+     "err": 829.65,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s029",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     177.24
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.053307,
+     "dec_deg": 66.757045,
+     "x": 108.13,
+     "y": 57.91,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 6) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 177.24,
+     "err": 86.54,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 177.24,
+     "err": 86.54,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s030",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     196.08
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 6,
+     "mjd": 60965.3839,
+     "ra_deg": 248.05341,
+     "dec_deg": 66.757006,
+     "x": 108.09,
+     "y": 57.87,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 6) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 6,
+     "flux": 196.08,
+     "err": 89.32,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60965.3839,
+     "band": "D4",
+     "flux": 196.08,
+     "err": 89.32,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s031",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1505.88
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.11884,
+     "dec_deg": 66.740907,
+     "x": 77.87,
+     "y": 38.98,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 6) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 1505.88,
+     "err": 1505.04,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 1505.88,
+     "err": 1505.04,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s032",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     752.68
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 15,
+     "mjd": 61242.2913,
+     "ra_deg": 248.131533,
+     "dec_deg": 66.780192,
+     "x": 71.98,
+     "y": 84.97,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 6) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 15,
+     "flux": 752.68,
+     "err": 418.59,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61242.2913,
+     "band": "D4",
+     "flux": 752.68,
+     "err": 418.59,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s033",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     108.07
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 16,
+     "mjd": 61270.8572,
+     "ra_deg": 248.053431,
+     "dec_deg": 66.757034,
+     "x": 108.08,
+     "y": 57.9,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 5) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 16,
+     "flux": 108.07,
+     "err": 102.78,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61270.8572,
+     "band": "D4",
+     "flux": 108.07,
+     "err": 102.78,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s034",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1415.08
+    ],
+    "D5": [
+     null
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 4,
+     "mjd": 60916.4897,
+     "ra_deg": 248.129173,
+     "dec_deg": 66.770764,
+     "x": 73.07,
+     "y": 73.93,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 5) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 4,
+     "flux": 1415.08,
+     "err": 1912.95,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.4897,
+     "band": "D4",
+     "flux": 1415.08,
+     "err": 1912.95,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s035",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1315.09
+    ],
+    "D5": [
+     766.32
+    ],
+    "D6": [
+     null
+    ]
+   },
+   "positions": [
+    {
+     "visit": 7,
+     "mjd": 60991.8307,
+     "ra_deg": 248.188678,
+     "dec_deg": 66.782604,
+     "x": 45.6,
+     "y": 87.79,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 5) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 7,
+     "flux": 1315.09,
+     "err": 646.45,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 7,
+     "flux": 766.32,
+     "err": 541.09,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60991.8307,
+     "band": "D4",
+     "flux": 1315.09,
+     "err": 646.45,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60991.8307,
+     "band": "D5",
+     "flux": 766.32,
+     "err": 541.09,
+     "quality": "ok"
+    }
+   ]
+  }
+ ],
+ "method": {
+  "detection_sigma": 5.0,
+  "psf_fwhm_px": 3.17,
+  "link_tolerance_px": 1.43,
+  "max_motion_arcsec_yr": 12.0,
+  "rules": "built-in defaults (science/classes.json not delivered yet)",
+  "names_from": "team targets.json (SIMBAD unreachable)",
+  "catalog_counts": {
+   "Gaia DR3": 60,
+   "CatWISE2020": 0,
+   "AllWISE": 22,
+   "2MASS": 26
+  },
+  "pixel_arcsec": 3.075,
+  "stacks": "processing/cache/stacks/r-draconis",
+  "runtime_s": 3.6
+ },
+ "summary_text": "Zone scanned over 18 SPHEREx visits (2025-04-24 to 2026-09-25) in D4, D5, D6: 35 sources. 5 known stars, 0 known asteroids, 1 variable, 29 artefacts or one-off detections, 0 unidentified static sources. No unknown movers above the detection threshold.",
+ "summary_text_source": "rules template"
+}

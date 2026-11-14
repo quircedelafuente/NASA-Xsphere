@@ -1,0 +1,7407 @@
+{
+ "zone": {
+  "ra_deg": 269.446229,
+  "dec_deg": 4.768706,
+  "w_arcmin": 5.74,
+  "h_arcmin": 5.74
+ },
+ "generated_utc": "2026-11-14T15:37:18Z",
+ "visits": 3,
+ "bands": [
+  "D4",
+  "D5",
+  "D6"
+ ],
+ "first_date": "2025-08-15",
+ "last_date": "2026-09-22",
+ "summary": {
+  "sources": 34,
+  "known_star": 29,
+  "known_asteroid": 0,
+  "variable": 0,
+  "artefact": 5,
+  "candidate": 0,
+  "unknown_static": 0
+ },
+ "sources": [
+  {
+   "id": "s001",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832130942575872",
+     "sep_arcsec": 0.49,
+     "epoch": 2016.0,
+     "pmra_masyr": -801.6,
+     "pmdec_masyr": 10362.4,
+     "phot_g_mean_mag": 8.194,
+     "bp_rp": 2.834,
+     "parallax": 546.976
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575194+0442202",
+     "sep_arcsec": 29.18,
+     "epoch": 2000.41,
+     "k_m": 10.575
+    },
+    {
+     "cat": "team targets.json",
+     "id": "Barnard's Star",
+     "kind": "mover",
+     "sep_arcsec": 0.49,
+     "pmra_masyr": -801.551,
+     "pmdec_masyr": 10362.394
+    }
+   ],
+   "flux": {
+    "D4": [
+     1306966.22,
+     1925471.2,
+     1882470.56
+    ],
+    "D5": [
+     3507400.66,
+     3974923.09,
+     3924383.13
+    ],
+    "D6": [
+     2912265.8,
+     2998924.71,
+     3074573.61
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -2507.7,
+    "pmdec_masyr": 9919.5,
+    "sig_pm_masyr": 1209.2,
+    "speed_arcsec_yr": 10.232,
+    "direction": "north",
+    "sig": 8.5,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.22,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.446591,
+     "dec_deg": 4.767314,
+     "x": 55.08,
+     "y": 53.87,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.446536,
+     "dec_deg": 4.769042,
+     "x": 55.14,
+     "y": 55.89,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.445874,
+     "dec_deg": 4.769999,
+     "x": 55.91,
+     "y": 57.01,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.95,
+   "reason": "Moves 10.2\u2033/yr toward north, matching Gaia DR3 4472832130942575872 (Barnard's Star) (catalogue 10.4\u2033/yr).",
+   "appearance_class": "red-dwarf",
+   "flags": [
+    "saturated-core"
+   ],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 1306966.22,
+     "err": 6705.48,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 1925471.2,
+     "err": 6281.55,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1882470.56,
+     "err": 6870.27,
+     "quality": "halo-only"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 3507400.66,
+     "err": 2450.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 3974923.09,
+     "err": 2536.22,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 3924383.13,
+     "err": 2268.83,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 2912265.8,
+     "err": 1615.66,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 2998924.71,
+     "err": 1646.43,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 3074573.61,
+     "err": 1504.87,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 1306966.22,
+     "err": 6705.48,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 1925471.2,
+     "err": 6281.55,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 1882470.56,
+     "err": 6870.27,
+     "quality": "halo-only"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 3507400.66,
+     "err": 2450.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 3974923.09,
+     "err": 2536.22,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 3924383.13,
+     "err": 2268.83,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 2912265.8,
+     "err": 1615.66,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 2998924.71,
+     "err": 1646.43,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 3074573.61,
+     "err": 1504.87,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s002",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472837495349546240",
+     "sep_arcsec": 0.22,
+     "epoch": 2016.0,
+     "pmra_masyr": -2.0,
+     "pmdec_masyr": -7.9,
+     "phot_g_mean_mag": 13.468,
+     "bp_rp": 1.391,
+     "parallax": 0.407
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175755.00+044727.5",
+     "sep_arcsec": 0.17,
+     "epoch": 2015.42,
+     "pmra_masyr": 7.2,
+     "pmdec_masyr": -10.7,
+     "w1mpro": 10.868,
+     "w2mpro": 10.93
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175755.00+044727.5",
+     "sep_arcsec": 0.07,
+     "epoch": 2010.5,
+     "pmra_masyr": 0.0,
+     "pmdec_masyr": 0.0,
+     "w1mpro": 10.848,
+     "w2mpro": 10.923
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575577+0447480",
+     "sep_arcsec": 20.74,
+     "epoch": 2000.41,
+     "k_m": 14.257
+    }
+   ],
+   "flux": {
+    "D4": [
+     12615.83,
+     13271.38,
+     12696.32
+    ],
+    "D5": [
+     7752.94,
+     8105.85,
+     7527.39
+    ],
+    "D6": [
+     5651.76,
+     5730.5,
+     5641.75
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 9.7,
+    "pmdec_masyr": -1459.4,
+    "sig_pm_masyr": 735.5,
+    "speed_arcsec_yr": 1.459,
+    "direction": "south",
+    "sig": 2.0,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.14,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.479213,
+     "dec_deg": 4.791138,
+     "x": 17.02,
+     "y": 81.76,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.479229,
+     "dec_deg": 4.791146,
+     "x": 17.0,
+     "y": 81.77,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.479214,
+     "dec_deg": 4.790718,
+     "x": 17.02,
+     "y": 81.27,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472837495349546240 (0.22\u2033). Motion 1.5\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 12615.83,
+     "err": 28.26,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 13271.38,
+     "err": 33.24,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 12696.32,
+     "err": 28.29,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 7752.94,
+     "err": 21.92,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 8105.85,
+     "err": 24.31,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 7527.39,
+     "err": 18.66,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 5651.76,
+     "err": 23.86,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 5730.5,
+     "err": 21.3,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 5641.75,
+     "err": 24.71,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 12615.83,
+     "err": 28.26,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 13271.38,
+     "err": 33.24,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 12696.32,
+     "err": 28.29,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 7752.94,
+     "err": 21.92,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 8105.85,
+     "err": 24.31,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 7527.39,
+     "err": 18.66,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 5651.76,
+     "err": 23.86,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 5730.5,
+     "err": 21.3,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 5641.75,
+     "err": 24.71,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s003",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472836357179487744",
+     "sep_arcsec": 0.26,
+     "epoch": 2016.0,
+     "pmra_masyr": -0.4,
+     "pmdec_masyr": -3.0,
+     "phot_g_mean_mag": 17.089,
+     "bp_rp": 1.719,
+     "parallax": 1.185
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175743.74+044841.0",
+     "sep_arcsec": 0.41,
+     "epoch": 2015.45,
+     "pmra_masyr": 11.0,
+     "pmdec_masyr": -8.5,
+     "w1mpro": 14.188,
+     "w2mpro": 14.328
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574373+0448409",
+     "sep_arcsec": 8.34,
+     "epoch": 2000.41,
+     "k_m": 14.406
+    }
+   ],
+   "flux": {
+    "D4": [
+     515.44,
+     512.63,
+     523.43
+    ],
+    "D5": [
+     293.47,
+     311.32,
+     323.07
+    ],
+    "D6": [
+     212.29,
+     255.95,
+     191.72
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 193.9,
+    "pmdec_masyr": 252.3,
+    "sig_pm_masyr": 1575.3,
+    "speed_arcsec_yr": 0.318,
+    "direction": "north-east",
+    "sig": 0.2,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.2,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.432144,
+     "dec_deg": 4.811228,
+     "x": 71.93,
+     "y": 105.28,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.432174,
+     "dec_deg": 4.811624,
+     "x": 71.9,
+     "y": 105.75,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.432197,
+     "dec_deg": 4.811281,
+     "x": 71.87,
+     "y": 105.34,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472836357179487744 (0.26\u2033). Motion 0.3\u00b11.6\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 515.44,
+     "err": 40.44,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 512.63,
+     "err": 51.69,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 523.43,
+     "err": 48.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 293.47,
+     "err": 32.05,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 311.32,
+     "err": 33.37,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 323.07,
+     "err": 34.32,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 212.29,
+     "err": 24.74,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 255.95,
+     "err": 27.98,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 191.72,
+     "err": 27.12,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 515.44,
+     "err": 40.44,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 512.63,
+     "err": 51.69,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 523.43,
+     "err": 48.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 293.47,
+     "err": 32.05,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 311.32,
+     "err": 33.37,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 323.07,
+     "err": 34.32,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 212.29,
+     "err": 24.74,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 255.95,
+     "err": 27.98,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 191.72,
+     "err": 27.12,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s004",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832581906948224",
+     "sep_arcsec": 0.43,
+     "epoch": 2016.0,
+     "pmra_masyr": 10.7,
+     "pmdec_masyr": -7.5,
+     "phot_g_mean_mag": 16.09,
+     "bp_rp": 1.189,
+     "parallax": 1.099
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175756.61+044337.7",
+     "sep_arcsec": 0.67,
+     "epoch": 2010.5,
+     "pmra_masyr": 82.0,
+     "pmdec_masyr": -14.0,
+     "w1mpro": 13.919,
+     "w2mpro": 13.934
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575660+0443377",
+     "sep_arcsec": 8.22,
+     "epoch": 2000.41,
+     "k_m": 13.904
+    }
+   ],
+   "flux": {
+    "D4": [
+     586.09,
+     571.51,
+     595.32
+    ],
+    "D5": [
+     322.22,
+     339.67,
+     331.77
+    ],
+    "D6": [
+     236.99,
+     278.91,
+     252.48
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 22.5,
+    "pmdec_masyr": 315.3,
+    "sig_pm_masyr": 1462.1,
+    "speed_arcsec_yr": 0.316,
+    "direction": "north",
+    "sig": 0.2,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.03,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.486068,
+     "dec_deg": 4.727076,
+     "x": 9.02,
+     "y": 6.76,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.486032,
+     "dec_deg": 4.72716,
+     "x": 9.06,
+     "y": 6.86,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.486077,
+     "dec_deg": 4.72716,
+     "x": 9.01,
+     "y": 6.86,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832581906948224 (0.43\u2033). Motion 0.3\u00b11.5\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 586.09,
+     "err": 51.94,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 571.51,
+     "err": 52.05,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 595.32,
+     "err": 45.6,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 322.22,
+     "err": 33.73,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 339.67,
+     "err": 27.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 331.77,
+     "err": 35.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 236.99,
+     "err": 33.0,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 278.91,
+     "err": 19.46,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 252.48,
+     "err": 30.61,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 586.09,
+     "err": 51.94,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 571.51,
+     "err": 52.05,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 595.32,
+     "err": 45.6,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 322.22,
+     "err": 33.73,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 339.67,
+     "err": 27.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 331.77,
+     "err": 35.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 236.99,
+     "err": 33.0,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 278.91,
+     "err": 19.46,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 252.48,
+     "err": 30.61,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s005",
+   "crossmatch": [
+    {
+     "cat": "CatWISE2020",
+     "id": "J175754.47+044410.6",
+     "sep_arcsec": 2.31,
+     "epoch": 2015.41,
+     "pmra_masyr": -16.7,
+     "pmdec_masyr": 2.2,
+     "w1mpro": 14.415,
+     "w2mpro": 14.645
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175754.03+044404.6",
+     "sep_arcsec": 4.16,
+     "epoch": 2010.5,
+     "w1mpro": 14.916,
+     "w2mpro": 15.268
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575447+0444109",
+     "sep_arcsec": 7.24,
+     "epoch": 2000.41,
+     "k_m": 14.455
+    }
+   ],
+   "flux": {
+    "D4": [
+     582.87,
+     564.9,
+     574.94
+    ],
+    "D5": [
+     343.24,
+     367.56,
+     338.02
+    ],
+    "D6": [
+     253.32,
+     258.12,
+     279.27
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 194.0,
+    "pmdec_masyr": 36.6,
+    "sig_pm_masyr": 1720.4,
+    "speed_arcsec_yr": 0.197,
+    "direction": "east",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.476503,
+     "dec_deg": 4.735772,
+     "x": 20.18,
+     "y": 16.94,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.476571,
+     "dec_deg": 4.735779,
+     "x": 20.1,
+     "y": 16.95,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.476555,
+     "dec_deg": 4.735782,
+     "x": 20.12,
+     "y": 16.96,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches CatWISE2020 J175754.47+044410.6 (2.31\u2033). Motion 0.2\u00b11.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 582.87,
+     "err": 19.86,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 564.9,
+     "err": 19.68,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 574.94,
+     "err": 17.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 343.24,
+     "err": 13.32,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 367.56,
+     "err": 13.79,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 338.02,
+     "err": 13.21,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 253.32,
+     "err": 14.24,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 258.12,
+     "err": 15.05,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 279.27,
+     "err": 14.54,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 582.87,
+     "err": 19.86,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 564.9,
+     "err": 19.68,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 574.94,
+     "err": 17.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 343.24,
+     "err": 13.32,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 367.56,
+     "err": 13.79,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 338.02,
+     "err": 13.21,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 253.32,
+     "err": 14.24,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 258.12,
+     "err": 15.05,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 279.27,
+     "err": 14.54,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s006",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472836322819658112",
+     "sep_arcsec": 1.9,
+     "epoch": 2016.0,
+     "pmra_masyr": -12.5,
+     "pmdec_masyr": -17.7,
+     "phot_g_mean_mag": 18.462,
+     "bp_rp": 2.755,
+     "parallax": 1.724
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175740.26+044733.2",
+     "sep_arcsec": 1.68,
+     "epoch": 2015.41,
+     "pmra_masyr": -3.7,
+     "pmdec_masyr": -28.5,
+     "w1mpro": 14.558,
+     "w2mpro": 14.393
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175740.22+044733.1",
+     "sep_arcsec": 1.93,
+     "epoch": 2010.5,
+     "pmra_masyr": -109.0,
+     "pmdec_masyr": -192.0,
+     "w1mpro": 14.491,
+     "w2mpro": 14.232
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574025+0447338",
+     "sep_arcsec": 6.26,
+     "epoch": 2000.41,
+     "k_m": 14.702
+    }
+   ],
+   "flux": {
+    "D4": [
+     609.91,
+     622.71,
+     630.82
+    ],
+    "D5": [
+     471.22,
+     490.47,
+     425.81
+    ],
+    "D6": [
+     279.49,
+     362.01,
+     343.26
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -103.3,
+    "pmdec_masyr": 152.2,
+    "sig_pm_masyr": 1572.7,
+    "speed_arcsec_yr": 0.184,
+    "direction": "north-west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.417434,
+     "dec_deg": 4.792135,
+     "x": 89.09,
+     "y": 82.93,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.41746,
+     "dec_deg": 4.792146,
+     "x": 89.06,
+     "y": 82.94,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.417405,
+     "dec_deg": 4.792177,
+     "x": 89.13,
+     "y": 82.98,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472836322819658112 (1.9\u2033). Motion 0.2\u00b11.6\u2033/yr (not significant).",
+   "appearance_class": "red-dwarf",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 609.91,
+     "err": 40.63,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 622.71,
+     "err": 35.01,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 630.82,
+     "err": 43.42,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 471.22,
+     "err": 23.36,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 490.47,
+     "err": 25.58,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 425.81,
+     "err": 30.85,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 279.49,
+     "err": 21.56,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 362.01,
+     "err": 22.48,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 343.26,
+     "err": 30.59,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 609.91,
+     "err": 40.63,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 622.71,
+     "err": 35.01,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 630.82,
+     "err": 43.42,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 471.22,
+     "err": 23.36,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 490.47,
+     "err": 25.58,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 425.81,
+     "err": 30.85,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 279.49,
+     "err": 21.56,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 362.01,
+     "err": 22.48,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 343.26,
+     "err": 30.59,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s007",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832753705643776",
+     "sep_arcsec": 1.13,
+     "epoch": 2016.0,
+     "pmra_masyr": 1.1,
+     "pmdec_masyr": -6.8,
+     "phot_g_mean_mag": 16.251,
+     "bp_rp": 1.118,
+     "parallax": 0.934
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175755.76+044447.9",
+     "sep_arcsec": 1.31,
+     "epoch": 2015.48,
+     "pmra_masyr": -7.4,
+     "pmdec_masyr": -17.1,
+     "w1mpro": 13.873,
+     "w2mpro": 14.026
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175755.76+044448.0",
+     "sep_arcsec": 2.3,
+     "epoch": 2010.5,
+     "pmra_masyr": 161.0,
+     "pmdec_masyr": -39.0,
+     "w1mpro": 13.933,
+     "w2mpro": 14.042
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575576+0444479",
+     "sep_arcsec": 5.76,
+     "epoch": 2000.41,
+     "k_m": 14.136
+    }
+   ],
+   "flux": {
+    "D4": [
+     758.44,
+     767.7,
+     781.74
+    ],
+    "D5": [
+     450.26,
+     424.38,
+     440.46
+    ],
+    "D6": [
+     279.61,
+     271.12,
+     389.06
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -118.2,
+    "pmdec_masyr": -136.5,
+    "sig_pm_masyr": 1336.4,
+    "speed_arcsec_yr": 0.181,
+    "direction": "south-west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.04,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.482546,
+     "dec_deg": 4.746916,
+     "x": 13.13,
+     "y": 29.99,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.482599,
+     "dec_deg": 4.746893,
+     "x": 13.07,
+     "y": 29.96,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.48251,
+     "dec_deg": 4.746879,
+     "x": 13.17,
+     "y": 29.95,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832753705643776 (1.13\u2033). Motion 0.2\u00b11.3\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 758.44,
+     "err": 28.79,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 767.7,
+     "err": 27.0,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 781.74,
+     "err": 28.09,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 450.26,
+     "err": 24.13,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 424.38,
+     "err": 18.49,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 440.46,
+     "err": 20.65,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 279.61,
+     "err": 17.31,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 271.12,
+     "err": 18.43,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 389.06,
+     "err": 20.35,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 758.44,
+     "err": 28.79,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 767.7,
+     "err": 27.0,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 781.74,
+     "err": 28.09,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 450.26,
+     "err": 24.13,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 424.38,
+     "err": 18.49,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 440.46,
+     "err": 20.65,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 279.61,
+     "err": 17.31,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 271.12,
+     "err": 18.43,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 389.06,
+     "err": 20.35,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s008",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832959864074752",
+     "sep_arcsec": 0.31,
+     "epoch": 2016.0,
+     "pmra_masyr": 0.6,
+     "pmdec_masyr": -3.8,
+     "phot_g_mean_mag": 14.785,
+     "bp_rp": 1.51,
+     "parallax": 0.081
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175755.73+044507.9",
+     "sep_arcsec": 0.26,
+     "epoch": 2015.4,
+     "pmra_masyr": 8.7,
+     "pmdec_masyr": -9.3,
+     "w1mpro": 11.935,
+     "w2mpro": 12.03
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175755.73+044507.9",
+     "sep_arcsec": 0.88,
+     "epoch": 2010.5,
+     "pmra_masyr": 36.0,
+     "pmdec_masyr": -75.0,
+     "w1mpro": 11.928,
+     "w2mpro": 12.002
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575573+0445079",
+     "sep_arcsec": 4.8,
+     "epoch": 2000.41,
+     "k_m": 12.017
+    }
+   ],
+   "flux": {
+    "D4": [
+     4622.11,
+     4758.58,
+     4639.18
+    ],
+    "D5": [
+     2860.28,
+     2912.26,
+     2759.94
+    ],
+    "D6": [
+     1982.68,
+     2046.09,
+     2030.95
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -175.7,
+    "pmdec_masyr": -10.5,
+    "sig_pm_masyr": 1113.1,
+    "speed_arcsec_yr": 0.176,
+    "direction": "west",
+    "sig": 0.2,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.21,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.482433,
+     "dec_deg": 4.752117,
+     "x": 13.26,
+     "y": 36.08,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.48205,
+     "dec_deg": 4.752139,
+     "x": 13.71,
+     "y": 36.1,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.482418,
+     "dec_deg": 4.752112,
+     "x": 13.28,
+     "y": 36.07,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832959864074752 (0.31\u2033). Motion 0.2\u00b11.1\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 4622.11,
+     "err": 22.14,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 4758.58,
+     "err": 27.86,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 4639.18,
+     "err": 26.04,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 2860.28,
+     "err": 15.73,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 2912.26,
+     "err": 21.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 2759.94,
+     "err": 17.95,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 1982.68,
+     "err": 18.3,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 2046.09,
+     "err": 16.98,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 2030.95,
+     "err": 18.64,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 4622.11,
+     "err": 22.14,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 4758.58,
+     "err": 27.86,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 4639.18,
+     "err": 26.04,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 2860.28,
+     "err": 15.73,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 2912.26,
+     "err": 21.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 2759.94,
+     "err": 17.95,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 1982.68,
+     "err": 18.3,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 2046.09,
+     "err": 16.98,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 2030.95,
+     "err": 18.64,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s009",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472836116661112576",
+     "sep_arcsec": 0.86,
+     "epoch": 2016.0,
+     "pmra_masyr": -1.6,
+     "pmdec_masyr": -0.4,
+     "phot_g_mean_mag": 16.16,
+     "bp_rp": 1.098,
+     "parallax": 0.496
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175736.97+044610.7",
+     "sep_arcsec": 1.99,
+     "epoch": 2010.5,
+     "pmra_masyr": 56.0,
+     "pmdec_masyr": 156.0,
+     "w1mpro": 14.124,
+     "w2mpro": 14.237
+    },
+    {
+     "cat": "2MASS",
+     "id": "17573698+0446106",
+     "sep_arcsec": 3.36,
+     "epoch": 2000.41,
+     "k_m": 14.296
+    }
+   ],
+   "flux": {
+    "D4": [
+     561.12,
+     612.37,
+     535.86
+    ],
+    "D5": [
+     326.04,
+     331.58,
+     320.62
+    ],
+    "D6": [
+     265.61,
+     271.15,
+     251.48
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -41.1,
+    "pmdec_masyr": 158.3,
+    "sig_pm_masyr": 1685.6,
+    "speed_arcsec_yr": 0.164,
+    "direction": "north",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.03,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.404019,
+     "dec_deg": 4.769806,
+     "x": 104.75,
+     "y": 56.79,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.404018,
+     "dec_deg": 4.769881,
+     "x": 104.75,
+     "y": 56.88,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.404008,
+     "dec_deg": 4.769844,
+     "x": 104.76,
+     "y": 56.83,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472836116661112576 (0.86\u2033). Motion 0.2\u00b11.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 561.12,
+     "err": 23.05,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 612.37,
+     "err": 22.78,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 535.86,
+     "err": 24.19,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 326.04,
+     "err": 22.27,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 331.58,
+     "err": 15.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 320.62,
+     "err": 19.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 265.61,
+     "err": 14.65,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 271.15,
+     "err": 15.21,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 251.48,
+     "err": 14.87,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 561.12,
+     "err": 23.05,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 612.37,
+     "err": 22.78,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 535.86,
+     "err": 24.19,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 326.04,
+     "err": 22.27,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 331.58,
+     "err": 15.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 320.62,
+     "err": 19.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 265.61,
+     "err": 14.65,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 271.15,
+     "err": 15.21,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 251.48,
+     "err": 14.87,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s010",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472837529709284992",
+     "sep_arcsec": 0.96,
+     "epoch": 2016.0,
+     "pmra_masyr": -1.2,
+     "pmdec_masyr": -1.8,
+     "phot_g_mean_mag": 15.822,
+     "bp_rp": 0.991,
+     "parallax": 0.565
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175755.77+044748.0",
+     "sep_arcsec": 0.77,
+     "epoch": 2015.4,
+     "pmra_masyr": -5.1,
+     "pmdec_masyr": -16.2,
+     "w1mpro": 14.032,
+     "w2mpro": 14.202
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175755.77+044747.9",
+     "sep_arcsec": 3.47,
+     "epoch": 2010.5,
+     "pmra_masyr": 107.0,
+     "pmdec_masyr": -252.0,
+     "w1mpro": 14.076,
+     "w2mpro": 14.136
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575577+0447480",
+     "sep_arcsec": 4.27,
+     "epoch": 2000.41,
+     "k_m": 14.257
+    }
+   ],
+   "flux": {
+    "D4": [
+     755.28,
+     875.64,
+     749.67
+    ],
+    "D5": [
+     482.64,
+     552.74,
+     455.96
+    ],
+    "D6": [
+     372.84,
+     399.9,
+     380.76
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -156.1,
+    "pmdec_masyr": 15.6,
+    "sig_pm_masyr": 1373.0,
+    "speed_arcsec_yr": 0.157,
+    "direction": "west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.05,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.482424,
+     "dec_deg": 4.79643,
+     "x": 13.27,
+     "y": 87.96,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.482367,
+     "dec_deg": 4.796353,
+     "x": 13.34,
+     "y": 87.87,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.482384,
+     "dec_deg": 4.796442,
+     "x": 13.32,
+     "y": 87.97,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472837529709284992 (0.96\u2033). Motion 0.2\u00b11.4\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 755.28,
+     "err": 24.27,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 875.64,
+     "err": 21.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 749.67,
+     "err": 24.6,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 482.64,
+     "err": 20.54,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 552.74,
+     "err": 22.61,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 455.96,
+     "err": 22.0,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 372.84,
+     "err": 18.55,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 399.9,
+     "err": 20.95,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 380.76,
+     "err": 16.87,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 755.28,
+     "err": 24.27,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 875.64,
+     "err": 21.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 749.67,
+     "err": 24.6,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 482.64,
+     "err": 20.54,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 552.74,
+     "err": 22.61,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 455.96,
+     "err": 22.0,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 372.84,
+     "err": 18.55,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 399.9,
+     "err": 20.95,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 380.76,
+     "err": 16.87,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s011",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472835330683245824",
+     "sep_arcsec": 0.97,
+     "epoch": 2016.0,
+     "pmra_masyr": -4.6,
+     "pmdec_masyr": -4.4,
+     "phot_g_mean_mag": 15.943,
+     "bp_rp": 0.989,
+     "parallax": 0.472
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175737.18+044329.2",
+     "sep_arcsec": 0.78,
+     "epoch": 2015.37,
+     "pmra_masyr": -34.8,
+     "pmdec_masyr": -7.0,
+     "w1mpro": 14.156,
+     "w2mpro": 14.196
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175737.19+044328.7",
+     "sep_arcsec": 3.34,
+     "epoch": 2010.5,
+     "pmra_masyr": -106.0,
+     "pmdec_masyr": -225.0,
+     "w1mpro": 14.001,
+     "w2mpro": 14.094
+    },
+    {
+     "cat": "2MASS",
+     "id": "17573719+0443294",
+     "sep_arcsec": 4.41,
+     "epoch": 2000.41,
+     "k_m": 14.216
+    }
+   ],
+   "flux": {
+    "D4": [
+     835.41,
+     880.8,
+     841.28
+    ],
+    "D5": [
+     528.27,
+     562.41,
+     479.99
+    ],
+    "D6": [
+     422.84,
+     351.19,
+     377.5
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 124.3,
+    "pmdec_masyr": 44.9,
+    "sig_pm_masyr": 1357.4,
+    "speed_arcsec_yr": 0.132,
+    "direction": "east",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.03,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.404775,
+     "dec_deg": 4.724534,
+     "x": 103.87,
+     "y": 3.79,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.404835,
+     "dec_deg": 4.724557,
+     "x": 103.8,
+     "y": 3.81,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.404805,
+     "dec_deg": 4.724545,
+     "x": 103.83,
+     "y": 3.8,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472835330683245824 (0.97\u2033). Motion 0.1\u00b11.4\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 835.41,
+     "err": 14.91,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 880.8,
+     "err": 12.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 841.28,
+     "err": 16.15,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 528.27,
+     "err": 11.45,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 562.41,
+     "err": 11.01,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 479.99,
+     "err": 13.51,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 422.84,
+     "err": 15.15,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 351.19,
+     "err": 15.15,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 377.5,
+     "err": 14.46,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 835.41,
+     "err": 14.91,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 880.8,
+     "err": 12.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 841.28,
+     "err": 16.15,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 528.27,
+     "err": 11.45,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 562.41,
+     "err": 11.01,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 479.99,
+     "err": 13.51,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 422.84,
+     "err": 15.15,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 351.19,
+     "err": 15.15,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 377.5,
+     "err": 14.46,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s012",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472835914801589888",
+     "sep_arcsec": 0.94,
+     "epoch": 2016.0,
+     "pmra_masyr": -1.8,
+     "pmdec_masyr": -8.0,
+     "phot_g_mean_mag": 14.837,
+     "bp_rp": 1.007,
+     "parallax": 0.553
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175739.52+044518.5",
+     "sep_arcsec": 2.21,
+     "epoch": 2010.5,
+     "pmra_masyr": 12.0,
+     "pmdec_masyr": -103.0,
+     "w1mpro": 13.063,
+     "w2mpro": 13.065
+    },
+    {
+     "cat": "2MASS",
+     "id": "17573951+0445185",
+     "sep_arcsec": 2.22,
+     "epoch": 2000.41,
+     "k_m": 13.139
+    }
+   ],
+   "flux": {
+    "D4": [
+     1792.0,
+     1804.52,
+     1788.49
+    ],
+    "D5": [
+     1078.26,
+     1087.93,
+     1025.45
+    ],
+    "D6": [
+     856.18,
+     789.51,
+     804.59
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 80.9,
+    "pmdec_masyr": 82.8,
+    "sig_pm_masyr": 835.3,
+    "speed_arcsec_yr": 0.116,
+    "direction": "north-east",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.414777,
+     "dec_deg": 4.755288,
+     "x": 92.2,
+     "y": 39.79,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.414827,
+     "dec_deg": 4.755321,
+     "x": 92.14,
+     "y": 39.83,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.414795,
+     "dec_deg": 4.755309,
+     "x": 92.17,
+     "y": 39.82,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472835914801589888 (0.94\u2033). Motion 0.1\u00b10.8\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 1792.0,
+     "err": 52.15,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 1804.52,
+     "err": 44.82,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1788.49,
+     "err": 49.94,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 1078.26,
+     "err": 33.94,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 1087.93,
+     "err": 28.5,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 1025.45,
+     "err": 32.58,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 856.18,
+     "err": 28.28,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 789.51,
+     "err": 24.08,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 804.59,
+     "err": 28.19,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 1792.0,
+     "err": 52.15,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 1804.52,
+     "err": 44.82,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 1788.49,
+     "err": 49.94,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 1078.26,
+     "err": 33.94,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 1087.93,
+     "err": 28.5,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 1025.45,
+     "err": 32.58,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 856.18,
+     "err": 28.28,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 789.51,
+     "err": 24.08,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 804.59,
+     "err": 28.19,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s013",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472837083032703744",
+     "sep_arcsec": 0.34,
+     "epoch": 2016.0,
+     "pmra_masyr": -4.4,
+     "pmdec_masyr": -6.1,
+     "phot_g_mean_mag": 15.473,
+     "bp_rp": 1.18,
+     "parallax": 0.163
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175737.48+044820.5",
+     "sep_arcsec": 0.27,
+     "epoch": 2015.42,
+     "pmra_masyr": -1.3,
+     "pmdec_masyr": -4.5,
+     "w1mpro": 13.33,
+     "w2mpro": 13.409
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175737.48+044820.6",
+     "sep_arcsec": 0.43,
+     "epoch": 2010.5,
+     "pmra_masyr": 27.0,
+     "pmdec_masyr": -5.0,
+     "w1mpro": 13.348,
+     "w2mpro": 13.407
+    },
+    {
+     "cat": "2MASS",
+     "id": "17573748+0448206",
+     "sep_arcsec": 2.3,
+     "epoch": 2000.41,
+     "k_m": 13.465
+    }
+   ],
+   "flux": {
+    "D4": [
+     1340.87,
+     1383.35,
+     1334.54
+    ],
+    "D5": [
+     776.05,
+     835.09,
+     805.31
+    ],
+    "D6": [
+     613.76,
+     582.48,
+     626.32
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -63.5,
+    "pmdec_masyr": 70.5,
+    "sig_pm_masyr": 913.4,
+    "speed_arcsec_yr": 0.095,
+    "direction": "north-west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.406201,
+     "dec_deg": 4.80576,
+     "x": 102.2,
+     "y": 98.88,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.406222,
+     "dec_deg": 4.8058,
+     "x": 102.17,
+     "y": 98.93,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.406181,
+     "dec_deg": 4.805777,
+     "x": 102.22,
+     "y": 98.9,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472837083032703744 (0.34\u2033). Motion 0.1\u00b10.9\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 1340.87,
+     "err": 19.94,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 1383.35,
+     "err": 20.22,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1334.54,
+     "err": 19.62,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 776.05,
+     "err": 16.91,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 835.09,
+     "err": 16.27,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 805.31,
+     "err": 18.21,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 613.76,
+     "err": 15.96,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 582.48,
+     "err": 14.04,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 626.32,
+     "err": 15.48,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 1340.87,
+     "err": 19.94,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 1383.35,
+     "err": 20.22,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 1334.54,
+     "err": 19.62,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 776.05,
+     "err": 16.91,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 835.09,
+     "err": 16.27,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 805.31,
+     "err": 18.21,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 613.76,
+     "err": 15.96,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 582.48,
+     "err": 14.04,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 626.32,
+     "err": 15.48,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s014",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472833062943293952",
+     "sep_arcsec": 1.08,
+     "epoch": 2016.0,
+     "pmra_masyr": 7.8,
+     "pmdec_masyr": -3.5,
+     "phot_g_mean_mag": 15.222,
+     "bp_rp": 1.038,
+     "parallax": 1.053
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175754.24+044612.5",
+     "sep_arcsec": 0.97,
+     "epoch": 2015.5,
+     "pmra_masyr": -6.6,
+     "pmdec_masyr": 22.6,
+     "w1mpro": 13.33,
+     "w2mpro": 13.427
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175754.24+044612.5",
+     "sep_arcsec": 1.37,
+     "epoch": 2010.5,
+     "pmra_masyr": 3.0,
+     "pmdec_masyr": -83.0,
+     "w1mpro": 13.409,
+     "w2mpro": 13.456
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575424+0446126",
+     "sep_arcsec": 3.16,
+     "epoch": 2000.41,
+     "k_m": 13.482
+    }
+   ],
+   "flux": {
+    "D4": [
+     1500.78,
+     1440.67,
+     1470.62
+    ],
+    "D5": [
+     858.34,
+     823.34,
+     874.34
+    ],
+    "D6": [
+     699.24,
+     586.61,
+     626.18
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 61.2,
+    "pmdec_masyr": 68.1,
+    "sig_pm_masyr": 894.5,
+    "speed_arcsec_yr": 0.092,
+    "direction": "north-east",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.475791,
+     "dec_deg": 4.770059,
+     "x": 21.01,
+     "y": 57.08,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.475811,
+     "dec_deg": 4.770069,
+     "x": 20.99,
+     "y": 57.1,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.475807,
+     "dec_deg": 4.770077,
+     "x": 20.99,
+     "y": 57.11,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472833062943293952 (1.08\u2033). Motion 0.1\u00b10.9\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 1500.78,
+     "err": 32.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 1440.67,
+     "err": 51.7,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1470.62,
+     "err": 28.12,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 858.34,
+     "err": 27.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 823.34,
+     "err": 32.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 874.34,
+     "err": 21.5,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 699.24,
+     "err": 22.33,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 586.61,
+     "err": 22.13,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 626.18,
+     "err": 21.61,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 1500.78,
+     "err": 32.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 1440.67,
+     "err": 51.7,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 1470.62,
+     "err": 28.12,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 858.34,
+     "err": 27.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 823.34,
+     "err": 32.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 874.34,
+     "err": 21.5,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 699.24,
+     "err": 22.33,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 586.61,
+     "err": 22.13,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 626.18,
+     "err": 21.61,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s015",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832822422325632",
+     "sep_arcsec": 0.14,
+     "epoch": 2016.0,
+     "pmra_masyr": -5.5,
+     "pmdec_masyr": 1.3,
+     "phot_g_mean_mag": 15.559,
+     "bp_rp": 1.3,
+     "parallax": 1.414
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574602+0444029",
+     "sep_arcsec": 1.98,
+     "epoch": 2000.41,
+     "k_m": 13.251
+    }
+   ],
+   "flux": {
+    "D4": [
+     1414.94,
+     1508.14,
+     1527.76
+    ],
+    "D5": [
+     942.07,
+     1013.06,
+     938.65
+    ],
+    "D6": [
+     731.93,
+     685.08,
+     705.75
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -85.5,
+    "pmdec_masyr": -31.4,
+    "sig_pm_masyr": 843.4,
+    "speed_arcsec_yr": 0.091,
+    "direction": "west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.441689,
+     "dec_deg": 4.734119,
+     "x": 60.8,
+     "y": 15.01,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.441685,
+     "dec_deg": 4.73415,
+     "x": 60.8,
+     "y": 15.04,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.441665,
+     "dec_deg": 4.734108,
+     "x": 60.83,
+     "y": 14.99,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832822422325632 (0.14\u2033). Motion 0.1\u00b10.8\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 1414.94,
+     "err": 68.96,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 1508.14,
+     "err": 66.38,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1527.76,
+     "err": 53.08,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 942.07,
+     "err": 42.38,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 1013.06,
+     "err": 35.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 938.65,
+     "err": 32.25,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 731.93,
+     "err": 28.75,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 685.08,
+     "err": 23.23,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 705.75,
+     "err": 26.73,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 1414.94,
+     "err": 68.96,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 1508.14,
+     "err": 66.38,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 1527.76,
+     "err": 53.08,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 942.07,
+     "err": 42.38,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 1013.06,
+     "err": 35.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 938.65,
+     "err": 32.25,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 731.93,
+     "err": 28.75,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 685.08,
+     "err": 23.23,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 705.75,
+     "err": 26.73,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s016",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472836292758713216",
+     "sep_arcsec": 0.49,
+     "epoch": 2016.0,
+     "pmra_masyr": -6.2,
+     "pmdec_masyr": 0.5,
+     "phot_g_mean_mag": 11.863,
+     "bp_rp": 1.397,
+     "parallax": 0.977
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175746.52+044746.7",
+     "sep_arcsec": 0.44,
+     "epoch": 2015.42,
+     "pmra_masyr": 8.3,
+     "pmdec_masyr": -10.1,
+     "w1mpro": 9.284,
+     "w2mpro": 9.354
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175746.52+044746.6",
+     "sep_arcsec": 0.73,
+     "epoch": 2010.5,
+     "pmra_masyr": -7.0,
+     "pmdec_masyr": 55.0,
+     "w1mpro": 9.268,
+     "w2mpro": 9.343
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574653+0447466",
+     "sep_arcsec": 1.14,
+     "epoch": 2000.41,
+     "k_m": 9.342
+    }
+   ],
+   "flux": {
+    "D4": [
+     53034.25,
+     55418.61,
+     53368.79
+    ],
+    "D5": [
+     32485.42,
+     33156.13,
+     31884.33
+    ],
+    "D6": [
+     23183.9,
+     23652.22,
+     23331.27
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 7.8,
+    "pmdec_masyr": 57.2,
+    "sig_pm_masyr": 664.1,
+    "speed_arcsec_yr": 0.058,
+    "direction": "north",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.443956,
+     "dec_deg": 4.796365,
+     "x": 58.15,
+     "y": 87.88,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.443981,
+     "dec_deg": 4.796379,
+     "x": 58.12,
+     "y": 87.9,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.443956,
+     "dec_deg": 4.79638,
+     "x": 58.15,
+     "y": 87.9,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472836292758713216 (0.49\u2033). Motion 0.1\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 53034.25,
+     "err": 75.92,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 55418.61,
+     "err": 82.78,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 53368.79,
+     "err": 92.67,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 32485.42,
+     "err": 41.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 33156.13,
+     "err": 56.86,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 31884.33,
+     "err": 56.59,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 23183.9,
+     "err": 41.17,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 23652.22,
+     "err": 45.97,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 23331.27,
+     "err": 47.71,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 53034.25,
+     "err": 75.92,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 55418.61,
+     "err": 82.78,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 53368.79,
+     "err": 92.67,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 32485.42,
+     "err": 41.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 33156.13,
+     "err": 56.86,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 31884.33,
+     "err": 56.59,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 23183.9,
+     "err": 41.17,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 23652.22,
+     "err": 45.97,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 23331.27,
+     "err": 47.71,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s017",
+   "crossmatch": [
+    {
+     "cat": "CatWISE2020",
+     "id": "J175756.84+044700.9",
+     "sep_arcsec": 3.32,
+     "epoch": 2015.53,
+     "pmra_masyr": -2.6,
+     "pmdec_masyr": -12.8,
+     "w1mpro": 14.491,
+     "w2mpro": 14.54
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175756.84+044701.0",
+     "sep_arcsec": 2.89,
+     "epoch": 2010.5,
+     "pmra_masyr": -249.0,
+     "pmdec_masyr": -315.0,
+     "w1mpro": 14.585,
+     "w2mpro": 14.596
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575684+0447010",
+     "sep_arcsec": 2.07,
+     "epoch": 2000.41,
+     "k_m": 14.648
+    }
+   ],
+   "flux": {
+    "D4": [
+     669.89,
+     686.68,
+     668.14
+    ],
+    "D5": [
+     428.54,
+     394.99,
+     431.79
+    ],
+    "D6": [
+     320.54,
+     266.6,
+     302.5
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -49.5,
+    "pmdec_masyr": -30.3,
+    "sig_pm_masyr": 1566.7,
+    "speed_arcsec_yr": 0.058,
+    "direction": "south-west",
+    "sig": 0.0,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.486134,
+     "dec_deg": 4.782967,
+     "x": 8.94,
+     "y": 72.2,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.486155,
+     "dec_deg": 4.782944,
+     "x": 8.92,
+     "y": 72.17,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.486118,
+     "dec_deg": 4.78296,
+     "x": 8.96,
+     "y": 72.19,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches CatWISE2020 J175756.84+044700.9 (3.32\u2033). Motion 0.1\u00b11.6\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 669.89,
+     "err": 29.36,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 686.68,
+     "err": 30.63,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 668.14,
+     "err": 30.89,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 428.54,
+     "err": 18.58,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 394.99,
+     "err": 22.95,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 431.79,
+     "err": 21.26,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 320.54,
+     "err": 19.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 266.6,
+     "err": 19.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 302.5,
+     "err": 21.95,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 669.89,
+     "err": 29.36,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 686.68,
+     "err": 30.63,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 668.14,
+     "err": 30.89,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 428.54,
+     "err": 18.58,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 394.99,
+     "err": 22.95,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 431.79,
+     "err": 21.26,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 320.54,
+     "err": 19.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 266.6,
+     "err": 19.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 302.5,
+     "err": 21.95,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s018",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472837770227461504",
+     "sep_arcsec": 0.26,
+     "epoch": 2016.0,
+     "pmra_masyr": 1.3,
+     "pmdec_masyr": -7.7,
+     "phot_g_mean_mag": 12.654,
+     "bp_rp": 1.717,
+     "parallax": 0.489
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175749.68+044840.0",
+     "sep_arcsec": 0.31,
+     "epoch": 2015.42,
+     "pmra_masyr": 9.8,
+     "pmdec_masyr": -9.8,
+     "w1mpro": 9.52,
+     "w2mpro": 9.652
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175749.68+044840.0",
+     "sep_arcsec": 2.01,
+     "epoch": 2010.5,
+     "pmra_masyr": -46.0,
+     "pmdec_masyr": 100.0,
+     "w1mpro": 9.515,
+     "w2mpro": 9.635
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574968+0448400",
+     "sep_arcsec": 1.22,
+     "epoch": 2000.41,
+     "k_m": 9.599
+    }
+   ],
+   "flux": {
+    "D4": [
+     41757.68,
+     44068.15,
+     42322.77
+    ],
+    "D5": [
+     25832.87,
+     26369.44,
+     25021.27
+    ],
+    "D6": [
+     17246.3,
+     17191.81,
+     17145.52
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 32.7,
+    "pmdec_masyr": -42.0,
+    "sig_pm_masyr": 664.1,
+    "speed_arcsec_yr": 0.053,
+    "direction": "south-east",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.456985,
+     "dec_deg": 4.811037,
+     "x": 42.95,
+     "y": 105.06,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.45701,
+     "dec_deg": 4.811047,
+     "x": 42.92,
+     "y": 105.07,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.456992,
+     "dec_deg": 4.811024,
+     "x": 42.94,
+     "y": 105.04,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472837770227461504 (0.26\u2033). Motion 0.1\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 41757.68,
+     "err": 50.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 44068.15,
+     "err": 53.39,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 42322.77,
+     "err": 46.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 25832.87,
+     "err": 43.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 26369.44,
+     "err": 45.29,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 25021.27,
+     "err": 35.79,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 17246.3,
+     "err": 37.1,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 17191.81,
+     "err": 32.24,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 17145.52,
+     "err": 36.04,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 41757.68,
+     "err": 50.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 44068.15,
+     "err": 53.39,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 42322.77,
+     "err": 46.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 25832.87,
+     "err": 43.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 26369.44,
+     "err": 45.29,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 25021.27,
+     "err": 35.79,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 17246.3,
+     "err": 37.1,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 17191.81,
+     "err": 32.24,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 17145.52,
+     "err": 36.04,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s019",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472837632788148224",
+     "sep_arcsec": 0.31,
+     "epoch": 2016.0,
+     "pmra_masyr": -1.3,
+     "pmdec_masyr": -7.8,
+     "phot_g_mean_mag": 15.434,
+     "bp_rp": 1.0,
+     "parallax": 0.491
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175757.51+044818.4",
+     "sep_arcsec": 0.27,
+     "epoch": 2015.39,
+     "pmra_masyr": -3.1,
+     "pmdec_masyr": -12.6,
+     "w1mpro": 13.665,
+     "w2mpro": 13.736
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175757.51+044818.4",
+     "sep_arcsec": 1.49,
+     "epoch": 2010.5,
+     "pmra_masyr": 83.0,
+     "pmdec_masyr": -5.0,
+     "w1mpro": 13.662,
+     "w2mpro": 13.698
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575751+0448185",
+     "sep_arcsec": 1.39,
+     "epoch": 2000.41,
+     "k_m": 13.714
+    }
+   ],
+   "flux": {
+    "D4": [
+     856.77,
+     911.84,
+     870.57
+    ],
+    "D5": [
+     509.5,
+     499.35,
+     500.53
+    ],
+    "D6": [
+     400.59,
+     400.58,
+     415.61
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 47.5,
+    "pmdec_masyr": -20.2,
+    "sig_pm_masyr": 1115.5,
+    "speed_arcsec_yr": 0.052,
+    "direction": "south-east",
+    "sig": 0.0,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.489586,
+     "dec_deg": 4.805017,
+     "x": 4.92,
+     "y": 98.01,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.489624,
+     "dec_deg": 4.805019,
+     "x": 4.87,
+     "y": 98.01,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.489597,
+     "dec_deg": 4.805012,
+     "x": 4.91,
+     "y": 98.01,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472837632788148224 (0.31\u2033). Motion 0.1\u00b11.1\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 856.77,
+     "err": 46.59,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 911.84,
+     "err": 43.05,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 870.57,
+     "err": 43.48,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 509.5,
+     "err": 27.19,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 499.35,
+     "err": 32.82,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 500.53,
+     "err": 32.37,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 400.59,
+     "err": 21.77,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 400.58,
+     "err": 23.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 415.61,
+     "err": 18.2,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 856.77,
+     "err": 46.59,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 911.84,
+     "err": 43.05,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 870.57,
+     "err": 43.48,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 509.5,
+     "err": 27.19,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 499.35,
+     "err": 32.82,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 500.53,
+     "err": 32.37,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 400.59,
+     "err": 21.77,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 400.58,
+     "err": 23.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 415.61,
+     "err": 18.2,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s020",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472836327118455552",
+     "sep_arcsec": 0.16,
+     "epoch": 2016.0,
+     "pmra_masyr": -2.7,
+     "pmdec_masyr": -5.3,
+     "phot_g_mean_mag": 13.45,
+     "bp_rp": 1.61,
+     "parallax": 0.287
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175742.07+044753.4",
+     "sep_arcsec": 0.18,
+     "epoch": 2015.42,
+     "pmra_masyr": -2.9,
+     "pmdec_masyr": -22.3,
+     "w1mpro": 10.437,
+     "w2mpro": 10.562
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175742.07+044753.4",
+     "sep_arcsec": 0.76,
+     "epoch": 2010.5,
+     "pmra_masyr": -55.0,
+     "pmdec_masyr": 7.0,
+     "w1mpro": 10.444,
+     "w2mpro": 10.552
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574207+0447535",
+     "sep_arcsec": 0.99,
+     "epoch": 2000.41,
+     "k_m": 10.523
+    }
+   ],
+   "flux": {
+    "D4": [
+     17940.31,
+     18238.38,
+     17908.63
+    ],
+    "D5": [
+     11001.91,
+     11211.93,
+     10752.36
+    ],
+    "D6": [
+     7280.12,
+     7495.61,
+     7334.22
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -24.1,
+    "pmdec_masyr": -39.9,
+    "sig_pm_masyr": 664.4,
+    "speed_arcsec_yr": 0.047,
+    "direction": "south-west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.425261,
+     "dec_deg": 4.798157,
+     "x": 79.96,
+     "y": 89.98,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.425288,
+     "dec_deg": 4.798172,
+     "x": 79.93,
+     "y": 90.0,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.425252,
+     "dec_deg": 4.798144,
+     "x": 79.97,
+     "y": 89.96,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472836327118455552 (0.16\u2033). Motion 0.0\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 17940.31,
+     "err": 53.61,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 18238.38,
+     "err": 55.9,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 17908.63,
+     "err": 62.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 11001.91,
+     "err": 36.02,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 11211.93,
+     "err": 35.36,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 10752.36,
+     "err": 30.74,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 7280.12,
+     "err": 25.9,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 7495.61,
+     "err": 33.15,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 7334.22,
+     "err": 27.03,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 17940.31,
+     "err": 53.61,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 18238.38,
+     "err": 55.9,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 17908.63,
+     "err": 62.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 11001.91,
+     "err": 36.02,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 11211.93,
+     "err": 35.36,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 10752.36,
+     "err": 30.74,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 7280.12,
+     "err": 25.9,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 7495.61,
+     "err": 33.15,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 7334.22,
+     "err": 27.03,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s021",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832508888391168",
+     "sep_arcsec": 0.35,
+     "epoch": 2016.0,
+     "pmra_masyr": -8.9,
+     "pmdec_masyr": -2.0,
+     "phot_g_mean_mag": 13.028,
+     "bp_rp": 1.447,
+     "parallax": 0.393
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175740.87+044353.8",
+     "sep_arcsec": 0.32,
+     "epoch": 2015.42,
+     "pmra_masyr": -13.5,
+     "pmdec_masyr": 1.6,
+     "w1mpro": 10.369,
+     "w2mpro": 10.448
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175740.87+044353.8",
+     "sep_arcsec": 0.98,
+     "epoch": 2010.5,
+     "pmra_masyr": -80.0,
+     "pmdec_masyr": 22.0,
+     "w1mpro": 10.358,
+     "w2mpro": 10.444
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574088+0443538",
+     "sep_arcsec": 1.52,
+     "epoch": 2000.41,
+     "k_m": 10.42
+    }
+   ],
+   "flux": {
+    "D4": [
+     19808.15,
+     20019.2,
+     19931.54
+    ],
+    "D5": [
+     12132.87,
+     12198.92,
+     11921.74
+    ],
+    "D6": [
+     8547.21,
+     8624.43,
+     8506.59
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 28.5,
+    "pmdec_masyr": -35.1,
+    "sig_pm_masyr": 664.1,
+    "speed_arcsec_yr": 0.045,
+    "direction": "south-east",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.420171,
+     "dec_deg": 4.731583,
+     "x": 85.9,
+     "y": 12.04,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.420197,
+     "dec_deg": 4.731592,
+     "x": 85.87,
+     "y": 12.05,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.420177,
+     "dec_deg": 4.731572,
+     "x": 85.9,
+     "y": 12.03,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832508888391168 (0.35\u2033). Motion 0.0\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 19808.15,
+     "err": 18.93,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 20019.2,
+     "err": 25.48,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 19931.54,
+     "err": 20.36,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 12132.87,
+     "err": 24.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 12198.92,
+     "err": 24.79,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 11921.74,
+     "err": 22.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 8547.21,
+     "err": 27.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 8624.43,
+     "err": 24.26,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 8506.59,
+     "err": 26.87,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 19808.15,
+     "err": 18.93,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 20019.2,
+     "err": 25.48,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 19931.54,
+     "err": 20.36,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 12132.87,
+     "err": 24.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 12198.92,
+     "err": 24.79,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 11921.74,
+     "err": 22.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 8547.21,
+     "err": 27.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 8624.43,
+     "err": 24.26,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 8506.59,
+     "err": 26.87,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s022",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472837770227463680",
+     "sep_arcsec": 0.42,
+     "epoch": 2016.0,
+     "pmra_masyr": -1.0,
+     "pmdec_masyr": -6.1,
+     "phot_g_mean_mag": 13.902,
+     "bp_rp": 1.47,
+     "parallax": 0.287
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175747.97+044824.1",
+     "sep_arcsec": 0.3,
+     "epoch": 2015.42,
+     "pmra_masyr": 15.5,
+     "pmdec_masyr": -17.5,
+     "w1mpro": 11.125,
+     "w2mpro": 11.261
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175747.96+044824.1",
+     "sep_arcsec": 1.22,
+     "epoch": 2010.5,
+     "pmra_masyr": -21.0,
+     "pmdec_masyr": 51.0,
+     "w1mpro": 11.154,
+     "w2mpro": 11.208
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574797+0448241",
+     "sep_arcsec": 1.29,
+     "epoch": 2000.41,
+     "k_m": 11.249
+    }
+   ],
+   "flux": {
+    "D4": [
+     9537.22,
+     9835.49,
+     9340.79
+    ],
+    "D5": [
+     5845.99,
+     6021.1,
+     5660.31
+    ],
+    "D6": [
+     3995.73,
+     4017.48,
+     4042.37
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 5.6,
+    "pmdec_masyr": 44.0,
+    "sig_pm_masyr": 668.7,
+    "speed_arcsec_yr": 0.044,
+    "direction": "north",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.449995,
+     "dec_deg": 4.806664,
+     "x": 51.11,
+     "y": 99.94,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.450009,
+     "dec_deg": 4.806679,
+     "x": 51.09,
+     "y": 99.96,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.449996,
+     "dec_deg": 4.806675,
+     "x": 51.11,
+     "y": 99.95,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472837770227463680 (0.42\u2033). Motion 0.0\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 9537.22,
+     "err": 55.82,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 9835.49,
+     "err": 70.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 9340.79,
+     "err": 58.87,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 5845.99,
+     "err": 41.38,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 6021.1,
+     "err": 42.63,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 5660.31,
+     "err": 41.47,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 3995.73,
+     "err": 38.44,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 4017.48,
+     "err": 45.24,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 4042.37,
+     "err": 30.68,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 9537.22,
+     "err": 55.82,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 9835.49,
+     "err": 70.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 9340.79,
+     "err": 58.87,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 5845.99,
+     "err": 41.38,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 6021.1,
+     "err": 42.63,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 5660.31,
+     "err": 41.47,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 3995.73,
+     "err": 38.44,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 4017.48,
+     "err": 45.24,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 4042.37,
+     "err": 30.68,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s023",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472836047939582592",
+     "sep_arcsec": 0.58,
+     "epoch": 2016.0,
+     "pmra_masyr": -0.7,
+     "pmdec_masyr": -6.0,
+     "phot_g_mean_mag": 13.597,
+     "bp_rp": 1.43,
+     "parallax": 0.453
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175745.28+044711.5",
+     "sep_arcsec": 0.59,
+     "epoch": 2015.42,
+     "pmra_masyr": 11.7,
+     "pmdec_masyr": -5.9,
+     "w1mpro": 10.966,
+     "w2mpro": 11.057
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175745.28+044711.5",
+     "sep_arcsec": 1.13,
+     "epoch": 2010.5,
+     "pmra_masyr": 3.0,
+     "pmdec_masyr": 28.0,
+     "w1mpro": 10.944,
+     "w2mpro": 11.051
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574528+0447115",
+     "sep_arcsec": 1.41,
+     "epoch": 2000.41,
+     "k_m": 11.031
+    }
+   ],
+   "flux": {
+    "D4": [
+     11365.1,
+     12127.83,
+     11407.84
+    ],
+    "D5": [
+     6889.87,
+     7341.1,
+     6862.66
+    ],
+    "D6": [
+     4927.45,
+     5048.24,
+     5028.95
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -39.5,
+    "pmdec_masyr": -13.6,
+    "sig_pm_masyr": 667.0,
+    "speed_arcsec_yr": 0.042,
+    "direction": "west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.43877,
+     "dec_deg": 4.786373,
+     "x": 64.2,
+     "y": 76.18,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.438786,
+     "dec_deg": 4.786383,
+     "x": 64.18,
+     "y": 76.2,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.438757,
+     "dec_deg": 4.786368,
+     "x": 64.22,
+     "y": 76.18,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472836047939582592 (0.58\u2033). Motion 0.0\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 11365.1,
+     "err": 186.28,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 12127.83,
+     "err": 212.04,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 11407.84,
+     "err": 294.02,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 6889.87,
+     "err": 106.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 7341.1,
+     "err": 132.12,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 6862.66,
+     "err": 168.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 4927.45,
+     "err": 80.73,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 5048.24,
+     "err": 97.28,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 5028.95,
+     "err": 109.35,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 11365.1,
+     "err": 186.28,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 12127.83,
+     "err": 212.04,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 11407.84,
+     "err": 294.02,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 6889.87,
+     "err": 106.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 7341.1,
+     "err": 132.12,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 6862.66,
+     "err": 168.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 4927.45,
+     "err": 80.73,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 5048.24,
+     "err": 97.28,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 5028.95,
+     "err": 109.35,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s024",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472836361478195200",
+     "sep_arcsec": 0.78,
+     "epoch": 2016.0,
+     "pmra_masyr": -4.6,
+     "pmdec_masyr": -4.0,
+     "phot_g_mean_mag": 14.901,
+     "bp_rp": 1.503,
+     "parallax": 0.296
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175742.13+044822.3",
+     "sep_arcsec": 0.77,
+     "epoch": 2015.42,
+     "pmra_masyr": -1.8,
+     "pmdec_masyr": -7.6,
+     "w1mpro": 12.179,
+     "w2mpro": 12.299
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175742.13+044822.3",
+     "sep_arcsec": 1.19,
+     "epoch": 2010.5,
+     "pmra_masyr": -78.0,
+     "pmdec_masyr": 28.0,
+     "w1mpro": 12.182,
+     "w2mpro": 12.286
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574213+0448223",
+     "sep_arcsec": 1.57,
+     "epoch": 2000.41,
+     "k_m": 12.253
+    }
+   ],
+   "flux": {
+    "D4": [
+     3748.61,
+     3843.31,
+     3763.8
+    ],
+    "D5": [
+     2315.42,
+     2319.8,
+     2245.18
+    ],
+    "D6": [
+     1510.0,
+     1575.96,
+     1534.61
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 36.4,
+    "pmdec_masyr": -20.6,
+    "sig_pm_masyr": 703.2,
+    "speed_arcsec_yr": 0.042,
+    "direction": "south-east",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.425392,
+     "dec_deg": 4.806047,
+     "x": 79.81,
+     "y": 99.22,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.425423,
+     "dec_deg": 4.806067,
+     "x": 79.77,
+     "y": 99.24,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.4254,
+     "dec_deg": 4.806039,
+     "x": 79.8,
+     "y": 99.21,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472836361478195200 (0.78\u2033). Motion 0.0\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 3748.61,
+     "err": 39.39,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 3843.31,
+     "err": 43.77,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 3763.8,
+     "err": 41.7,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 2315.42,
+     "err": 23.79,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 2319.8,
+     "err": 24.65,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 2245.18,
+     "err": 30.0,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 1510.0,
+     "err": 31.26,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 1575.96,
+     "err": 26.62,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 1534.61,
+     "err": 27.57,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 3748.61,
+     "err": 39.39,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 3843.31,
+     "err": 43.77,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 3763.8,
+     "err": 41.7,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 2315.42,
+     "err": 23.79,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 2319.8,
+     "err": 24.65,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 2245.18,
+     "err": 30.0,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 1510.0,
+     "err": 31.26,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 1575.96,
+     "err": 26.62,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 1534.61,
+     "err": 27.57,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s025",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832581906946944",
+     "sep_arcsec": 0.45,
+     "epoch": 2016.0,
+     "pmra_masyr": -3.9,
+     "pmdec_masyr": -8.4,
+     "phot_g_mean_mag": 15.211,
+     "bp_rp": 1.37,
+     "parallax": 0.025
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175757.64+044325.5",
+     "sep_arcsec": 0.48,
+     "epoch": 2015.42,
+     "pmra_masyr": -9.6,
+     "pmdec_masyr": -10.8,
+     "w1mpro": 12.71,
+     "w2mpro": 12.818
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175757.64+044325.5",
+     "sep_arcsec": 1.9,
+     "epoch": 2010.5,
+     "pmra_masyr": -97.0,
+     "pmdec_masyr": 60.0,
+     "w1mpro": 12.712,
+     "w2mpro": 12.804
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575764+0443256",
+     "sep_arcsec": 1.25,
+     "epoch": 2000.41,
+     "k_m": 12.766
+    }
+   ],
+   "flux": {
+    "D4": [
+     2088.67,
+     2244.52,
+     2099.92
+    ],
+    "D5": [
+     1290.42,
+     1369.17,
+     1240.73
+    ],
+    "D6": [
+     928.97,
+     881.99,
+     894.75
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -40.0,
+    "pmdec_masyr": 10.5,
+    "sig_pm_masyr": 769.3,
+    "speed_arcsec_yr": 0.041,
+    "direction": "west",
+    "sig": 0.1,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.490253,
+     "dec_deg": 4.723819,
+     "x": 4.13,
+     "y": 2.95,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.490261,
+     "dec_deg": 4.723827,
+     "x": 4.13,
+     "y": 2.96,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.490241,
+     "dec_deg": 4.723821,
+     "x": 4.15,
+     "y": 2.95,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832581906946944 (0.45\u2033). Motion 0.0\u00b10.8\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 2088.67,
+     "err": 69.57,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 2244.52,
+     "err": 61.53,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 2099.92,
+     "err": 70.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 1290.42,
+     "err": 35.93,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 1369.17,
+     "err": 35.03,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 1240.73,
+     "err": 45.63,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 928.97,
+     "err": 27.4,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 881.99,
+     "err": 35.33,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 894.75,
+     "err": 32.61,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 2088.67,
+     "err": 69.57,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 2244.52,
+     "err": 61.53,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 2099.92,
+     "err": 70.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 1290.42,
+     "err": 35.93,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 1369.17,
+     "err": 35.03,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 1240.73,
+     "err": 45.63,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 928.97,
+     "err": 27.4,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 881.99,
+     "err": 35.33,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 894.75,
+     "err": 32.61,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s026",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832680687096576",
+     "sep_arcsec": 0.52,
+     "epoch": 2016.0,
+     "pmra_masyr": 1.5,
+     "pmdec_masyr": -5.1,
+     "phot_g_mean_mag": 16.206,
+     "bp_rp": 1.062,
+     "parallax": 0.529
+    },
+    {
+     "cat": "CatWISE2020",
+     "id": "J175757.29+044409.5",
+     "sep_arcsec": 0.64,
+     "epoch": 2015.4,
+     "pmra_masyr": 16.2,
+     "pmdec_masyr": -5.0,
+     "w1mpro": 14.286,
+     "w2mpro": 14.393
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175754.03+044404.6",
+     "sep_arcsec": 48.91,
+     "epoch": 2010.5,
+     "w1mpro": 14.916,
+     "w2mpro": 15.268
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575729+0444095",
+     "sep_arcsec": 0.51,
+     "epoch": 2000.41,
+     "k_m": 14.381
+    }
+   ],
+   "flux": {
+    "D4": [
+     465.78,
+     477.23,
+     475.65
+    ],
+    "D5": [
+     245.64,
+     258.01,
+     291.74
+    ],
+    "D6": [
+     174.85,
+     168.81,
+     189.97
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 24.3,
+    "pmdec_masyr": -7.7,
+    "sig_pm_masyr": 1739.8,
+    "speed_arcsec_yr": 0.025,
+    "direction": "east",
+    "sig": 0.0,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.488816,
+     "dec_deg": 4.735801,
+     "x": 5.81,
+     "y": 16.98,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.488796,
+     "dec_deg": 4.735831,
+     "x": 5.84,
+     "y": 17.01,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.488824,
+     "dec_deg": 4.735797,
+     "x": 5.8,
+     "y": 16.97,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832680687096576 (0.52\u2033). Motion 0.0\u00b11.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 465.78,
+     "err": 35.08,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 477.23,
+     "err": 35.34,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 475.65,
+     "err": 31.95,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 245.64,
+     "err": 25.77,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 258.01,
+     "err": 22.8,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 291.74,
+     "err": 22.03,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 174.85,
+     "err": 22.18,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 168.81,
+     "err": 17.65,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 189.97,
+     "err": 18.47,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 465.78,
+     "err": 35.08,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 477.23,
+     "err": 35.34,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 475.65,
+     "err": 31.95,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 245.64,
+     "err": 25.77,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 258.01,
+     "err": 22.8,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 291.74,
+     "err": 22.03,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 174.85,
+     "err": 22.18,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 168.81,
+     "err": 17.65,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 189.97,
+     "err": 18.47,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s027",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832513187484544",
+     "sep_arcsec": 1.03,
+     "epoch": 2016.0,
+     "pmra_masyr": -4.2,
+     "pmdec_masyr": -2.3,
+     "phot_g_mean_mag": 14.488,
+     "bp_rp": 1.384,
+     "parallax": 0.329
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175744.02+044417.6",
+     "sep_arcsec": 3.23,
+     "epoch": 2010.5,
+     "pmra_masyr": 131.0,
+     "pmdec_masyr": -43.0,
+     "w1mpro": 11.877,
+     "w2mpro": 11.802
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574401+0444175",
+     "sep_arcsec": 0.77,
+     "epoch": 2000.41,
+     "k_m": 11.993
+    }
+   ],
+   "flux": {
+    "D4": [
+     4903.84,
+     4941.27,
+     4924.24
+    ],
+    "D5": [
+     3051.17,
+     3097.36,
+     2942.54
+    ],
+    "D6": [
+     2173.74,
+     2098.76,
+     2162.63
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -7.1,
+    "pmdec_masyr": 13.4,
+    "sig_pm_masyr": 685.7,
+    "speed_arcsec_yr": 0.015,
+    "direction": "north-west",
+    "sig": 0.0,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.433133,
+     "dec_deg": 4.738333,
+     "x": 70.78,
+     "y": 19.94,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.433159,
+     "dec_deg": 4.738343,
+     "x": 70.75,
+     "y": 19.95,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.433128,
+     "dec_deg": 4.738336,
+     "x": 70.79,
+     "y": 19.94,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832513187484544 (1.03\u2033). Motion 0.0\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 4903.84,
+     "err": 58.55,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 4941.27,
+     "err": 50.07,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 4924.24,
+     "err": 42.23,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 3051.17,
+     "err": 30.73,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 3097.36,
+     "err": 33.5,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 2942.54,
+     "err": 25.67,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 2173.74,
+     "err": 23.81,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 2098.76,
+     "err": 22.76,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 2162.63,
+     "err": 18.49,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 4903.84,
+     "err": 58.55,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 4941.27,
+     "err": 50.07,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 4924.24,
+     "err": 42.23,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 3051.17,
+     "err": 30.73,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 3097.36,
+     "err": 33.5,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 2942.54,
+     "err": 25.67,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 2173.74,
+     "err": 23.81,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 2098.76,
+     "err": 22.76,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 2162.63,
+     "err": 18.49,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s028",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472832994223814016",
+     "sep_arcsec": 0.61,
+     "epoch": 2016.0,
+     "pmra_masyr": -2.3,
+     "pmdec_masyr": -2.2,
+     "phot_g_mean_mag": 15.463,
+     "bp_rp": 1.253,
+     "parallax": 0.095
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175756.66+044545.7",
+     "sep_arcsec": 2.81,
+     "epoch": 2010.5,
+     "pmra_masyr": 151.0,
+     "pmdec_masyr": -128.0,
+     "w1mpro": 13.1,
+     "w2mpro": 13.115
+    },
+    {
+     "cat": "2MASS",
+     "id": "17575665+0445457",
+     "sep_arcsec": 0.77,
+     "epoch": 2000.41,
+     "k_m": 13.197
+    }
+   ],
+   "flux": {
+    "D4": [
+     1516.46,
+     1557.93,
+     1502.13
+    ],
+    "D5": [
+     934.43,
+     911.5,
+     955.86
+    ],
+    "D6": [
+     717.9,
+     661.22,
+     735.9
+    ]
+   },
+   "motion": {
+    "pmra_masyr": -11.7,
+    "pmdec_masyr": 0.7,
+    "sig_pm_masyr": 850.4,
+    "speed_arcsec_yr": 0.012,
+    "direction": "west",
+    "sig": 0.0,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.01,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.486074,
+     "dec_deg": 4.762514,
+     "x": 9.01,
+     "y": 48.25,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.486093,
+     "dec_deg": 4.762521,
+     "x": 8.99,
+     "y": 48.26,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.486069,
+     "dec_deg": 4.762513,
+     "x": 9.02,
+     "y": 48.25,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472832994223814016 (0.61\u2033). Motion 0.0\u00b10.9\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 1516.46,
+     "err": 24.22,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 1557.93,
+     "err": 29.06,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1502.13,
+     "err": 26.56,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 934.43,
+     "err": 17.84,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 911.5,
+     "err": 21.94,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 955.86,
+     "err": 16.55,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 717.9,
+     "err": 16.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 661.22,
+     "err": 23.49,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 735.9,
+     "err": 19.35,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 1516.46,
+     "err": 24.22,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 1557.93,
+     "err": 29.06,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 1502.13,
+     "err": 26.56,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 934.43,
+     "err": 17.84,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 911.5,
+     "err": 21.94,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 955.86,
+     "err": 16.55,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 717.9,
+     "err": 16.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 661.22,
+     "err": 23.49,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 735.9,
+     "err": 19.35,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s029",
+   "crossmatch": [
+    {
+     "cat": "Gaia DR3",
+     "id": "4472835846082110464",
+     "sep_arcsec": 1.22,
+     "epoch": 2016.0,
+     "pmra_masyr": -3.7,
+     "pmdec_masyr": -4.7,
+     "phot_g_mean_mag": 14.44,
+     "bp_rp": 1.387,
+     "parallax": 0.25
+    },
+    {
+     "cat": "AllWISE",
+     "id": "J175741.51+044504.4",
+     "sep_arcsec": 2.18,
+     "epoch": 2010.5,
+     "pmra_masyr": 19.0,
+     "pmdec_masyr": 109.0,
+     "w1mpro": 11.797,
+     "w2mpro": 11.887
+    },
+    {
+     "cat": "2MASS",
+     "id": "17574151+0445044",
+     "sep_arcsec": 1.45,
+     "epoch": 2000.41,
+     "k_m": 11.901
+    }
+   ],
+   "flux": {
+    "D4": [
+     7053.59,
+     7261.08,
+     7159.34
+    ],
+    "D5": [
+     4334.74,
+     4350.86,
+     4185.64
+    ],
+    "D6": [
+     3069.63,
+     3168.01,
+     3124.65
+    ]
+   },
+   "motion": {
+    "pmra_masyr": 7.5,
+    "pmdec_masyr": 1.6,
+    "sig_pm_masyr": 673.7,
+    "speed_arcsec_yr": 0.008,
+    "direction": "east",
+    "sig": 0.0,
+    "chance_lines_expected": 0.0146,
+    "fit_rms_px": 0.02,
+    "n_visits": 3
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.422633,
+     "dec_deg": 4.751271,
+     "x": 83.03,
+     "y": 35.09,
+     "detected": true
+    },
+    {
+     "visit": 1,
+     "mjd": 61119.4567,
+     "ra_deg": 269.422663,
+     "dec_deg": 4.751274,
+     "x": 83.0,
+     "y": 35.09,
+     "detected": true
+    },
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.422633,
+     "dec_deg": 4.751271,
+     "x": 83.03,
+     "y": 35.09,
+     "detected": true
+    }
+   ],
+   "class": "known-star",
+   "confidence": 0.9,
+   "reason": "Static and steady; matches Gaia DR3 4472835846082110464 (1.22\u2033). Motion 0.0\u00b10.7\u2033/yr (not significant).",
+   "appearance_class": "star",
+   "flags": [],
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 7053.59,
+     "err": 95.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 1,
+     "flux": 7261.08,
+     "err": 87.13,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 7159.34,
+     "err": 73.83,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 4334.74,
+     "err": 53.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 1,
+     "flux": 4350.86,
+     "err": 51.35,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 4185.64,
+     "err": 43.66,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 3069.63,
+     "err": 49.27,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 1,
+     "flux": 3168.01,
+     "err": 37.05,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 3124.65,
+     "err": 39.24,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 7053.59,
+     "err": 95.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D4",
+     "flux": 7261.08,
+     "err": 87.13,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 7159.34,
+     "err": 73.83,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 4334.74,
+     "err": 53.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D5",
+     "flux": 4350.86,
+     "err": 51.35,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 4185.64,
+     "err": 43.66,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 3069.63,
+     "err": 49.27,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61119.4567,
+     "band": "D6",
+     "flux": 3168.01,
+     "err": 37.05,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 3124.65,
+     "err": 39.24,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s030",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     683.68
+    ],
+    "D5": [
+     389.97
+    ],
+    "D6": [
+     338.38
+    ]
+   },
+   "positions": [
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.46991,
+     "dec_deg": 4.757995,
+     "x": 27.87,
+     "y": 42.96,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 6) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 683.68,
+     "err": 60.75,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 389.97,
+     "err": 48.72,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 338.38,
+     "err": 31.67,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 683.68,
+     "err": 60.75,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 389.97,
+     "err": 48.72,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 338.38,
+     "err": 31.67,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s031",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1445.02
+    ],
+    "D5": [
+     808.87
+    ],
+    "D6": [
+     562.69
+    ]
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.428532,
+     "dec_deg": 4.770833,
+     "x": 76.15,
+     "y": 57.99,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 6) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 1445.02,
+     "err": 197.66,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 808.87,
+     "err": 119.08,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 562.69,
+     "err": 94.83,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 1445.02,
+     "err": 197.66,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 808.87,
+     "err": 119.08,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 562.69,
+     "err": 94.83,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s032",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     1399.89
+    ],
+    "D5": [
+     728.68
+    ],
+    "D6": [
+     484.14
+    ]
+   },
+   "positions": [
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.42846,
+     "dec_deg": 4.771065,
+     "x": 76.23,
+     "y": 58.26,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 5) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 1399.89,
+     "err": 205.58,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 728.68,
+     "err": 133.0,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 484.14,
+     "err": 111.82,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 1399.89,
+     "err": 205.58,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 728.68,
+     "err": 133.0,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 484.14,
+     "err": 111.82,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s033",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     687.37
+    ],
+    "D5": [
+     384.91
+    ],
+    "D6": [
+     257.34
+    ]
+   },
+   "positions": [
+    {
+     "visit": 0,
+     "mjd": 60916.2684,
+     "ra_deg": 269.469937,
+     "dec_deg": 4.757956,
+     "x": 27.84,
+     "y": 42.91,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 5) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 0,
+     "flux": 687.37,
+     "err": 70.31,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 0,
+     "flux": 384.91,
+     "err": 55.17,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 0,
+     "flux": 257.34,
+     "err": 43.71,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 60916.2684,
+     "band": "D4",
+     "flux": 687.37,
+     "err": 70.31,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D5",
+     "flux": 384.91,
+     "err": 55.17,
+     "quality": "ok"
+    },
+    {
+     "mjd": 60916.2684,
+     "band": "D6",
+     "flux": 257.34,
+     "err": 43.71,
+     "quality": "ok"
+    }
+   ]
+  },
+  {
+   "id": "s034",
+   "crossmatch": [],
+   "flux": {
+    "D4": [
+     578.34
+    ],
+    "D5": [
+     352.0
+    ],
+    "D6": [
+     271.36
+    ]
+   },
+   "positions": [
+    {
+     "visit": 2,
+     "mjd": 61274.6549,
+     "ra_deg": 269.484464,
+     "dec_deg": 4.808487,
+     "x": 10.89,
+     "y": 102.07,
+     "detected": true
+    }
+   ],
+   "class": "artefact",
+   "confidence": 0.8,
+   "reason": "Seen in only one visit, faint (S/N 5) or next to masked pixels: most likely a detector artefact.",
+   "flags": [
+    "single-visit"
+   ],
+   "appearance_class": null,
+   "spectrum": [
+    {
+     "lam_um": 3.12,
+     "band": "D4",
+     "visit": 2,
+     "flux": 578.34,
+     "err": 32.88,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.12,
+     "band": "D5",
+     "visit": 2,
+     "flux": 352.0,
+     "err": 24.47,
+     "quality": "ok"
+    },
+    {
+     "lam_um": 4.71,
+     "band": "D6",
+     "visit": 2,
+     "flux": 271.36,
+     "err": 15.5,
+     "quality": "ok"
+    }
+   ],
+   "light_curve": [
+    {
+     "mjd": 61274.6549,
+     "band": "D4",
+     "flux": 578.34,
+     "err": 32.88,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D5",
+     "flux": 352.0,
+     "err": 24.47,
+     "quality": "ok"
+    },
+    {
+     "mjd": 61274.6549,
+     "band": "D6",
+     "flux": 271.36,
+     "err": 15.5,
+     "quality": "ok"
+    }
+   ]
+  }
+ ],
+ "method": {
+  "detection_sigma": 5.0,
+  "psf_fwhm_px": 3.15,
+  "link_tolerance_px": 1.42,
+  "max_motion_arcsec_yr": 12.0,
+  "rules": "built-in defaults (science/classes.json not delivered yet)",
+  "names_from": "team targets.json (SIMBAD unreachable)",
+  "catalog_counts": {
+   "Gaia DR3": 561,
+   "CatWISE2020": 315,
+   "AllWISE": 203,
+   "2MASS": 131
+  },
+  "pixel_arcsec": 3.075,
+  "stacks": "processing/cache/stacks/barnards-star",
+  "runtime_s": 3.1
+ },
+ "summary_text": "Zone scanned over 3 SPHEREx visits (2025-08-15 to 2026-09-22) in D4, D5, D6: 34 sources. 29 known stars, 0 known asteroids, 0 variable, 5 artefacts or one-off detections, 0 unidentified static sources. s001 moves 10.2\u2033/yr: Moves 10.2\u2033/yr toward north, matching Gaia DR3 4472832130942575872 (Barnard's Star) (catalogue 10.4\u2033/yr). No unknown movers above the detection threshold.",
+ "summary_text_source": "rules template"
+}

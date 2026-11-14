@@ -77,6 +77,7 @@ GET  /object/barnards-star         → targets.json entry + latest report + scie
 | A10 | **Integration**: merge the three branches, end-to-end on Barnard then the other 4 | One command runs the whole pipeline |
 
 ## Chunk B · Quirce · discovery engine (large)
+**Status 14 Nov: B1–B8 delivered on branch `b/discovery`** (`processing/discovery/`, README there; all 5 targets classified correctly, reports in `processing/discovery/reports/`).
 **Paste into your agent:** *"Read WORKSPLIT.md, contracts/, research/02-processing.md and spikes/. Build chunk B in `processing/` only. Develop against `contracts/fixtures/barnards-star/` (real SPHEREx stacks)."*
 | # | Task | Done when |
 |---|---|---|

@@ -33,9 +33,9 @@ CACHE = ROOT / CFG["cache_dir"]
 def sky_at(target, mjd):
     """Target position at a given MJD (proper motion + parallax distance), D6."""
     c = SkyCoord(ra=target["ra_deg"] * u.deg, dec=target["dec_deg"] * u.deg,
-                 pm_ra_cosdec=target.get("pmra_masyr", 0) * u.mas / u.yr,
-                 pm_dec=target.get("pmdec_masyr", 0) * u.mas / u.yr,
-                 distance=Distance(parallax=max(target.get("plx_mas", 0.1), 0.1) * u.mas),
+                 pm_ra_cosdec=(target.get("pmra_masyr") or 0) * u.mas / u.yr,
+                 pm_dec=(target.get("pmdec_masyr") or 0) * u.mas / u.yr,
+                 distance=Distance(parallax=max(target.get("plx_mas") or 0.1, 0.1) * u.mas),
                  obstime=Time(target["ref_epoch"], format="jyear"))
     return c.apply_space_motion(new_obstime=Time(mjd, format="mjd"))
 
@@ -109,12 +109,13 @@ def process_exposure(exp, center, grid_wcs, shape, half):
             "det": exp["det"], "epoch": exp["epoch"], "obs_id": exp["obs_id"]}
 
 
-def build_frames(target, exps, center=None, workers=8, log=print, nx=None, ny=None):
+def build_frames(target, exps, center=None, workers=8, log=print, nx=None, ny=None, pix_arcsec=None, renumber=True):
     """Returns (grid_wcs, shape, frames) where frames is a list of per-epoch co-adds."""
     mjds = np.array([e["mjd"] for e in exps])
     center = center or sky_at(target, float(mjds.mean()))
-    grid_wcs, shape = common_grid(center, nx, ny)
-    half = int(np.ceil(max(shape) * 0.75)) + 4                 # covers the rotated grid
+    grid_wcs, shape = common_grid(center, nx, ny, pix_arcsec)
+    scale = (pix_arcsec or CFG["grid"]["pix_arcsec"]) / CFG["spherex"]["pixel_arcsec"]
+    half = int(np.ceil(max(shape) * scale * 0.75)) + 4                 # covers the rotated grid
     log(f"{len(exps)} exposures, grid {shape[1]}x{shape[0]} centred at "
         f"{center.ra.deg:.5f} {center.dec.deg:+.5f}; reading sections from S3 ...")
     done = []
@@ -152,6 +153,7 @@ def build_frames(target, exps, center=None, workers=8, log=print, nx=None, ny=No
                        "target_radec": (pos.ra.deg, pos.dec.deg)})
         log(f"  epoch {ep}: {len(grp)} exposures, {Time(mjd, format='mjd').iso[:10]}")
     # renumber epochs 0..N-1 (some epochs may have no usable exposures in this band)
-    for k, fr in enumerate(frames):
-        fr["epoch"] = k
+    if renumber:
+        for k, fr in enumerate(frames):
+            fr["epoch"] = k
     return grid_wcs, shape, frames

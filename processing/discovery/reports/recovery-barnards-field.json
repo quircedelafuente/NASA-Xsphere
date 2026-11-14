@@ -1,0 +1,27 @@
+{
+ "stacks": "processing/cache/stacks/barnards-star",
+ "pix_arcsec": 3.075,
+ "fwhm_px": 3.15,
+ "baseline_years": 0.98,
+ "spherex_px_arcsec": 6.15,
+ "recovery": {
+  "1\u2033/yr S/N8": 0.0,
+  "1\u2033/yr S/N15": 0.0,
+  "1\u2033/yr S/N30": 0.0,
+  "2\u2033/yr S/N8": 0.0,
+  "2\u2033/yr S/N15": 0.0,
+  "2\u2033/yr S/N30": 0.0,
+  "4\u2033/yr S/N8": 0.0,
+  "4\u2033/yr S/N15": 0.0,
+  "4\u2033/yr S/N30": 0.0,
+  "6\u2033/yr S/N8": 0.0,
+  "6\u2033/yr S/N15": 0.0,
+  "6\u2033/yr S/N30": 0.22,
+  "8\u2033/yr S/N8": 0.0,
+  "8\u2033/yr S/N15": 0.0,
+  "8\u2033/yr S/N30": 0.61,
+  "10\u2033/yr S/N8": 0.0,
+  "10\u2033/yr S/N15": 0.0,
+  "10\u2033/yr S/N30": 0.5
+ }
+}
