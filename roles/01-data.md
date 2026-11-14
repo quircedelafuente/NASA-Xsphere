@@ -101,4 +101,4 @@ Key facts:
 - Using J2000/2010 positions for movers (WISE 0855 is 2′ off).
 - Treating `SOURCE` as bad (it only means "a known source is here").
 - Over-polishing bonus targets before the 5 required ones are QA'd.
-- Spending hours on CORS: Processing decides live vs static (D2 says static).
+- Spending hours on CORS: the browser never calls NASA directly; the backend does (D2: on-demand + cache).

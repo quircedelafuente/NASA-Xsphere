@@ -1,0 +1,15 @@
+# chunk A engine (Python 3.11+)
+astropy>=6
+reproject
+numpy
+pillow
+pyyaml
+scipy
+pyvo
+fsspec
+aiohttp
+requests
+fastapi
+uvicorn[standard]
+mcp>=2
+truststore   # only needed on networks that inspect HTTPS (e.g. IE Wi-Fi)

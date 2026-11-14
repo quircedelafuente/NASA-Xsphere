@@ -1,0 +1,208 @@
+[
+  {
+    "id": "barnards-star",
+    "name": "Barnard's Star",
+    "aliases": [
+      "Barnard's Star",
+      "GJ 699",
+      "HIP 87937",
+      "Gaia DR3 4472832130942575872"
+    ],
+    "kind": "mover",
+    "ra_deg": 269.44850252544,
+    "dec_deg": 4.73942005111,
+    "ref_epoch": 2016.0,
+    "pmra_masyr": -801.551,
+    "pmdec_masyr": 10362.394,
+    "plx_mas": 546.9759,
+    "astrometry_source": "Gaia DR3 4472832130942575872",
+    "archival_positions": [
+      {
+        "survey": "2MASS",
+        "epoch": 2000.405,
+        "ra_deg": 269.452044,
+        "dec_deg": 4.694597,
+        "offset_from_prediction_arcsec": 0.31
+      },
+      {
+        "survey": "AllWISE",
+        "epoch": 2010.443,
+        "ra_deg": 269.44977,
+        "dec_deg": 4.72328,
+        "offset_from_prediction_arcsec": 0.53
+      }
+    ],
+    "default_band": "D4",
+    "fov_arcsec": 393.6,
+    "expected": {
+      "motion_arcsec_per_yr": 10.393,
+      "motion_px_per_yr": 1.69,
+      "variability": "none",
+      "saturated": true,
+      "notes": "Fastest proper motion of any star. Core saturated (NaN) in D1–D3 and in our D4 sample; position still measurable. Sample build measured 9.8″ shift over 0.98 yr (expected 10.2″)."
+    }
+  },
+  {
+    "id": "eps-indi-b",
+    "name": "ε Indi B",
+    "aliases": [
+      "eps Indi B",
+      "epsilon Indi B",
+      "ε Indi Ba/Bb",
+      "eps Ind B",
+      "Gaia DR3 6412596012146801152"
+    ],
+    "kind": "companion-mover",
+    "ra_deg": 331.07645259656,
+    "dec_deg": -56.79381206688,
+    "ref_epoch": 2016.0,
+    "pmra_masyr": 3981.977,
+    "pmdec_masyr": -2466.832,
+    "plx_mas": 270.658,
+    "astrometry_source": "Gaia DR3 6412596012146801152",
+    "archival_positions": [
+      {
+        "survey": "2MASS",
+        "epoch": 1999.851,
+        "ra_deg": 331.043836,
+        "dec_deg": -56.782707,
+        "offset_from_prediction_arcsec": 0.14
+      },
+      {
+        "survey": "AllWISE",
+        "epoch": 2010.591,
+        "ra_deg": 331.0656363,
+        "dec_deg": -56.790137,
+        "offset_from_prediction_arcsec": 0.24
+      }
+    ],
+    "default_band": "D56",
+    "fov_arcsec": 393.6,
+    "expected": {
+      "motion_arcsec_per_yr": 4.684,
+      "motion_px_per_yr": 0.762,
+      "variability": "none",
+      "saturated": false,
+      "notes": "Pair of brown dwarfs (Ba + Bb) orbiting the star ε Indi A; unresolved at 6.15″ pixels. Gaia DR3 entry is the combined light."
+    }
+  },
+  {
+    "id": "wise-0855",
+    "name": "WISE 0855−0714",
+    "aliases": [
+      "WISE 0855",
+      "WISE J085510.83-071442.5",
+      "WISE 0855-0714"
+    ],
+    "kind": "mover",
+    "ra_deg": 133.7947597,
+    "dec_deg": -7.2451456,
+    "ref_epoch": 2010.59,
+    "pmra_masyr": -8118.0,
+    "pmdec_masyr": 680.0,
+    "plx_mas": null,
+    "astrometry_source": "AllWISE J085510.74-071442.5 position + literature proper motion",
+    "archival_positions": [
+      {
+        "survey": "AllWISE",
+        "epoch": 2010.59,
+        "ra_deg": 133.7947597,
+        "dec_deg": -7.2451456,
+        "offset_from_prediction_arcsec": 0.0
+      }
+    ],
+    "default_band": "D56",
+    "fov_arcsec": 393.6,
+    "expected": {
+      "motion_arcsec_per_yr": 8.146,
+      "motion_px_per_yr": 1.325,
+      "variability": "none",
+      "saturated": false,
+      "notes": "Coldest known brown dwarf. Invisible below ~3.8 µm; needs per-visit co-adds in D5/D6. Catalogue (2010) position is ~2′ off today: always propagate."
+    }
+  },
+  {
+    "id": "rw-aurigae",
+    "name": "RW Aurigae",
+    "aliases": [
+      "RW Aur",
+      "RW Aurigae",
+      "Gaia DR3 156430822114424576"
+    ],
+    "kind": "variable",
+    "ra_deg": 76.95608119553,
+    "dec_deg": 30.4012045891,
+    "ref_epoch": 2016.0,
+    "pmra_masyr": 2.641,
+    "pmdec_masyr": -27.398,
+    "plx_mas": 6.4062,
+    "astrometry_source": "Gaia DR3 156430822114424576",
+    "archival_positions": [
+      {
+        "survey": "2MASS",
+        "epoch": 1999.904,
+        "ra_deg": 76.95641,
+        "dec_deg": 30.401409,
+        "offset_from_prediction_arcsec": 1.1
+      },
+      {
+        "survey": "AllWISE",
+        "epoch": 2010.434,
+        "ra_deg": 76.9564535,
+        "dec_deg": 30.4013327,
+        "offset_from_prediction_arcsec": 1.21
+      }
+    ],
+    "default_band": "D2",
+    "fov_arcsec": 393.6,
+    "expected": {
+      "motion_arcsec_per_yr": 0.028,
+      "motion_px_per_yr": 0.004,
+      "variability": "irregular (young T Tauri binary, dimming events)",
+      "saturated": true,
+      "notes": "Saturated (OVERFLOW) in ~all D1–D3 frames per research; use for variability with care."
+    }
+  },
+  {
+    "id": "r-draconis",
+    "name": "R Draconis",
+    "aliases": [
+      "R Dra",
+      "R Draconis",
+      "Gaia DR3 1648328016354496384"
+    ],
+    "kind": "variable",
+    "ra_deg": 248.16737836729,
+    "dec_deg": 66.75500674547,
+    "ref_epoch": 2016.0,
+    "pmra_masyr": -20.643,
+    "pmdec_masyr": 6.149,
+    "plx_mas": 1.2509,
+    "astrometry_source": "Gaia DR3 1648328016354496384",
+    "archival_positions": [
+      {
+        "survey": "2MASS",
+        "epoch": 1999.397,
+        "ra_deg": 248.167655,
+        "dec_deg": 66.755005,
+        "offset_from_prediction_arcsec": 0.11
+      },
+      {
+        "survey": "AllWISE",
+        "epoch": 2010.422,
+        "ra_deg": 248.167472,
+        "dec_deg": 66.7549882,
+        "offset_from_prediction_arcsec": 0.04
+      }
+    ],
+    "default_band": "D2",
+    "fov_arcsec": 393.6,
+    "expected": {
+      "motion_arcsec_per_yr": 0.022,
+      "motion_px_per_yr": 0.004,
+      "variability": "Mira, period ≈ 245 d",
+      "saturated": null,
+      "notes": "In the north ecliptic deep field: ~monthly visits, enough for a light curve. Saturation not yet checked."
+    }
+  }
+]

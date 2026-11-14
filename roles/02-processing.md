@@ -71,7 +71,7 @@ WISE 0855 ~1.3 px, ε Indi B < 1 px; bright targets are saturated (NaN cores, OV
 
 ## 4. What to research (in this order, time-boxed)
 
-1. **Run the spikes first** (`spikes/README.md`): `s3.py` (S3 section read), `pm.py` (propagation check), `bench.py` (reproject speed). 30 min.
+1. **Run the spikes first** (`trash/spikes/README.md`, moved 14 Nov): `s3.py` (S3 section read), `pm.py` (propagation check), `bench.py` (reproject speed). 30 min.
 2. IRSA tutorial notebooks — read the code, not the prose: *Spectral Image Cutouts*, *Source Discovery Tool* (background with `sep`, aperture photometry, MJy/sr → µJy), *Mosaic Cube* (how they keep similar-λ pixels). https://caltech-ipac.github.io/irsa-tutorials/spherex/
 3. The LVF / spectral WCS: alternate WCS key `"W"` gives λ per pixel (`WCS(hdr, fobj=hdul, key="W")`, set `.sip=None`). Confirm on one cutout that λ varies < 0.01 µm across 64 px (measured 4.983→4.992 µm over 29 px).
 4. FLAGS bit meanings: header keys `MSKNnnnn`; SPHEREx Explanatory Supplement https://irsa.ipac.caltech.edu/data/SPHEREx/docs/SPHEREx_Expsupp_QR.pdf (saturation limits per band).
