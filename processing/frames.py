@@ -89,8 +89,10 @@ def process_exposure(exp, center, grid_wcs, shape, half):
     s = _read_section(exp, center, half)
     if s is None:
         return None
-    w = WCS(s["hdr"])
-    w.wcs.crpix = w.wcs.crpix - [int(s["x0"]), int(s["y0"])]   # sub-image WCS (SIP is relative to crpix)
+    sh = s["img"].shape
+    x0, y0 = int(s["x0"]), int(s["y0"])
+    # sub-image WCS: WCS.slice also moves the SIP distortion reference (editing wcs.crpix alone does not)
+    w = WCS(s["hdr"]).slice((slice(y0, y0 + sh[0]), slice(x0, x0 + sh[1])))
     img = s["img"] - s["zodi"]
     hard = sum(1 << b for b in CFG["flags"]["hard_mask_bits"])
     sat = sum(1 << b for b in CFG["flags"]["saturation_bits"])

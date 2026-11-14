@@ -35,8 +35,8 @@
  "stretch": {
   "method": "asinh",
   "a": 0.1,
-  "vmin": -0.02562,
-  "vmax": 0.0773,
+  "vmin": -0.02715,
+  "vmax": 0.38515,
   "scope": "sequence"
  },
  "frames": [
@@ -146,11 +146,43 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 39,
-     "y": 26,
-     "sigma": -5.2,
-     "npix": 2,
+     "x": 33,
+     "y": 34,
+     "sigma": 8.3,
+     "npix": 11,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 29,
+     "sigma": -5.9,
+     "npix": 4,
      "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 32,
+     "y": 38,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 35,
+     "y": 38,
+     "sigma": 5.0,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 28,
+     "y": 32,
+     "sigma": 5.0,
+     "npix": 1,
+     "kind": "brighter",
      "saturated": false
     }
    ]
@@ -163,35 +195,19 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 38,
-     "y": 27,
-     "sigma": 10.0,
+     "x": 33,
+     "y": 31,
+     "sigma": -11.1,
      "npix": 10,
-     "kind": "brighter",
+     "kind": "moved",
      "saturated": false
     },
     {
-     "x": 29,
-     "y": 12,
-     "sigma": 8.8,
-     "npix": 5,
-     "kind": "brighter",
-     "saturated": false
-    },
-    {
-     "x": 53,
-     "y": 63,
-     "sigma": 8.2,
-     "npix": 5,
-     "kind": "brighter",
-     "saturated": false
-    },
-    {
-     "x": 15,
-     "y": 22,
-     "sigma": 5.5,
-     "npix": 2,
-     "kind": "brighter",
+     "x": 30,
+     "y": 32,
+     "sigma": 10.9,
+     "npix": 9,
+     "kind": "moved",
      "saturated": false
     }
    ]
@@ -204,11 +220,43 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 39,
-     "y": 27,
-     "sigma": -5.9,
-     "npix": 4,
-     "kind": "fainter",
+     "x": 30,
+     "y": 33,
+     "sigma": 11.7,
+     "npix": 18,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 31,
+     "sigma": -11.7,
+     "npix": 13,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 42,
+     "y": 3,
+     "sigma": 6.3,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 41,
+     "y": 2,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 37,
+     "y": 3,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
      "saturated": false
     }
    ]
@@ -221,27 +269,35 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 39,
-     "y": 27,
-     "sigma": 7.4,
-     "npix": 10,
-     "kind": "brighter",
+     "x": 33,
+     "y": 31,
+     "sigma": -8.0,
+     "npix": 7,
+     "kind": "moved",
      "saturated": false
     },
     {
-     "x": 29,
-     "y": 12,
-     "sigma": 6.7,
-     "npix": 5,
-     "kind": "brighter",
+     "x": 30,
+     "y": 32,
+     "sigma": 7.9,
+     "npix": 4,
+     "kind": "moved",
      "saturated": false
     },
     {
-     "x": 53,
-     "y": 63,
-     "sigma": 5.4,
-     "npix": 3,
-     "kind": "brighter",
+     "x": 32,
+     "y": 34,
+     "sigma": -6.2,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 35,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
      "saturated": false
     }
    ]
@@ -254,35 +310,27 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 39,
-     "y": 27,
-     "sigma": -8.3,
-     "npix": 11,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 29,
-     "y": 12,
-     "sigma": -7.3,
+     "x": 31,
+     "y": 34,
+     "sigma": 7.8,
      "npix": 5,
-     "kind": "fainter",
+     "kind": "brighter",
      "saturated": false
     },
     {
-     "x": 53,
-     "y": 63,
-     "sigma": -6.3,
+     "x": 32,
+     "y": 30,
+     "sigma": -6.8,
      "npix": 4,
      "kind": "fainter",
      "saturated": false
     },
     {
-     "x": 16,
-     "y": 23,
-     "sigma": -5.0,
+     "x": 37,
+     "y": 3,
+     "sigma": 5.1,
      "npix": 1,
-     "kind": "fainter",
+     "kind": "brighter",
      "saturated": false
     }
    ]

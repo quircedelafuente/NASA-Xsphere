@@ -35,8 +35,8 @@
  "stretch": {
   "method": "asinh",
   "a": 0.1,
-  "vmin": -0.023,
-  "vmax": 0.08426,
+  "vmin": -0.02388,
+  "vmax": 0.49872,
   "scope": "sequence"
  },
  "frames": [
@@ -122,145 +122,9 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 60,
-     "y": 45,
-     "sigma": -8.9,
-     "npix": 7,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 36,
-     "y": 53,
-     "sigma": -8.1,
-     "npix": 6,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 49,
-     "y": 25,
-     "sigma": -8.1,
-     "npix": 6,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 33,
-     "y": 51,
-     "sigma": -7.9,
-     "npix": 6,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 9,
-     "y": 45,
-     "sigma": -7.6,
-     "npix": 5,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 12,
-     "y": 55,
-     "sigma": 7.0,
-     "npix": 3,
-     "kind": "brighter",
-     "saturated": false
-    },
-    {
-     "x": 12,
-     "y": 63,
-     "sigma": -7.0,
-     "npix": 2,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 59,
-     "y": 43,
-     "sigma": -6.8,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 9,
-     "y": 63,
-     "sigma": -6.3,
-     "npix": 2,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 54,
-     "y": 20,
-     "sigma": -6.0,
-     "npix": 2,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 0,
-     "y": 20,
-     "sigma": -5.8,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 30,
-     "y": 13,
-     "sigma": -5.8,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 47,
-     "y": 25,
-     "sigma": -5.7,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 51,
-     "y": 16,
-     "sigma": 5.2,
-     "npix": 1,
-     "kind": "moved",
-     "saturated": false
-    },
-    {
-     "x": 53,
-     "y": 19,
+     "x": 62,
+     "y": 42,
      "sigma": -5.2,
-     "npix": 1,
-     "kind": "moved",
-     "saturated": false
-    },
-    {
-     "x": 39,
-     "y": 45,
-     "sigma": 5.1,
-     "npix": 1,
-     "kind": "brighter",
-     "saturated": false
-    },
-    {
-     "x": 0,
-     "y": 9,
-     "sigma": 5.0,
-     "npix": 1,
-     "kind": "brighter",
-     "saturated": false
-    },
-    {
-     "x": 3,
-     "y": 14,
-     "sigma": -5.0,
      "npix": 1,
      "kind": "fainter",
      "saturated": false
@@ -275,99 +139,19 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 60,
-     "y": 44,
-     "sigma": -9.9,
-     "npix": 6,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 37,
-     "y": 53,
-     "sigma": -9.3,
-     "npix": 4,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 9,
-     "y": 44,
-     "sigma": -8.0,
-     "npix": 3,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 48,
-     "y": 26,
-     "sigma": -7.9,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 49,
-     "y": 24,
-     "sigma": -7.5,
-     "npix": 3,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 13,
-     "y": 63,
-     "sigma": -6.8,
-     "npix": 2,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 33,
-     "y": 51,
-     "sigma": -6.8,
-     "npix": 4,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 54,
-     "y": 20,
-     "sigma": -6.7,
-     "npix": 3,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 54,
-     "y": 29,
-     "sigma": -5.9,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
      "x": 30,
-     "y": 13,
-     "sigma": -5.6,
-     "npix": 1,
-     "kind": "fainter",
+     "y": 32,
+     "sigma": -6.7,
+     "npix": 2,
+     "kind": "moved",
      "saturated": false
     },
     {
-     "x": 9,
-     "y": 63,
-     "sigma": -5.5,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 47,
-     "y": 25,
-     "sigma": -5.0,
-     "npix": 1,
-     "kind": "fainter",
+     "x": 32,
+     "y": 31,
+     "sigma": 6.1,
+     "npix": 2,
+     "kind": "moved",
      "saturated": false
     }
    ]
@@ -380,66 +164,18 @@
    "units": "sigma",
    "candidates": [
     {
-     "x": 60,
-     "y": 45,
-     "sigma": 6.4,
-     "npix": 4,
-     "kind": "brighter",
-     "saturated": false
-    },
-    {
-     "x": 35,
-     "y": 53,
-     "sigma": 6.3,
-     "npix": 5,
-     "kind": "brighter",
-     "saturated": false
-    },
-    {
-     "x": 12,
-     "y": 55,
-     "sigma": -6.1,
-     "npix": 3,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 57,
-     "y": 12,
-     "sigma": -5.6,
-     "npix": 2,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 11,
-     "y": 35,
-     "sigma": -5.4,
+     "x": 63,
+     "y": 41,
+     "sigma": 5.0,
      "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 0,
-     "y": 9,
-     "sigma": -5.3,
-     "npix": 1,
-     "kind": "fainter",
-     "saturated": false
-    },
-    {
-     "x": 49,
-     "y": 26,
-     "sigma": 5.2,
-     "npix": 3,
      "kind": "brighter",
      "saturated": false
     },
     {
-     "x": 39,
-     "y": 45,
-     "sigma": -5.2,
-     "npix": 2,
+     "x": 31,
+     "y": 32,
+     "sigma": -5.0,
+     "npix": 1,
      "kind": "fainter",
      "saturated": false
     }

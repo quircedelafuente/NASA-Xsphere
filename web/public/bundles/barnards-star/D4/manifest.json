@@ -35,8 +35,8 @@
  "stretch": {
   "method": "asinh",
   "a": 0.1,
-  "vmin": -0.02277,
-  "vmax": 1.66381,
+  "vmin": -0.0277,
+  "vmax": 23.7664,
   "scope": "sequence"
  },
  "frames": [
@@ -117,7 +117,24 @@
    "f32": "diff_1_0.f32",
    "png": "diff_1_0.png",
    "units": "sigma",
-   "candidates": []
+   "candidates": [
+    {
+     "x": 31,
+     "y": 30,
+     "sigma": 8.0,
+     "npix": 7,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 34,
+     "sigma": -7.7,
+     "npix": 6,
+     "kind": "moved",
+     "saturated": true
+    }
+   ]
   },
   {
    "from": 0,
@@ -128,10 +145,18 @@
    "candidates": [
     {
      "x": 33,
-     "y": 37,
-     "sigma": 5.2,
-     "npix": 4,
+     "y": 30,
+     "sigma": 8.6,
+     "npix": 27,
      "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 34,
+     "sigma": -8.6,
+     "npix": 31,
+     "kind": "fainter",
      "saturated": true
     }
    ]
@@ -142,7 +167,32 @@
    "f32": "diff_2_1.f32",
    "png": "diff_2_1.png",
    "units": "sigma",
-   "candidates": []
+   "candidates": [
+    {
+     "x": 32,
+     "y": 29,
+     "sigma": 8.3,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 33,
+     "sigma": -8.2,
+     "npix": 8,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 28,
+     "y": 35,
+     "sigma": -5.2,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
   }
  ],
  "target_track": [

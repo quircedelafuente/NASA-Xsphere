@@ -35,8 +35,8 @@
  "stretch": {
   "method": "asinh",
   "a": 0.1,
-  "vmin": -0.02096,
-  "vmax": 0.66822,
+  "vmin": -0.02434,
+  "vmax": 5.75814,
   "scope": "sequence"
  },
  "frames": [
@@ -84,7 +84,7 @@
     76.95609,
     30.401124
    ],
-   "saturated_at_target": false
+   "saturated_at_target": true
   },
   {
    "epoch": 2,
@@ -125,7 +125,16 @@
    "f32": "diff_2_0.f32",
    "png": "diff_2_0.png",
    "units": "sigma",
-   "candidates": []
+   "candidates": [
+    {
+     "x": 37,
+     "y": 37,
+     "sigma": -5.0,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
   },
   {
    "from": 1,
@@ -133,7 +142,40 @@
    "f32": "diff_2_1.f32",
    "png": "diff_2_1.png",
    "units": "sigma",
-   "candidates": []
+   "candidates": [
+    {
+     "x": 37,
+     "y": 37,
+     "sigma": -5.9,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 34,
+     "sigma": -5.5,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 40,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 38,
+     "y": 38,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
   }
  ],
  "target_track": [
