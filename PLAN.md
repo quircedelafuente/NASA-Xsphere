@@ -13,7 +13,7 @@
 - Kick-off ~15:00 Sat; everyone works until ~01:00, sleeps, resumes ~08:30 Sun. *(Recommended confirm)*
 - Deadline = local event time; we target **22:00 Sunday** to leave buffer. *(Recommended confirm)*
 - Everyone has Python 3.11 + Node 20 and a GitHub account invited to this repo. *(Safe default)*
-- Demo is a static site on Vercel; a live backend is optional (D2). *(Recommended confirm)*
+- Data is pulled on demand (name, coordinates or a drawn zone) with a cache; the 5 targets are pre-warmed (D2, changed 14 Nov). Static frontend + Python API backend. See WORKSPLIT.md.
 - Team ≤ 6 people (rule) ✔︎.
 
 ## 2. Appetite [Book ch02, ch07]
