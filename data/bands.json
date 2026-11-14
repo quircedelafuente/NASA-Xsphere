@@ -1,0 +1,717 @@
+{
+ "detectors": {
+  "D1": {
+   "lam_um": [
+    0.75,
+    1.09
+   ],
+   "R": 39,
+   "channels_um": [
+    [
+     0.75,
+     0.7667
+    ],
+    [
+     0.7667,
+     0.7837
+    ],
+    [
+     0.7837,
+     0.8012
+    ],
+    [
+     0.8012,
+     0.819
+    ],
+    [
+     0.819,
+     0.8372
+    ],
+    [
+     0.8372,
+     0.8558
+    ],
+    [
+     0.8558,
+     0.8748
+    ],
+    [
+     0.8748,
+     0.8943
+    ],
+    [
+     0.8943,
+     0.9142
+    ],
+    [
+     0.9142,
+     0.9345
+    ],
+    [
+     0.9345,
+     0.9553
+    ],
+    [
+     0.9553,
+     0.9765
+    ],
+    [
+     0.9765,
+     0.9982
+    ],
+    [
+     0.9982,
+     1.0204
+    ],
+    [
+     1.0204,
+     1.0431
+    ],
+    [
+     1.0431,
+     1.0663
+    ],
+    [
+     1.0663,
+     1.09
+    ]
+   ],
+   "note": "17 geometric channels; planning approximation, true per-pixel lambda comes from the WCS-WAVE (alt WCS 'W')"
+  },
+  "D2": {
+   "lam_um": [
+    1.1,
+    1.62
+   ],
+   "R": 41,
+   "channels_um": [
+    [
+     1.1,
+     1.1253
+    ],
+    [
+     1.1253,
+     1.1513
+    ],
+    [
+     1.1513,
+     1.1778
+    ],
+    [
+     1.1778,
+     1.2049
+    ],
+    [
+     1.2049,
+     1.2327
+    ],
+    [
+     1.2327,
+     1.261
+    ],
+    [
+     1.261,
+     1.2901
+    ],
+    [
+     1.2901,
+     1.3198
+    ],
+    [
+     1.3198,
+     1.3502
+    ],
+    [
+     1.3502,
+     1.3813
+    ],
+    [
+     1.3813,
+     1.4131
+    ],
+    [
+     1.4131,
+     1.4457
+    ],
+    [
+     1.4457,
+     1.479
+    ],
+    [
+     1.479,
+     1.513
+    ],
+    [
+     1.513,
+     1.5479
+    ],
+    [
+     1.5479,
+     1.5835
+    ],
+    [
+     1.5835,
+     1.62
+    ]
+   ],
+   "note": "17 geometric channels; planning approximation, true per-pixel lambda comes from the WCS-WAVE (alt WCS 'W')"
+  },
+  "D3": {
+   "lam_um": [
+    1.63,
+    2.41
+   ],
+   "R": 41,
+   "channels_um": [
+    [
+     1.63,
+     1.6679
+    ],
+    [
+     1.6679,
+     1.7067
+    ],
+    [
+     1.7067,
+     1.7465
+    ],
+    [
+     1.7465,
+     1.7871
+    ],
+    [
+     1.7871,
+     1.8287
+    ],
+    [
+     1.8287,
+     1.8712
+    ],
+    [
+     1.8712,
+     1.9148
+    ],
+    [
+     1.9148,
+     1.9593
+    ],
+    [
+     1.9593,
+     2.0049
+    ],
+    [
+     2.0049,
+     2.0516
+    ],
+    [
+     2.0516,
+     2.0993
+    ],
+    [
+     2.0993,
+     2.1482
+    ],
+    [
+     2.1482,
+     2.1981
+    ],
+    [
+     2.1981,
+     2.2493
+    ],
+    [
+     2.2493,
+     2.3016
+    ],
+    [
+     2.3016,
+     2.3552
+    ],
+    [
+     2.3552,
+     2.41
+    ]
+   ],
+   "note": "17 geometric channels; planning approximation, true per-pixel lambda comes from the WCS-WAVE (alt WCS 'W')"
+  },
+  "D4": {
+   "lam_um": [
+    2.42,
+    3.82
+   ],
+   "R": 35,
+   "channels_um": [
+    [
+     2.42,
+     2.4859
+    ],
+    [
+     2.4859,
+     2.5535
+    ],
+    [
+     2.5535,
+     2.623
+    ],
+    [
+     2.623,
+     2.6944
+    ],
+    [
+     2.6944,
+     2.7677
+    ],
+    [
+     2.7677,
+     2.8431
+    ],
+    [
+     2.8431,
+     2.9204
+    ],
+    [
+     2.9204,
+     2.9999
+    ],
+    [
+     2.9999,
+     3.0816
+    ],
+    [
+     3.0816,
+     3.1654
+    ],
+    [
+     3.1654,
+     3.2516
+    ],
+    [
+     3.2516,
+     3.3401
+    ],
+    [
+     3.3401,
+     3.431
+    ],
+    [
+     3.431,
+     3.5243
+    ],
+    [
+     3.5243,
+     3.6203
+    ],
+    [
+     3.6203,
+     3.7188
+    ],
+    [
+     3.7188,
+     3.82
+    ]
+   ],
+   "note": "17 geometric channels; planning approximation, true per-pixel lambda comes from the WCS-WAVE (alt WCS 'W')"
+  },
+  "D5": {
+   "lam_um": [
+    3.83,
+    4.41
+   ],
+   "R": 112,
+   "channels_um": [
+    [
+     3.83,
+     3.8619
+    ],
+    [
+     3.8619,
+     3.8941
+    ],
+    [
+     3.8941,
+     3.9265
+    ],
+    [
+     3.9265,
+     3.9592
+    ],
+    [
+     3.9592,
+     3.9922
+    ],
+    [
+     3.9922,
+     4.0254
+    ],
+    [
+     4.0254,
+     4.059
+    ],
+    [
+     4.059,
+     4.0928
+    ],
+    [
+     4.0928,
+     4.1269
+    ],
+    [
+     4.1269,
+     4.1612
+    ],
+    [
+     4.1612,
+     4.1959
+    ],
+    [
+     4.1959,
+     4.2308
+    ],
+    [
+     4.2308,
+     4.2661
+    ],
+    [
+     4.2661,
+     4.3016
+    ],
+    [
+     4.3016,
+     4.3374
+    ],
+    [
+     4.3374,
+     4.3736
+    ],
+    [
+     4.3736,
+     4.41
+    ]
+   ],
+   "note": "17 geometric channels; planning approximation, true per-pixel lambda comes from the WCS-WAVE (alt WCS 'W')"
+  },
+  "D6": {
+   "lam_um": [
+    4.42,
+    5.0
+   ],
+   "R": 128,
+   "channels_um": [
+    [
+     4.42,
+     4.4522
+    ],
+    [
+     4.4522,
+     4.4846
+    ],
+    [
+     4.4846,
+     4.5172
+    ],
+    [
+     4.5172,
+     4.5501
+    ],
+    [
+     4.5501,
+     4.5832
+    ],
+    [
+     4.5832,
+     4.6166
+    ],
+    [
+     4.6166,
+     4.6502
+    ],
+    [
+     4.6502,
+     4.684
+    ],
+    [
+     4.684,
+     4.7181
+    ],
+    [
+     4.7181,
+     4.7525
+    ],
+    [
+     4.7525,
+     4.7871
+    ],
+    [
+     4.7871,
+     4.8219
+    ],
+    [
+     4.8219,
+     4.857
+    ],
+    [
+     4.857,
+     4.8924
+    ],
+    [
+     4.8924,
+     4.928
+    ],
+    [
+     4.928,
+     4.9639
+    ],
+    [
+     4.9639,
+     5.0
+    ]
+   ],
+   "note": "17 geometric channels; planning approximation, true per-pixel lambda comes from the WCS-WAVE (alt WCS 'W')"
+  }
+ },
+ "bands": {
+  "D1": {
+   "detectors": [
+    "D1"
+   ],
+   "lam_um": [
+    0.75,
+    1.09
+   ],
+   "plain": "0.75-1.09 um"
+  },
+  "D2": {
+   "detectors": [
+    "D2"
+   ],
+   "lam_um": [
+    1.1,
+    1.62
+   ],
+   "plain": "1.1-1.62 um"
+  },
+  "D3": {
+   "detectors": [
+    "D3"
+   ],
+   "lam_um": [
+    1.63,
+    2.41
+   ],
+   "plain": "1.63-2.41 um"
+  },
+  "D4": {
+   "detectors": [
+    "D4"
+   ],
+   "lam_um": [
+    2.42,
+    3.82
+   ],
+   "plain": "2.42-3.82 um"
+  },
+  "D5": {
+   "detectors": [
+    "D5"
+   ],
+   "lam_um": [
+    3.83,
+    4.41
+   ],
+   "plain": "3.83-4.41 um"
+  },
+  "D6": {
+   "detectors": [
+    "D6"
+   ],
+   "lam_um": [
+    4.42,
+    5.0
+   ],
+   "plain": "4.42-5.0 um"
+  },
+  "D56": {
+   "detectors": [
+    "D5",
+    "D6"
+   ],
+   "lam_um": [
+    3.83,
+    5.0
+   ],
+   "plain": "3.8-5.0 um: best for cold brown dwarfs (they glow here)"
+  }
+ },
+ "rule": "Never blink across bands; ALL is for pretty context only.",
+ "molecules": [
+  {
+   "id": "h2o-1.4",
+   "label": "Water 1.4 um",
+   "plain": "Water vapour/ice absorbs here",
+   "detector": "D2",
+   "window_um": [
+    1.33,
+    1.5
+   ],
+   "continuum_um": [
+    [
+     1.22,
+     1.3
+    ],
+    [
+     1.55,
+     1.62
+    ]
+   ],
+   "sources": "NIR water band; Explanatory Supplement; verify"
+  },
+  {
+   "id": "h2o-1.9",
+   "label": "Water 1.9 um",
+   "plain": "Water vapour/ice absorbs here",
+   "detector": "D3",
+   "window_um": [
+    1.8,
+    2.0
+   ],
+   "continuum_um": [
+    [
+     1.65,
+     1.75
+    ],
+    [
+     2.05,
+     2.2
+    ]
+   ],
+   "sources": "NIR water band; verify"
+  },
+  {
+   "id": "h2o-3.0",
+   "label": "Water ice 3.0 um",
+   "plain": "Water ice absorbs strongly here",
+   "detector": "D4",
+   "window_um": [
+    2.85,
+    3.2
+   ],
+   "continuum_um": [
+    [
+     2.5,
+     2.75
+    ],
+    [
+     3.35,
+     3.6
+    ]
+   ],
+   "sources": "SPHEREx ices science case; verify"
+  },
+  {
+   "id": "ch4-1.6",
+   "label": "Methane 1.6 um",
+   "plain": "Methane in cold brown dwarfs and planets",
+   "detector": "D2",
+   "window_um": [
+    1.58,
+    1.72
+   ],
+   "continuum_um": [
+    [
+     1.5,
+     1.56
+    ],
+    [
+     1.74,
+     1.8
+    ]
+   ],
+   "sources": "T dwarf CH4 band; verify"
+  },
+  {
+   "id": "ch4-2.2",
+   "label": "Methane 2.2 um",
+   "plain": "Methane in cold brown dwarfs",
+   "detector": "D3",
+   "window_um": [
+    2.15,
+    2.4
+   ],
+   "continuum_um": [
+    [
+     2.05,
+     2.12
+    ],
+    [
+     2.42,
+     2.5
+    ]
+   ],
+   "sources": "T dwarf CH4 band; verify"
+  },
+  {
+   "id": "ch4-3.3",
+   "label": "Methane 3.3 um",
+   "plain": "Strongest methane band; cold brown dwarfs are dark here",
+   "detector": "D4",
+   "window_um": [
+    3.2,
+    3.45
+   ],
+   "continuum_um": [
+    [
+     2.9,
+     3.1
+    ],
+    [
+     3.55,
+     3.75
+    ]
+   ],
+   "sources": "T/Y dwarf CH4 fundamental; verify"
+  },
+  {
+   "id": "co2-4.27",
+   "label": "Carbon dioxide 4.27 um",
+   "plain": "CO2 ice and gas absorb here",
+   "detector": "D5",
+   "window_um": [
+    4.2,
+    4.34
+   ],
+   "continuum_um": [
+    [
+     4.05,
+     4.15
+    ],
+    [
+     4.4,
+     4.5
+    ]
+   ],
+   "sources": "SPHEREx ices science case; verify"
+  },
+  {
+   "id": "co-4.67",
+   "label": "Carbon monoxide 4.67 um",
+   "plain": "CO ice and gas absorb here",
+   "detector": "D6",
+   "window_um": [
+    4.6,
+    4.75
+   ],
+   "continuum_um": [
+    [
+     4.45,
+     4.55
+    ],
+    [
+     4.8,
+     4.95
+    ]
+   ],
+   "sources": "SPHEREx ices science case; verify"
+  }
+ ],
+ "status": "molecule windows approximate, MUST be checked against the SPHEREx cube channels and the Supplement before showing in the UI"
+}

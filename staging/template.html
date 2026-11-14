@@ -1,0 +1,228 @@
+<title>SPHEREx Blink Staging</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: instrument console. Left = the detector view (square, pixel-exact), right = readouts. Stacks on phones. */
+:root{
+  --bg:#f3f4f6; --panel:#ffffff; --fg:#14171c; --muted:#5d6573; --line:#d9dde3;
+  --accent:#c26a00; --accent-fg:#ffffff; --ok:#1d7a46; --warn:#a15c00; --bad:#b42318; --sky:#0b0d10;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1216; --panel:#171b21; --fg:#e6e9ee; --muted:#98a1ae; --line:#2a3039;
+  --accent:#f0a030; --accent-fg:#14100a; --ok:#4cc38a; --warn:#f0a030; --bad:#ff6b5e; --sky:#000; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1216; --panel:#171b21; --fg:#e6e9ee; --muted:#98a1ae; --line:#2a3039;
+  --accent:#f0a030; --accent-fg:#14100a; --ok:#4cc38a; --warn:#f0a030; --bad:#ff6b5e; --sky:#000; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;gap:18px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+h1{font-size:1.45rem;margin:0;font-weight:600;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);font-size:.9rem;margin:0}
+.tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:2px 8px;border-radius:3px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:inherit;font-size:.88rem;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 12px;border-radius:4px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.main{grid-template-columns:1fr}}
+.view{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px;display:grid;gap:12px;min-width:0}
+.stage{background:var(--sky);border-radius:4px;position:relative;overflow:hidden}
+canvas{display:block;width:100%;height:auto;image-rendering:pixelated}
+.hud{position:absolute;left:10px;top:8px;font-family:var(--mono);font-size:.78rem;color:#ffd38a;text-shadow:0 1px 2px #000;pointer-events:none}
+.hud.r{left:auto;right:10px}
+.compass{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:.72rem;color:#cfd6df;text-align:center;line-height:1.1;pointer-events:none}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.seg button{font:inherit;font-size:.85rem;border:0;background:transparent;color:var(--fg);padding:6px 11px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--panel)}
+.btn{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:6px 11px;border-radius:4px;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+label.chk{display:inline-flex;gap:5px;align-items:center;font-size:.85rem;color:var(--muted);cursor:pointer}
+select,input[type=range]{font:inherit;font-size:.85rem;accent-color:var(--accent)}
+select{background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:4px 6px}
+.timeline{display:flex;gap:4px;flex-wrap:wrap}
+.timeline button{font-family:var(--mono);font-size:.75rem;border:1px solid var(--line);background:transparent;color:var(--muted);padding:3px 7px;border-radius:3px;cursor:pointer}
+.timeline button[aria-current="true"]{border-color:var(--accent);color:var(--fg);background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.side{display:grid;gap:14px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;min-width:0}
+.card h2{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 8px;font-weight:600}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:.88rem}
+dt{color:var(--muted)} dd{margin:0;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:10px;font-family:var(--mono)}
+.pill.ok{color:var(--ok);border:1px solid var(--ok)} .pill.warn{color:var(--warn);border:1px solid var(--warn)} .pill.bad{color:var(--bad);border:1px solid var(--bad)}
+.bars{display:grid;gap:6px;font-size:.84rem}
+.bar{display:grid;grid-template-columns:9.5em 1fr 3.2em;gap:8px;align-items:center}
+.bar .t{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--muted)}
+.bar.win .t i{background:var(--ok)} .bar span:last-child{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:.83rem;font-variant-numeric:tabular-nums}
+th{text-align:left;color:var(--muted);font-weight:500;border-bottom:1px solid var(--line);padding:4px 6px}
+td{padding:4px 6px;border-bottom:1px solid var(--line);font-family:var(--mono)}
+tr.hl td{background:color-mix(in srgb,var(--accent) 14%,transparent)}
+.tablebox{overflow-x:auto;max-height:240px;overflow-y:auto}
+.legend{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);flex-wrap:wrap}
+.ramp{width:140px;height:10px;border-radius:2px;background:linear-gradient(90deg,#0000ff,#fff,#ff0000)}
+.note{font-size:.86rem;color:var(--muted);margin:0;max-width:65ch}
+.warnbox{font-size:.84rem;color:var(--warn);margin:0}
+.grid-side{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.grid-side figure{margin:0;display:grid;gap:3px} .grid-side figcaption{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.grid-side canvas{border-radius:3px;background:var(--sky)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>SPHEREx Blink Staging</h1>
+      <p class="sub">Processing output for the five test targets: one stacked image per survey pass, same grid, same contrast.</p>
+    </div>
+    <span class="tag">staging · not public</span>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="Target"></nav>
+
+  <div class="main">
+    <section class="view" aria-label="Viewer">
+      <div class="controls">
+        <div class="seg" role="group" aria-label="Mode">
+          <button id="m-blink" aria-pressed="true">Blink</button>
+          <button id="m-diff" aria-pressed="false">Difference</button>
+          <button id="m-side" aria-pressed="false">Side by side</button>
+        </div>
+        <button class="btn" id="play">Pause</button>
+        <label class="chk">Speed <input id="speed" type="range" min="0.5" max="6" step="0.5" value="1.5"></label>
+      </div>
+      <div class="stage" id="stage">
+        <canvas id="cv" width="512" height="512" aria-label="SPHEREx frame"></canvas>
+        <div class="hud" id="hud"></div><div class="hud r" id="hudr"></div>
+        <div class="compass">N<br>E&nbsp;←&nbsp;·</div>
+      </div>
+      <div class="grid-side" id="sidegrid" hidden></div>
+      <div class="timeline" id="timeline" aria-label="Epochs"></div>
+      <div class="controls" id="diffctl" hidden>
+        <label class="chk">Compare <select id="pair"></select></label>
+        <div class="legend"><span>fainter</span><span class="ramp"></span><span>brighter</span><span>(±10σ)</span></div>
+      </div>
+      <div class="controls">
+        <label class="chk"><input type="checkbox" id="o-cross" checked> Predicted position</label>
+        <label class="chk"><input type="checkbox" id="o-track" checked> Track</label>
+        <label class="chk"><input type="checkbox" id="o-stars"> 2MASS stars</label>
+        <label class="chk"><input type="checkbox" id="o-mask"> Saturation mask</label>
+        <label class="chk"><input type="checkbox" id="o-cands" checked> Change candidates</label>
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="card"><h2>Target</h2><dl id="info"></dl><p class="warnbox" id="warn"></p></div>
+      <div class="card">
+        <h2>Orientation check</h2>
+        <p class="note" id="orientnote"></p>
+        <div class="bars" id="bars"></div>
+      </div>
+      <div class="card">
+        <h2>Change candidates <span id="pairlbl" style="text-transform:none;letter-spacing:0"></span></h2>
+        <div class="tablebox"><table><thead><tr><th>#</th><th>x</th><th>y</th><th>σ</th><th>kind</th><th>sat.</th></tr></thead><tbody id="cands"></tbody></table></div>
+        <p class="note" style="margin-top:8px">Blobs that changed by 5σ or more between the two epochs. Red = brighter, blue = fainter, a red/blue pair = something moved. Candidates, not discoveries.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const DATA=/*__DATA__*/[];
+const $=id=>document.getElementById(id);
+const st={t:0,frame:0,mode:"blink",playing:true,pair:0,hover:-1};
+const imgs=new Map();
+function img(src){if(!imgs.has(src)){const i=new Image();i.src=src;i.onload=draw;imgs.set(src,i)}return imgs.get(src)}
+const T=()=>DATA[st.t];
+
+function tabs(){
+  $("tabs").innerHTML="";
+  DATA.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.name;b.setAttribute("aria-pressed",i===st.t);
+    b.onclick=()=>{st.t=i;st.frame=0;st.pair=0;render()};$("tabs").append(b)});
+}
+function render(){
+  tabs();const d=T();
+  $("timeline").innerHTML="";
+  d.frames.forEach((f,i)=>{const b=document.createElement("button");b.textContent=f.date;b.onclick=()=>{st.frame=i;st.playing=false;syncPlay();draw()};$("timeline").append(b)});
+  $("pair").innerHTML=d.diffs.map((x,i)=>`<option value="${i}">${d.frames[x.to].date} − ${d.frames[x.from].date}</option>`).join("");
+  $("pair").value=st.pair;
+  const s=d.stretch;
+  $("info").innerHTML=`<dt>Object</dt><dd>${d.name}</dd><dt>Type</dt><dd>${d.kind}</dd>
+    <dt>Band</dt><dd>${d.band} · ${d.lam[0]}–${d.lam[1]} µm</dd><dt>Epochs</dt><dd>${d.frames.length} (${d.frames[0].date} → ${d.frames.at(-1).date})</dd>
+    <dt>Exposures</dt><dd>${d.frames.map(f=>f.n).join(" + ")}</dd><dt>Stretch</dt><dd>asinh, ${s.vmin} … ${s.vmax} MJy/sr</dd>
+    <dt>Grid</dt><dd>64 × 64 px · 6.15″/px · north up</dd><dt>Input</dt><dd>${d.source}</dd>`;
+  $("warn").textContent=d.warnings.length?"⚠ "+d.warnings.join(" · "):"";
+  const o=d.orient;
+  if(o){
+    const order=["correcta","volteada arriba-abajo","volteada izq-der","girada 180"],names=["As processed","Flipped up–down","Flipped left–right","Rotated 180°"];
+    const best=order.reduce((a,b)=>o.match[a]>=o.match[b]?a:b);
+    $("bars").innerHTML=order.map((k,i)=>`<div class="bar ${k===best?"win":""}"><span>${names[i]}</span><span class="t"><i style="width:${Math.round(o.match[k]*100)}%"></i></span><span>${Math.round(o.match[k]*100)}%</span></div>`).join("");
+    const okk=best==="correcta";
+    $("orientnote").innerHTML=`Share of bright spots in our image that land on a 2MASS catalogue star (${o.n_2mass} stars in the field), for each possible orientation. `+
+      (okk?`<span class="pill ok">correct</span> best match is the image as processed; median offset ${o.offset_px.map(v=>v.toFixed(2)).join(", ")} px.`:`<span class="pill bad">check</span> another orientation matches better.`);
+  } else {$("orientnote").textContent="No orientation data for this target.";$("bars").innerHTML=""}
+  setMode(st.mode);
+}
+function cands(){
+  const d=T(),x=d.diffs[st.pair];
+  $("pairlbl").textContent=x?`· ${d.frames[x.to].date} vs ${d.frames[x.from].date}`:"";
+  $("cands").innerHTML=x&&x.cands.length?x.cands.map((c,i)=>`<tr data-i="${i}"><td>${i+1}</td><td>${c.x}</td><td>${c.y}</td><td>${c.sigma>0?"+":""}${c.sigma}</td><td>${c.kind}</td><td>${c.saturated?"yes":""}</td></tr>`).join(""):`<tr><td colspan="6" style="font-family:var(--sans);color:var(--muted)">No change above 5σ.</td></tr>`;
+  [...$("cands").querySelectorAll("tr[data-i]")].forEach(r=>{r.onmouseenter=()=>{st.hover=+r.dataset.i;draw()};r.onmouseleave=()=>{st.hover=-1;draw()}});
+}
+function setMode(m){
+  st.mode=m;["blink","diff","side"].forEach(k=>$("m-"+k).setAttribute("aria-pressed",k===m));
+  $("diffctl").hidden=m!=="diff";$("stage").hidden=m==="side";$("sidegrid").hidden=m!=="side";
+  $("timeline").hidden=m==="diff";
+  if(m==="side")side();cands();draw();
+}
+function overlays(ctx,s,fi,showCands){
+  const d=T(),f=d.frames[fi];
+  if($("o-mask").checked&&fi!=null){const mi=img(f.mask);if(mi.complete)ctx.drawImage(mi,0,0,64*s,64*s)}
+  if($("o-stars").checked&&d.orient){ctx.strokeStyle="rgba(120,200,255,.9)";ctx.lineWidth=1.2;
+    d.orient.stars.forEach(([x,y])=>{ctx.beginPath();ctx.arc((x+.5)*s,(y+.5)*s,s*1.4,0,7);ctx.stroke()})}
+  if($("o-track").checked){ctx.strokeStyle="rgba(255,190,80,.85)";ctx.lineWidth=1.5;ctx.beginPath();
+    d.frames.forEach((g,i)=>{const X=(g.px[0]+.5)*s,Y=(g.px[1]+.5)*s;i?ctx.lineTo(X,Y):ctx.moveTo(X,Y)});ctx.stroke();
+    d.frames.forEach(g=>{ctx.fillStyle="rgba(255,190,80,.9)";ctx.fillRect((g.px[0]+.5)*s-1.5,(g.px[1]+.5)*s-1.5,3,3)})}
+  if($("o-cross").checked&&fi!=null){const X=(f.px[0]+.5)*s,Y=(f.px[1]+.5)*s,a=s*1.2,b=s*3.2;
+    ctx.strokeStyle="#7CFC9A";ctx.lineWidth=2;ctx.beginPath();
+    [[1,0],[-1,0],[0,1],[0,-1]].forEach(([dx,dy])=>{ctx.moveTo(X+dx*a,Y+dy*a);ctx.lineTo(X+dx*b,Y+dy*b)});ctx.stroke()}
+  if(showCands&&$("o-cands").checked){const x=d.diffs[st.pair];if(x)x.cands.forEach((c,i)=>{
+    ctx.strokeStyle=i===st.hover?"#ffd000":"rgba(0,0,0,.85)";ctx.lineWidth=i===st.hover?3:2;ctx.beginPath();ctx.arc((c.x+.5)*s,(c.y+.5)*s,s*2.4,0,7);ctx.stroke()})}
+}
+function draw(){
+  const d=T(),cv=$("cv"),ctx=cv.getContext("2d"),s=cv.width/64;ctx.imageSmoothingEnabled=false;
+  ctx.fillStyle="#000";ctx.fillRect(0,0,cv.width,cv.height);
+  if(st.mode==="blink"){const f=d.frames[st.frame],i=img(f.img);if(i.complete)ctx.drawImage(i,0,0,cv.width,cv.height);
+    overlays(ctx,s,st.frame,false);$("hud").textContent=`${d.band}  ${f.date}`;$("hudr").textContent=`${st.frame+1}/${d.frames.length} · ${f.n} exp${f.sat?" · saturated":""}`;
+    [...$("timeline").children].forEach((b,i)=>b.setAttribute("aria-current",i===st.frame));}
+  else if(st.mode==="diff"){const x=d.diffs[st.pair],i=img(x.img);if(i.complete)ctx.drawImage(i,0,0,cv.width,cv.height);
+    overlays(ctx,s,x.to,true);$("hud").textContent=`${d.frames[x.to].date} − ${d.frames[x.from].date}`;$("hudr").textContent="σ units";}
+}
+function side(){
+  const d=T();$("sidegrid").innerHTML="";
+  d.frames.forEach((f,i)=>{const fig=document.createElement("figure"),c=document.createElement("canvas");c.width=c.height=256;
+    fig.append(c);const cap=document.createElement("figcaption");cap.textContent=`${f.date} · ${f.n} exp`;fig.append(cap);$("sidegrid").append(fig);
+    const ctx=c.getContext("2d");ctx.imageSmoothingEnabled=false;const im=img(f.img);
+    const paint=()=>{ctx.drawImage(im,0,0,256,256);overlays(ctx,4,i,false)};im.complete?paint():im.addEventListener("load",paint)});
+}
+function syncPlay(){$("play").textContent=st.playing?"Pause":"Play"}
+let last=0;
+function tick(ts){
+  const fps=+$("speed").value;
+  if(st.playing&&st.mode==="blink"&&ts-last>1000/fps){last=ts;st.frame=(st.frame+1)%T().frames.length;draw()}
+  requestAnimationFrame(tick);
+}
+$("m-blink").onclick=()=>setMode("blink");$("m-diff").onclick=()=>setMode("diff");$("m-side").onclick=()=>setMode("side");
+$("play").onclick=()=>{st.playing=!st.playing;syncPlay()};
+$("pair").onchange=e=>{st.pair=+e.target.value;cands();draw()};
+["o-cross","o-track","o-stars","o-mask","o-cands"].forEach(id=>$(id).onchange=()=>{draw();if(st.mode==="side")side()});
+document.addEventListener("keydown",e=>{if(e.target.tagName==="SELECT"||e.target.tagName==="INPUT")return;
+  if(e.key===" "){e.preventDefault();st.playing=!st.playing;syncPlay()}
+  if(e.key==="ArrowRight"||e.key==="ArrowLeft"){st.playing=false;syncPlay();const n=T().frames.length;st.frame=(st.frame+(e.key==="ArrowRight"?1:n-1))%n;draw()}});
+if(matchMedia("(prefers-reduced-motion: reduce)").matches){st.playing=false;syncPlay()}
+render();requestAnimationFrame(tick);
+</script>

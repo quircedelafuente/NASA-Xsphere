@@ -7,9 +7,9 @@ If your row hasn't moved in 3 h, write what's blocking you in the last column.
 |---|---|---|---|---|
 | D-1 Target catalogue | Yasen | not started | | |
 | D-2 Coverage inventory | Yasen | not started | | |
-| D-3 Flag dictionary | Sean | not started | | |
-| D-4 Science notes | Sean | not started | | |
-| D-5 Band/molecule windows | Sean | not started | | |
+| D-3 Flag dictionary | Sean | downhill | 2026-11-14 | draft in data/, needs review (molecule windows + [L] facts unverified) |
+| D-4 Science notes | Sean | downhill | 2026-11-14 | draft in data/, needs review (molecule windows + [L] facts unverified) |
+| D-5 Band/molecule windows | Sean | downhill | 2026-11-14 | draft in data/, needs review (molecule windows + [L] facts unverified) |
 | D-6 Archival positions (+ ~Gaia field) | Yasen | not started | | |
 | D-7 Release script + bundle QA | Yasen + Sean | not started | | |
 | P0 Spike Barnard | Quirce | not started | | |

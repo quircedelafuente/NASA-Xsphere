@@ -32,3 +32,8 @@ Status: `PROPOSED` until the kick-off (H0–H1), then `LOCKED`.
 - Product: layout, typography, colour palette (colour-blind safe), component library, copy wording (within D13).
 
 Add new rows at the bottom. Format: `| D18 | … | class | who | constrains | why |`.
+| D18 | **Change reference** = compare every epoch with the **first** one (default view) and also export consecutive pairs. Status: PROPOSED (Quirce). | Consultative | Quirce (Giorgi, Niklas review) | C4 `diffs`, viewer diff mode | "What changed since SPHEREx started" is the clearest story; consecutive pairs help R Dra. |
+| D19 | **Differences in sigma units** with a 10 % systematic floor, background rescaled to 1σ. Colour: blue = fainter, red = brighter, white = no change, clipped at ±10σ. Status: PROPOSED. | Consultative | Quirce | C4, viewer colormap | Raw MJy/sr differences are dominated by bright stars; pipeline variances alone gave ±100σ everywhere. |
+| D20 | **Change candidates** = blobs with \|diff\| ≥ 5σ, labelled `brighter` / `fainter` / `moved` (opposite-sign pair ≤ 4 px), max 20 per diff, listed in the manifest. Shown as "candidates" (D13). Status: PROPOSED. | Consultative | Quirce | C4 `diffs[].candidates`, UI | Gives the "automatic" extra without claiming discoveries. |
+| D21 | **Default band per target**: D4 for bright stars (Barnard, RW Aur, R Dra — saturated in D1–D3), D56 for brown dwarfs (ε Indi B, WISE 0855). Status: PROPOSED. | Consultative | Quirce (Data reviews) | C1 `default_band`, UI | Least saturated band that still shows the object. |
+
