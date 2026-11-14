@@ -1,0 +1,240 @@
+<meta charset="utf-8">
+<title>SPHEREx Blink</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an observing console. Big blink viewer left, plain-language panel right, epoch strip and spectrum under it. */
+:root{
+  --ink:#0a0e16; --panel:#111827; --line:#223047; --fg:#e6ebf3; --mute:#8b98ad;
+  --ir:#f0a43a;          /* infrared amber: the one accent */
+  --cool:#7fb2ff;        /* epoch / difference second hue */
+  --good:#5cc489; --warn:#e8b04a;
+  --f-display:"Space Grotesk",system-ui,sans-serif; --f-body:"Inter",system-ui,sans-serif; --f-num:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ink);color:var(--fg);font:15px/1.55 var(--f-body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 40px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:18px;border-bottom:1px solid var(--line)}
+.brand{font:700 20px/1 var(--f-display);letter-spacing:.01em}
+.brand small{display:block;font:500 11px/1.4 var(--f-num);color:var(--mute);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.search{flex:1 1 280px;display:flex;gap:8px;min-width:0}
+.search input{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:9px 12px;font:14px var(--f-body)}
+.search button,.btn{background:var(--ir);color:#1b1206;border:0;border-radius:8px;padding:9px 14px;font:600 14px var(--f-body);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+:focus-visible{outline:2px solid var(--ir);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--mute);border-radius:999px;padding:5px 12px;font:500 13px var(--f-body);cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--ir);color:var(--fg);background:rgba(240,164,58,.12)}
+.chip:disabled{opacity:.45;cursor:not-allowed}
+.note{font-size:12.5px;color:var(--mute)}
+.main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.main{grid-template-columns:1fr}}
+.viewer{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:12px;min-width:0}
+.stage{position:relative;width:100%;aspect-ratio:1;max-width:100%;background:#000;border-radius:8px;overflow:hidden}
+.stage img{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+.stage .pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;position:absolute;inset:0}
+.stage .pair img{position:static;width:100%;height:auto;align-self:center}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hud{position:absolute;left:10px;top:10px;font:500 12px/1.5 var(--f-num);background:rgba(10,14,22,.78);padding:6px 9px;border-radius:6px}
+.hud b{color:var(--ir);font-weight:500}
+.scale{position:absolute;right:10px;bottom:10px;font:11px var(--f-num);color:var(--mute);background:rgba(10,14,22,.78);padding:4px 7px;border-radius:6px}
+.controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{background:transparent;border:0;color:var(--mute);padding:7px 11px;font:500 13px var(--f-body);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--line);color:var(--fg)}
+label.lbl{font:500 11px var(--f-num);color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.ep{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:transparent;color:var(--fg);text-align:left;cursor:pointer;font:13px var(--f-body)}
+.ep .d{font:500 12px var(--f-num);color:var(--mute)}
+.ep[aria-current="true"]{border-color:var(--ir)}
+.ep .bar{height:3px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}
+.ep .bar i{display:block;height:100%;background:var(--cool)}
+aside{display:grid;gap:16px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:10px;min-width:0}
+h2{font:700 13px var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:0}
+h1{font:700 30px/1.1 var(--f-display);margin:0;text-wrap:balance}
+.kind{justify-self:start;display:inline-block;font:500 11px var(--f-num);text-transform:uppercase;letter-spacing:.08em;color:var(--ir);border:1px solid rgba(240,164,58,.4);border-radius:4px;padding:2px 6px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:14px}
+.facts dt{color:var(--mute)} .facts dd{margin:0;font:500 13.5px var(--f-num);font-variant-numeric:tabular-nums}
+.verdict{display:flex;gap:10px;align-items:flex-start;border-left:3px solid var(--good);padding:2px 0 2px 10px}
+.verdict b{color:var(--good)}
+.spec svg{width:100%;height:auto;display:block}
+.spec text{fill:var(--mute);font:11px var(--f-num)}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;color:var(--mute);font:500 13px var(--f-body)}
+table{border-collapse:collapse;font:12px var(--f-num);width:100%}
+td,th{padding:4px 6px;border-bottom:1px solid var(--line);text-align:left}
+.tbl{overflow-x:auto}
+footer{font-size:12px;color:var(--mute);border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px}
+.sample{background:rgba(127,178,255,.1);border:1px dashed var(--cool);color:var(--fg);border-radius:8px;padding:8px 12px;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">SPHEREx Blink<small>working name · NASA Space Apps 2026</small></div>
+    <form class="search" id="f" role="search">
+      <label for="q" class="lbl" style="position:absolute;left:-9999px">Star name or coordinates</label>
+      <input id="q" value="Barnard's Star" autocomplete="off" placeholder="Star name, or RA Dec (e.g. 269.446 4.768)">
+      <button type="submit">Show</button>
+    </form>
+    <div class="chips" id="chips"></div>
+  </header>
+
+  <div class="sample">Sample built from real SPHEREx images (DR1 + QR3) of one object. The other targets are greyed out here; the finished site will have all five and any position you type.</div>
+
+  <div class="main">
+    <section class="viewer" aria-label="Blink viewer">
+      <div class="stage" id="stage">
+        <img id="frame" alt="">
+        <svg id="ov" viewBox="0 0 56 56" preserveAspectRatio="none"></svg>
+        <div class="hud" id="hud"></div>
+        <div class="scale" id="scale"></div>
+      </div>
+      <div class="controls">
+        <button class="btn" id="play" aria-pressed="false">Pause</button>
+        <div><label class="lbl" for="spd">Speed</label>
+          <input id="spd" type="range" min="0.5" max="2" step="0.5" value="1" aria-describedby="spdv"> <span id="spdv" class="note"></span></div>
+        <div class="seg" role="group" aria-label="View mode" id="modes">
+          <button data-m="blink" aria-pressed="true">Blink</button>
+          <button data-m="diff" aria-pressed="false">Changes only</button>
+          <button data-m="pair" aria-pressed="false">Side by side</button>
+        </div>
+        <div class="seg" role="group" aria-label="Infrared band" id="bands"></div>
+        <label class="note"><input type="checkbox" id="track" checked> Predicted path</label>
+      </div>
+      <div class="strip" id="strip"></div>
+      <p class="note" id="modehelp"></p>
+    </section>
+
+    <aside>
+      <div class="card">
+        <span class="kind">Fast-moving star</span>
+        <h1>Barnard's Star</h1>
+        <p style="margin:0">The star with the fastest motion across our sky. Each frame is the same patch photographed by SPHEREx on a different visit. Watch the bright star under the amber cross: it shifts upward a little each visit, while the stars around it stay put.</p>
+        <div class="verdict" id="verdict"></div>
+        <dl class="facts" id="facts"></dl>
+      </div>
+      <div class="card spec">
+        <h2>Its infrared colours</h2>
+        <div id="spec"></div>
+        <p class="note" style="margin:0">Each dot is one SPHEREx photo. The telescope sees each photo at a slightly different wavelength, so together they draw the star's spectrum. Brightness here is a quick sum of 3×3 pixels, not calibrated.</p>
+      </div>
+      <div class="card">
+        <h2>Share</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-width:0">
+          <code id="link" style="font:12px var(--f-num);background:var(--ink);padding:7px 9px;border-radius:6px;overflow-x:auto;min-width:0;flex:1">…/?ra=269.4463&amp;dec=4.7682&amp;band=D6</code>
+          <button class="btn ghost" id="copy">Copy link</button>
+        </div>
+        <details>
+          <summary>Advanced: photos and quality</summary>
+          <div class="tbl" id="adv"></div>
+        </details>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div id="credit"></div>
+    <div>This publication makes use of data products from the Spectro-Photometer for the History of the Universe, Epoch of Reionization and Ices Explorer (SPHEREx), which is a joint project of the Jet Propulsion Laboratory and the California Institute of Technology, and is funded by the National Aeronautics and Space Administration.</div>
+  </footer>
+</div>
+
+<script>
+const D = /*DATA*/null;
+const TARGETS = ["Barnard's Star","ε Indi B","WISE 0855−0714","RW Aurigae","R Draconis"];
+const $ = s => document.querySelector(s);
+const bands = Object.keys(D.bands).sort();
+let band = D.default_band, ep = 0, mode = 'blink', playing = !matchMedia('(prefers-reduced-motion: reduce)').matches, timer = null;
+const usable = b => D.bands[b].n.map((n,i)=>n>0?i:-1).filter(i=>i>=0);
+
+$('#chips').innerHTML = TARGETS.map((t,i)=>`<button class="chip" aria-pressed="${i===0}" ${i?'disabled title="Not in this sample"':''}>${t}</button>`).join('');
+$('#bands').innerHTML = bands.map(b=>`<button data-b="${b}" aria-pressed="${b===band}" title="${D.bands[b].lam_min.toFixed(2)}–${D.bands[b].lam_max.toFixed(2)} µm">D${b} · ${D.bands[b].lam_min.toFixed(1)}–${D.bands[b].lam_max.toFixed(1)} µm</button>`).join('');
+$('#scale').textContent = `${(D.grid_px*D.grid_arcsec/60).toFixed(1)}′ across · north up`;
+$('#credit').textContent = `Sample built ${D.built} from ${D.total} real SPHEREx exposures (detectors ${bands.map(b=>'D'+b).join(', ')}), merged per visit.`;
+
+function fmt(d){return new Date(d+'T00:00:00Z').toLocaleDateString('en-GB',{month:'short',year:'numeric',timeZone:'UTC'})}
+function strip(){
+  const max = Math.max(...D.bands[band].n);
+  $('#strip').innerHTML = D.epochs.map((e,i)=>`<button class="ep" data-e="${i}" aria-current="${i===ep}" ${D.bands[band].n[i]?'':'disabled'}>
+    <div><b>Visit ${i+1}</b></div><div class="d">${fmt(e.start)}${e.end.slice(0,7)!==e.start.slice(0,7)?' – '+fmt(e.end):''}</div>
+    <div class="d">${D.bands[band].n[i]} photos merged</div><div class="bar"><i style="width:${100*D.bands[band].n[i]/max}%"></i></div></button>`).join('');
+}
+function overlay(){
+  const s = $('#ov'); if(!$('#track').checked){s.innerHTML='';return}
+  const E = D.epochs, e = E[ep];
+  const pts = E.filter((_,i)=>D.bands[band].n[i]).map(x=>`${x.px+.5},${x.py+.5}`).join(' ');
+  s.innerHTML = `<polyline points="${pts}" fill="none" stroke="#7fb2ff" stroke-width=".15" stroke-dasharray=".5 .4"/>`+
+    E.map((x,i)=>D.bands[band].n[i]?`<circle cx="${x.px+.5}" cy="${x.py+.5}" r=".35" fill="${i===ep?'#f0a43a':'#7fb2ff'}"/>`:'').join('')+
+    `<g stroke="#f0a43a" stroke-width=".18" fill="none"><line x1="${e.px+.5}" y1="${e.py-3}" x2="${e.px+.5}" y2="${e.py-1.2}"/><line x1="${e.px+.5}" y1="${e.py+2.2}" x2="${e.px+.5}" y2="${e.py+4}"/><line x1="${e.px-3}" y1="${e.py+.5}" x2="${e.px-1.2}" y2="${e.py+.5}"/><line x1="${e.px+2.2}" y1="${e.py+.5}" x2="${e.px+4}" y2="${e.py+.5}"/></g>`;
+}
+function draw(){
+  const B = D.bands[band], e = D.epochs[ep], st = $('#stage');
+  st.querySelector('.pair')?.remove(); $('#frame').hidden = mode==='pair';
+  if(mode==='pair'){
+    const u = usable(band), a = u[0], b = u[u.length-1];
+    st.insertAdjacentHTML('afterbegin',`<div class="pair"><img src="${B.frames[a]}" alt="First visit"><img src="${B.frames[b]}" alt="Last visit"></div>`);
+    $('#ov').innerHTML=''; $('#hud').innerHTML = `Left <b>${fmt(D.epochs[a].start)}</b> · Right <b>${fmt(D.epochs[b].start)}</b>`;
+  } else {
+    $('#frame').src = (mode==='diff'?B.diffs:B.frames)[ep];
+    $('#frame').alt = `Barnard's Star field, visit ${ep+1}, ${fmt(e.start)}`;
+    $('#hud').innerHTML = `Visit <b>${ep+1}/${D.epochs.length}</b> · ${fmt(e.start)}<br>D${band} · <b>${B.lam_min.toFixed(2)}–${B.lam_max.toFixed(2)} µm</b>`;
+    overlay();
+  }
+  document.querySelectorAll('.ep').forEach(x=>x.setAttribute('aria-current', +x.dataset.e===ep));
+  $('#link').textContent = `…/?ra=${D.ra.toFixed(4)}&dec=${D.dec.toFixed(4)}&band=D${band}&mode=${mode}`;
+  $('#modehelp').textContent = {blink:'Blink: the same patch at each visit, in date order. Moving things jump; still things stay.',
+    diff:'Changes only: each visit minus the average of all visits. Still stars vanish; a mover leaves a bright spot where it is now and a dark spot where it usually is.',
+    pair:'Side by side: first and last visit next to each other, for anyone who prefers not to watch motion.'}[mode];
+}
+function step(){const u=usable(band); ep = u[(u.indexOf(ep)+1)%u.length]; draw()}
+function loop(){clearInterval(timer); if(playing && mode!=='pair') timer = setInterval(step, 1000/ +$('#spd').value);
+  $('#play').textContent = playing?'Pause':'Play'; $('#play').setAttribute('aria-pressed',!playing); $('#spdv').textContent = `${$('#spd').value} frames/s`}
+
+$('#play').onclick=()=>{playing=!playing;loop()};
+$('#spd').oninput=loop;
+$('#track').onchange=draw;
+$('#modes').onclick=e=>{const b=e.target.closest('button'); if(!b)return; mode=b.dataset.m;
+  document.querySelectorAll('#modes button').forEach(x=>x.setAttribute('aria-pressed',x===b)); draw(); loop()};
+$('#bands').onclick=e=>{const b=e.target.closest('button'); if(!b)return; band=b.dataset.b;
+  document.querySelectorAll('#bands button').forEach(x=>x.setAttribute('aria-pressed',x===b)); if(!D.bands[band].n[ep]) ep=usable(band)[0]; strip(); draw()};
+$('#strip').onclick=e=>{const b=e.target.closest('.ep'); if(!b||b.disabled)return; ep=+b.dataset.e; playing=false; loop(); draw()};
+$('#f').onsubmit=e=>{e.preventDefault(); $('#q').value="Barnard's Star"};
+$('#copy').onclick=async()=>{const t=$('#link').textContent; try{await navigator.clipboard.writeText(t);$('#copy').textContent='Copied'}catch{getSelection().selectAllChildren($('#link'))}};
+
+// facts + verdict (numbers from the team's research and this build)
+const M = D.measured;
+$('#facts').innerHTML = [
+  ['Moves per year','10.39″ ≈ 1.7 SPHEREx pixels'],
+  ['Distance','≈ 1.83 parsec (≈ 6 light-years)'],
+  ['Visits in this sample', D.epochs.length+` (${fmt(D.epochs[0].start)} – ${fmt(D.epochs.at(-1).end)})`],
+  ['Measured shift', M ? `${M.shift_arcsec.toFixed(1)}″ over ${M.years.toFixed(2)} yr` : 'n/a'],
+  ['Expected shift', M ? `${M.expected_arcsec.toFixed(1)}″` : 'n/a'],
+].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+const ok = M && M.diff_arcsec < 6.15;   // within one SPHEREx pixel of Gaia's prediction
+$('#verdict').style.borderLeftColor = ok ? 'var(--good)' : 'var(--warn)';
+$('#verdict').innerHTML = M ? `<div><b style="color:${ok?'var(--good)':'var(--warn)'}">${ok?'Mover · known star ✓':'Mover · check needed'}</b><br><span class="note">${ok
+  ? `Measured in SPHEREx, the star's motion matches Gaia's prediction to within ${M.diff_arcsec.toFixed(1)}″ (${(M.diff_arcsec/6.15).toFixed(1)} pixel). Sorted by rules: it moves across visits and matches Gaia DR3.`
+  : `The measured shift differs from Gaia's prediction by ${M.diff_arcsec.toFixed(1)}″, more than one pixel, so it is flagged for a person to check.`}</span></div>` : '';
+
+// spectrum
+(function(){
+  const P = D.spectrum, W=420, H=200, l=44, r=10, t=10, b=30;
+  const xs=[Math.min(...P.map(p=>p.lam)),Math.max(...P.map(p=>p.lam))], ys=[0,Math.max(...P.map(p=>p.flux))*1.08];
+  const X=v=>l+(v-xs[0])/(xs[1]-xs[0])*(W-l-r), Y=v=>H-b-(v-ys[0])/(ys[1]-ys[0])*(H-t-b);
+  const col=['#f0a43a','#7fb2ff','#5cc489','#c79bff'];
+  let g=''; for(let v=Math.ceil(xs[0]*2)/2; v<=xs[1]; v+=.5) g+=`<line x1="${X(v)}" x2="${X(v)}" y1="${t}" y2="${H-b}" stroke="#223047"/><text x="${X(v)}" y="${H-b+16}" text-anchor="middle">${v.toFixed(1)}</text>`;
+  g+=`<text x="${(W+l)/2}" y="${H-2}" text-anchor="middle">wavelength (µm)</text><text x="12" y="${H/2}" transform="rotate(-90 12 ${H/2})" text-anchor="middle">brightness</text>`;
+  const dots=P.map(p=>`<circle cx="${X(p.lam)}" cy="${Y(p.flux)}" r="3" fill="${col[p.ep%4]}" opacity=".85"><title>${p.lam.toFixed(2)} µm · visit ${p.ep+1}${p.flag?'':''}</title></circle>`).join('');
+  const leg=D.epochs.map((e,i)=>`<span style="color:${col[i%4]}">● Visit ${i+1}</span>`).join(' &nbsp; ');
+  $('#spec').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Spectrum of Barnard's Star from ${P.length} SPHEREx photos">${g}<line x1="${l}" x2="${W-r}" y1="${H-b}" y2="${H-b}" stroke="#8b98ad"/>${dots}</svg><div class="note">${leg}</div>`;
+})();
+
+$('#adv').innerHTML = `<table><tr><th>Band</th><th>µm</th>${D.epochs.map((_,i)=>`<th>Visit ${i+1}</th>`).join('')}</tr>`+
+  bands.map(b=>`<tr><td>D${b}</td><td>${D.bands[b].lam_min.toFixed(2)}–${D.bands[b].lam_max.toFixed(2)}</td>${D.bands[b].n.map(n=>`<td>${n}</td>`).join('')}</tr>`).join('')+
+  `</table><p class="note">Position at 2026.0: RA ${D.ra.toFixed(5)}°, Dec ${D.dec.toFixed(5)}° (Gaia DR3 propagated). Photos with hard quality flags are left out by the finished engine; this sample merges all with a median.</p>`;
+
+strip(); draw(); loop();
+</script>

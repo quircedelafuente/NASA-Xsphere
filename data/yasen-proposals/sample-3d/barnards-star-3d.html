@@ -1,0 +1,312 @@
+<meta charset="utf-8">
+<title>Barnard's Star 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-bleed 3D stage, a control rail on the right, a fact sheet that says how each number is known. Deliberately dark (space). */
+:root{
+  --ink:#06080e; --panel:rgba(14,19,30,.86); --line:#26324a; --fg:#e8edf5; --mute:#8f9bb0;
+  --ir:#f0a43a; --cool:#7fb2ff; --good:#5cc489; --calc:#e8c25a; --assume:#c792ff;
+  --f-display:"Space Grotesk",system-ui,sans-serif; --f-body:"Inter",system-ui,sans-serif; --f-num:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--fg);font:14px/1.5 var(--f-body);overflow:hidden}
+#stage{position:fixed;inset:0}
+#stage canvas{display:block}
+.ui{position:fixed;inset:0;pointer-events:none;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;
+  padding-top:16px;padding-bottom:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ui > *{pointer-events:auto}
+.left{display:flex;flex-direction:column;justify-content:space-between;min-width:0;pointer-events:none}
+.left > *{pointer-events:auto}
+.title .kicker{font:500 11px var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--ir)}
+.title h1{font:700 34px/1.05 var(--f-display);margin:4px 0 6px;text-wrap:balance}
+.title p{margin:0;color:var(--mute);max-width:46ch}
+.views{display:flex;flex-wrap:wrap;gap:6px}
+.views button,.rail button{background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font:500 13px var(--f-body);cursor:pointer;backdrop-filter:blur(6px)}
+.views button[aria-pressed="true"]{border-color:var(--ir);background:rgba(240,164,58,.16)}
+:focus-visible{outline:2px solid var(--ir);outline-offset:2px}
+.legend{font:12px var(--f-num);color:var(--mute);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 10px;max-width:520px}
+.rail{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;backdrop-filter:blur(8px);min-width:0}
+.rail h2{font:500 11px var(--f-num);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:0 0 6px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{flex:1;border:0;border-radius:0;background:transparent;color:var(--mute)}
+.seg button[aria-pressed="true"]{background:var(--line);color:var(--fg)}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.row output{font:500 13px var(--f-num);color:var(--fg)}
+input[type=range]{width:100%;accent-color:var(--ir)}
+.chk{display:flex;gap:8px;align-items:center;color:var(--fg);cursor:pointer}
+.facts{display:grid;gap:7px;margin:0}
+.fact{display:grid;grid-template-columns:1fr auto;gap:2px 8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.fact dt{color:var(--mute);font-size:12.5px}
+.fact dd{margin:0;font:500 13px var(--f-num);text-align:right}
+.fact .how{grid-column:1/-1;font:11px var(--f-num);display:flex;gap:6px;align-items:center}
+.tag{border-radius:4px;padding:0 5px;font:500 10.5px var(--f-num);text-transform:uppercase;letter-spacing:.05em;border:1px solid}
+.t-m{color:var(--good);border-color:rgba(92,196,137,.5)} .t-c{color:var(--calc);border-color:rgba(232,194,90,.5)} .t-a{color:var(--assume);border-color:rgba(199,146,255,.5)}
+.note{font-size:12px;color:var(--mute);margin:0}
+#spec{display:none}
+#spec svg{width:100%;height:auto;display:block}
+#spec text{fill:var(--mute);font:10px var(--f-num)}
+.flare{background:var(--ir)!important;color:#1b1206!important;border-color:var(--ir)!important;font-weight:600!important}
+.label3d{position:fixed;pointer-events:none;font:500 12px var(--f-num);color:var(--fg);background:rgba(6,8,14,.7);border:1px solid var(--line);border-radius:5px;padding:2px 6px;transform:translate(-50%,-140%);white-space:nowrap}
+.foot{font-size:11px;color:var(--mute)}
+@media (max-width:820px){
+  body{overflow:auto}
+  .ui{position:relative;grid-template-columns:1fr;height:auto;inset:auto;pointer-events:auto;padding-top:56vh}
+  #stage{position:fixed;height:56vh}
+  .title h1{font-size:26px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div id="stage" aria-label="Interactive 3D illustration of Barnard's Star. Drag to rotate, scroll to zoom."></div>
+<div id="labels"></div>
+<div class="ui">
+  <div class="left">
+    <div class="title">
+      <div class="kicker">Illustration based on measured values</div>
+      <h1>Barnard's Star</h1>
+      <p id="blurb">A small, old red dwarf six light-years away: the fastest-moving star in our sky. Drag to rotate, scroll to zoom.</p>
+    </div>
+    <div style="display:grid;gap:8px">
+      <div class="views" role="group" aria-label="Scene">
+        <button data-v="star" aria-pressed="true">The star</button>
+        <button data-v="size" aria-pressed="false">Size compared</button>
+        <button data-v="planets" aria-pressed="false">Its planets</button>
+        <button data-v="map" aria-pressed="false">Where it is</button>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+
+  <aside class="rail" aria-label="Controls and facts">
+    <div>
+      <h2>See it as</h2>
+      <div class="seg" role="group" aria-label="Colour view">
+        <button id="eyeBtn" aria-pressed="true">Human eye</button>
+        <button id="irBtn" aria-pressed="false">SPHEREx infrared</button>
+      </div>
+      <div id="spec">
+        <p class="note" style="margin-top:8px">Real SPHEREx brightness of this star at 3.8–5 µm (68 photos, from our sample build). The colours on the star map these wavelengths to visible light.</p>
+        <div id="specsvg"></div>
+      </div>
+    </div>
+    <div>
+      <div class="row"><h2 style="margin:0">Temperature</h2><output id="tOut">3,200 K</output></div>
+      <input id="temp" type="range" min="2000" max="12000" step="100" value="3200" aria-label="Surface temperature">
+      <p class="note">Slide to see why it looks orange-red: cooler stars glow redder. The Sun is about 5,800 K. <button id="resetT" style="background:none;border:0;color:var(--cool);padding:0;cursor:pointer;font:inherit">Back to Barnard's</button></p>
+    </div>
+    <div style="display:grid;gap:8px">
+      <label class="chk"><input type="checkbox" id="spots" checked> Starspots</label>
+      <label class="chk"><input type="checkbox" id="spin" checked> Rotate</label>
+      <button id="flareBtn" class="flare">Trigger a flare</button>
+      <p class="note">Red dwarfs flare: a sudden bright burst from tangled magnetic fields.</p>
+    </div>
+    <div>
+      <h2>How we know</h2>
+      <dl class="facts" id="facts"></dl>
+      <p class="note" style="margin-top:8px">Values from the published literature, rounded. The Data role confirms each one with a source before launch.</p>
+    </div>
+    <div class="foot">Shape, spots and surface texture are illustration: SPHEREx and Gaia see this star as a single point of light.</div>
+  </aside>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const SPEC = [[3.821,6118.2],[3.854,5923.2],[3.888,6071.5],[3.904,5912.0],[3.921,5856.7],[3.938,5593.8],[3.941,5672.0],[3.956,5466.5],[3.975,5771.5],[3.99,5575.6],[4.01,5655.8],[4.025,5490.8],[4.045,5267.2],[4.06,5460.0],[4.096,5008.1],[4.131,4799.5],[4.167,5142.9],[4.203,5022.5],[4.223,5382.2],[4.239,4676.8],[4.26,5122.7],[4.275,5092.0],[4.291,5412.7],[4.291,4817.6],[4.296,5000.4],[4.296,4964.3],[4.327,5745.9],[4.333,5360.3],[4.333,4982.6],[4.364,5151.2],[4.37,5165.5],[4.407,4855.4],[4.407,5042.5],[4.418,4845.2],[4.434,4915.6],[4.45,5088.4],[4.465,4590.9],[4.482,4514.0],[4.498,4228.9],[4.514,4250.5],[4.53,4599.5],[4.551,4219.1],[4.563,4160.1],[4.58,4025.5],[4.585,4105.5],[4.597,4087.1],[4.614,4125.5],[4.618,4108.8],[4.63,3919.6],[4.647,4042.0],[4.652,3518.3],[4.681,4159.1],[4.686,4118.1],[4.715,4377.4],[4.721,4024.7],[4.75,3895.5],[4.755,3771.3],[4.785,5069.3],[4.789,3858.7],[4.819,4046.9],[4.854,3993.0],[4.889,3794.0],[4.906,3861.8],[4.942,3894.0],[4.965,3509.0],[4.977,4392.4],[5.001,3514.0],[5.002,3611.4]];
+const FACTS = [
+  ['Distance','5.96 light-years (1.83 pc)','m','Gaia parallax'],
+  ['Motion across sky','10.39″ per year','m','Gaia; our SPHEREx sample measured 9.8″ in 0.98 yr'],
+  ['Coming toward us','≈ 110 km/s','m','Doppler shift of its light'],
+  ['Surface temperature','≈ 3,200 K','m','Its spectrum'],
+  ['Radius','≈ 0.19 × the Sun','c','Brightness + distance + temperature'],
+  ['Mass','≈ 0.16 × the Sun','c','Stellar models'],
+  ['Age','≈ 10 billion years','a','Estimated from its slow spin and motion'],
+  ['Planets','4 small rocky planets (2024–25)','m','Tiny wobbles of the star; sizes unknown'],
+];
+const TAG = {m:['t-m','measured'],c:['t-c','calculated'],a:['t-a','estimated']};
+document.getElementById('facts').innerHTML = FACTS.map(([k,v,t,how])=>`<div class="fact"><dt>${k}</dt><dd>${v}</dd><div class="how"><span class="tag ${TAG[t][0]}">${TAG[t][1]}</span><span style="color:var(--mute)">${how}</span></div></div>`).join('');
+
+// ---------- colour from temperature (blackbody approximation) ----------
+function kelvinRGB(K){
+  const t=K/100; let r,g,b;
+  r = t<=66 ? 255 : 329.698727446*Math.pow(t-60,-0.1332047592);
+  g = t<=66 ? 99.4708025861*Math.log(t)-161.1195681661 : 288.1221695283*Math.pow(t-60,-0.0755148492);
+  b = t>=66 ? 255 : (t<=19 ? 0 : 138.5177312231*Math.log(t-10)-305.0447927307);
+  const c=v=>Math.min(255,Math.max(0,v))/255; return new THREE.Color(c(r),c(g),c(b));
+}
+
+// ---------- scene ----------
+const stage = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45,1,0.01,5000);
+camera.position.set(0,0.6,5.2);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.minDistance = 1.6; controls.maxDistance = 400;
+function size(){ const w=stage.clientWidth, h=stage.clientHeight; renderer.setSize(w,h); camera.aspect=w/h;
+  if(w>820){ camera.setViewOffset(w+356,h,356,0,w,h); } else camera.clearViewOffset();  // centre the scene in the area left of the side panel
+  camera.updateProjectionMatrix(); }
+addEventListener('resize', size);
+
+// starfield
+(function(){
+  const n=2500, p=new Float32Array(n*3), c=new Float32Array(n*3);
+  for(let i=0;i<n;i++){ const u=Math.random()*2-1, th=Math.random()*Math.PI*2, r=900+Math.random()*600, s=Math.sqrt(1-u*u);
+    p.set([r*s*Math.cos(th), r*u, r*s*Math.sin(th)], i*3);
+    const col=kelvinRGB(3000+Math.random()*9000); c.set([col.r,col.g,col.b], i*3); }
+  const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.BufferAttribute(p,3)); g.setAttribute('color',new THREE.BufferAttribute(c,3));
+  scene.add(new THREE.Points(g,new THREE.PointsMaterial({size:1.6,vertexColors:true,sizeAttenuation:false,transparent:true,opacity:.75})));
+})();
+
+// star surface shader: granulation noise + spots + limb darkening + flare patch; ir mode remaps to a false-colour ramp
+const noise = `
+vec3 hash3(vec3 p){p=vec3(dot(p,vec3(127.1,311.7,74.7)),dot(p,vec3(269.5,183.3,246.1)),dot(p,vec3(113.5,271.9,124.6)));return -1.0+2.0*fract(sin(p)*43758.5453123);}
+float noise(vec3 p){vec3 i=floor(p),f=fract(p);vec3 u=f*f*(3.0-2.0*f);
+ return mix(mix(mix(dot(hash3(i),f),dot(hash3(i+vec3(1,0,0)),f-vec3(1,0,0)),u.x),mix(dot(hash3(i+vec3(0,1,0)),f-vec3(0,1,0)),dot(hash3(i+vec3(1,1,0)),f-vec3(1,1,0)),u.x),u.y),
+            mix(mix(dot(hash3(i+vec3(0,0,1)),f-vec3(0,0,1)),dot(hash3(i+vec3(1,0,1)),f-vec3(1,0,1)),u.x),mix(dot(hash3(i+vec3(0,1,1)),f-vec3(0,1,1)),dot(hash3(i+vec3(1,1,1)),f-vec3(1,1,1)),u.x),u.y),u.z);}
+float fbm(vec3 p){float s=0.0,a=.5;for(int i=0;i<5;i++){s+=a*noise(p);p*=2.03;a*=.5;}return s;}`;
+const starMat = new THREE.ShaderMaterial({
+  uniforms:{time:{value:0},col:{value:kelvinRGB(3200)},spots:{value:1},ir:{value:0},flare:{value:0},flareDir:{value:new THREE.Vector3(0.4,0.5,0.77).normalize()}},
+  vertexShader:`varying vec3 vN; varying vec3 vP; varying vec3 vV;
+    void main(){ vN=normalize(normalMatrix*normal); vP=position; vec4 mv=modelViewMatrix*vec4(position,1.0); vV=normalize(-mv.xyz); gl_Position=projectionMatrix*mv; }`,
+  fragmentShader: noise + `uniform float time,spots,ir,flare; uniform vec3 col,flareDir; varying vec3 vN; varying vec3 vP; varying vec3 vV;
+    vec3 irRamp(float x){ return mix(mix(vec3(.08,.02,.25),vec3(.85,.15,.45),smoothstep(0.,.5,x)), vec3(1.,.85,.35), smoothstep(.5,1.,x)); }
+    void main(){
+      vec3 p=normalize(vP);
+      float g=fbm(p*9.0+vec3(0.,time*.05,0.))*.5+.5;           // granulation
+      float big=fbm(p*2.2+vec3(time*.01));                        // large-scale mottling
+      float sp=smoothstep(.18,.32,fbm(p*3.1+vec3(7.0)))*spots;      // starspots (darker, cooler patches)
+      float mu=max(dot(vN,vV),0.0);
+      float limb=.35+.65*pow(mu,.55);                             // limb darkening
+      float b=(.78+.35*g+.15*big)*(1.0-.62*sp)*limb;
+      float f=flare*smoothstep(.75,1.0,dot(p,flareDir));
+      vec3 hot=pow(col,vec3(1.6))*1.25; vec3 c = mix(hot*b + pow(g,6.0)*col*.35, vec3(1.0,.97,.9)*1.6, f);
+      vec3 irc = irRamp(clamp(b*.95,0.,1.)) + vec3(1.,.9,.6)*f;
+      gl_FragColor=vec4(mix(c,irc,ir),1.0);
+    }`
+});
+const star = new THREE.Mesh(new THREE.SphereGeometry(1,128,128), starMat);
+scene.add(star);
+
+// glow (additive sprite)
+function glowTex(){ const c=document.createElement('canvas'); c.width=c.height=256; const g=c.getContext('2d');
+  const gr=g.createRadialGradient(128,128,0,128,128,128); gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(.25,'rgba(255,255,255,.55)'); gr.addColorStop(.6,'rgba(255,255,255,.12)'); gr.addColorStop(1,'rgba(255,255,255,0)');
+  g.fillStyle=gr; g.fillRect(0,0,256,256); return new THREE.CanvasTexture(c); }
+const glow = new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex(),color:kelvinRGB(3200),blending:THREE.AdditiveBlending,transparent:true,depthWrite:false,opacity:.75}));
+glow.scale.set(4.6,4.6,1); star.add(glow);
+// flare loop (prominence arc)
+const arcCurve = new THREE.CatmullRomCurve3([new THREE.Vector3(.75,.45,.45),new THREE.Vector3(1.1,.85,.75),new THREE.Vector3(1.0,1.0,.5),new THREE.Vector3(.55,.82,.25)].map(v=>v.normalize().multiplyScalar(v.length())));
+const arc = new THREE.Mesh(new THREE.TubeGeometry(arcCurve,64,.035,8,false), new THREE.MeshBasicMaterial({color:0xfff1d6,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));
+star.add(arc);
+
+// ---------- size comparison (radii in units of Barnard's radius; Sun 1/0.19, Jupiter 0.1/0.19, Earth 0.0092/0.19) ----------
+const sizeGroup = new THREE.Group(); scene.add(sizeGroup); sizeGroup.visible=false;
+const RB=0.19, R={Sun:1/RB, Jupiter:0.1005/RB, Earth:0.00916/RB};
+function ball(r,color,x,name){ const m=new THREE.Mesh(new THREE.SphereGeometry(r,64,64), name==='Sun'? new THREE.MeshBasicMaterial({color:new THREE.Color(color).multiplyScalar(.92)}) : new THREE.MeshStandardMaterial({color,roughness:.8}));
+  m.position.x=x; m.userData.label=name; sizeGroup.add(m); return m; }
+const sun = ball(R.Sun, kelvinRGB(5800), -R.Sun-1.6, 'Sun');
+const jup = ball(R.Jupiter, 0xc9a77c, 2.2, 'Jupiter');
+const earth = ball(R.Earth, 0x4f86c6, 3.4, 'Earth');
+sizeGroup.add(new THREE.AmbientLight(0xffffff,.35)); const pl=new THREE.PointLight(0xffd2a8,1.6,0); sizeGroup.add(pl);
+
+// ---------- planets (4 found 2024–25; orbits drawn to scale in a compressed way, planet sizes exaggerated and assumed) ----------
+const planetGroup = new THREE.Group(); scene.add(planetGroup); planetGroup.visible=false;
+const PLANETS = [ ['d',2.34],['b',3.15],['c',4.12],['e',6.74] ];   // label, period in days (verify)
+const auStar = 0.01*215/RB;  // 0.01 AU in units of Barnard radii ≈ 11.3
+const planets = PLANETS.map(([n,P],i)=>{
+  const a = Math.cbrt((P/365.25)**2*0.16)/0.01*0.01*215/RB;   // Kepler: a³ = M·P² (AU, yr, M☉)
+  const ring = new THREE.Mesh(new THREE.RingGeometry(a-.02,a+.02,128), new THREE.MeshBasicMaterial({color:0x7fb2ff,transparent:true,opacity:.35,side:THREE.DoubleSide}));
+  ring.rotation.x=Math.PI/2; planetGroup.add(ring);
+  const m = new THREE.Mesh(new THREE.SphereGeometry(.8,32,32), new THREE.MeshStandardMaterial({color:[0x8a6f5a,0x9b8b7a,0x7a6a62,0xa08f80][i],roughness:.95}));
+  m.userData={a,P,label:'Barnard '+n,ph:i*1.7}; planetGroup.add(m); return m; });
+planetGroup.add(new THREE.AmbientLight(0xffffff,.15)); const pl2=new THREE.PointLight(0xffb27a,2.2,0); planetGroup.add(pl2);
+
+// ---------- where it is: Sun at centre, Barnard's Star at 1.83 pc in its real direction, motion arrow ----------
+const mapGroup = new THREE.Group(); scene.add(mapGroup); mapGroup.visible=false;
+const PC=40; // scene units per parsec
+function dirRaDec(ra,dec){ ra*=Math.PI/180; dec*=Math.PI/180; return new THREE.Vector3(Math.cos(dec)*Math.cos(ra), Math.sin(dec), -Math.cos(dec)*Math.sin(ra)); }
+const sunDot = new THREE.Mesh(new THREE.SphereGeometry(1.2,32,32), new THREE.MeshBasicMaterial({color:kelvinRGB(5800)})); sunDot.userData.label='Sun (us)'; mapGroup.add(sunDot);
+const bPos = dirRaDec(269.45,4.69).multiplyScalar(1.83*PC);
+const bDot = new THREE.Mesh(new THREE.SphereGeometry(1,32,32), new THREE.MeshBasicMaterial({color:kelvinRGB(3200)})); bDot.position.copy(bPos); bDot.userData.label="Barnard's Star · 5.96 ly"; mapGroup.add(bDot);
+const aPos = dirRaDec(219.9,-60.83).multiplyScalar(1.34*PC);
+const aDot = new THREE.Mesh(new THREE.SphereGeometry(1.1,32,32), new THREE.MeshBasicMaterial({color:kelvinRGB(5500)})); aDot.position.copy(aPos); aDot.userData.label='Alpha Centauri · 4.37 ly'; mapGroup.add(aDot);
+[1,2].forEach(r=>{ const g=new THREE.Mesh(new THREE.RingGeometry(r*PC-.15,r*PC+.15,160), new THREE.MeshBasicMaterial({color:0x26324a,side:THREE.DoubleSide})); g.rotation.x=Math.PI/2; mapGroup.add(g); });
+mapGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),bPos]), new THREE.LineDashedMaterial({color:0xf0a43a,dashSize:2,gapSize:1.5})).computeLineDistances());
+// velocity: mostly toward us (radial −110 km/s) plus sideways (tangential ≈ 90 km/s from 10.39″/yr at 1.83 pc)
+const vDir = bPos.clone().normalize().multiplyScalar(-110).add(new THREE.Vector3(0,1,0).projectOnPlane(bPos.clone().normalize()).normalize().multiplyScalar(90)).normalize();
+const arrow = new THREE.ArrowHelper(vDir, bPos, 14, 0xf0a43a, 3, 1.6); mapGroup.add(arrow);
+arrow.userData.label='heading our way';
+
+// ---------- labels ----------
+const labelsEl = document.getElementById('labels');
+function labelsFor(objs){ labelsEl.innerHTML=''; return objs.map(o=>{ const d=document.createElement('div'); d.className='label3d'; d.textContent=o.userData.label; labelsEl.appendChild(d); return [o,d]; }); }
+let labels=[];
+function placeLabels(){ const w=stage.clientWidth,h=stage.clientHeight, v=new THREE.Vector3();
+  labels.forEach(([o,d])=>{ o.getWorldPosition(v); v.project(camera); const vis=v.z<1; d.style.display=vis?'block':'none';
+    d.style.left=((v.x+1)/2*w)+'px'; d.style.top=((1-v.y)/2*h)+'px'; }); }
+
+// ---------- views ----------
+const LEG = {
+  star:'Surface texture, spots and glow are illustration. Colour comes from its measured temperature.',
+  size:'To scale. Barnard\'s Star is about twice Jupiter\'s width and a fifth of the Sun\'s. Earth is the blue dot.',
+  planets:'Orbit sizes to scale from their periods (Kepler\'s law). Planet sizes enlarged and assumed: only their minimum masses are known. All four orbit closer than Mercury does to our Sun.',
+  map:'To scale: 1 ring = 1 parsec (3.26 light-years). Arrow: its motion through space. It is coming closer and will pass about 3.8 light-years from us in roughly 10,000 years.'
+};
+let view='star';
+function setView(v){
+  view=v; document.querySelectorAll('.views button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===v));
+  star.visible = v!=='map'; sizeGroup.visible = v==='size'; planetGroup.visible = v==='planets'; mapGroup.visible = v==='map';
+  star.position.set(0,0,0); glow.visible = v!=='size';
+  document.getElementById('legend').textContent = LEG[v];
+  if(v==='star'){ camera.position.set(0,.6,5.2); controls.target.set(0,0,0); labels=labelsFor([]); }
+  if(v==='size'){ camera.position.set(-2,3,26); controls.target.set(-2.5,0,0); labels=labelsFor([sun,jup,earth,Object.assign(star,{userData:{label:"Barnard's Star"}})]); }
+  if(v==='planets'){ camera.position.set(0,48,58); controls.target.set(0,0,0); labels=labelsFor(planets); }
+  if(v==='map'){ const mid=bPos.clone().add(aPos).multiplyScalar(1/3); controls.target.copy(mid); camera.position.copy(mid).add(new THREE.Vector3(40,70,130)); labels=labelsFor([sunDot,bDot,aDot]); }
+  controls.update();
+}
+document.querySelector('.views').onclick=e=>{ const b=e.target.closest('button'); if(b) setView(b.dataset.v); };
+
+// ---------- controls ----------
+const temp=document.getElementById('temp'), tOut=document.getElementById('tOut');
+function setTemp(K){ temp.value=K; tOut.value = (+K).toLocaleString('en-US')+' K'; const c=kelvinRGB(+K); starMat.uniforms.col.value=c; glow.material.color=c; bDot.material.color=c; }
+temp.oninput=()=>setTemp(temp.value);
+document.getElementById('resetT').onclick=()=>setTemp(3200);
+document.getElementById('spots').onchange=e=>starMat.uniforms.spots.value=e.target.checked?1:0;
+let spinning=!matchMedia('(prefers-reduced-motion: reduce)').matches; const spinBox=document.getElementById('spin'); spinBox.checked=spinning; spinBox.onchange=e=>spinning=e.target.checked;
+let flareT=-1; document.getElementById('flareBtn').onclick=()=>{ flareT=0; if(view!=='star') setView('star'); };
+function setIR(on){ starMat.uniforms.ir.value=on?1:0; glow.material.color = on? new THREE.Color(0xd9468a): kelvinRGB(+temp.value);
+  document.getElementById('eyeBtn').setAttribute('aria-pressed',!on); document.getElementById('irBtn').setAttribute('aria-pressed',on);
+  document.getElementById('spec').style.display = on?'block':'none'; }
+document.getElementById('eyeBtn').onclick=()=>setIR(false); document.getElementById('irBtn').onclick=()=>setIR(true);
+
+// real SPHEREx spectrum (sample build)
+(function(){ if(!SPEC.length) return; const W=300,H=130,l=36,r=6,t=8,b=24;
+  const xs=[SPEC[0][0],SPEC.at(-1)[0]], ys=[0,Math.max(...SPEC.map(p=>p[1]))*1.1];
+  const X=v=>l+(v-xs[0])/(xs[1]-xs[0])*(W-l-r), Y=v=>H-b-(v-ys[0])/(ys[1]-ys[0])*(H-t-b);
+  let g=''; for(let v=4;v<=5;v+=.5) g+=`<line x1="${X(v)}" x2="${X(v)}" y1="${t}" y2="${H-b}" stroke="#26324a"/><text x="${X(v)}" y="${H-b+14}" text-anchor="middle">${v.toFixed(1)} µm</text>`;
+  g+=`<text x="10" y="${(H-b)/2}" transform="rotate(-90 10 ${(H-b)/2})" text-anchor="middle">brightness</text>`;
+  const ramp=x=>{const c=new THREE.Color(); c.setHSL(.83-.75*x,.8,.6); return '#'+c.getHexString();};
+  const d=SPEC.map(p=>`<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="2.6" fill="${ramp((p[0]-xs[0])/(xs[1]-xs[0]))}"/>`).join('');
+  document.getElementById('specsvg').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="SPHEREx spectrum of Barnard's Star, 68 points from 3.8 to 5 microns">${g}<line x1="${l}" x2="${W-r}" y1="${H-b}" y2="${H-b}" stroke="#8f9bb0"/>${d}</svg>`;
+})();
+
+// ---------- loop ----------
+const clock=new THREE.Clock();
+function tick(){
+  const dt=clock.getDelta(), t=clock.elapsedTime;
+  starMat.uniforms.time.value=t;
+  if(spinning){ star.rotation.y+=dt*.12; }
+  if(flareT>=0){ flareT+=dt; const f = flareT<.25? flareT/.25 : Math.max(0,1-(flareT-.25)/2.2);
+    starMat.uniforms.flare.value=f; arc.material.opacity=f*.9; glow.material.opacity=.75+f*.9; glow.scale.setScalar(4.2+f*2.2);
+    if(flareT>2.6){ flareT=-1; starMat.uniforms.flare.value=0; arc.material.opacity=0; glow.material.opacity=.75; glow.scale.setScalar(4.2);} }
+  if(planetGroup.visible){ planets.forEach(p=>{ const u=p.userData, ang=u.ph+t*2/u.P; p.position.set(Math.cos(ang)*u.a,0,Math.sin(ang)*u.a); p.rotation.y+=dt; }); }
+  if(mapGroup.visible){ bDot.scale.setScalar(1+.15*Math.sin(t*2)); }
+  controls.update(); renderer.render(scene,camera); placeLabels(); requestAnimationFrame(tick);
+}
+size(); setView('star'); setTemp(3200); tick();
+</script>
