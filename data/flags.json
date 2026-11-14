@@ -1,0 +1,163 @@
+{
+ "source": "SPHEREx L2 FLAGS header MSKN/MSKM/MSKD (checked 14 Nov 2026 on 2026W33_2A_0594_4D3, R7); hard list = IRSA mosaic reject list (Explanatory Supplement v2.1 \u00a73.4.3). OVERFLOW, SOURCE, OUTLIER pass the mosaic tool.",
+ "hard_mask_bits": [
+  0,
+  2,
+  6,
+  7,
+  9,
+  10,
+  11,
+  14,
+  15,
+  17,
+  20,
+  22,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28
+ ],
+ "soft_bits": [
+  1,
+  19
+ ],
+ "info_bits": [
+  12,
+  21
+ ],
+ "saturation_bits": [
+  1,
+  26
+ ],
+ "saturation_note": "OVERFLOW+BLOOM mean 'bright star': processing may mask them in the image but must raise the saturated warning/overlay rather than silently drop the target. For saturated targets (Barnard, RW Aur) BLOOM/TRANSIENT are set on the core in every frame, so a pure hard mask would blank the target; see per_target_notes.",
+ "bits": {
+  "0": {
+   "name": "TRANSIENT",
+   "class": "hard",
+   "plain": "Something flashed here during the exposure (cosmic ray or a bright transient), so this pixel can't be trusted."
+  },
+  "1": {
+   "name": "OVERFLOW",
+   "class": "soft",
+   "plain": "Too bright: the detector saturated here, so the real brightness is higher than shown."
+  },
+  "2": {
+   "name": "SUR_ERROR",
+   "class": "hard",
+   "plain": "The on-board computer made an error while reading this pixel."
+  },
+  "6": {
+   "name": "NONFUNC",
+   "class": "hard",
+   "plain": "Dead pixel: it never works."
+  },
+  "7": {
+   "name": "DICHROIC",
+   "class": "hard",
+   "plain": "Edge of the detector where the beam splitter blocks most of the light."
+  },
+  "9": {
+   "name": "MISSING_DATA",
+   "class": "hard",
+   "plain": "Data for this pixel was lost on its way down from the satellite."
+  },
+  "10": {
+   "name": "HOT",
+   "class": "hard",
+   "plain": "Hot pixel: reads brighter than it should."
+  },
+  "11": {
+   "name": "COLD",
+   "class": "hard",
+   "plain": "Cold pixel: reads fainter than it should."
+  },
+  "12": {
+   "name": "FULLSAMPLE",
+   "class": "info",
+   "plain": "Detailed read-out history exists for this pixel (technical note, nothing wrong)."
+  },
+  "14": {
+   "name": "PHANMISS",
+   "class": "hard",
+   "plain": "A small detector-glow correction could not be applied here."
+  },
+  "15": {
+   "name": "NONLINEAR",
+   "class": "hard",
+   "plain": "Bright enough that the brightness correction is unreliable."
+  },
+  "17": {
+   "name": "PERSIST",
+   "class": "hard",
+   "plain": "Afterimage: left-over charge from an earlier bright source."
+  },
+  "19": {
+   "name": "OUTLIER",
+   "class": "soft",
+   "plain": "This pixel looks odd compared with its neighbours; kept, but treat with care."
+  },
+  "20": {
+   "name": "CROSSTALK",
+   "class": "hard",
+   "plain": "Faint copy of a bright object leaking in from elsewhere on the detector."
+  },
+  "21": {
+   "name": "SOURCE",
+   "class": "info",
+   "plain": "A known star or galaxy sits on this pixel. Not a defect: this is the thing we want to see."
+  },
+  "22": {
+   "name": "GHOST",
+   "class": "hard",
+   "plain": "Faint reflection of a bright source in the same image."
+  },
+  "23": {
+   "name": "GHOST_FPA",
+   "class": "hard",
+   "plain": "Faint reflection of a bright source seen by another detector."
+  },
+  "24": {
+   "name": "GHOST_EXT",
+   "class": "hard",
+   "plain": "Faint reflection of a bright source just outside the field of view."
+  },
+  "25": {
+   "name": "STREAK",
+   "class": "hard",
+   "plain": "A line across the image, e.g. a satellite or asteroid trail."
+  },
+  "26": {
+   "name": "BLOOM",
+   "class": "hard",
+   "plain": "Light bleeding out of a very bright star along the detector."
+  },
+  "27": {
+   "name": "SNOWBALL",
+   "class": "hard",
+   "plain": "Round blob left by a cosmic-ray hit."
+  },
+  "28": {
+   "name": "HALO",
+   "class": "hard",
+   "plain": "Glow around a transient hit."
+  }
+ },
+ "per_target_notes": {
+  "barnards-star": "OVERFLOW/BLOOM/TRANSIENT on the core in all 168 D1-D3 frames; core is NaN. Use D5/D6 or difference mode; position still measurable from the wings.",
+  "rw-aurigae": "OVERFLOW in 100/101 frames: bright (about Jy level). Flux values are lower limits.",
+  "epsilon-indi-b": "Faint (Gaia G=18) next to the bright star eps Indi A (~4.7 mag): watch GHOST/CROSSTALK/BLOOM near the target; check in QA.",
+  "wise-0855": "Faint, no saturation expected. Only visible above ~3.8 um (D5/D6); SOURCE may mark the AllWISE position, not today's.",
+  "r-draconis": "Mira at maximum can be bright in D1-D3; check OVERFLOW per epoch since flux changes by orders of magnitude over a cycle."
+ },
+ "header_keys": {
+  "finast": "FINAST != 0 = poor astrometry -> reject exposure",
+  "contamination": [
+   "AURORA_CONT",
+   "SHUTTLE_GLOW_CONT",
+   "HE_AIRGLOW_CONT"
+  ]
+ }
+}
