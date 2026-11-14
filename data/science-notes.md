@@ -1,6 +1,7 @@
 # Science notes (C7) — D-4, owner Sean
 
 Every number the app or video shows must come from here. Status tags: **[M]** measured by our team on 14 Nov 2026 (see `research/01-data.md`), **[L✓]** literature, checked against the linked source on 14 Nov 2026, **[L]** literature not yet verified (re-check before the video).
+Temperatures, sizes and class ranges for the 3D models are in `science/classes.json` (built by `data/scripts/build_classes.py`).
 Positions/pm in the app come from `data/targets.json`, not from here.
 
 ## Mission and story
@@ -15,14 +16,14 @@ Positions/pm in the app come from `data/targets.json`, not from here.
 - Data are public, no login, from IRSA (Caltech/IPAC). Release used: DR1 + QR3 (pipeline R7). [D]
 
 ## Barnard's Star (`barnards-star`)
-1. A faint red dwarf (spectral type M4 [L]) only **~1.83 pc (6 light-years)** away: Gaia parallax 546.98 mas → 1.828 pc. [M]; 1.8266 pc [L✓] Wikipedia/Britannica.
+1. A faint red dwarf (spectral type M4 [L]; surface ~3,100–3,200 K: 3134 ± 102 K, Dawson & De Robertis 2004, or 3223 ± 17 K; radius ~0.19–0.20 of the Sun's [L✓ via https://en.wikipedia.org/wiki/Barnard%27s_Star]) only **~1.83 pc (6 light-years)** away: Gaia parallax 546.98 mas → 1.828 pc. [M]; 1.8266 pc [L✓] Wikipedia/Britannica.
 2. It has the **fastest proper motion of any star: 10.39″ per year** = 1.69 SPHEREx pixels/yr, so it moves by 1 px in ~7 months. Gaia pm (−801.55, +10362.39) mas/yr. [M]
 3. We measured it in SPHEREx: **+9.8″ in Dec over 0.99 yr** (expected +10.3″). [M]
 4. It is approaching us at **~110 km/s** (−110.6 km/s) and will be closest around **AD 11,800**, at ~3.8 light-years (sources differ: 3.75–3.85 ly, 11,700–11,800). [L✓] Wikipedia, Britannica; say 'about 12,000 years' / 'about 3.8 ly'.
 5. Caveat: it's bright in SPHEREx; its core is saturated (NaN) in all 168 D1–D3 frames we checked. Use D5/D6 or the difference view; the motion is still measurable. [M]
 
 ## ε Indi B (`eps-indi-b`) — Ba and Bb
-1. A pair of **brown dwarfs** (spectral types T1–1.5 and T6) orbiting the star ε Indi A at **~3.64 pc** (3.638 pc, Gaia EDR3 parallax of A). Dynamical masses **66.92 ± 0.36 and 53.25 ± 0.29 Jupiter masses**; system age ~3.5 Gyr. [L✓] https://arxiv.org/abs/2205.08077. The pair is a fraction of an arcsecond–few arcsec apart (separation not verified [L]), far below the 6.15″ pixel, so we see a single blob.
+1. A pair of **brown dwarfs** (spectral types T1–1.5 and T6) orbiting the star ε Indi A at **~3.64 pc** (3.638 pc, Gaia EDR3 parallax of A). Dynamical masses **66.92 ± 0.36 and 53.25 ± 0.29 Jupiter masses**; system age ~3.5 Gyr. [L✓] https://arxiv.org/abs/2205.08077. Temperatures **1300–1340 K (Ba) and 880–940 K (Bb)** [L✓] King et al. 2010, https://www.aanda.org/articles/aa/abs/2010/02/aa12981-09/aa12981-09.html. The pair is a fraction of an arcsecond–few arcsec apart (separation not verified [L]), far below the 6.15″ pixel, so we see a single blob.
 2. Proper motion 4.68″/yr = 0.76 px/yr, moves with its parent star. Gaia DR3 6412596012146801152 (G=18.0). [M]
 3. Brown dwarfs are brighter in the red end of SPHEREx (D5/D6) than in the blue; methane makes them dim around 1.6, 2.2 and 3.3 µm. [L] 
 4. Caveat: faint and next to the very bright ε Indi A: check ghosts/crosstalk (QA).
