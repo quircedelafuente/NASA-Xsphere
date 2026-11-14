@@ -5,7 +5,7 @@
  *   /?target=barnards-star              named target
  *   /?ra=133.795&dec=-7.245&fov=394     arbitrary coordinates (live mode)
  *     &band=D56&mode=blink|diff|side&speed=1.0&frame=0&stretch=asinh:0.1&overlay=gaia,flags
- *     &zoom=8&tour=1&palette=grey       (UI-only extras, optional; palette: frames are false colour unless 'grey')
+ *     &zoom=8&tour=1&palette=grey&smooth=1   (UI-only extras, optional; palette: false colour unless 'grey'; smooth: no square pixels)
  *     &view=269.4486,4.7398,0.32         (UI-only: sky-map centre RA,Dec and horizontal field in deg)
  *   /embed?...                          same params, minimal chrome
  */
@@ -32,6 +32,8 @@ export interface ViewState {
   tour?: boolean;
   /** False colour by wavelength (default, omitted from the URL) or 'grey'. */
   palette?: PaletteId;
+  /** Smooth display instead of square pixels (off by default, D7). */
+  smooth?: boolean;
   /** Sky-map camera (UI extra): centre RA/Dec and horizontal field of view, all in degrees. */
   view?: MapView;
 }
@@ -82,6 +84,7 @@ export function parseUrl(loc: { pathname: string; search: string }): ViewState {
     zoom: num(p.get('zoom')),
     tour: p.get('tour') === '1',
     palette: PALETTES.find((x) => x === p.get('palette')),
+    smooth: p.get('smooth') === '1',
     view: parseView(p.get('view')),
   };
 }
@@ -103,6 +106,7 @@ export function buildSearch(s: Partial<ViewState>): string {
   if (s.zoom !== undefined) p.set('zoom', String(s.zoom));
   if (s.tour) p.set('tour', '1');
   if (s.palette && s.palette !== 'infrared') p.set('palette', s.palette);
+  if (s.smooth) p.set('smooth', '1');
   if (s.view) p.set('view', `${s.view.ra.toFixed(4)},${s.view.dec.toFixed(4)},${Number(s.view.fov.toPrecision(3))}`);
   const q = p.toString().replace(/%2C/gi, ','); // commas are safe in a query string and easier to read
   return q ? `?${q}` : '';

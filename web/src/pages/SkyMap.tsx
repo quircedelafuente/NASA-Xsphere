@@ -147,6 +147,7 @@ export function SkyMap({ loc }: { loc: string }) {
   const [vmax, setVmax] = useState<number | undefined>(undefined);
   const [invert, setInvert] = useState(false);
   const [palette, setPalette] = useState<PaletteId>('infrared');
+  const [smooth, setSmooth] = useState(false);
   const [overlays, setOverlays] = useState<Overlay[]>(DEFAULT_OVERLAYS);
   const [excluded, setExcluded] = useState<number[]>([]);
   const [advOpen, setAdvOpen] = useState(false);
@@ -360,7 +361,8 @@ export function SkyMap({ loc }: { loc: string }) {
     const st = parseUrl({ pathname: '/', search });
     const keep: Partial<ViewState> = { mode: st.mode, speed: st.speed, frame: st.frame, band: st.band, stretchA: st.stretchA, overlays: st.overlays };
     if (initial) setDemo(new URLSearchParams(search).get('demo') === '1');
-    if (st.palette) setPalette(st.palette); // a viewing preference: kept across targets, only a link can set it
+    if (st.palette) setPalette(st.palette); // viewing preferences: kept across targets, only a link can set them
+    if (st.smooth) setSmooth(true);
     setTour(Boolean(st.tour));
     setTourStep(0);
     // tour link without a target: start at the first stop, flying in from the whole sky
@@ -893,9 +895,9 @@ export function SkyMap({ loc }: { loc: string }) {
     embed: false,
     view: { ra: view.ra, dec: view.dec, fov: view.fov },
     ...(meta && patchOpen
-      ? { target: meta.id, mode, speed, frame: playing ? 0 : frame, band, stretchA, overlays, tour, palette }
+      ? { target: meta.id, mode, speed, frame: playing ? 0 : frame, band, stretchA, overlays, tour, palette, smooth }
       : { mode: 'blink' as ViewMode, speed: 1, frame: 0, overlays: DEFAULT_OVERLAYS }),
-  }), [view, meta, patchOpen, mode, speed, frame, playing, band, stretchA, overlays, tour, palette]);
+  }), [view, meta, patchOpen, mode, speed, frame, playing, band, stretchA, overlays, tour, palette, smooth]);
 
   useEffect(() => {
     if (!initialised.current) return;
@@ -1066,7 +1068,7 @@ export function SkyMap({ loc }: { loc: string }) {
         {mode === 'side' && (
           <div className="sheet__side">
             <BlinkCanvas manifest={manifest} frames={frames} mode="side" frameIndex={frame} playing={false} fps={speed}
-              stretch={stretch} zoom={6} invert={invert} palette={palette} excludeEpochs={excluded} overlays={overlayProps} />
+              stretch={stretch} zoom={6} invert={invert} palette={palette} smooth={smooth} excludeEpochs={excluded} overlays={overlayProps} />
           </div>
         )}
         <label className="slider">
@@ -1097,6 +1099,7 @@ export function SkyMap({ loc }: { loc: string }) {
         vmax={vmax ?? manifest.stretch.vmax} vmaxDefault={manifest.stretch.vmax} onVmax={setVmax}
         invert={invert} onInvert={setInvert}
         palette={palette} onPalette={setPalette}
+        smooth={smooth} onSmooth={setSmooth}
         flags={overlays.includes('flags')} onFlags={(v) => toggleOverlay('flags', v)}
         crosshair={overlays.includes('crosshair')} onCrosshair={(v) => toggleOverlay('crosshair', v)}
         track={overlays.includes('track')} onTrack={(v) => toggleOverlay('track', v)}
@@ -1136,6 +1139,7 @@ export function SkyMap({ loc }: { loc: string }) {
                 zoom={8}
                 invert={invert}
                 palette={palette}
+                smooth={smooth}
                 excludeEpochs={excluded}
                 overlays={overlayProps}
                 onFrameChange={setFrame}

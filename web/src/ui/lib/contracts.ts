@@ -161,6 +161,8 @@ export interface BlinkCanvasProps {
   invert?: boolean;
   /** Optional extension: false colour by wavelength ('infrared', default) or the plain 'grey' frames. See ui/lib/palette.ts. */
   palette?: 'infrared' | 'grey';
+  /** Optional extension: smooth the display instead of square pixels (off by default, D7). See ui/lib/smooth.ts. */
+  smooth?: boolean;
   /** Optional extension: epochs the user switched off in Advanced. */
   excludeEpochs?: number[];
 }
