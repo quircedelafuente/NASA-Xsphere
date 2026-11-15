@@ -158,6 +158,9 @@ export function SkyMap({ loc }: { loc: string }) {
   const [areaRect, setAreaRect] = useState<{ x0: number; y0: number; x1: number; y1: number } | null>(null);
   const [areaJob, setAreaJob] = useState<{ title: string; detail: string; progress: number; error?: boolean } | null>(null);
   const areaRun = useRef(0);
+  /** The chosen area stays drawn on the sky (glued to it while the map moves) until its photos open. */
+  const pendingArea = useRef<{ ra: number; dec: number; w: number; h: number } | null>(null);
+  const pendingEl = useRef<HTMLDivElement>(null);
   const [emptyDismissed, setEmptyDismissed] = useState(false);
   useEffect(() => { setEmptyDismissed(false); }, [selectedId]);
 
@@ -515,6 +518,17 @@ export function SkyMap({ loc }: { loc: string }) {
         if (pe.dataset.small !== small) pe.dataset.small = small;
       }
 
+      // the area being fetched: same box the user drew, kept on the sky
+      const ae = pendingEl.current, pa = pendingArea.current;
+      if (ae && pa) {
+        const q = P.project(pa.ra, pa.dec);
+        const w = Math.max(16, (pa.w / 60) * D2R * q.k), h = Math.max(16, (pa.h / 60) * D2R * q.k);
+        ae.style.width = `${w}px`;
+        ae.style.height = `${h}px`;
+        ae.style.transform = `translate3d(${(q.x - w / 2).toFixed(1)}px, ${(q.y - h / 2).toFixed(1)}px, 0)`;
+        ae.style.visibility = q.cosc > 0 ? 'visible' : 'hidden';
+      }
+
       // "then vs now": where older surveys saw this star (drawn outside the patch so the blink stays clean)
       const tc = trailCanvasRef.current;
       if (tc) {
@@ -869,7 +883,7 @@ export function SkyMap({ loc }: { loc: string }) {
     return () => { alive = false; };
   }, [patchOpen, meta]);
 
-  useEffect(() => { dirtyRef.current = true; }, [patchOpen, load, selectedId]);
+  useEffect(() => { dirtyRef.current = true; }, [patchOpen, load, selectedId, areaJob]);
 
   // trail of archival positions (oldest → SPHEREx position) for the "then vs now" overlay
   useEffect(() => {
@@ -1009,7 +1023,7 @@ export function SkyMap({ loc }: { loc: string }) {
   const startAreaMode = useCallback(() => {
     setHint(false); setNotice(null); dismissIntro(); setTourEnd(false); setTour(false);
     if (selectedId) closePatch(false);
-    areaRun.current++; setAreaJob(null); setAreaRect(null); setAreaMode(true);   // a new box replaces any area still loading
+    areaRun.current++; pendingArea.current = null; setAreaJob(null); setAreaRect(null); setAreaMode(true);   // a new box replaces any area still loading
     // a box drawn on the whole-sky view would be far too big: get close enough first
     if (camRef.current.fov > 2) flyTo({ ...camRef.current, fov: 1.2 });
   }, [selectedId, closePatch, flyTo, dismissIntro]);
@@ -1022,6 +1036,7 @@ export function SkyMap({ loc }: { loc: string }) {
       queued: 'Waiting for a free slot…', listing: 'Asking NASA which photos cover this area…',
       fetching: 'Reading the photos from NASA and lining them up…', 'checking catalogues': 'Almost there…',
     };
+    pendingArea.current = a; dirtyRef.current = true;
     setAreaJob({ title: STATUS.listing, detail: label, progress: 0.02 });
     try {
       const r = await fetch('/scan', { method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -1051,10 +1066,12 @@ export function SkyMap({ loc }: { loc: string }) {
       } as unknown as TargetMeta;
       catalog.metas[id] = meta;
       if (!catalog.index.some((e) => e.id === id)) catalog.index.push({ id, name: label, kind: 'custom', bands: ['D4'], n_epochs: m.frames.length });
+      pendingArea.current = null;
       setAreaJob(null);
       select(id, { open: true });
     } catch (err) {
       if (run !== areaRun.current) return;
+      pendingArea.current = null;
       setAreaJob({ title: 'Could not load this area', detail: (err as Error).message, progress: 0, error: true });
     }
   }, [catalog, getBundle, select]);
@@ -1266,6 +1283,13 @@ export function SkyMap({ loc }: { loc: string }) {
           </div>
         )}
 
+        {areaJob && !areaJob.error && (
+          <div ref={pendingEl} className="selbox selbox--busy selbox--onsky" aria-hidden="true">
+            <i className="selbox__c selbox__c--tl" /><i className="selbox__c selbox__c--tr" /><i className="selbox__c selbox__c--bl" /><i className="selbox__c selbox__c--br" />
+            <span className="selbox__scan" />
+            <span className="selbox__tag mono">{Math.round(areaJob.progress * 100)}% · fetching SPHEREx photos</span>
+          </div>
+        )}
         <canvas ref={trailCanvasRef} className="skymap__trail" aria-hidden="true" />
 
         <div className="markers">
@@ -1294,10 +1318,11 @@ export function SkyMap({ loc }: { loc: string }) {
       {areaMode && (
         <div className="area-layer" {...areaHandlers} aria-label="Drag a box on the sky to choose an area">
           {areaRect && (
-            <div className={`area-rect ${areaLive?.capped ? 'area-rect--capped' : ''}`} style={{
+            <div className={`selbox ${areaLive?.capped ? 'selbox--capped' : ''}`} style={{
               left: Math.min(areaRect.x0, areaRect.x1), top: Math.min(areaRect.y0, areaRect.y1),
               width: Math.abs(areaRect.x1 - areaRect.x0), height: Math.abs(areaRect.y1 - areaRect.y0) }}>
-              {areaLive && <span className="area-rect__size mono">{areaLive.w.toFixed(1)}′ × {areaLive.h.toFixed(1)}′{areaLive.capped ? ' (max 30′)' : ''}</span>}
+              <i className="selbox__c selbox__c--tl" /><i className="selbox__c selbox__c--tr" /><i className="selbox__c selbox__c--bl" /><i className="selbox__c selbox__c--br" />
+              {areaLive && <span className="selbox__tag mono">{areaLive.w.toFixed(1)}′ × {areaLive.h.toFixed(1)}′{areaLive.capped ? ' · max 30′' : ''}</span>}
             </div>
           )}
           {!areaRect && <p className="area-hint">Drag a box on the sky (up to 30′ wide) · scroll to zoom · Esc or the button above to cancel</p>}
@@ -1305,7 +1330,7 @@ export function SkyMap({ loc }: { loc: string }) {
       )}
       {areaJob && (
         <div className={`area-job ${areaJob.error ? 'area-job--error' : ''}`} role="status">
-          <button className="toast__x" onClick={() => { areaRun.current++; setAreaJob(null); }} aria-label="Cancel">✕</button>
+          <button className="toast__x" onClick={() => { areaRun.current++; pendingArea.current = null; setAreaJob(null); }} aria-label="Cancel">✕</button>
           <p className="area-job__title">{!areaJob.error && <span className="spinner" aria-hidden="true" />} {areaJob.title}</p>
           {!areaJob.error && <div className="area-job__bar"><i style={{ width: `${Math.round(areaJob.progress * 100)}%` }} /></div>}
           <p className="small muted">{areaJob.detail}</p>
