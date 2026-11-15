@@ -1053,7 +1053,7 @@ export function SkyMap({ loc }: { loc: string }) {
   const runArea = useCallback(async (a: { ra: number; dec: number; w: number; h: number }) => {
     if (!catalog) return;
     const run = ++areaRun.current;
-    const label = `Selected area ${a.w.toFixed(1)}′ × ${a.h.toFixed(1)}′`;
+    const label = `Selected area ${a.w.toFixed(1)}′ × ${a.h.toFixed(1)}′ · RA ${a.ra.toFixed(3)}° Dec ${a.dec >= 0 ? '+' : ''}${a.dec.toFixed(3)}°`;
     const STATUS: Record<string, string> = {
       queued: 'Waiting for a free slot…', listing: 'Asking NASA which photos cover this area…',
       fetching: 'Reading the photos from NASA and lining them up…', 'checking catalogues': 'Almost there…',
@@ -1073,7 +1073,9 @@ export function SkyMap({ loc }: { loc: string }) {
         if (j.status === 'error') throw new Error(j.message || 'The area could not be processed.');
         if (j.bundle || j.status === 'done') break;   // photos are ready; object checks may still be running
         setAreaJob({ title: STATUS[j.status] ?? 'Working…', progress: Math.max(0.02, j.progress ?? 0),
-          detail: [label, j.n_photos_total ? `${j.n_photos_total} photos of this area exist` : ''].filter(Boolean).join(' · ') });
+          detail: [label, j.n_photos_total ? `${j.n_photos_total} photos found` : '',
+            // SPHEREx passes over a spot a few times a year: every pass's photos are stacked into ONE blink frame
+            j.visits?.length ? `stacked into ${j.visits.length} visits = ${j.visits.length} blink frames` : ''].filter(Boolean).join(' · ') });
         await sleep(1500);
       }
       const id = `live-${key}`;
