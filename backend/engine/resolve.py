@@ -92,11 +92,51 @@ def sesame(name):
             return None
     return None
 
+# Words that star and nebula names are built from, to split a name typed without spaces ('alphacentauri', 'tauceti').
+_GREEK = ('alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau upsilon phi chi psi omega '
+          'alf bet gam del eps zet tet iot kap lam omi sig ups ome').split()
+_GENITIVES = ('andromedae antliae apodis aquarii aquilae arae arietis aurigae bootis caeli camelopardalis cancri canum venaticorum '
+              'canis majoris minoris capricorni carinae cassiopeiae centauri cephei ceti chamaeleontis circini columbae comae berenices '
+              'coronae australis borealis corvi crateris crucis cygni delphini doradus draconis equulei eridani fornacis geminorum gruis '
+              'herculis horologii hydrae hydri indi lacertae leonis leporis librae lupi lyncis lyrae mensae microscopii monocerotis '
+              'muscae normae octantis ophiuchi orionis pavonis pegasi persei phoenicis pictoris piscium piscis austrini puppis pyxidis '
+              'reticuli sagittae sagittarii scorpii sculptoris scuti serpentis sextantis tauri telescopii trianguli tucanae ursae '
+              'velorum virginis volantis vulpeculae').split()
+_ENDS = _GENITIVES + 'nebula galaxy cluster star'.split()
+
+def _split_word(w):
+    """'alphacentauri' -> ['alpha centauri'], 'orionnebula' -> ['orion nebula']. Empty if no known word is inside."""
+    w = w.lower()
+    # 1. the whole word made of a Greek letter + constellation words ('alphaursaemajoris')
+    def pieces(rest, vocab):
+        if not rest:
+            return []
+        for v in sorted(vocab, key=len, reverse=True):
+            if rest.startswith(v):
+                tail = pieces(rest[len(v):], _ENDS)
+                if tail is not None:
+                    return [v] + tail
+        return None
+    out = []
+    full = pieces(w, _GREEK + _ENDS)
+    if full and len(full) > 1:
+        out.append(' '.join(full))
+    # 2. any name + a known last word ('proximacentauri', 'andromedagalaxy')
+    for e in sorted(_ENDS, key=len, reverse=True):
+        if w.endswith(e) and len(w) - len(e) >= 3:
+            v = w[:-len(e)] + ' ' + e
+            if v not in out:
+                out.append(v)
+            break
+    return out
+
 def name_variants(q):
     """The same name with its words joined differently, as typed first. The catalogues are strict about this:
     'TRAPPIST-1' is known, 'trappist 1' and 'trappist1' are not; 'GJ 1214' is known, 'gj 1214' and 'gj1214' are not."""
     parts = re.findall(r'[^\W\d_]+|\d+(?:\.\d+)?', q)
     out = [q.strip()]
+    if len(parts) == 1 and parts[0].isalpha() and len(parts[0]) >= 6 and parts[0] == q.strip():
+        return out + _split_word(parts[0])
     if len(parts) >= 2 and not re.search(r'[^\w\s\-.]', q):   # leave J-names and anything with + or other signs alone
         for v in (' '.join(parts), '-'.join(parts), ''.join(parts), parts[0] + '-' + ' '.join(parts[1:]),
                   parts[0].upper() + ' ' + ' '.join(parts[1:])):   # some catalogue prefixes only work in capitals (GJ, HIP)

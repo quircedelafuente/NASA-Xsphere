@@ -41,6 +41,9 @@ def test_name_variants():
     assert 'trappist-1' in [v.lower() for v in name_variants('trappist 1')] and 'trappist-1' in [v.lower() for v in name_variants('trappist1')]
     assert 'GJ 1214' in name_variants('gj1214') and 'HIP 87937' in name_variants('hip 87937')
     assert 'gj 1214' in name_variants('gj1214') and 'trappist-1 b' in name_variants('trappist 1 b')
+    assert name_variants('alphacentauri') == ['alphacentauri', 'alpha centauri'] and 'tau ceti' in name_variants('tauceti')
+    assert 'alpha ursae majoris' in name_variants('AlphaUrsaeMajoris') and 'proxima centauri' in name_variants('proximacentauri')
+    assert 'orion nebula' in name_variants('orionnebula') and name_variants('betelgeuse') == ['betelgeuse']
     assert name_variants('Vega') == ['Vega'] and name_variants('J175748.5+044136') == ['J175748.5+044136']
     assert name_variants('TRAPPIST-1')[0] == 'TRAPPIST-1'   # as typed is always tried first
 
