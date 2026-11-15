@@ -160,6 +160,9 @@ def b_meta(bid: str):
 
 @app.get('/bundles/{bid}/spectrum.json')
 def b_spectrum(bid: str):
+    full = PREBUILT / bid / 'spectrum_full.json'                    # one point per exposure (processing/spectrum.py)
+    if '/' not in bid and '..' not in bid and full.exists():
+        return JSONResponse(json.loads(full.read_text()))
     p = REPORTS / f'{bid}.json'
     if bid.startswith('live-'):
         p = _bundle_dir(bid) / 'report.json'
@@ -186,14 +189,18 @@ def b_spectrum(bid: str):
 
 @app.get('/bundles/{bid}/gaia.json')
 def b_gaia(bid: str):
-    """Gaia DR3 stars in the field for the viewer's overlay (chunk B's cached IRSA query, G < 19.5)."""
+    """Gaia DR3 stars (G < 19.5) + AllWISE sources in the field for the viewer's overlays (chunk B's cached IRSA queries)."""
     from processing.discovery.crossmatch import query_irsa
     m = b_meta(bid)
     if m.get('ra_deg') is None:
         raise HTTPException(404, dict(error='not-found', message='No position for this field.'))
     rows = query_irsa('Gaia DR3', m['ra_deg'], m['dec_deg'], 0.08)   # covers the 393.6″ square's corners
     return dict(ref_epoch=2016.0, sources=[dict(ra_deg=r['ra'], dec_deg=r['dec'], pmra_masyr=r['pmra'] or 0.0, pmdec_masyr=r['pmdec'] or 0.0,
-                                               plx_mas=r['parallax'] or 0.0, gmag=r['phot_g_mean_mag']) for r in rows])
+                                               plx_mas=r['parallax'] or 0.0, gmag=r['phot_g_mean_mag']) for r in rows],
+                # AllWISE (W2 < 16) where WISE saw each source in ~2010, not moved: a mover sits away from its square.
+                # CatWISE2020 would be newer, but its VizieR backup returns no rows and IRSA TAP is often down.
+                ref_epoch_wise=2010.5, wise=[dict(ra_deg=r['ra'], dec_deg=r['dec'], pmra_masyr=0.0, pmdec_masyr=0.0, w2mag=r['w2mpro'])
+                                             for r in query_irsa('AllWISE', m['ra_deg'], m['dec_deg'], 0.08)])
 
 @app.get('/bundles/{bid}/{band}/manifest.json')
 def b_manifest(bid: str, band: str):

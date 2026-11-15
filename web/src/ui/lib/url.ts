@@ -4,7 +4,7 @@
  *   /                                   landing
  *   /?target=barnards-star              named target
  *   /?ra=133.795&dec=-7.245&fov=394     arbitrary coordinates (live mode)
- *     &band=D56&mode=blink|diff|side&speed=1.0&frame=0&stretch=asinh:0.1&overlay=gaia,flags
+ *     &band=D56&mode=blink|diff|side&speed=1.0&frame=0&stretch=asinh:0.1&overlay=gaia,wise,flags
  *     &zoom=8&tour=1&palette=grey&smooth=1   (UI-only extras, optional; palette: false colour unless 'grey'; smooth: no square pixels)
  *     &view=269.4486,4.7398,0.32         (UI-only: sky-map centre RA,Dec and horizontal field in deg)
  *   /embed?...                          same params, minimal chrome
@@ -14,7 +14,7 @@ import { PALETTES, type PaletteId } from './palette';
 
 export const MAX_FPS = 2; // WCAG 2.3.1 — never more than 3 flashes/s; we cap at 2
 
-export type Overlay = 'gaia' | 'flags' | 'track' | 'crosshair';
+export type Overlay = 'gaia' | 'wise' | 'flags' | 'track' | 'crosshair';
 
 export interface ViewState {
   embed: boolean;
@@ -50,7 +50,7 @@ function parseView(v: string | null): MapView | undefined {
 
 const BANDS: BandId[] = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D56', 'ALL', 'mol-ch4', 'mol-h2o', 'mol-co2'];
 const MODES: ViewMode[] = ['blink', 'diff', 'side'];
-const OVERLAYS: Overlay[] = ['gaia', 'flags', 'track', 'crosshair'];
+const OVERLAYS: Overlay[] = ['gaia', 'wise', 'flags', 'track', 'crosshair'];
 export const DEFAULT_OVERLAYS: Overlay[] = ['crosshair', 'track', 'flags'];
 
 function num(v: string | null): number | undefined {
