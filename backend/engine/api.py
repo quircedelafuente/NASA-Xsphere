@@ -234,4 +234,7 @@ if _explore.exists():
     app.mount('/explore', StaticFiles(directory=_explore, html=True), name='explore')   # any spot + zone scans (engine UI)
 _dist = config.ROOT / 'web' / 'dist'
 if _dist.exists():
+    @app.get('/embed', include_in_schema=False)   # same page, minimal chrome (the share panel hands out /embed?... links);
+    def embed():                                    # on Vercel this is the rewrite in web/vercel.json
+        return FileResponse(_dist / 'index.html')
     app.mount('/', StaticFiles(directory=_dist, html=True), name='product')   # Niklas's product UI build (npm run build)
