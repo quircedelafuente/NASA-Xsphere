@@ -1284,9 +1284,8 @@ export function SkyMap({ loc }: { loc: string }) {
         )}
 
         {areaJob && !areaJob.error && (
-          <div ref={pendingEl} className="selbox selbox--busy selbox--onsky" aria-hidden="true">
+          <div ref={pendingEl} className="selbox selbox--onsky" aria-hidden="true">
             <i className="selbox__c selbox__c--tl" /><i className="selbox__c selbox__c--tr" /><i className="selbox__c selbox__c--bl" /><i className="selbox__c selbox__c--br" />
-            <span className="selbox__scan" />
             <span className="selbox__tag mono">{Math.round(areaJob.progress * 100)}% · fetching SPHEREx photos</span>
           </div>
         )}

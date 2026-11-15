@@ -636,14 +636,6 @@ button.area-btn { cursor: pointer; font: inherit; font-size: 13px; }
 .selbox__c--br { right: -2px; bottom: -2px; border-right-width: 3px; border-bottom-width: 3px; border-bottom-right-radius: 5px; }
 .selbox__tag { position: absolute; left: 0; top: -30px; font-size: 11.5px; letter-spacing: .02em; white-space: nowrap; padding: 3px 10px; border-radius: 999px;
   color: var(--fg); background: rgba(11,13,18,.82); border: 1px solid color-mix(in srgb, var(--c) 55%, transparent); backdrop-filter: blur(6px); }
-.selbox__scan { position: absolute; inset: 0; overflow: hidden; border-radius: 4px; }
-.selbox__scan::after { content: ''; position: absolute; left: 0; right: 0; height: 35%; top: -35%;
-  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--c) 22%, transparent) 70%, color-mix(in srgb, var(--c) 70%, transparent) 99%, transparent);
-  animation: selscan 1.8s cubic-bezier(.45,.05,.55,.95) infinite; }
-.selbox--busy .selbox__c { animation: selpulse 1.8s ease-in-out infinite; }
-@keyframes selscan { to { top: 100%; } }
-@keyframes selpulse { 50% { opacity: .45; } }
-@media (prefers-reduced-motion: reduce) { .selbox__scan::after, .selbox--busy .selbox__c { animation: none; } }
 .area-hint { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); margin: 0; padding: 9px 14px; border-radius: 10px; background: rgba(11,13,18,.88); border: 1px solid var(--accent); font-size: 14px; pointer-events: none; max-width: calc(100% - 32px); text-align: center; }
 .area-job { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 6; width: min(420px, calc(100% - 32px)); padding: 14px 40px 12px 16px; border-radius: 12px; background: rgba(18,21,28,.94); border: 1px solid var(--accent); box-shadow: 0 10px 40px rgba(0,0,0,.5); }
 .area-job--error { border-color: #e69f00; }
