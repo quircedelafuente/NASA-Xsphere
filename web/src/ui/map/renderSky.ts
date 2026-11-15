@@ -79,7 +79,7 @@ export function drawSky(ctx: CanvasRenderingContext2D, P: Projector, fov: number
     const maxR = 2.2 * Math.hypot(W, H);
     for (const p of MW) {
       const q = P.project(p.ra, p.dec);
-      if (q.cosc < -0.35) continue;
+      if (q.cosc < -0.87) continue;
       const r = Math.min(maxR, p.w * D2R * q.k);
       if (r < 1 || !onScreen(q.x, q.y, r)) continue;
       const a = p.a * alpha.base * ((1 + q.cosc) / 2) ** 1.5; // dim where the projection stretches
@@ -122,7 +122,7 @@ export function drawSky(ctx: CanvasRenderingContext2D, P: Projector, fov: number
     const zoomBoost = Math.max(0, Math.min(1.2, Math.log10(180 / Math.max(fov, 1)) * 0.6));
     for (const s of FIELD) {
       const q = P.project(s.ra, s.dec);
-      if (q.cosc < -0.4 || !onScreen(q.x, q.y, 2)) continue;
+      if (q.cosc < -0.87 || !onScreen(q.x, q.y, 2)) continue;
       const r = 0.35 + (1 - s.m) * 0.9 + zoomBoost * 0.5;
       ctx.globalAlpha = (0.25 + (1 - s.m) * 0.55) * alpha.base;
       ctx.fillStyle = s.c;
@@ -141,7 +141,7 @@ export function drawSky(ctx: CanvasRenderingContext2D, P: Projector, fov: number
         const sa = STAR_BY_ID[a], sb = STAR_BY_ID[b];
         if (!sa || !sb) continue;
         const pa = P.project(sa.ra, sa.dec), pb = P.project(sb.ra, sb.dec);
-        if (pa.cosc < -0.3 || pb.cosc < -0.3) continue;
+        if (pa.cosc < -0.75 || pb.cosc < -0.75) continue;
         if (!onScreen(pa.x, pa.y, 0) && !onScreen(pb.x, pb.y, 0) && Math.hypot(pa.x - pb.x, pa.y - pb.y) < Math.max(W, H)) continue;
         // shorten the line a little at each end so stars sit in a gap
         const dx = pb.x - pa.x, dy = pb.y - pa.y, L = Math.hypot(dx, dy);
@@ -158,7 +158,7 @@ export function drawSky(ctx: CanvasRenderingContext2D, P: Projector, fov: number
   if (alpha.base > 0.01) {
     for (const s of STARS) {
       const q = P.project(s.ra, s.dec);
-      if (q.cosc < -0.4 || !onScreen(q.x, q.y, 20)) continue;
+      if (q.cosc < -0.85 || !onScreen(q.x, q.y, 20)) continue;
       const r = Math.max(0.8, 3.6 - s.mag * 0.62);
       if (s.mag < 1.6) {
         const g = ctx.createRadialGradient(q.x, q.y, 0, q.x, q.y, r * 4);

@@ -31,7 +31,7 @@ import { MapSearch, type SearchHit } from '../ui/map/MapSearch';
 import { drawSky } from '../ui/map/renderSky';
 import { HIPS_CREDIT, loadAladin, pickHips } from '../ui/map/aladin';
 import {
-  D2R, angDist, clampFov, fitCamera, fovRamp, makeProjector, slerp, type Camera,
+  D2R, angDist, clampFov, fitCamera, fovRamp, makeProjector, setViewport, slerp, type Camera,
 } from '../ui/map/sphere';
 
 const OPEN_FOV = 1.5;
@@ -200,6 +200,7 @@ export function SkyMap({ loc }: { loc: string }) {
     const r = el.getBoundingClientRect();
     if (r.width > 0 && r.height > 0 && (r.width !== sizeRef.current.W || r.height !== sizeRef.current.H)) {
       sizeRef.current = { ...sizeRef.current, W: r.width, H: r.height };
+      setViewport(r.width, r.height);
     }
     return sizeRef.current;
   }, []);
@@ -473,7 +474,7 @@ export function SkyMap({ loc }: { loc: string }) {
         const m = catalog?.metas[id];
         if (!el || !m) continue;
         const q = P.project(m.ra_deg, m.dec_deg);
-        const hidden = q.cosc < -0.3 || q.x < -80 || q.x > W + 80 || q.y < -40 || q.y > H + 40 || (pi?.id === id && cam.fov <= CLOSE_FOV);
+        const hidden = q.cosc < -0.8 || q.x < -80 || q.x > W + 80 || q.y < -40 || q.y > H + 40 || (pi?.id === id && cam.fov <= CLOSE_FOV);
         el.style.visibility = hidden ? 'hidden' : 'visible';
         if (!hidden) {
           el.style.transform = `translate3d(${q.x.toFixed(1)}px, ${q.y.toFixed(1)}px, 0)`;
@@ -626,6 +627,8 @@ export function SkyMap({ loc }: { loc: string }) {
       const r = el.getBoundingClientRect();
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       sizeRef.current = { W: r.width, H: r.height, dpr };
+      setViewport(r.width, r.height);
+      camRef.current = { ...camRef.current, fov: clampFov(camRef.current.fov) };   // a resize can shrink the allowed zoom-out
       const c = canvasRef.current;
       if (c) { c.width = Math.round(r.width * dpr); c.height = Math.round(r.height * dpr); }
       const tc = trailCanvasRef.current;

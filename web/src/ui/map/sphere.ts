@@ -14,8 +14,23 @@ export interface Camera {
 export const MIN_FOV = 0.06;
 export const MAX_FOV = 330;
 
+/** The map draws the sky only up to ~100° from the centre, so zooming out further leaves a disc in a black frame.
+ *  Cap the zoom-out so the screen corners stay ≤ CORNER_DEG from the centre: the sky always fills the screen. */
+const CORNER_DEG = 138;   // renderSky draws stars out to ~150° (cosc −0.87), so corners at 125° are always filled
+/** Zoom-in limit: the shorter screen side always shows at least this much sky, so an open patch (6.6′) never
+ *  swallows the screen and the controls around it stay usable. */
+const MIN_SPAN_ARCMIN = 10;
+let screenMaxFov = MAX_FOV;
+let screenMinFov = MIN_FOV;
+export function setViewport(W: number, H: number) {
+  if (W <= 0 || H <= 0) return;
+  const k = Math.tan((CORNER_DEG * D2R) / 2) * (W / 2) / Math.hypot(W / 2, H / 2);
+  screenMaxFov = Math.min(MAX_FOV, (4 * Math.atan(k)) / D2R);
+  screenMinFov = Math.max(MIN_FOV, (MIN_SPAN_ARCMIN / 60) * W / Math.min(W, H));
+}
+
 export function clampFov(f: number) {
-  return Math.min(MAX_FOV, Math.max(MIN_FOV, f));
+  return Math.min(screenMaxFov, Math.max(screenMinFov, f));
 }
 
 export function normRa(ra: number) {
