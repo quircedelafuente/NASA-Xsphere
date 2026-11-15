@@ -7,6 +7,8 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { BlinkCanvasProps } from '../lib/contracts';
 import { MAX_FPS } from '../lib/url';
 import { pixelToSky } from '../lib/astro';
+import { frameLut, maskRgb, sequenceLambda } from '../lib/palette';
+import { SMOOTH_FACTOR, upsample } from '../lib/smooth';
 
 function stretchValue(v: number, a: number, vmin: number, vmax: number) {
   const t = (v - vmin) / (vmax - vmin);
@@ -23,6 +25,8 @@ function robustSigma(arr: Float32Array) {
 
 export function BlinkCanvasStub(props: BlinkCanvasProps) {
   const { manifest, frames, mode, frameIndex, playing, fps, stretch, zoom, overlays, onPixelClick, onFrameChange, invert, excludeEpochs } = props;
+  const palette = props.palette ?? 'infrared';
+  const smooth = Boolean(props.smooth);
   const nx = manifest.nx ?? 64;
   const ny = manifest.ny ?? 64;
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -67,29 +71,41 @@ export function BlinkCanvasStub(props: BlinkCanvasProps) {
     const H = ny * pz;
     c.width = W;
     c.height = H;
-    ctx.imageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = smooth;
     ctx.clearRect(0, 0, W, H);
+    const lam = sequenceLambda(manifest);
+    const lut = frameLut(mode === 'diff' ? 'grey' : palette, lam); // Difference stays grey (dark–bright pair on grey)
+    const mk = maskRgb(palette, lam);
 
     panels.forEach((fi, p) => {
-      const img = ctx.createImageData(nx, ny);
       const src = mode === 'diff' ? diffs?.[fi]?.d : frames[fi];
       const sig = mode === 'diff' ? (diffs?.[fi]?.sigma ?? 1) * 5 : 1;
       if (!src) return;
+      // 1. brightness 0..1 per SPHEREx pixel (NaN = no usable data)
+      const level = new Float32Array(nx * ny);
       for (let k = 0; k < nx * ny; k++) {
         const v = src[k];
-        let g: number;
-        let masked = false;
-        if (!Number.isFinite(v)) { masked = true; g = 0; }
-        else if (mode === 'diff') g = Math.max(0, Math.min(1, 0.5 + v / (2 * sig)));
-        else g = stretchValue(v, stretch.a, stretch.vmin, stretch.vmax);
-        if (invert) g = 1 - g;
-        const o = k * 4;
-        if (masked && overlays.flags) { img.data[o] = 230; img.data[o + 1] = 159; img.data[o + 2] = 0; } // orange (CB-safe)
-        else { const b = Math.round(g * 255); img.data[o] = b; img.data[o + 1] = b; img.data[o + 2] = b; }
-        img.data[o + 3] = 255;
+        if (!Number.isFinite(v)) level[k] = NaN;
+        else if (mode === 'diff') level[k] = Math.max(0, Math.min(1, 0.5 + v / (2 * sig)));
+        else level[k] = stretchValue(v, stretch.a, stretch.vmin, stretch.vmax);
+      }
+      // 2. optional smoothing (display only); problem pixels always stay whole squares
+      const up = smooth ? SMOOTH_FACTOR : 1;
+      const fine = smooth ? upsample(level, nx, ny, up) : level;
+      const img = ctx.createImageData(nx * up, ny * up);
+      for (let y = 0; y < ny * up; y++) {
+        for (let x = 0; x < nx * up; x++) {
+          const masked = Number.isNaN(level[Math.floor(y / up) * nx + Math.floor(x / up)]);
+          let g = masked ? 0 : fine[y * nx * up + x];
+          if (invert) g = 1 - g;
+          const o = (y * nx * up + x) * 4;
+          if (masked && overlays.flags) { img.data[o] = mk[0]; img.data[o + 1] = mk[1]; img.data[o + 2] = mk[2]; } // Okabe–Ito, never a colour of the palette
+          else { const b = Math.round(g * 255) * 3; img.data[o] = lut[b]; img.data[o + 1] = lut[b + 1]; img.data[o + 2] = lut[b + 2]; }
+          img.data[o + 3] = 255;
+        }
       }
       const off = document.createElement('canvas');
-      off.width = nx; off.height = ny;
+      off.width = nx * up; off.height = ny * up;
       off.getContext('2d')!.putImageData(img, 0, 0);
       const ox = p * (nx * pz + gap);
       ctx.drawImage(off, ox, 0, nx * pz, ny * pz);
@@ -137,7 +153,7 @@ export function BlinkCanvasStub(props: BlinkCanvasProps) {
         ctx.setLineDash([]);
       }
     });
-  }, [frames, diffs, mode, frameIndex, stretch, zoom, overlays, invert, manifest, nx, ny, active]);
+  }, [frames, diffs, mode, frameIndex, stretch, zoom, overlays, invert, palette, smooth, manifest, nx, ny, active]);
 
   const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!onPixelClick || mode === 'side') return;
@@ -150,5 +166,5 @@ export function BlinkCanvasStub(props: BlinkCanvasProps) {
   };
 
   if (!frames) return <div className="canvas-placeholder" />;
-  return <canvas ref={canvasRef} className="blink-canvas" onClick={handleClick} role="img" aria-label="SPHEREx image sequence of the selected sky patch" />;
+  return <canvas ref={canvasRef} className="blink-canvas" style={smooth ? { imageRendering: 'auto' } : undefined} onClick={handleClick} role="img" aria-label="SPHEREx image sequence of the selected sky patch" />;
 }

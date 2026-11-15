@@ -17,7 +17,7 @@ export function motionSentence(m: Manifest): string | null {
   return `It moved ${dist.toFixed(0)}″ ${compass(dEast, dNorth)} between ${formatMjd(a.mjd)} and ${formatMjd(b.mjd)} — about ${px.toFixed(1)} pixel${px.toFixed(1) === '1.0' ? '' : 's'}.`;
 }
 
-export function ExplainPanel({ meta, manifest, frameIndex, flags, mock }: { meta: TargetMeta; manifest: Manifest; frameIndex: number; flags: FlagsJson | null; mock: boolean }) {
+export function ExplainPanel({ meta, manifest, frameIndex, flags, mock, flagColour }: { meta: TargetMeta; manifest: Manifest; frameIndex: number; flags: FlagsJson | null; mock: boolean; /** colour the canvas paints problem pixels with (default: CSS --warn) */ flagColour?: string }) {
   const copy = TARGET_COPY[meta.id];
   const frame = manifest.frames[frameIndex];
   const band = BANDS.find((b) => b.id === manifest.band);
@@ -70,7 +70,7 @@ export function ExplainPanel({ meta, manifest, frameIndex, flags, mock }: { meta
         <>
           <h3>Problem pixels</h3>
           <ul className="legend">
-            {legend.map((b) => <li key={b.name}><span className="swatch swatch--flag" aria-hidden="true" />{b.plain}</li>)}
+            {legend.map((b) => <li key={b.name}><span className="swatch swatch--flag" aria-hidden="true" style={flagColour ? { background: flagColour } : undefined} />{b.plain}</li>)}
           </ul>
         </>
       ) : null}

@@ -31,3 +31,10 @@ because each epoch mixes slightly different wavelengths inside a band), `grid.nx
 - Inside one detector the wavelength still varies per exposure (LVF); averaging per epoch evens it out but bright
   stars leave small residuals in the difference images. That is why there is a 10 % error floor.
 - Custom RA/Dec needs an SIA table for now (`--sia`); the live query belongs to P6.
+
+## Preview colour (added by Sean, 14 Nov)
+`e<N>.png` and `blink.gif` are in false colour: one tint per band, picked from the band's wavelength (shorter bluer,
+longer redder), in `palette.py`. Brightness order is kept and one sequence uses one table, so frames stay comparable.
+The `.f32` data, the masks and the difference images are unchanged. Bundles made before this:
+`python -m processing.recolour` repaints their previews from the `.f32` files (no download). The web viewer uses the
+same table in `web/src/ui/lib/palette.ts`: change both together.
