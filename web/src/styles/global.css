@@ -617,3 +617,18 @@ kbd { font: 12px var(--mono); padding: 1px 5px; border: 1px solid var(--line); b
 /* link to the live engine screen (/explore): any position + zone scans */
 .explore-link { display: inline-block; margin-top: 8px; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-size: 13px; background: rgba(0,0,0,.35); }
 .explore-link:hover, .explore-link:focus-visible { background: var(--accent); color: #111; }
+
+/* ---------- "Select an area" (live engine) ---------- */
+button.area-btn { cursor: pointer; font: inherit; font-size: 13px; }
+.area-btn--on { background: var(--accent); color: #111; }
+.area-layer { position: absolute; inset: 0; z-index: 4; cursor: crosshair; background: rgba(86,180,233,.04); touch-action: none; }
+.area-rect { position: absolute; border: 2px dashed var(--accent); background: rgba(86,180,233,.12); box-shadow: 0 0 24px rgba(86,180,233,.35); }
+.area-rect--capped { border-color: #e69f00; background: rgba(230,159,0,.10); }
+.area-rect__size { position: absolute; left: 0; top: -24px; font-size: 12px; white-space: nowrap; background: rgba(11,13,18,.85); padding: 2px 7px; border-radius: 6px; color: var(--fg); }
+.area-hint { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); margin: 0; padding: 9px 14px; border-radius: 10px; background: rgba(11,13,18,.88); border: 1px solid var(--accent); font-size: 14px; pointer-events: none; max-width: calc(100% - 32px); text-align: center; }
+.area-job { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 6; width: min(420px, calc(100% - 32px)); padding: 14px 40px 12px 16px; border-radius: 12px; background: rgba(18,21,28,.94); border: 1px solid var(--accent); box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+.area-job--error { border-color: #e69f00; }
+.area-job__title { margin: 0 0 8px; font-weight: 600; display: flex; gap: 8px; align-items: center; }
+.area-job__bar { height: 4px; border-radius: 4px; background: var(--bg-3); overflow: hidden; margin-bottom: 8px; }
+.area-job__bar i { display: block; height: 100%; background: var(--accent); transition: width .4s; }
+.area-job .toast__x { position: absolute; top: 8px; right: 10px; }

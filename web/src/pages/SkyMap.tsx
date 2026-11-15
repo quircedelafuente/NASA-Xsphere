@@ -153,6 +153,12 @@ export function SkyMap({ loc }: { loc: string }) {
   const [advOpen, setAdvOpen] = useState(false);
   const [picked, setPicked] = useState<{ ra: number; dec: number } | null>(null);
 
+  // ---------- "Select an area": drag a box → the engine fetches that patch live → it opens like a target ----------
+  const [areaMode, setAreaMode] = useState(false);
+  const [areaRect, setAreaRect] = useState<{ x0: number; y0: number; x1: number; y1: number } | null>(null);
+  const [areaJob, setAreaJob] = useState<{ title: string; detail: string; progress: number; error?: boolean } | null>(null);
+  const areaRun = useRef(0);
+
   const [manifest, setManifest] = useState<Manifest | null>(null);
   const [frames, setFrames] = useState<Float32Array[] | null>(null);
   const [load, setLoad] = useState<Load>('idle');
@@ -786,7 +792,7 @@ export function SkyMap({ loc }: { loc: string }) {
       else if (!opened && view.fov <= OPEN_FOV && !settling) setOpened(true);
       return;
     }
-    if (settling) return;
+    if (settling || areaMode || areaJob) return;
     if (view.fov <= OPEN_FOV) {
       const { W, H } = sizeRef.current;
       const P = makeProjector(view, W, H);
@@ -801,7 +807,7 @@ export function SkyMap({ loc }: { loc: string }) {
       if (best) { select(best.id); return; }
     }
     setEmpty(view.fov <= EMPTY_FOV);
-  }, [view, catalog, metas, selectedId, opened, select, closePatch]);
+  }, [view, catalog, metas, selectedId, opened, select, closePatch, areaMode, areaJob]);
 
   // ---------- load the patch (only now does anything heavy download) ----------
   useEffect(() => {
@@ -979,13 +985,101 @@ export function SkyMap({ loc }: { loc: string }) {
     flyTo({ ra: h.ra, dec: h.dec, fov: 0.6 });
   }, [select, metas, selectedId, closePatch, flyTo, dismissIntro]);
 
+  // ---------- area selection ----------
+  const AREA_MAX_ARCMIN = 30;
+  /** Box (screen px, stage coords) → centre + size on the sky, capped at 30′ like the engine. */
+  const areaFromRect = useCallback((r: { x0: number; y0: number; x1: number; y1: number }) => {
+    const P = projector();
+    const xm = (r.x0 + r.x1) / 2, ym = (r.y0 + r.y1) / 2;
+    const c = P.unproject(xm, ym);
+    const l = P.unproject(Math.min(r.x0, r.x1), ym), rr = P.unproject(Math.max(r.x0, r.x1), ym);
+    const t = P.unproject(xm, Math.min(r.y0, r.y1)), b = P.unproject(xm, Math.max(r.y0, r.y1));
+    let w = angDist(l.ra, l.dec, rr.ra, rr.dec) * 60, h = angDist(t.ra, t.dec, b.ra, b.dec) * 60;
+    const big = Math.max(w, h);
+    if (big > AREA_MAX_ARCMIN) { w *= AREA_MAX_ARCMIN / big; h *= AREA_MAX_ARCMIN / big; }
+    return { ra: c.ra, dec: c.dec, w, h, capped: big > AREA_MAX_ARCMIN };
+  }, [projector]);
+
+  const startAreaMode = useCallback(() => {
+    setHint(false); setNotice(null); dismissIntro(); setTourEnd(false); setTour(false);
+    if (selectedId) closePatch(false);
+    setAreaJob(null); setAreaRect(null); setAreaMode(true);
+    // a box drawn on the whole-sky view would be far too big: get close enough first
+    if (camRef.current.fov > 2) flyTo({ ...camRef.current, fov: 1.2 });
+  }, [selectedId, closePatch, flyTo, dismissIntro]);
+
+  const runArea = useCallback(async (a: { ra: number; dec: number; w: number; h: number }) => {
+    if (!catalog) return;
+    const run = ++areaRun.current;
+    const label = `Selected area ${a.w.toFixed(1)}′ × ${a.h.toFixed(1)}′`;
+    const STATUS: Record<string, string> = {
+      queued: 'Waiting for a free slot…', listing: 'Asking NASA which photos cover this area…',
+      fetching: 'Reading the photos from NASA and lining them up…', 'checking catalogues': 'Almost there…',
+    };
+    setAreaJob({ title: STATUS.listing, detail: label, progress: 0.02 });
+    try {
+      const r = await fetch('/scan', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ box: { ra_deg: a.ra, dec_deg: a.dec, w_arcmin: a.w, h_arcmin: a.h }, band: 'D4' }) });
+      const start = await r.json().catch(() => ({}));
+      if (!r.ok || !start.job) throw new Error(start?.detail?.message || 'The live engine is not connected here.');
+      const key: string = start.job;
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        if (run !== areaRun.current) return;
+        const j = await (await fetch(`/scan/${key}`)).json();
+        if (j.status === 'error') throw new Error(j.message || 'The area could not be processed.');
+        if (j.bundle || j.status === 'done') break;   // photos are ready; object checks may still be running
+        setAreaJob({ title: STATUS[j.status] ?? 'Working…', progress: Math.max(0.02, j.progress ?? 0),
+          detail: [label, j.n_photos_total ? `${j.n_photos_total} photos of this area exist` : ''].filter(Boolean).join(' · ') });
+        await sleep(1500);
+      }
+      const id = `live-${key}`;
+      const { m } = await getBundle(id, 'D4');
+      if (run !== areaRun.current) return;
+      const nx = m.nx ?? 64;
+      const pix = Math.abs(m.wcs?.cdelt?.[0] ?? 3.075 / 3600) * 3600;
+      const meta = {
+        id, name: label, aliases: [], kind: 'custom', ra_deg: a.ra, dec_deg: a.dec, ref_epoch: 2016.0,
+        pmra_masyr: 0, pmdec_masyr: 0, default_band: 'D4', fov_arcsec: nx * pix,
+        epochs: m.frames.map((f, i) => ({ id: i, label: f.label ?? `Visit ${i + 1}`, mjd_start: f.mjd, mjd_end: f.mjd, n: f.n_exposures })),
+      } as unknown as TargetMeta;
+      catalog.metas[id] = meta;
+      if (!catalog.index.some((e) => e.id === id)) catalog.index.push({ id, name: label, kind: 'custom', bands: ['D4'], n_epochs: m.frames.length });
+      setAreaJob(null);
+      select(id, { open: true });
+    } catch (err) {
+      if (run !== areaRun.current) return;
+      setAreaJob({ title: 'Could not load this area', detail: (err as Error).message, progress: 0, error: true });
+    }
+  }, [catalog, getBundle, select]);
+
+  const areaHandlers = {
+    onPointerDown: (e: React.PointerEvent<HTMLDivElement>) => {
+      const b = stageRef.current!.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
+      e.currentTarget.setPointerCapture(e.pointerId);
+      setAreaRect({ x0: x, y0: y, x1: x, y1: y });
+    },
+    onPointerMove: (e: React.PointerEvent<HTMLDivElement>) => {
+      if (!areaRect) return;
+      const b = stageRef.current!.getBoundingClientRect();
+      setAreaRect({ ...areaRect, x1: e.clientX - b.left, y1: e.clientY - b.top });
+    },
+    onPointerUp: () => {
+      const r = areaRect; setAreaRect(null);
+      if (!r || Math.abs(r.x1 - r.x0) < 10 || Math.abs(r.y1 - r.y0) < 10) return;
+      setAreaMode(false);
+      runArea(areaFromRect(r));
+    },
+  };
+  const areaLive = areaRect ? areaFromRect(areaRect) : null;
+
   // ---------- derived copy ----------
   const nEpochs = manifest?.frames.length ?? 0;
   const fr = manifest?.frames[frame];
   const saturated = Boolean(meta?.expected?.saturated && (manifest?.warnings?.some((w) => w.includes('saturat')) || fr?.flags_at_target?.includes('OVERFLOW')));
   const stretch = manifest ? { a: stretchA ?? manifest.stretch.a, vmin: manifest.stretch.vmin, vmax: vmax ?? manifest.stretch.vmax } : { a: 0.1, vmin: 0, vmax: 1 };
   const bandCopy = BANDS.find((b) => b.id === activeBand);
-  const motion = manifest ? motionSentence(manifest) : null;
+  const motion = manifest && !meta?.id.startsWith('live-') ? motionSentence(manifest) : null;   // an area has no single object to track
   const copy = meta ? TARGET_COPY[meta.id] : undefined;
   const nearest = useMemo(() => {
     if (!empty || !metas.length) return null;
@@ -1189,12 +1283,36 @@ export function SkyMap({ loc }: { loc: string }) {
         </div>
       </div>
 
+      {areaMode && (
+        <div className="area-layer" {...areaHandlers} aria-label="Drag a box on the sky to choose an area">
+          {areaRect && (
+            <div className={`area-rect ${areaLive?.capped ? 'area-rect--capped' : ''}`} style={{
+              left: Math.min(areaRect.x0, areaRect.x1), top: Math.min(areaRect.y0, areaRect.y1),
+              width: Math.abs(areaRect.x1 - areaRect.x0), height: Math.abs(areaRect.y1 - areaRect.y0) }}>
+              {areaLive && <span className="area-rect__size mono">{areaLive.w.toFixed(1)}′ × {areaLive.h.toFixed(1)}′{areaLive.capped ? ' (max 30′)' : ''}</span>}
+            </div>
+          )}
+          {!areaRect && <p className="area-hint">Drag a box on the sky (up to 30′ wide). Its SPHEREx photos will open here, visit by visit.</p>}
+        </div>
+      )}
+      {areaJob && (
+        <div className={`area-job ${areaJob.error ? 'area-job--error' : ''}`} role="status">
+          <button className="toast__x" onClick={() => { areaRun.current++; setAreaJob(null); }} aria-label="Cancel">✕</button>
+          <p className="area-job__title">{!areaJob.error && <span className="spinner" aria-hidden="true" />} {areaJob.title}</p>
+          {!areaJob.error && <div className="area-job__bar"><i style={{ width: `${Math.round(areaJob.progress * 100)}%` }} /></div>}
+          <p className="small muted">{areaJob.detail}</p>
+        </div>
+      )}
+
       {/* ---------- overlay UI ---------- */}
       <div className="skymap__top" ref={topRef}>
         {catalog?.mock && <MockBanner compact={demo} />}
         <MapSearch ref={searchRef} catalog={catalog} onHit={onSearch} />
-        {/* live engine (backend/): any position on demand + autonomous zone scans */}
-        <a className="explore-link" href="/explore/">Explore any spot · scan a zone</a>
+        {/* live engine (backend/): drag a box anywhere → its SPHEREx photos open in the same popup as the targets */}
+        <button className={`explore-link area-btn ${areaMode ? 'area-btn--on' : ''}`} aria-pressed={areaMode}
+          onClick={() => (areaMode ? setAreaMode(false) : startAreaMode())}>
+          {areaMode ? 'Cancel area selection' : 'Select an area'}
+        </button>
       </div>
 
       <nav className="targetlist" aria-label="Objects with SPHEREx blinks">
