@@ -29,17 +29,24 @@ def query(ra, dec, radius_deg=0.0003, collections=None):
     if cache.exists() and time.time() - cache.stat().st_mtime < 6 * 3600:   # weekly releases: 6 h is fresh enough
         return json.loads(cache.read_text())
     import pyvo   # imported here so resolve/tests don't need it
-    rows = []
+    rows, res, err = [], None, None
+    from . import s3index
     for attempt in range(3):
         try:   # the service object reads IRSA's capabilities, so it fails too when IRSA is down
             res = pyvo.dal.SIA2Service(config.IRSA + 'SIA').search(pos=(ra, dec, max(radius_deg, 0.0003)), collection=collections).to_table()
             break
         except Exception as e:
-            err = e; time.sleep(3 * (attempt + 1))
-    else:
+            err = e
+            if s3index.available():   # our own index of the S3 photos answers at once: don't keep IRSA retrying
+                break
+            time.sleep(3 * (attempt + 1))
+    if res is None:
         if cache.exists():   # IRSA down: an older photo list beats no answer (it only misses photos added since)
             return json.loads(cache.read_text())
-        raise RuntimeError(f'nasa-busy: NASA\'s photo index (IRSA) is not answering, try again in a few minutes ({str(err)[:120]})')
+        if not s3index.available():
+            raise RuntimeError(f'nasa-busy: NASA\'s photo index (IRSA) is not answering, try again in a few minutes ({str(err)[:120]})')
+        rows = s3index.query(ra, dec, radius_deg)   # same photos, found from their headers on NASA's S3 copy
+        res = []
     for r in res:
         if 'dataproduct_subtype' in res.colnames and r['dataproduct_subtype'] != 'science':
             continue
