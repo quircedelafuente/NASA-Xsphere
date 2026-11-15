@@ -160,6 +160,9 @@ def b_meta(bid: str):
 
 @app.get('/bundles/{bid}/spectrum.json')
 def b_spectrum(bid: str):
+    full = PREBUILT / bid / 'spectrum_full.json'                    # one point per exposure (processing/spectrum.py)
+    if '/' not in bid and '..' not in bid and full.exists():
+        return JSONResponse(json.loads(full.read_text()))
     p = REPORTS / f'{bid}.json'
     if bid.startswith('live-'):
         p = _bundle_dir(bid) / 'report.json'
