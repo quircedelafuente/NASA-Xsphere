@@ -36,9 +36,27 @@ def test_coordinates_forgiving():
     for q in ['wise 0855-0714', 'WISE J085510.83-071442.5', 'gj 699', 'hd 209458', '51 peg', '0855', '269.45', '17 57 61 +04 41 36', '100 95', '12:30', '2026-11-15']:
         assert parse_coords(q) is None, q
 
+def test_name_variants():
+    from engine.resolve import name_variants
+    assert 'trappist-1' in [v.lower() for v in name_variants('trappist 1')] and 'trappist-1' in [v.lower() for v in name_variants('trappist1')]
+    assert 'GJ 1214' in name_variants('gj1214') and 'HIP 87937' in name_variants('hip 87937')
+    assert 'gj 1214' in name_variants('gj1214') and 'trappist-1 b' in name_variants('trappist 1 b')
+    assert name_variants('Vega') == ['Vega'] and name_variants('J175748.5+044136') == ['J175748.5+044136']
+    assert name_variants('TRAPPIST-1')[0] == 'TRAPPIST-1'   # as typed is always tried first
+
+def test_wrong_number_is_not_a_target(monkeypatch=None):
+    import engine.resolve as R
+    keep, R.sesame = R.sesame, (lambda name: None)   # offline: only our own matching
+    try:
+        for q in ['hip 57367', 'gj 698', 'wise 0856']:
+            assert first(q) is None, (q, first(q))
+        assert first('wise 855')['id'] == 'wise-0855' and first('GJ699')['id'] == 'barnards-star'
+    finally:
+        R.sesame = keep
+
 def test_motion_applied():
     m = first('barnard')      # Barnard at 2026 is ~104″ north of its 2016 Gaia position
     assert 4.766 < m['dec_deg'] < 4.770, m
 
 if __name__ == '__main__':
-    test_coordinates(); test_coordinates_forgiving(); test_names_fuzzy(); test_motion_applied(); print('resolve: all tests passed')
+    test_coordinates(); test_coordinates_forgiving(); test_names_fuzzy(); test_name_variants(); test_wrong_number_is_not_a_target(); test_motion_applied(); print('resolve: all tests passed')

@@ -6,6 +6,9 @@ def _norm(s):
     s = s.lower().replace('ε', 'eps').replace('epsilon', 'eps').replace('−', '-').replace("'", '').replace('’', '')
     return re.sub(r'[^a-z0-9+\-.]', '', s)
 
+def _nums(s):
+    return [n.lstrip('0') for n in re.findall(r'\d+', s)]
+
 def propagate(t, year):
     """Position of a targets.json entry at a decimal year (linear proper motion)."""
     dt = year - t['ref_epoch']
@@ -89,6 +92,26 @@ def sesame(name):
             return None
     return None
 
+def name_variants(q):
+    """The same name with its words joined differently, as typed first. The catalogues are strict about this:
+    'TRAPPIST-1' is known, 'trappist 1' and 'trappist1' are not; 'GJ 1214' is known, 'gj 1214' and 'gj1214' are not."""
+    parts = re.findall(r'[^\W\d_]+|\d+(?:\.\d+)?', q)
+    out = [q.strip()]
+    if len(parts) >= 2 and not re.search(r'[^\w\s\-.]', q):   # leave J-names and anything with + or other signs alone
+        for v in (' '.join(parts), '-'.join(parts), ''.join(parts), parts[0] + '-' + ' '.join(parts[1:]),
+                  parts[0].upper() + ' ' + ' '.join(parts[1:])):   # some catalogue prefixes only work in capitals (GJ, HIP)
+            if v not in out:
+                out.append(v)
+    return out
+
+def sesame_any(q):
+    """sesame() on the name as typed, then on its spacing variants. Returns (ra, dec) or None."""
+    for v in name_variants(q):
+        s = sesame(v)
+        if s:
+            return s
+    return None
+
 def resolve(q, year=2026.0):
     """Returns {'matches': [...]}: best first. Each match: name, id (if a known target), ra_deg, dec_deg, source."""
     q = (q or '').strip()
@@ -102,6 +125,8 @@ def resolve(q, year=2026.0):
         for a in [t['name'], t['id']] + t['aliases']:
             na = _norm(a)
             score = 1.0 if na == nq else (0.95 if nq and (nq in na or na in nq) else difflib.SequenceMatcher(None, nq, na).ratio())
+            if score < 0.95 and _nums(nq) and _nums(na) and _nums(nq) != _nums(na):
+                score = 0.0   # a different catalogue number is a different object ('hip 57367' is not HIP 87937)
             scored.append((score, t))
     scored.sort(key=lambda x: -x[0])
     out, seen = [], set()
@@ -110,7 +135,7 @@ def resolve(q, year=2026.0):
             seen.add(t['id']); ra, dec = propagate(t, year)
             out.append(dict(name=t['name'], id=t['id'], ra_deg=ra, dec_deg=dec, source='targets.json', score=round(score, 2)))
     if not out or out[0]['score'] < 0.9:
-        s = sesame(q)
+        s = sesame_any(q)
         if s:
             out.insert(0, dict(name=q, ra_deg=s[0], dec_deg=s[1], source='CDS Sesame (J2000 catalogue position; no proper motion applied)'))
     return {'matches': out[:5]}
