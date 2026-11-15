@@ -26,9 +26,19 @@ def test_coordinates():
     assert dec > 0
     assert parse_coords('400 10') is None and parse_coords('hello') is None
 
+def test_coordinates_forgiving():
+    near = lambda got, want: got is not None and abs(got[0] - want[0]) < 2e-3 and abs(got[1] - want[1]) < 2e-3
+    for q in ['269.45 −4.74', '269.45° -4.74°', '269.45 deg, -4.74 deg', '(269.45; -4.74)', 'RA 269.45 Dec -4.74', 'ra=269.45, dec=-4.74', 'RA: 269.45 DEC: -4.74']:
+        assert near(parse_coords(q), (269.45, -4.74)), q
+    for q in ['17:57:48.5 +04:41:36', '17h57m48.5s+04d41m36s', '17h 57m 48.5s, +04° 41′ 36″', 'J175748.5+044136', 'RA 17h57m48.5s Dec +04d41m36s']:
+        assert near(parse_coords(q), (269.4521, 4.6933)), q
+    assert near(parse_coords('17h57m +04d41m'), (269.25, 4.6833)) and near(parse_coords('00 00 00 -00 30 00'), (0, -0.5))
+    for q in ['wise 0855-0714', 'WISE J085510.83-071442.5', 'gj 699', 'hd 209458', '51 peg', '0855', '269.45', '17 57 61 +04 41 36', '100 95', '12:30', '2026-11-15']:
+        assert parse_coords(q) is None, q
+
 def test_motion_applied():
     m = first('barnard')      # Barnard at 2026 is ~104″ north of its 2016 Gaia position
     assert 4.766 < m['dec_deg'] < 4.770, m
 
 if __name__ == '__main__':
-    test_coordinates(); test_names_fuzzy(); test_motion_applied(); print('resolve: all tests passed')
+    test_coordinates(); test_coordinates_forgiving(); test_names_fuzzy(); test_motion_applied(); print('resolve: all tests passed')

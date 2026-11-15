@@ -1118,7 +1118,7 @@ export function SkyMap({ loc }: { loc: string }) {
     if (!empty || !metas.length) return null;
     return [...metas].sort((a, b) => angDist(view.ra, view.dec, a.ra_deg, a.dec_deg) - angDist(view.ra, view.dec, b.ra_deg, b.dec_deg))[0];
   }, [empty, metas, view.ra, view.dec]);
-  const overlayProps = { crosshair: overlays.includes('crosshair'), track: overlays.includes('track'), gaia: overlays.includes('gaia') ? gaia : null, flags: overlays.includes('flags') };
+  const overlayProps = { crosshair: overlays.includes('crosshair'), track: overlays.includes('track'), gaia: overlays.includes('gaia') ? gaia : null, wise: overlays.includes('wise') ? gaia : null, flags: overlays.includes('flags') };
   const zoomedIn = view.fov < 60;
   const chartKind: 'lightcurve' | 'spectrum' | null = meta
     ? meta.kind === 'variable' ? 'lightcurve' : meta.default_band === 'D56' ? 'spectrum' : null
@@ -1230,6 +1230,8 @@ export function SkyMap({ loc }: { loc: string }) {
         flags={overlays.includes('flags')} onFlags={(v) => toggleOverlay('flags', v)}
         crosshair={overlays.includes('crosshair')} onCrosshair={(v) => toggleOverlay('crosshair', v)}
         track={overlays.includes('track')} onTrack={(v) => toggleOverlay('track', v)}
+        gaia={overlays.includes('gaia')} onGaia={(v) => toggleOverlay('gaia', v)}
+        wise={overlays.includes('wise')} onWise={(v) => toggleOverlay('wise', v)}
         frames={manifest.frames} excluded={excluded}
         onExclude={(i) => setExcluded((s) => (s.includes(i) ? s.filter((x) => x !== i) : [...s, i]))}
       />

@@ -138,6 +138,9 @@ export interface SpectrumJson {
 export interface GaiaJson {
   ref_epoch: number;
   sources: { ra_deg: number; dec_deg: number; pmra_masyr: number; pmdec_masyr: number; plx_mas: number; gmag: number }[];
+  /** AllWISE sources in the same field, at the positions WISE measured (~2010.5, proper motion 0). */
+  wise?: { ra_deg: number; dec_deg: number; pmra_masyr: number; pmdec_masyr: number; w2mag: number }[];
+  ref_epoch_wise?: number;
 }
 
 // ---------- C6 · viewer component API ----------
@@ -153,7 +156,7 @@ export interface BlinkCanvasProps {
   fps: number;
   stretch: { a: number; vmin: number; vmax: number };
   zoom: number;
-  overlays: { crosshair: boolean; track: boolean; gaia: GaiaJson | null; flags: boolean };
+  overlays: { crosshair: boolean; track: boolean; gaia: GaiaJson | null; flags: boolean; wise?: GaiaJson | null };
   onPixelClick?: (ra: number, dec: number, x: number, y: number) => void;
   /** Optional extension: lets the UI keep its epoch strip in sync while the canvas auto-plays. */
   onFrameChange?: (i: number) => void;

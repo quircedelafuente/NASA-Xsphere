@@ -6,7 +6,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import type { BlinkCanvasProps } from '../lib/contracts';
 import { MAX_FPS } from '../lib/url';
-import { pixelToSky } from '../lib/astro';
+import { pixelToSky, skyToPixel } from '../lib/astro';
 import { frameLut, maskRgb, sequenceLambda } from '../lib/palette';
 import { SMOOTH_FACTOR, upsample } from '../lib/smooth';
 
@@ -131,6 +131,25 @@ export function BlinkCanvasStub(props: BlinkCanvasProps) {
           ctx.fill();
         });
       }
+      // Catalogue overlays, each star moved by its proper motion to this visit's date
+      const cat = (rows: { ra_deg: number; dec_deg: number; pmra_masyr: number; pmdec_masyr: number }[] | undefined, refEpoch: number, colour: string, square: boolean) => {
+        if (!rows || !manifest.wcs) return;
+        const yrs = 2000 + (f.mjd - 51544.5) / 365.25 - refEpoch;
+        ctx.strokeStyle = colour; ctx.lineWidth = 1;
+        const r = pz * 0.9;
+        for (const s of rows) {
+          const dec = s.dec_deg + (s.pmdec_masyr * yrs) / 3.6e6;
+          const ra = s.ra_deg + (s.pmra_masyr * yrs) / 3.6e6 / Math.cos((dec * Math.PI) / 180);
+          const q = skyToPixel(manifest.wcs, ra, dec, ny);
+          if (q.x < -1 || q.y < -1 || q.x > nx || q.y > ny) continue;
+          const X = ox + (q.x + 0.5) * pz, Y = (q.y + 0.5) * pz;
+          ctx.beginPath();
+          if (square) ctx.rect(X - r, Y - r, 2 * r, 2 * r); else ctx.arc(X, Y, r, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      };
+      cat(overlays.gaia?.sources, overlays.gaia?.ref_epoch ?? 2016, 'rgba(86,180,233,0.85)', false);
+      cat(overlays.wise?.wise, overlays.wise?.ref_epoch_wise ?? 2015.4, 'rgba(230,159,0,0.85)', true);
       // Crosshair with a gap so the source stays visible
       if (overlays.crosshair && tp) {
         const X = ox + (tp[0] + 0.5) * pz, Y = (tp[1] + 0.5) * pz;
