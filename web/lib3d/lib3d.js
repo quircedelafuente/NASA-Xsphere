@@ -1,7 +1,7 @@
 // A8 · Class-based 3D models driven by measured values (contract I5).
 // Usage (Vite/npm `three`, or the import map in demo.html):
 //   import { renderObject } from './lib3d.js';
-//   const ctl = renderObject(el, { cls: 'red-dwarf', temp_K: 3200 });   ctl.setView('ir'); ctl.flare(); ctl.dispose();
+//   const ctl = renderObject(el, { cls: 'red-dwarf', temp_K: 3200 });   ctl.setView('ir', 4.4); ctl.flare(); ctl.dispose();
 // Classes: red-dwarf | star | brown-dwarf | mira | young-star | asteroid | comet.  Option: binary:true (two bodies orbiting).
 // Every model is an ILLUSTRATION: shape and surface are not observed; colour/size/period come from data when given.
 import * as THREE from 'three';
@@ -26,16 +26,31 @@ float noise(vec3 p){vec3 i=floor(p),f=fract(p);vec3 u=f*f*(3.0-2.0*f);
  return mix(mix(mix(dot(hash3(i),f),dot(hash3(i+vec3(1,0,0)),f-vec3(1,0,0)),u.x),mix(dot(hash3(i+vec3(0,1,0)),f-vec3(0,1,0)),dot(hash3(i+vec3(1,1,0)),f-vec3(1,1,0)),u.x),u.y),
             mix(mix(dot(hash3(i+vec3(0,0,1)),f-vec3(0,0,1)),dot(hash3(i+vec3(1,0,1)),f-vec3(1,0,1)),u.x),mix(dot(hash3(i+vec3(0,1,1)),f-vec3(0,1,1)),dot(hash3(i+vec3(1,1,1)),f-vec3(1,1,1)),u.x),u.y),u.z);}
 float fbm(vec3 p){float s=0.0,a=.5;for(int i=0;i<5;i++){s+=a*noise(p);p*=2.03;a*=.5;}return s;}
-vec3 irRamp(float x){ return mix(mix(vec3(.08,.02,.25),vec3(.85,.15,.45),smoothstep(0.,.5,x)), vec3(1.,.85,.35), smoothstep(.5,1.,x)); }`;
+vec3 irRamp(float x, vec3 e){ return pow(vec3(x), e); }`;   // same curve as the photos: black stays black, white stays white, the tint fills the middle
+
+// "SPHEREx infrared" view: the same false colour as the photos (web/src/ui/lib/palette.ts, processing/palette.py; keep in sync).
+// wavelength (µm) -> tint, linear in between: shorter is bluer, longer is redder.
+const IR_STOPS = [[0.9, [.25, .45, 1]], [1.35, [.1, .75, 1]], [2.0, [.15, 1, .75]], [3.1, [1, .72, .15]], [4.1, [1, .45, .1]], [4.7, [1, .2, .12]]];
+export const IR_DEFAULT_UM = 3.1;   // used when the caller gives no band
+export function irTint(lamUm) {
+  if (!(lamUm > IR_STOPS[0][0])) return IR_STOPS[0][1];
+  for (let i = 1; i < IR_STOPS.length; i++) {
+    const [l1, c1] = IR_STOPS[i]; if (lamUm > l1) continue;
+    const [l0, c0] = IR_STOPS[i - 1], f = (lamUm - l0) / (l1 - l0);
+    return c0.map((v, k) => v + f * (c1[k] - v));
+  }
+  return IR_STOPS[IR_STOPS.length - 1][1];
+}
+const irExponent = lamUm => new THREE.Vector3(...irTint(lamUm).map(t => 0.9 + 1.5 * (1 - t)));
 
 // One shader for every glowing body; `mode` picks the surface: 0 star (granulation+spots), 1 brown dwarf (bands), 2 mira (big convection cells)
 function bodyMaterial(color, mode) {
   return new THREE.ShaderMaterial({
-    uniforms: { time: { value: 0 }, col: { value: color }, spots: { value: 1 }, ir: { value: 0 }, flare: { value: 0 }, mode: { value: mode },
+    uniforms: { time: { value: 0 }, col: { value: color }, spots: { value: 1 }, ir: { value: 0 }, irPow: { value: irExponent(IR_DEFAULT_UM) }, flare: { value: 0 }, mode: { value: mode },
                 flareDir: { value: new THREE.Vector3(0.4, 0.5, 0.77).normalize() } },
     vertexShader: `varying vec3 vN; varying vec3 vP; varying vec3 vV;
       void main(){ vN=normalize(normalMatrix*normal); vP=position; vec4 mv=modelViewMatrix*vec4(position,1.0); vV=normalize(-mv.xyz); gl_Position=projectionMatrix*mv; }`,
-    fragmentShader: NOISE + `uniform float time,spots,ir,flare,mode; uniform vec3 col,flareDir; varying vec3 vN; varying vec3 vP; varying vec3 vV;
+    fragmentShader: NOISE + `uniform float time,spots,ir,flare,mode; uniform vec3 col,flareDir,irPow; varying vec3 vN; varying vec3 vP; varying vec3 vV;
       void main(){
         vec3 p=normalize(vP); float mu=max(dot(vN,vV),0.0); float b;
         if(mode<0.5){ float g=fbm(p*9.0+vec3(0.,time*.05,0.))*.5+.5; float sp=smoothstep(.18,.32,fbm(p*3.1+vec3(7.0)))*spots;
@@ -47,7 +62,7 @@ function bodyMaterial(color, mode) {
         float f=flare*smoothstep(.75,1.0,dot(p,flareDir));
         vec3 hot=pow(col,vec3(1.6))*1.25;
         vec3 c=mix(hot*b, vec3(1.0,.97,.9)*1.6, f);
-        gl_FragColor=vec4(mix(c, irRamp(clamp(b*.95,0.,1.))+vec3(1.,.9,.6)*f, ir),1.0);
+        gl_FragColor=vec4(mix(c, irRamp(clamp(b*.95,0.,1.),irPow)+vec3(1.,.9,.6)*f, ir),1.0);
       }`,
   });
 }
@@ -144,7 +159,10 @@ export function renderObject(el, params = {}) {
   }
   tick();
   return {
-    setView(v) { bodies.forEach(b => { if (b.parts.mat) b.parts.mat.uniforms.ir.value = v === 'ir' ? 1 : 0; if (b.parts.glow) b.parts.glow.material.color = v === 'ir' ? new THREE.Color(0xd9468a) : b.parts.color; }); },
+    // 'ir' takes the wavelength (µm) of the band shown next to the model, so both carry the same tint
+    setView(v, lamUm = IR_DEFAULT_UM) { const ir = v === 'ir';
+      bodies.forEach(b => { if (b.parts.mat) { b.parts.mat.uniforms.ir.value = ir ? 1 : 0; b.parts.mat.uniforms.irPow.value = irExponent(lamUm); }
+        if (b.parts.glow) b.parts.glow.material.color = ir ? new THREE.Color(...irTint(lamUm)) : b.parts.color; }); },
     setTemp(K) { p.temp_K = K; bodies.forEach(b => { const c = kelvinRGB(K); b.parts.color = c; if (b.parts.mat) b.parts.mat.uniforms.col.value = c; if (b.parts.glow) b.parts.glow.material.color = c; }); },
     setSpots(on) { bodies.forEach(b => b.parts.mat && (b.parts.mat.uniforms.spots.value = on ? 1 : 0)); },
     setSpin(on) { spin = on; },

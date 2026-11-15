@@ -213,7 +213,7 @@ function loop() { clearInterval(timer); if (playing && mode !== 'pair') timer = 
 $('#play').onclick = () => { playing = !playing; loop(); };
 $('#speed').oninput = loop; $('#cross').onchange = draw;
 $('#modes').onclick = e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.m; document.querySelectorAll('#modes button').forEach(x => x.setAttribute('aria-pressed', x === b)); draw(); loop(); };
-$('#bands').onclick = e => { const b = e.target.closest('button'); if (!b) return; V.band = b.dataset.b; ep = 0; document.querySelectorAll('#bands button').forEach(x => x.setAttribute('aria-pressed', x === b)); strip(); draw(); };
+$('#bands').onclick = e => { const b = e.target.closest('button'); if (!b) return; V.band = b.dataset.b; ep = 0; document.querySelectorAll('#bands button').forEach(x => x.setAttribute('aria-pressed', x === b)); strip(); draw(); sync3D(); };
 $('#strip').onclick = e => { const b = e.target.closest('button'); if (!b) return; ep = +b.dataset.e; playing = false; loop(); draw(); };
 
 function renderScan() {
@@ -236,10 +236,14 @@ async function render3D(t) {
   for (const [k, v] of Object.entries(a)) if (v && typeof v === 'object' && 'value' in v) p[k] = v.value;
   const { renderObject } = await import('/lib3d/lib3d.js');
   three = renderObject($('#three'), p);
+  sync3D();
   $('#threeDials').innerHTML = Object.entries(a).filter(([, v]) => v && typeof v === 'object' && 'value' in v)
     .map(([k, v]) => `<span class="pill" title="${v.note || ''}">${k.replace('_K', ' (K)').replace('temp2', 'companion temp').replace('temp', 'temperature').replace('_days', ' (days)')}: ${v.value} · ${v.how}</span>`).join('');
 }
-document.querySelector('#threeCard .seg').onclick = e => { const b = e.target.closest('button'); if (!b || !three) return; three.setView(b.dataset.v);
+// The 3D "SPHEREx infrared" view takes the tint of the band on screen (same false colour as the photos).
+let threeView = 'eye';
+function sync3D() { const r = V && V.bands && V.bands[V.band]?.man?.lam_range_um; three?.setView(threeView, r ? (r[0] + r[1]) / 2 : undefined); }
+document.querySelector('#threeCard .seg').onclick = e => { const b = e.target.closest('button'); if (!b || !three) return; threeView = b.dataset.v; sync3D();
   document.querySelectorAll('#threeCard .seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); };
 
 // ---------- share / URL ----------
