@@ -195,13 +195,19 @@ def b_gaia(bid: str):
     m = b_meta(bid)
     if m.get('ra_deg') is None:
         raise HTTPException(404, dict(error='not-found', message='No position for this field.'))
-    rows = query_irsa('Gaia DR3', m['ra_deg'], m['dec_deg'], 0.08)   # covers the 393.6″ square's corners
+    ra, dec = m['ra_deg'], m['dec_deg']
+    # Movers' photos are centred on today's position, up to ~2′ from the catalogue position: query around the photo's centre
+    for mf in sorted(_bundle_dir(bid).glob('D*/manifest.json')):
+        wcs = (json.loads(mf.read_text()).get('grid') or {}).get('wcs') or {}
+        if wcs.get('crval'):
+            ra, dec = wcs['crval']; break
+    rows = query_irsa('Gaia DR3', ra, dec, 0.08)   # covers the 393.6″ square's corners
     return dict(ref_epoch=2016.0, sources=[dict(ra_deg=r['ra'], dec_deg=r['dec'], pmra_masyr=r['pmra'] or 0.0, pmdec_masyr=r['pmdec'] or 0.0,
                                                plx_mas=r['parallax'] or 0.0, gmag=r['phot_g_mean_mag']) for r in rows],
                 # AllWISE (W2 < 16) where WISE saw each source in ~2010, not moved: a mover sits away from its square.
                 # CatWISE2020 would be newer, but its VizieR backup returns no rows and IRSA TAP is often down.
                 ref_epoch_wise=2010.5, wise=[dict(ra_deg=r['ra'], dec_deg=r['dec'], pmra_masyr=0.0, pmdec_masyr=0.0, w2mag=r['w2mpro'])
-                                             for r in query_irsa('AllWISE', m['ra_deg'], m['dec_deg'], 0.08)])
+                                             for r in query_irsa('AllWISE', ra, dec, 0.08)])
 
 @app.get('/bundles/{bid}/{band}/manifest.json')
 def b_manifest(bid: str, band: str):
