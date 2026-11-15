@@ -6,10 +6,10 @@ can be chosen later without re-downloading. Resumable: a zone with a saved repor
   python -m processing.dataset.collect run     # scan every zone not done yet (engine must run on :8000)
   python -m processing.dataset.collect table   # flatten reports -> sources.csv (features + catalogue labels apart)
 """
-import csv, json, math, random, sys, time, urllib.request
+import csv, json, math, os, random, sys, time, urllib.request
 from pathlib import Path
 
-ENGINE = 'http://127.0.0.1:8000'
+ENGINE = os.environ.get('SPHEREX_ENGINE', 'http://127.0.0.1:8000')   # e.g. http://127.0.0.1:4390 on the VPS
 OUT = Path(__file__).resolve().parents[2] / 'cache' / 'ml-dataset'
 ZONES = OUT / 'zones.csv'
 

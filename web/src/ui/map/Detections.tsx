@@ -7,7 +7,7 @@
  * Everything is a "candidate" until checked (D13).
  */
 import type { Manifest, Wcs } from '../lib/contracts';
-import { D2R } from './sphere';
+import { skyToPixel } from '../lib/astro';
 
 export interface ChangeCand { x: number; y: number; sigma: number; npix: number; kind: string; saturated?: boolean }
 interface ReportPos { visit: number; ra_deg: number; dec_deg: number }
@@ -35,16 +35,10 @@ const KIND_LABEL: Record<Detection['kind'], string> = {
   brighter: 'Brighter', fainter: 'Fainter', moved: 'Shifted', mover: 'Moving object', variable: 'Variable', candidate: 'Unexplained',
 };
 
-/** Sky → patch pixel (inverse of astro.pixelToSky: TAN, top-left origin). */
-function skyToPixel(wcs: Wcs, ra: number, dec: number, ny: number): [number, number] | null {
-  const a = ra * D2R, d = dec * D2R, a0 = wcs.crval[0] * D2R, d0 = wcs.crval[1] * D2R;
-  const cosc = Math.sin(d0) * Math.sin(d) + Math.cos(d0) * Math.cos(d) * Math.cos(a - a0);
-  if (cosc <= 0) return null;
-  const xi = (Math.cos(d) * Math.sin(a - a0)) / cosc;
-  const eta = (Math.cos(d0) * Math.sin(d) - Math.sin(d0) * Math.cos(d) * Math.cos(a - a0)) / cosc;
-  const fx = xi / D2R / wcs.cdelt[0] + wcs.crpix[0];
-  const fy = eta / D2R / wcs.cdelt[1] + wcs.crpix[1];
-  return [fx - 1, ny - fy];
+/** Sky → patch pixel (top-left origin), via the shared astro helper (same row convention as the viewer). */
+function toPix(wcs: Wcs, ra: number, dec: number, ny: number): [number, number] | null {
+  const p = skyToPixel(wcs, ra, dec, ny);
+  return Number.isFinite(p.x) && Number.isFinite(p.y) ? [p.x, p.y] : null;
 }
 
 /** The difference shown for a visit: visit 1 → this visit (visit 1 itself shows 1 → 2). */
@@ -92,7 +86,7 @@ export function buildDetections(m: Manifest, report: Report | null, frame: numbe
     const kind: Detection['kind'] | null = mover ? 'mover' : s.class === 'variable' ? 'variable' : s.class.startsWith('candidate') ? 'candidate' : null;
     if (!kind) { if (s.class === 'known-star') known++; continue; }
     const ps = (s.positions?.length ? s.positions : [{ visit: 0, ra_deg: s.ra_deg ?? 0, dec_deg: s.dec_deg ?? 0 }])
-      .map((p) => skyToPixel(wcs, p.ra_deg, p.dec_deg, ny)).filter((p): p is [number, number] => Boolean(p));
+      .map((p) => toPix(wcs, p.ra_deg, p.dec_deg, ny)).filter((p): p is [number, number] => Boolean(p));
     if (!ps.length) continue;
     const here = ps[Math.min(frame, ps.length - 1)];
     if (here[0] < -2 || here[1] < -2 || here[0] > nx + 1 || here[1] > ny + 1) continue;
