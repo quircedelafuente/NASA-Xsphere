@@ -67,8 +67,8 @@ def parse_coords(q):
     ra, dec = _group(tokens[:k], True), _group(tokens[k:], False)
     return (ra, dec) if ra is not None and dec is not None else None
 
-SESAME = ['https://cds.unistra.fr/cgi-bin/nph-sesame/-oI/SNV?',            # CDS Strasbourg
-          'https://vizier.cfa.harvard.edu/viz-bin/nph-sesame/-oI/SNV?']    # same service, Harvard mirror (used when CDS is unreachable)
+SESAME = ['https://vizier.cfa.harvard.edu/viz-bin/nph-sesame/-oI/SNV?',  # Harvard mirror: answers in ~0.3 s from the server
+          'https://cds.unistra.fr/cgi-bin/nph-sesame/-oI/SNV?']           # CDS (redirects to a mirror that sometimes takes > 6 s)
 
 _down = {}   # mirror -> time of its last failure
 
