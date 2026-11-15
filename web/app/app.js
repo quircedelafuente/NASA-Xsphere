@@ -12,6 +12,9 @@ const SURVEYS = {
   // by URL from IRSA mirrors: CDS's own tile server (alasky) answered 404 on the IE network
   wise: 'https://irsa.ipac.caltech.edu/data/hips/CDS/2MASS/Color', dss: 'https://irsa.ipac.caltech.edu/data/hips/CDS/DSS2/color',
 };
+// Object recognition (chunk B classification: known star / variable / candidate…) is switched off in the UI for now:
+// a zone shows only its photos blinking. Set to true to bring back the list, rings and catalogue warnings.
+const RECOGNITION = false;
 let APPEAR = {};   // web/lib3d/appearance.json: 3D dials per target, each tagged with how we know it
 const EXPLAIN = [
   'SPHEREx photographs the whole sky every six months, so most spots have 3–4 visits so far.',
@@ -93,7 +96,7 @@ async function runJob(startPromise, onDone) {
       const j = await api('/view/' + job);
       $('#bar').style.width = Math.max(2, 100 * (j.progress || 0)) + '%';
       $('#waitTitle').textContent = { queued: 'Waiting for a free slot…', listing: 'Asking NASA which photos cover this spot…', fetching: 'Reading the photos from NASA and lining them up…',
-        'checking catalogues': 'Checking every change against known stars and asteroids…', done: 'Done', error: 'Something went wrong' }[j.status] || j.status;
+        'checking catalogues': RECOGNITION ? 'Checking every change against known stars and asteroids…' : 'Finishing…', done: 'Done', error: 'Something went wrong' }[j.status] || j.status;
       $('#waitStep').textContent = [j.n_photos_total ? `${j.n_photos_total} photos of this spot exist` : '', j.current_band ? `band ${j.current_band}` : '', (j.log || []).slice(-1)[0] || ''].filter(Boolean).join(' · ');
       if (tick++ % 4 === 0) $('#explain').textContent = EXPLAIN[(tick / 4 | 0) % EXPLAIN.length];
       if (j.status === 'done') return onDone(j);
@@ -118,7 +121,7 @@ async function openPosition(m) {
 
 // ---------- zone drawing ----------
 $('#drawBtn').onclick = () => { const on = $('#drawLayer').hidden; show('#drawLayer', on); $('#drawBtn').setAttribute('aria-pressed', on);
-  $('#maphint').innerHTML = on ? 'Drag a box on the map (up to 30′ wide). Everything that changed inside it will be listed.' : 'Search a star, pick a test target, or <b>Draw a zone</b>.'; };
+  $('#maphint').innerHTML = on ? 'Drag a box on the map (up to 30′ wide). Its SPHEREx photos will play inside the box.' : 'Search a star, pick a test target, or <b>Draw a zone</b>.'; };
 (() => {
   const L = $('#drawLayer'), R = $('#rect'); let s = null;
   L.onpointerdown = e => { const b = L.getBoundingClientRect(); s = [e.clientX - b.left, e.clientY - b.top]; L.setPointerCapture(e.pointerId); Object.assign(R.style, { left: s[0] + 'px', top: s[1] + 'px', width: 0, height: 0 }); show('#rect'); };
@@ -148,7 +151,7 @@ function scanZone(ra, dec, w, h) {
     const bands = j.report.bundle ? { D4: await loadBundle(j.report.bundle) } : {};
     const side = bands.D4 ? bands.D4.man.grid.nx * bands.D4.man.grid.pix_arcsec / 3600 : Math.max(w, h) / 60;
     mapGo(ra, dec, side * 1.6); overlay?.removeAll();
-    present({ kind: 'scan', title: `Zone ${w.toFixed(1)}′ × ${h.toFixed(1)}′`, bands, report: j.report, warnings: catalogWarnings(j.report), center: { ra_deg: ra, dec_deg: dec } });
+    present({ kind: 'scan', title: `Zone ${w.toFixed(1)}′ × ${h.toFixed(1)}′`, bands, report: j.report, warnings: RECOGNITION ? catalogWarnings(j.report) : [], center: { ra_deg: ra, dec_deg: dec } });
   });
 }
 
@@ -169,7 +172,7 @@ function present(r) {
   $('#kind').textContent = r.kind === 'scan' ? 'zone scan' : (t?.kind || 'sky position');
   $('#where').textContent = `RA ${r.center.ra_deg.toFixed(4)}° · Dec ${r.center.dec_deg.toFixed(4)}°`;
   $('#title').textContent = t?.name || r.title;
-  $('#blurb').textContent = r.kind === 'scan' ? (r.report.summary_text || '') : (t?.expected?.notes ||
+  $('#blurb').textContent = r.kind === 'scan' ? (RECOGNITION ? (r.report.summary_text || '') : 'The box on the map plays this zone at each SPHEREx visit. Watch for anything that jumps or changes brightness, or switch to Changes only.') : (t?.expected?.notes ||
     'Each frame is the same patch of sky on a different SPHEREx visit. Watch for anything that jumps between frames, or switch to Changes only.');
   const warns = [...(r.warnings || []), ...Object.values(r.bands).flatMap(b => b.man.warnings || [])];
   $('#warnings').innerHTML = [...new Set(warns)].map(w => `<p class="warn">${w.replace(/^D\d+6?: /, '')}</p>`).join('');
@@ -200,7 +203,7 @@ function draw() {
       g.strokeStyle = 'rgba(127,178,255,.8)'; g.setLineDash([4, 4]); g.beginPath();
       m.target_track.forEach((p, i) => { const X = (p.x + .5) * S, Y = (p.y + .5) * S; i ? g.lineTo(X, Y) : g.moveTo(X, Y); }); g.stroke(); g.setLineDash([]);
     }
-    if (V.report) for (const s of V.report.sources) {
+    if (V.report && RECOGNITION) for (const s of V.report.sources) {
       if (picked !== s.id) continue;   // no rings on everything: only the object picked in the list
       const [sx, sy] = srcXY(s, ep); const k = N / (V.report.zone ? Math.round(V.report.zone.w_arcmin * 60 / 3.075) : N);
       const X = (sx * k + .5) * S, Y = (N - 1 - sy * k + .5) * S;
@@ -235,7 +238,7 @@ function drawZone() {
   const g = c.getContext('2d'); g.imageSmoothingEnabled = false; g.fillStyle = '#000'; g.fillRect(0, 0, N, N);
   const im = mode === 'diff' ? b.diffs[ep] : b.imgs[mode === 'pair' ? 0 : ep];
   if (im) g.drawImage(im, 0, 0, N, N);
-  const s = picked && V.report?.sources.find(x => x.id === picked);
+  const s = RECOGNITION && picked && V.report?.sources.find(x => x.id === picked);
   if (s) { const [sx, sy] = srcXY(s, ep); g.strokeStyle = '#f0a43a'; g.lineWidth = Math.max(1, N / 120); g.beginPath(); g.arc(sx + .5, N - 1 - sy + .5, N / 30, 0, 7); g.stroke(); }
   const f = m.frames[ep];
   $('#zoneCap').innerHTML = mode === 'diff' ? (ep ? `Changes · visit ${ep + 1} minus visit 1` : 'Visit 1 = reference') : `Visit <b>${ep + 1}/${m.frames.length}</b> · ${f.date} · ${V.band}`;
@@ -250,7 +253,7 @@ $('#bands').onclick = e => { const b = e.target.closest('button'); if (!b) retur
 $('#strip').onclick = e => { const b = e.target.closest('button'); if (!b) return; ep = +b.dataset.e; playing = false; loop(); draw(); };
 
 function renderScan() {
-  show('#scanCard', V.kind === 'scan'); if (V.kind !== 'scan') return;
+  show('#scanCard', RECOGNITION && V.kind === 'scan'); if (!RECOGNITION || V.kind !== 'scan') return;
   const r = V.report, s = r.summary;
   $('#scanText').textContent = r.summary_text;
   $('#counts').innerHTML = [['known-star', s.known_star], ['known-asteroid', s.known_asteroid], ['variable', s.variable], ['candidate', s.candidate], ['unknown-static', s.unknown_static], ['artefact', s.artefact]]
