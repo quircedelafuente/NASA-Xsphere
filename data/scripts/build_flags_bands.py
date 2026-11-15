@@ -39,7 +39,7 @@ flags = {
  "per_target_notes": {
   "barnards-star": "OVERFLOW/BLOOM/TRANSIENT on the core in all 168 D1-D3 frames; core is NaN. Use D5/D6 or difference mode; position still measurable from the wings.",
   "rw-aurigae": "OVERFLOW in 100/101 frames: bright (about Jy level). Flux values are lower limits.",
-  "epsilon-indi-b": "Faint (Gaia G=18) next to the bright star eps Indi A (~4.7 mag): watch GHOST/CROSSTALK/BLOOM near the target; check in QA.",
+  "eps-indi-b": "Faint (Gaia G=18) next to the bright star eps Indi A (~4.7 mag): watch GHOST/CROSSTALK/BLOOM near the target; check in QA.",
   "wise-0855": "Faint, no saturation expected. Only visible above ~3.8 um (D5/D6); SOURCE may mark the AllWISE position, not today's.",
   "r-draconis": "Mira at maximum can be bright in D1-D3; check OVERFLOW per epoch since flux changes by orders of magnitude over a cycle."
  },

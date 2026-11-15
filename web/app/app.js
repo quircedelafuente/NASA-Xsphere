@@ -34,6 +34,8 @@ let ep = 0, mode = 'blink', playing = !matchMedia('(prefers-reduced-motion: redu
 async function api(path, opts) {
   const r = await fetch(API + path, opts); let j = null;
   try { j = await r.json(); } catch { /* non-JSON error */ }
+  // no JSON 404 = the engine isn't behind this site (static hosting), not a NASA problem
+  if (r.status === 404 && !j) throw Object.assign(new Error('The search engine is not connected to this website yet, so only the 5 featured targets work here.'), { noEngine: true });
   if (!r.ok) throw new Error(j?.detail?.message || j?.message || `${r.status} ${r.statusText}`);
   return j;
 }
@@ -73,7 +75,7 @@ async function suggest() {
 $('#search').onsubmit = async e => {
   e.preventDefault(); show('#suggest', false);
   try { const m = (await api('/resolve?q=' + encodeURIComponent($('#q').value))).matches; openPosition(m[0]); }
-  catch (err) { fail(err.message); }
+  catch (err) { fail(err.message, err.noEngine); }
 };
 document.addEventListener('click', e => { if (!e.target.closest('.search')) show('#suggest', false); });
 
@@ -96,9 +98,9 @@ async function runJob(startPromise, onDone) {
       if (j.status === 'error') throw new Error(j.message || 'The job failed.');
       await new Promise(r => setTimeout(r, 1500));
     }
-  } catch (err) { if (my === pollId) fail(err.message); }
+  } catch (err) { if (my === pollId) fail(err.message, err.noEngine); }
 }
-function fail(msg) { show('#wait', false); show('#error'); $('#error').innerHTML = `<h2>Could not finish</h2><p>${msg}</p><p class="note">NASA's servers can be busy; trying again in a minute usually works.</p>`; }
+function fail(msg, noEngine) { show('#wait', false); show('#error'); $('#error').innerHTML = `<h2>Could not finish</h2><p>${msg}</p>${noEngine ? '' : '<p class="note">NASA\'s servers can be busy; trying again in a minute usually works.</p>'}`; }
 
 async function openPosition(m) {
   if (!m) return fail('No object or coordinates found. Try a name like "Barnard\'s Star" or coordinates like "269.45 4.77".');
@@ -216,7 +218,7 @@ function loop() { clearInterval(timer); if (playing && mode !== 'pair') timer = 
 $('#play').onclick = () => { playing = !playing; loop(); };
 $('#speed').oninput = loop; $('#cross').onchange = draw;
 $('#modes').onclick = e => { const b = e.target.closest('button'); if (!b) return; mode = b.dataset.m; document.querySelectorAll('#modes button').forEach(x => x.setAttribute('aria-pressed', x === b)); draw(); loop(); };
-$('#bands').onclick = e => { const b = e.target.closest('button'); if (!b) return; V.band = b.dataset.b; ep = 0; document.querySelectorAll('#bands button').forEach(x => x.setAttribute('aria-pressed', x === b)); strip(); draw(); };
+$('#bands').onclick = e => { const b = e.target.closest('button'); if (!b) return; V.band = b.dataset.b; ep = 0; document.querySelectorAll('#bands button').forEach(x => x.setAttribute('aria-pressed', x === b)); strip(); draw(); sync3D(); };
 $('#strip').onclick = e => { const b = e.target.closest('button'); if (!b) return; ep = +b.dataset.e; playing = false; loop(); draw(); };
 
 function renderScan() {
@@ -239,10 +241,14 @@ async function render3D(t) {
   for (const [k, v] of Object.entries(a)) if (v && typeof v === 'object' && 'value' in v) p[k] = v.value;
   const { renderObject } = await import('/lib3d/lib3d.js');
   three = renderObject($('#three'), p);
+  sync3D();
   $('#threeDials').innerHTML = Object.entries(a).filter(([, v]) => v && typeof v === 'object' && 'value' in v)
     .map(([k, v]) => `<span class="pill" title="${v.note || ''}">${k.replace('_K', ' (K)').replace('temp2', 'companion temp').replace('temp', 'temperature').replace('_days', ' (days)')}: ${v.value} · ${v.how}</span>`).join('');
 }
-document.querySelector('#threeCard .seg').onclick = e => { const b = e.target.closest('button'); if (!b || !three) return; three.setView(b.dataset.v);
+// The 3D "SPHEREx infrared" view takes the tint of the band on screen (same false colour as the photos).
+let threeView = 'eye';
+function sync3D() { const r = V && V.bands && V.bands[V.band]?.man?.lam_range_um; three?.setView(threeView, r ? (r[0] + r[1]) / 2 : undefined); }
+document.querySelector('#threeCard .seg').onclick = e => { const b = e.target.closest('button'); if (!b || !three) return; threeView = b.dataset.v; sync3D();
   document.querySelectorAll('#threeCard .seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); };
 
 // ---------- share / URL ----------

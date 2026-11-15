@@ -1,4 +1,5 @@
 import type { BandId, ManifestFrame, ViewMode } from '../lib/contracts';
+import type { PaletteId } from '../lib/palette';
 import { BANDS, MODES } from '../copy';
 import { MAX_FPS } from '../lib/url';
 import { formatMjdLong } from '../lib/astro';
@@ -95,6 +96,8 @@ export function AdvancedDrawer(p: {
   stretchA: number; onStretchA: (a: number) => void;
   vmax: number; vmaxDefault: number; onVmax: (v: number) => void;
   invert: boolean; onInvert: (v: boolean) => void;
+  palette?: PaletteId; onPalette?: (p: PaletteId) => void;
+  smooth?: boolean; onSmooth?: (v: boolean) => void;
   flags: boolean; onFlags: (v: boolean) => void;
   crosshair: boolean; onCrosshair: (v: boolean) => void;
   track: boolean; onTrack: (v: boolean) => void;
@@ -114,6 +117,16 @@ export function AdvancedDrawer(p: {
           <input type="range" min={p.vmaxDefault * 0.05} max={p.vmaxDefault * 2} step={p.vmaxDefault / 100} value={p.vmax} onChange={(e) => p.onVmax(Number(e.target.value))} />
           <span className="mono">{p.vmax.toFixed(1)}</span>
         </label>
+        {p.onPalette && (
+          <label className="check" title="The tint follows the wavelength: shorter is bluer, longer is redder. Brightness is unchanged.">
+            <input type="checkbox" checked={(p.palette ?? 'infrared') === 'infrared'} onChange={(e) => p.onPalette!(e.target.checked ? 'infrared' : 'grey')} /> Colour by wavelength
+          </label>
+        )}
+        {p.onSmooth && (
+          <label className="check" title="Draws a smooth surface through SPHEREx's 6″ pixels. Easier on the eye; it adds no real detail.">
+            <input type="checkbox" checked={Boolean(p.smooth)} onChange={(e) => p.onSmooth!(e.target.checked)} /> Smooth pixels (display only)
+          </label>
+        )}
         <label className="check"><input type="checkbox" checked={p.invert} onChange={(e) => p.onInvert(e.target.checked)} /> Invert (dark stars)</label>
         <label className="check"><input type="checkbox" checked={p.flags} onChange={(e) => p.onFlags(e.target.checked)} /> Show problem pixels</label>
         <label className="check"><input type="checkbox" checked={p.crosshair} onChange={(e) => p.onCrosshair(e.target.checked)} /> Crosshair</label>

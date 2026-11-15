@@ -5,6 +5,7 @@ import { useCatalog } from '../ui/lib/useCatalog';
 import { loadFlags, loadFrames, loadGaia, loadManifest, loadSpectrum, matchTarget, nearestTarget } from '../ui/lib/data';
 import { navigate } from '../ui/lib/router';
 import { MAX_FPS, viewUrl, type Overlay, type ViewState } from '../ui/lib/url';
+import { maskCss, sequenceLambda, type PaletteId } from '../ui/lib/palette';
 import { formatDec, formatMjdLong, formatRa } from '../ui/lib/astro';
 import { Header, MockBanner, Footer, BlinkMark } from '../ui/components/Chrome';
 import { SearchBox } from '../ui/components/SearchBox';
@@ -53,6 +54,8 @@ export function Viewer({ state, embed }: { state: ViewState; embed?: boolean }) 
   const [stretchA, setStretchA] = useState<number | undefined>(state.stretchA);
   const [vmax, setVmax] = useState<number | undefined>(undefined);
   const [invert, setInvert] = useState(false);
+  const [palette, setPalette] = useState<PaletteId>(state.palette ?? 'infrared');
+  const [smooth, setSmooth] = useState(Boolean(state.smooth));
   const [overlays, setOverlays] = useState<Overlay[]>(state.overlays);
   const [excluded, setExcluded] = useState<number[]>([]);
   const [advOpen, setAdvOpen] = useState(false);
@@ -105,9 +108,9 @@ export function Viewer({ state, embed }: { state: ViewState; embed?: boolean }) 
   // ---- keep the URL in sync (shareable state) ----
   const shareState: ViewState = useMemo(() => ({
     embed: Boolean(embed), target: meta?.id, mode, speed, frame: playing ? 0 : frame,
-    band: band, stretchA, overlays, zoom: zoom !== 8 ? zoom : undefined, tour,
+    band: band, stretchA, overlays, zoom: zoom !== 8 ? zoom : undefined, tour, palette, smooth,
     ...(meta ? {} : { ra: state.ra, dec: state.dec }),
-  }), [embed, meta, mode, speed, frame, playing, band, stretchA, overlays, zoom, tour, state.ra, state.dec]);
+  }), [embed, meta, mode, speed, frame, playing, band, stretchA, overlays, zoom, tour, palette, smooth, state.ra, state.dec]);
 
   useEffect(() => {
     if (resolved.status !== 'ok') return;
@@ -187,6 +190,8 @@ export function Viewer({ state, embed }: { state: ViewState; embed?: boolean }) 
         stretch={stretch}
         zoom={zoom}
         invert={invert}
+        palette={palette}
+        smooth={smooth}
         excludeEpochs={excluded}
         overlays={{ crosshair: overlays.includes('crosshair'), track: overlays.includes('track'), gaia: overlays.includes('gaia') ? gaia : null, flags: overlays.includes('flags') }}
         onFrameChange={setFrame}
@@ -284,6 +289,8 @@ export function Viewer({ state, embed }: { state: ViewState; embed?: boolean }) 
                 stretchA={stretchA ?? manifest.stretch.a} onStretchA={setStretchA}
                 vmax={vmax ?? manifest.stretch.vmax} vmaxDefault={manifest.stretch.vmax} onVmax={setVmax}
                 invert={invert} onInvert={setInvert}
+                palette={palette} onPalette={setPalette}
+                smooth={smooth} onSmooth={setSmooth}
                 flags={overlays.includes('flags')} onFlags={(v) => toggleOverlay('flags', v)}
                 crosshair={overlays.includes('crosshair')} onCrosshair={(v) => toggleOverlay('crosshair', v)}
                 track={overlays.includes('track')} onTrack={(v) => toggleOverlay('track', v)}
@@ -295,7 +302,7 @@ export function Viewer({ state, embed }: { state: ViewState; embed?: boolean }) 
           )}
         </section>
 
-        {manifest && <ExplainPanel meta={meta} manifest={manifest} frameIndex={frame} flags={flags} mock={Boolean(catalog?.mock)} />}
+        {manifest && <ExplainPanel meta={meta} manifest={manifest} frameIndex={frame} flags={flags} mock={Boolean(catalog?.mock)} flagColour={maskCss(palette, sequenceLambda(manifest))} />}
       </main>
       <Footer />
     </div>
