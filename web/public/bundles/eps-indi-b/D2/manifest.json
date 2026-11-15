@@ -1,0 +1,290 @@
+{
+ "target_id": "eps-indi-b",
+ "name": "\u03b5 Indi B",
+ "band": "D2",
+ "lam_range_um": [
+  1.1,
+  1.62
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    331.09650392987,
+    -56.800612062089
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.0344,
+  "vmax": 1.15523,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "May 2025",
+   "mjd": 60809.0297,
+   "date": "2025-05-14",
+   "n_exposures": 32,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.86,
+    31.28
+   ],
+   "target_radec": [
+    331.09537,
+    -56.800228
+   ],
+   "saturated_at_target": false
+  },
+  {
+   "epoch": 1,
+   "label": "Oct 2025",
+   "mjd": 60959.4378,
+   "date": "2025-10-11",
+   "n_exposures": 30,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.6,
+    31.44
+   ],
+   "target_radec": [
+    331.096202,
+    -56.80051
+   ],
+   "saturated_at_target": false
+  },
+  {
+   "epoch": 2,
+   "label": "Apr 2026",
+   "mjd": 61155.8782,
+   "date": "2026-04-25",
+   "n_exposures": 7,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.25,
+    31.66
+   ],
+   "target_radec": [
+    331.097289,
+    -56.800878
+   ],
+   "saturated_at_target": false
+  },
+  {
+   "epoch": 3,
+   "label": "Sep 2026",
+   "mjd": 61313.9993,
+   "date": "2026-09-30",
+   "n_exposures": 24,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e3.f32",
+   "err_f32": "e3_err.f32",
+   "png": "e3.png",
+   "mask_png": "e3_mask.png",
+   "target_px": [
+    30.97,
+    31.83
+   ],
+   "target_radec": [
+    331.098164,
+    -56.801175
+   ],
+   "saturated_at_target": false
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 32,
+     "y": 30,
+     "sigma": -6.2,
+     "npix": 2,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 31,
+     "sigma": -5.8,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 33,
+     "y": 31,
+     "sigma": -12.1,
+     "npix": 9,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 32,
+     "sigma": 10.7,
+     "npix": 4,
+     "kind": "moved",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 3,
+   "f32": "diff_3_0.f32",
+   "png": "diff_3_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 30,
+     "y": 33,
+     "sigma": 5.5,
+     "npix": 3,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 31,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 33,
+     "y": 32,
+     "sigma": -10.1,
+     "npix": 6,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 32,
+     "sigma": 8.9,
+     "npix": 2,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 8,
+     "y": 29,
+     "sigma": -5.1,
+     "npix": 1,
+     "kind": "fainter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 2,
+   "to": 3,
+   "f32": "diff_3_2.f32",
+   "png": "diff_3_2.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 31,
+     "y": 33,
+     "sigma": 5.6,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60809.0297,
+   "x": 31.86,
+   "y": 31.28
+  },
+  {
+   "mjd": 60959.4378,
+   "x": 31.6,
+   "y": 31.44
+  },
+  {
+   "mjd": 61155.8782,
+   "x": 31.25,
+   "y": 31.66
+  },
+  {
+   "mjd": 61313.9993,
+   "x": 30.97,
+   "y": 31.83
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": []
+}

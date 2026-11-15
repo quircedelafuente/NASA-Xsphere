@@ -1,0 +1,606 @@
+{
+ "target_id": "r-draconis",
+ "name": "R Draconis",
+ "band": "D2",
+ "lam_range_um": [
+  1.1,
+  1.62
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    248.16723492597,
+    66.755023608321
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.01782,
+  "vmax": 89.9609,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "Jun 2025",
+   "mjd": 60846.0598,
+   "date": "2025-06-20",
+   "n_exposures": 33,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167241,
+    66.755023
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 1,
+   "label": "Dec 2025",
+   "mjd": 61014.4842,
+   "date": "2025-12-05",
+   "n_exposures": 37,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167234,
+    66.755024
+   ],
+   "saturated_at_target": true
+  },
+  {
+   "epoch": 2,
+   "label": "Jun 2026",
+   "mjd": 61213.2099,
+   "date": "2026-06-22",
+   "n_exposures": 19,
+   "detectors": [
+    "D2"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.5,
+    31.5
+   ],
+   "target_radec": [
+    248.167226,
+    66.755025
+   ],
+   "saturated_at_target": true
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 30,
+     "y": 30,
+     "sigma": 12.4,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 0,
+     "y": 63,
+     "sigma": 9.3,
+     "npix": 33,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 55,
+     "y": 63,
+     "sigma": 9.3,
+     "npix": 62,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 34,
+     "y": 31,
+     "sigma": -9.1,
+     "npix": 8,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 33,
+     "y": 30,
+     "sigma": -8.7,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 31,
+     "y": 29,
+     "sigma": 8.6,
+     "npix": 2,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 1,
+     "y": 1,
+     "sigma": 7.2,
+     "npix": 7,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 27,
+     "sigma": -7.2,
+     "npix": 11,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 32,
+     "y": 37,
+     "sigma": 6.6,
+     "npix": 2,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 63,
+     "y": 3,
+     "sigma": 5.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 9,
+     "y": 62,
+     "sigma": 5.7,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 34,
+     "sigma": -5.6,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 8,
+     "y": 63,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 59,
+     "y": 57,
+     "sigma": 5.5,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 1,
+     "sigma": 5.4,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 21,
+     "y": 62,
+     "sigma": 5.3,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 7,
+     "sigma": 5.3,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 5,
+     "sigma": 5.3,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 49,
+     "sigma": 5.0,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 0,
+     "y": 63,
+     "sigma": 12.8,
+     "npix": 63,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 61,
+     "sigma": 10.6,
+     "npix": 45,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 1,
+     "sigma": 9.3,
+     "npix": 34,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 5,
+     "sigma": 7.8,
+     "npix": 18,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 22,
+     "y": 61,
+     "sigma": 7.5,
+     "npix": 6,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 30,
+     "sigma": 7.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": true
+    },
+    {
+     "x": 14,
+     "y": 63,
+     "sigma": 6.6,
+     "npix": 8,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 51,
+     "y": 63,
+     "sigma": 6.6,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 54,
+     "sigma": 6.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 62,
+     "y": 53,
+     "sigma": 6.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 17,
+     "y": 10,
+     "sigma": 6.0,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 8,
+     "y": 6,
+     "sigma": 5.8,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 10,
+     "y": 0,
+     "sigma": 5.6,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 2,
+     "y": 22,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 63,
+     "y": 8,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 55,
+     "y": 59,
+     "sigma": 5.3,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 5,
+     "y": 4,
+     "sigma": 5.3,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 59,
+     "y": 57,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 19,
+     "y": 48,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 11,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 0,
+     "y": 60,
+     "sigma": 7.7,
+     "npix": 9,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 26,
+     "sigma": 7.3,
+     "npix": 4,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 22,
+     "y": 61,
+     "sigma": 6.4,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 3,
+     "y": 2,
+     "sigma": 6.4,
+     "npix": 3,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 3,
+     "y": 63,
+     "sigma": 6.1,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 20,
+     "y": 59,
+     "sigma": 6.0,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 59,
+     "y": 0,
+     "sigma": 6.0,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 1,
+     "y": 54,
+     "sigma": 5.7,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 10,
+     "y": 63,
+     "sigma": 5.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 31,
+     "y": 29,
+     "sigma": -5.5,
+     "npix": 2,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 0,
+     "y": 55,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 29,
+     "y": 28,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "moved",
+     "saturated": true
+    },
+    {
+     "x": 61,
+     "y": 63,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 3,
+     "y": 60,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 53,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 0,
+     "y": 1,
+     "sigma": 5.1,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60846.0598,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61014.4842,
+   "x": 31.5,
+   "y": 31.5
+  },
+  {
+   "mjd": 61213.2099,
+   "x": 31.5,
+   "y": 31.5
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": [
+  "saturated core: brightness at the target is not reliable; use the difference view / a redder band"
+ ]
+}

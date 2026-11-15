@@ -29,16 +29,17 @@ def query(ra, dec, radius_deg=0.0003, collections=None):
     if cache.exists() and time.time() - cache.stat().st_mtime < 6 * 3600:   # weekly releases: 6 h is fresh enough
         return json.loads(cache.read_text())
     import pyvo   # imported here so resolve/tests don't need it
-    svc = pyvo.dal.SIA2Service(config.IRSA + 'SIA')
     rows = []
     for attempt in range(3):
-        try:
-            res = svc.search(pos=(ra, dec, max(radius_deg, 0.0003)), collection=collections).to_table()
+        try:   # the service object reads IRSA's capabilities, so it fails too when IRSA is down
+            res = pyvo.dal.SIA2Service(config.IRSA + 'SIA').search(pos=(ra, dec, max(radius_deg, 0.0003)), collection=collections).to_table()
             break
         except Exception as e:
             err = e; time.sleep(3 * (attempt + 1))
     else:
-        raise RuntimeError(f'nasa-busy: SIA query failed ({err})')
+        if cache.exists():   # IRSA down: an older photo list beats no answer (it only misses photos added since)
+            return json.loads(cache.read_text())
+        raise RuntimeError(f'nasa-busy: NASA\'s photo index (IRSA) is not answering, try again in a few minutes ({str(err)[:120]})')
     for r in res:
         if 'dataproduct_subtype' in res.colnames and r['dataproduct_subtype'] != 'science':
             continue

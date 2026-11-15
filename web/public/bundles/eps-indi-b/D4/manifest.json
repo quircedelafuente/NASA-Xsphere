@@ -1,0 +1,260 @@
+{
+ "target_id": "eps-indi-b",
+ "name": "\u03b5 Indi B",
+ "band": "D4",
+ "lam_range_um": [
+  2.42,
+  3.82
+ ],
+ "source": "SIA table (spikes/sia)",
+ "grid": {
+  "nx": 64,
+  "ny": 64,
+  "pix_arcsec": 6.15,
+  "origin": "top-left, north up",
+  "wcs": {
+   "ctype": [
+    "RA---TAN",
+    "DEC--TAN"
+   ],
+   "crval": [
+    331.09657189982,
+    -56.800635103032
+   ],
+   "crpix": [
+    32.5,
+    32.5
+   ],
+   "cdelt": [
+    -0.0017083333333333,
+    -0.0017083333333333
+   ]
+  }
+ },
+ "units": "MJy/sr (zodi- and background-subtracted)",
+ "stretch": {
+  "method": "asinh",
+  "a": 0.1,
+  "vmin": -0.02066,
+  "vmax": 0.53211,
+  "scope": "sequence"
+ },
+ "frames": [
+  {
+   "epoch": 0,
+   "label": "Apr 2025",
+   "mjd": 60791.5525,
+   "date": "2025-04-26",
+   "n_exposures": 4,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e0.f32",
+   "err_f32": "e0_err.f32",
+   "png": "e0.png",
+   "mask_png": "e0_mask.png",
+   "target_px": [
+    31.92,
+    31.24
+   ],
+   "target_radec": [
+    331.095274,
+    -56.800195
+   ],
+   "saturated_at_target": false
+  },
+  {
+   "epoch": 1,
+   "label": "Oct 2025",
+   "mjd": 60963.179,
+   "date": "2025-10-15",
+   "n_exposures": 23,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e1.f32",
+   "err_f32": "e1_err.f32",
+   "png": "e1.png",
+   "mask_png": "e1_mask.png",
+   "target_px": [
+    31.61,
+    31.43
+   ],
+   "target_radec": [
+    331.096223,
+    -56.800517
+   ],
+   "saturated_at_target": false
+  },
+  {
+   "epoch": 2,
+   "label": "Apr 2026",
+   "mjd": 61152.0271,
+   "date": "2026-04-22",
+   "n_exposures": 19,
+   "detectors": [
+    "D4"
+   ],
+   "f32": "e2.f32",
+   "err_f32": "e2_err.f32",
+   "png": "e2.png",
+   "mask_png": "e2_mask.png",
+   "target_px": [
+    31.28,
+    31.64
+   ],
+   "target_radec": [
+    331.097268,
+    -56.800871
+   ],
+   "saturated_at_target": false
+  }
+ ],
+ "diffs": [
+  {
+   "from": 0,
+   "to": 1,
+   "f32": "diff_1_0.f32",
+   "png": "diff_1_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 32,
+     "y": 30,
+     "sigma": -9.6,
+     "npix": 10,
+     "kind": "fainter",
+     "saturated": false
+    },
+    {
+     "x": 4,
+     "y": 58,
+     "sigma": 7.6,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 34,
+     "y": 57,
+     "sigma": 7.5,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 0,
+   "to": 2,
+   "f32": "diff_2_0.f32",
+   "png": "diff_2_0.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 33,
+     "y": 31,
+     "sigma": -11.5,
+     "npix": 13,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 4,
+     "y": 58,
+     "sigma": 8.9,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 34,
+     "y": 57,
+     "sigma": 8.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 30,
+     "y": 33,
+     "sigma": 6.7,
+     "npix": 3,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 4,
+     "y": 39,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    },
+    {
+     "x": 5,
+     "y": 38,
+     "sigma": 5.2,
+     "npix": 1,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  },
+  {
+   "from": 1,
+   "to": 2,
+   "f32": "diff_2_1.f32",
+   "png": "diff_2_1.png",
+   "units": "sigma",
+   "candidates": [
+    {
+     "x": 30,
+     "y": 32,
+     "sigma": 8.9,
+     "npix": 7,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 33,
+     "y": 31,
+     "sigma": -8.0,
+     "npix": 9,
+     "kind": "moved",
+     "saturated": false
+    },
+    {
+     "x": 20,
+     "y": 14,
+     "sigma": 6.6,
+     "npix": 2,
+     "kind": "brighter",
+     "saturated": false
+    }
+   ]
+  }
+ ],
+ "target_track": [
+  {
+   "mjd": 60791.5525,
+   "x": 31.92,
+   "y": 31.24
+  },
+  {
+   "mjd": 60963.179,
+   "x": 31.61,
+   "y": 31.43
+  },
+  {
+   "mjd": 61152.0271,
+   "x": 31.28,
+   "y": 31.64
+  }
+ ],
+ "previews": {
+  "blink_gif": "blink.gif",
+  "changes_png": "changes.png"
+ },
+ "warnings": []
+}
