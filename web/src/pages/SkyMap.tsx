@@ -27,6 +27,7 @@ import { IntroCard } from '../ui/map/IntroCard';
 import { AboutSheet } from '../ui/map/AboutSheet';
 import { MiniChart } from '../ui/map/MiniChart';
 import { VisitTimeline } from '../ui/map/VisitTimeline';
+import { DetectionOverlay, DetectionPanel, buildDetections, type Report } from '../ui/map/Detections';
 import { MapSearch, type SearchHit } from '../ui/map/MapSearch';
 import { drawSky } from '../ui/map/renderSky';
 import { HIPS_CREDIT, loadAladin, pickHips } from '../ui/map/aladin';
@@ -158,6 +159,10 @@ export function SkyMap({ loc }: { loc: string }) {
   const [areaRect, setAreaRect] = useState<{ x0: number; y0: number; x1: number; y1: number } | null>(null);
   const [areaJob, setAreaJob] = useState<{ title: string; detail: string; progress: number; error?: boolean } | null>(null);
   const areaRun = useRef(0);
+  // detections layer (change engine + discovery report)
+  const [detOn, setDetOn] = useState(false);
+  const [detFocus, setDetFocus] = useState<string | null>(null);
+  const [report, setReport] = useState<Report | null>(null);
   /** The chosen area stays drawn on the sky (glued to it while the map moves) until its photos open. */
   const pendingArea = useRef<{ ra: number; dec: number; w: number; h: number } | null>(null);
   const pendingEl = useRef<HTMLDivElement>(null);
@@ -878,6 +883,8 @@ export function SkyMap({ loc }: { loc: string }) {
     if (!patchOpen || !meta) return;
     let alive = true;
     loadSpectrum(meta.id).then((s) => alive && setSpectrum(s));
+    setReport(null); setDetFocus(null);
+    fetch(`/reports/${meta.id}.json`).then((r) => (r.ok ? r.json() : null)).then((r) => alive && setReport(r)).catch(() => { /* no report for this patch */ });
     loadGaia(meta.id).then((g) => alive && setGaia(g));
     loadFlags().then((f) => alive && setFlags(f));
     return () => { alive = false; };
@@ -1099,6 +1106,7 @@ export function SkyMap({ loc }: { loc: string }) {
   const areaLive = areaRect ? areaFromRect(areaRect) : null;
 
   // ---------- derived copy ----------
+  const det = useMemo(() => (detOn && manifest ? buildDetections(manifest, report, frame) : null), [detOn, manifest, report, frame]);
   const nEpochs = manifest?.frames.length ?? 0;
   const fr = manifest?.frames[frame];
   const saturated = Boolean(meta?.expected?.saturated && (manifest?.warnings?.some((w) => w.includes('saturat')) || fr?.flags_at_target?.includes('OVERFLOW')));
@@ -1270,6 +1278,7 @@ export function SkyMap({ loc }: { loc: string }) {
             {ready && showMe && tp && (
               <span className="patch__ring" aria-hidden="true" style={{ left: `${((tp[0] + 0.5) / nx) * 100}%`, top: `${((tp[1] + 0.5) / ny) * 100}%` }} />
             )}
+            {ready && det && <DetectionOverlay list={det.list} nx={manifest!.nx ?? 64} ny={manifest!.ny ?? manifest!.nx ?? 64} focus={detFocus} />}
             <span className="patch__frame" aria-hidden="true" />
             <span className="patch__name">{meta.name}</span>
             {ready && fr && (
@@ -1542,6 +1551,15 @@ export function SkyMap({ loc }: { loc: string }) {
                     })}
                   </div>
                   {bandCopy && <span className="pcard__range mono">{bandCopy.range}</span>}
+                </div>
+
+                <div className={`detsw ${detOn ? 'is-on' : ''}`}>
+                  <button className="detsw__btn" role="switch" aria-checked={detOn} onClick={() => { setDetOn((v) => !v); setDetFocus(null); }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /><circle cx="12" cy="12" r="2.6" fill="currentColor" /></svg>
+                    <span>Detections</span>
+                    <i className="detsw__track"><i /></i>
+                  </button>
+                  {detOn && det && <DetectionPanel list={det.list} pair={det.pair} known={det.known} focus={detFocus} onFocus={setDetFocus} hasReport={Boolean(report)} />}
                 </div>
 
                 {insight && (
