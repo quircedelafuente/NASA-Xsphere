@@ -28,6 +28,7 @@ import { AboutSheet } from '../ui/map/AboutSheet';
 import { MiniChart } from '../ui/map/MiniChart';
 import { VisitTimeline } from '../ui/map/VisitTimeline';
 import { DetectionOverlay, DetectionPanel, buildDetections, type Report } from '../ui/map/Detections';
+import { MarkerLegend, MarkerOverlay, trackMoves } from '../ui/map/Markers';
 import { MapSearch, type SearchHit } from '../ui/map/MapSearch';
 import { drawSky } from '../ui/map/renderSky';
 import { HIPS_CREDIT, loadAladin, pickHips } from '../ui/map/aladin';
@@ -1070,7 +1071,8 @@ export function SkyMap({ loc }: { loc: string }) {
       while (true) {
         if (run !== areaRun.current) return;
         const j = await (await fetch(`/scan/${key}`)).json();
-        if (j.status === 'error') throw new Error(j.message || 'The area could not be processed.');
+        // engine messages are "code: plain sentence (raw upstream error)": show only the sentence
+        if (j.status === 'error') throw new Error(String(j.message || 'The area could not be processed.').replace(/^[a-z-]+:\s*/, '').replace(/\s*\(.*$/s, ''));
         if (j.bundle || j.status === 'done') break;   // photos are ready; object checks may still be running
         setAreaJob({ title: STATUS[j.status] ?? 'Working…', progress: Math.max(0.02, j.progress ?? 0),
           detail: [label, j.n_photos_total ? `${j.n_photos_total} photos found` : '',
@@ -1287,7 +1289,7 @@ export function SkyMap({ loc }: { loc: string }) {
                 palette={palette}
                 smooth={smooth}
                 excludeEpochs={excluded}
-                overlays={overlayProps}
+                overlays={{ ...overlayProps, crosshair: false, track: false, gaia: null, wise: null }}
                 onFrameChange={setFrame}
                 onPixelClick={(ra, dec) => { if (performance.now() - dragged.current > 250) setPicked({ ra, dec }); }}
               />
@@ -1297,7 +1299,8 @@ export function SkyMap({ loc }: { loc: string }) {
             {ready && showMe && tp && (
               <span className="patch__ring" aria-hidden="true" style={{ left: `${((tp[0] + 0.5) / nx) * 100}%`, top: `${((tp[1] + 0.5) / ny) * 100}%` }} />
             )}
-            {ready && det && <DetectionOverlay list={det.list} nx={manifest!.nx ?? 64} ny={manifest!.ny ?? manifest!.nx ?? 64} focus={detFocus} />}
+            {ready && <MarkerOverlay manifest={manifest!} frame={frame} show={overlayProps} />}
+            {ready && det && <DetectionOverlay list={det.list} nx={manifest!.nx ?? 64} ny={manifest!.ny ?? manifest!.nx ?? 64} focus={detFocus} targetPx={overlayProps.track ? tp : null} />}
             <span className="patch__frame" aria-hidden="true" />
             <span className="patch__name">{meta.name}</span>
             {ready && fr && (
@@ -1562,8 +1565,12 @@ export function SkyMap({ loc }: { loc: string }) {
                       const avail = c.bands.find((b) => entry?.bands.includes(b));
                       const on = Boolean(activeBand && c.bands.includes(activeBand));
                       return (
-                        <button key={c.id} role="radio" aria-checked={on} className={on ? 'is-on' : ''} disabled={!avail}
-                          onClick={() => avail && setBand(avail)} aria-label={`${c.label} wavelengths, ${c.range}`} title={c.range}>
+                        // aria-disabled, not disabled: a disabled button shows no tooltip, and this one has to say why
+                        <button key={c.id} role="radio" aria-checked={on} className={on ? 'is-on' : ''} aria-disabled={!avail}
+                          onClick={() => avail && setBand(avail)} aria-label={`${c.label} wavelengths, ${c.range}`}
+                          title={avail ? c.range : meta?.id.startsWith('live-')
+                            ? `${c.label} (${c.range}): not loaded. Areas fetched live only get the Mid colour for now.`
+                            : `No ${c.label.toLowerCase()}-wavelength photos for this spot yet`}>
                           {c.label}
                         </button>
                       );
@@ -1571,6 +1578,10 @@ export function SkyMap({ loc }: { loc: string }) {
                   </div>
                   {bandCopy && <span className="pcard__range mono">{bandCopy.range}</span>}
                 </div>
+                <MarkerLegend crosshair={overlayProps.crosshair && Boolean(tp)} track={overlayProps.track && trackMoves(manifest!)}
+                  gaia={Boolean(overlayProps.gaia)} wise={Boolean(overlayProps.wise)}
+                  firstFrame={mode !== 'diff' && nEpochs > 1}
+                  mask={overlayProps.flags && mode !== 'diff' && frames?.some((f) => f.some(Number.isNaN)) ? maskCss(palette, sequenceLambda(manifest!)) : null} />
 
                 <div className={`detsw ${detOn ? 'is-on' : ''}`}>
                   <button className="detsw__btn" role="switch" aria-checked={detOn} onClick={() => { setDetOn((v) => !v); setDetFocus(null); }}>

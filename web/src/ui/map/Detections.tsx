@@ -100,26 +100,37 @@ export function buildDetections(m: Manifest, report: Report | null, frame: numbe
       x: here[0], y: here[1], r: 3.2, track: mover && ps.length > 1 ? ps : undefined,
     });
   }
-  return { list, pair: [d?.from ?? 0, d?.to ?? 1], known };
+  // one object, one box: a change-engine "shifted" pair on top of a linked mover is the same star seen twice
+  const movers = list.filter((x) => x.kind === 'mover');
+  const out = list.filter((x) => x.kind !== 'moved' || !movers.some((v) => Math.hypot(v.x - x.x, v.y - x.y) < 3));
+  return { list: out, pair: [d?.from ?? 0, d?.to ?? 1], known };
 }
 
 /** SVG markers on the patch (viewBox = patch pixels; strokes stay crisp at any zoom). */
-export function DetectionOverlay({ list, nx, ny, focus }: { list: Detection[]; nx: number; ny: number; focus: string | null }) {
+export function DetectionOverlay({ list, nx, ny, focus, targetPx }: { list: Detection[]; nx: number; ny: number; focus: string | null; targetPx?: [number, number] | null }) {
+  // the target's own path is already drawn by MarkerOverlay: skip a second (measured) track on the same star
+  const onTarget = (d: Detection) => Boolean(targetPx && Math.hypot(d.x - targetPx[0], d.y - targetPx[1]) < 3);
   const bracket = (x: number, y: number, r: number) => {
     const l = r * 0.55;
     return `M${x - r},${y - r + l}V${y - r}H${x - r + l} M${x + r - l},${y - r}H${x + r}V${y - r + l} M${x + r},${y + r - l}V${y + r}H${x + r - l} M${x - r + l},${y + r}H${x - r}V${y + r - l}`;
   };
   return (
-    <svg className="det-overlay" viewBox={`0 0 ${nx} ${ny}`} preserveAspectRatio="none" aria-hidden="true">
+    <svg className="det-overlay" viewBox={`0 0 ${nx} ${ny}`} preserveAspectRatio="none">
       {list.map((d) => {
         const cx = d.x + 0.5, cy = d.y + 0.5, on = focus === d.id, dim = focus && !on;
+        const track = onTarget(d) ? undefined : d.track;
+        const br = bracket(cx, cy, on ? d.r * 1.25 : d.r);
         return (
           <g key={d.id} className={`det det--${d.kind} ${on ? 'is-focus' : ''} ${dim ? 'is-dim' : ''}`}>
-            {d.track && <polyline points={d.track.map((p) => `${p[0] + 0.5},${p[1] + 0.5}`).join(' ')} className="det__track" vectorEffect="non-scaling-stroke" />}
-            {d.track?.map((p, i) => <circle key={i} cx={p[0] + 0.5} cy={p[1] + 0.5} r={0.35} className="det__dot" />)}
+            <title>{`${d.title} (${d.value}) · ${d.sub}`}</title>
+            {track && <polyline points={track.map((p) => `${p[0] + 0.5},${p[1] + 0.5}`).join(' ')} className="det__halo" vectorEffect="non-scaling-stroke" />}
+            {track && <polyline points={track.map((p) => `${p[0] + 0.5},${p[1] + 0.5}`).join(' ')} className="det__track" vectorEffect="non-scaling-stroke" />}
+            {track?.map((p, i) => <circle key={i} cx={p[0] + 0.5} cy={p[1] + 0.5} r={0.3} className="det__dot" />)}
+            {d.from && <line x1={d.from[0] + 0.5} y1={d.from[1] + 0.5} x2={cx} y2={cy} className="det__halo" vectorEffect="non-scaling-stroke" />}
             {d.from && <line x1={d.from[0] + 0.5} y1={d.from[1] + 0.5} x2={cx} y2={cy} className="det__vec" vectorEffect="non-scaling-stroke" />}
-            {d.from && <circle cx={d.from[0] + 0.5} cy={d.from[1] + 0.5} r={0.5} className="det__dot" />}
-            <path d={bracket(cx, cy, on ? d.r * 1.25 : d.r)} className="det__br" vectorEffect="non-scaling-stroke" />
+            {d.from && <circle cx={d.from[0] + 0.5} cy={d.from[1] + 0.5} r={0.3} className="det__dot" />}
+            <path d={br} className="det__halo" vectorEffect="non-scaling-stroke" />
+            <path d={br} className="det__br" vectorEffect="non-scaling-stroke" />
           </g>
         );
       })}
