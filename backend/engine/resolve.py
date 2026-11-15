@@ -1,10 +1,13 @@
 """A2 · Turn what the user typed into sky coordinates: known target names (fuzzy), coordinates, or any name via CDS Sesame."""
-import difflib, math, re, time, urllib.parse, urllib.request
+import difflib, json, math, re, time, urllib.parse, urllib.request
 from . import config
 
 def _norm(s):
     s = s.lower().replace('ε', 'eps').replace('epsilon', 'eps').replace('−', '-').replace("'", '').replace('’', '')
     return re.sub(r'[^a-z0-9+\-.]', '', s)
+
+def _nums(s):
+    return [n.lstrip('0') for n in re.findall(r'\d+', s)]
 
 def propagate(t, year):
     """Position of a targets.json entry at a decimal year (linear proper motion)."""
@@ -89,6 +92,91 @@ def sesame(name):
             return None
     return None
 
+# Words that star and nebula names are built from, to split a name typed without spaces ('alphacentauri', 'tauceti').
+_GREEK = ('alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau upsilon phi chi psi omega '
+          'alf bet gam del eps zet tet iot kap lam omi sig ups ome').split()
+_GENITIVES = ('andromedae antliae apodis aquarii aquilae arae arietis aurigae bootis caeli camelopardalis cancri canum venaticorum '
+              'canis majoris minoris capricorni carinae cassiopeiae centauri cephei ceti chamaeleontis circini columbae comae berenices '
+              'coronae australis borealis corvi crateris crucis cygni delphini doradus draconis equulei eridani fornacis geminorum gruis '
+              'herculis horologii hydrae hydri indi lacertae leonis leporis librae lupi lyncis lyrae mensae microscopii monocerotis '
+              'muscae normae octantis ophiuchi orionis pavonis pegasi persei phoenicis pictoris piscium piscis austrini puppis pyxidis '
+              'reticuli sagittae sagittarii scorpii sculptoris scuti serpentis sextantis tauri telescopii trianguli tucanae ursae '
+              'velorum virginis volantis vulpeculae').split()
+_ENDS = _GENITIVES + 'nebula galaxy cluster star'.split()
+
+def _split_word(w):
+    """'alphacentauri' -> ['alpha centauri'], 'orionnebula' -> ['orion nebula']. Empty if no known word is inside."""
+    w = w.lower()
+    # 1. the whole word made of a Greek letter + constellation words ('alphaursaemajoris')
+    def pieces(rest, vocab):
+        if not rest:
+            return []
+        for v in sorted(vocab, key=len, reverse=True):
+            if rest.startswith(v):
+                tail = pieces(rest[len(v):], _ENDS)
+                if tail is not None:
+                    return [v] + tail
+        return None
+    out = []
+    full = pieces(w, _GREEK + _ENDS)
+    if full and len(full) > 1:
+        out.append(' '.join(full))
+    # 2. any name + a known last word ('proximacentauri', 'andromedagalaxy')
+    for e in sorted(_ENDS, key=len, reverse=True):
+        if w.endswith(e) and len(w) - len(e) >= 3:
+            v = w[:-len(e)] + ' ' + e
+            if v not in out:
+                out.append(v)
+            break
+    return out
+
+def name_variants(q):
+    """The same name with its words joined differently, as typed first. The catalogues are strict about this:
+    'TRAPPIST-1' is known, 'trappist 1' and 'trappist1' are not; 'GJ 1214' is known, 'gj 1214' and 'gj1214' are not."""
+    parts = re.findall(r'[^\W\d_]+|\d+(?:\.\d+)?', q)
+    out = [q.strip()]
+    if len(parts) == 1 and parts[0].isalpha() and len(parts[0]) >= 6 and parts[0] == q.strip():
+        return out + _split_word(parts[0])
+    if parts and parts[0].lower() in ('gliese', 'gl') and len(parts) >= 2:
+        return out + ['GJ ' + ' '.join(parts[1:])]   # the catalogues file Gliese stars under GJ
+    if len(parts) >= 2 and not re.search(r'[^\w\s\-.]', q):   # leave J-names and anything with + or other signs alone
+        for v in (' '.join(parts), '-'.join(parts), ''.join(parts), parts[0] + '-' + ' '.join(parts[1:]),
+                  parts[0].upper() + ' ' + ' '.join(parts[1:])):   # some catalogue prefixes only work in capitals (GJ, HIP)
+            if v not in out:
+                out.append(v)
+    return out
+
+def sesame_any(q):
+    """sesame() on the name as typed, then on its spacing variants. Returns (ra, dec) or None."""
+    for v in name_variants(q):
+        s = sesame(v)
+        if s:
+            return s
+    return None
+
+_common = None
+
+def common_name(q):
+    """A well-known name typed with a typo ('betelgeuze', 'sirus', 'andromeda galxy') -> (proper name, ra, dec) or None.
+    The catalogues do no fuzzy matching, so we keep our own list (data/common_names.json, every entry checked in Sesame).
+    Short names and numbers must be exact: 'vega' never becomes something else, 'kepler 187' is not Kepler-186."""
+    global _common
+    if _common is None:
+        try:
+            names = json.loads((config.ROOT / 'data' / 'common_names.json').read_text())['names']
+        except Exception:
+            names = {}
+        _common = {_norm(n): (n, p[0], p[1]) for n, p in names.items()}
+    nq = _norm(q)
+    if nq in _common:
+        return _common[nq]
+    if len(nq) < 5:
+        return None
+    for k in difflib.get_close_matches(nq, list(_common), n=3, cutoff=0.8):
+        if _nums(k) == _nums(nq):
+            return _common[k]
+    return None
+
 def resolve(q, year=2026.0):
     """Returns {'matches': [...]}: best first. Each match: name, id (if a known target), ra_deg, dec_deg, source."""
     q = (q or '').strip()
@@ -102,6 +190,8 @@ def resolve(q, year=2026.0):
         for a in [t['name'], t['id']] + t['aliases']:
             na = _norm(a)
             score = 1.0 if na == nq else (0.95 if nq and (nq in na or na in nq) else difflib.SequenceMatcher(None, nq, na).ratio())
+            if score < 0.95 and _nums(nq) and _nums(na) and _nums(nq) != _nums(na):
+                score = 0.0   # a different catalogue number is a different object ('hip 57367' is not HIP 87937)
             scored.append((score, t))
     scored.sort(key=lambda x: -x[0])
     out, seen = [], set()
@@ -110,7 +200,12 @@ def resolve(q, year=2026.0):
             seen.add(t['id']); ra, dec = propagate(t, year)
             out.append(dict(name=t['name'], id=t['id'], ra_deg=ra, dec_deg=dec, source='targets.json', score=round(score, 2)))
     if not out or out[0]['score'] < 0.9:
-        s = sesame(q)
+        s = sesame_any(q)
         if s:
             out.insert(0, dict(name=q, ra_deg=s[0], dec_deg=s[1], source='CDS Sesame (J2000 catalogue position; no proper motion applied)'))
+        elif not out or out[0]['score'] < 0.8:   # no catalogue knows it as typed: a well-known name with a typo?
+            c = common_name(q)
+            if c:
+                out.insert(0, dict(name=c[0], ra_deg=c[1], dec_deg=c[2], corrected_from=q,
+                                   source='well-known name, spelling corrected (J2000 catalogue position from CDS Sesame; no proper motion applied)'))
     return {'matches': out[:5]}

@@ -59,7 +59,7 @@ export const MapSearch = forwardRef<HTMLInputElement, { catalog: Catalog | null;
         if (!m) { setErr(STATES['name-not-found'].body); return; }
         const known = m.id ? catalog.index.find((e) => e.id === m.id) : undefined;
         if (known) { setQ(known.name); go({ kind: 'target', id: known.id }); }
-        else go({ kind: 'coords', ra: m.ra, dec: m.dec });
+        else { setQ(m.name); go({ kind: 'coords', ra: m.ra, dec: m.dec }); } // m.name is the corrected spelling when the engine fixed a typo
       });
     };
 
