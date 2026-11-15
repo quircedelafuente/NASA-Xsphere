@@ -28,7 +28,7 @@ import { AboutSheet } from '../ui/map/AboutSheet';
 import { MiniChart } from '../ui/map/MiniChart';
 import { VisitTimeline } from '../ui/map/VisitTimeline';
 import { DetectionOverlay, DetectionPanel, buildDetections, type Report } from '../ui/map/Detections';
-import { MarkerLegend, MarkerOverlay } from '../ui/map/Markers';
+import { MarkerLegend, MarkerOverlay, trackMoves } from '../ui/map/Markers';
 import { MapSearch, type SearchHit } from '../ui/map/MapSearch';
 import { drawSky } from '../ui/map/renderSky';
 import { HIPS_CREDIT, loadAladin, pickHips } from '../ui/map/aladin';
@@ -1071,7 +1071,8 @@ export function SkyMap({ loc }: { loc: string }) {
       while (true) {
         if (run !== areaRun.current) return;
         const j = await (await fetch(`/scan/${key}`)).json();
-        if (j.status === 'error') throw new Error(j.message || 'The area could not be processed.');
+        // engine messages are "code: plain sentence (raw upstream error)": show only the sentence
+        if (j.status === 'error') throw new Error(String(j.message || 'The area could not be processed.').replace(/^[a-z-]+:\s*/, '').replace(/\s*\(.*$/s, ''));
         if (j.bundle || j.status === 'done') break;   // photos are ready; object checks may still be running
         setAreaJob({ title: STATUS[j.status] ?? 'Working…', progress: Math.max(0.02, j.progress ?? 0),
           detail: [label, j.n_photos_total ? `${j.n_photos_total} photos of this area exist` : ''].filter(Boolean).join(' · ') });
@@ -1575,10 +1576,10 @@ export function SkyMap({ loc }: { loc: string }) {
                   </div>
                   {bandCopy && <span className="pcard__range mono">{bandCopy.range}</span>}
                 </div>
-                <MarkerLegend crosshair={overlayProps.crosshair && Boolean(tp)} track={overlayProps.track && (manifest!.target_track?.length ?? 0) > 1}
+                <MarkerLegend crosshair={overlayProps.crosshair && Boolean(tp)} track={overlayProps.track && trackMoves(manifest!)}
                   gaia={Boolean(overlayProps.gaia)} wise={Boolean(overlayProps.wise)}
-                  firstFrame={mode !== 'diff' && frame === manifest!.frames.findIndex((_, i) => !excluded.includes(i))}
-                  mask={overlayProps.flags && mode !== 'diff' && frames?.[frame]?.some(Number.isNaN) ? maskCss(palette, sequenceLambda(manifest!)) : null} />
+                  firstFrame={mode !== 'diff' && nEpochs > 1}
+                  mask={overlayProps.flags && mode !== 'diff' && frames?.some((f) => f.some(Number.isNaN)) ? maskCss(palette, sequenceLambda(manifest!)) : null} />
 
                 <div className={`detsw ${detOn ? 'is-on' : ''}`}>
                   <button className="detsw__btn" role="switch" aria-checked={detOn} onClick={() => { setDetOn((v) => !v); setDetFocus(null); }}>

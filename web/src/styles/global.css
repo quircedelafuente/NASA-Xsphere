@@ -659,8 +659,10 @@ button.area-btn { cursor: pointer; font: inherit; font-size: 13px; }
 .mk path, .mk polyline, .mk circle, .mk rect { fill: none; stroke: var(--k); stroke-width: 1.5; paint-order: stroke; pointer-events: visibleStroke;
   filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000); }
 .mk--track polyline { stroke-width: 1.25; }
-.mk--track .mk__dot, .mk--track .mk__now, .mk__arrow { fill: var(--k); stroke: #000; stroke-width: 1; pointer-events: visiblePainted; filter: none; }
-.mk--track .mk__now { fill: #f0e442; stroke: #000; stroke-width: 1; }
+/* hollow rings: a faint target pixel must stay visible through its own visit markers */
+.mk--track .mk__dot { stroke-width: 1.25; }
+.mk--track .mk__now { stroke: #f0e442; stroke-width: 1.5; }
+.mk__arrow { fill: var(--k); stroke: #000; stroke-width: 1; pointer-events: visiblePainted; filter: none; }
 .mk .mk__hit { stroke: transparent; stroke-width: 10; filter: none; pointer-events: stroke; }
 .mk--gaia circle, .mk--wise rect { stroke-width: 1.25; opacity: .9; }
 .mlegend { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; color: var(--fg-dim); font-size: .72rem; }

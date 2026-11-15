@@ -3,7 +3,7 @@
  * dots/arrows keep their size at every zoom. Every marker has a dark halo under an Okabe–Ito colour, a distinct
  * shape, and a hover tooltip. The same shapes appear in <MarkerLegend> on the card.
  *   ＋ yellow crosshair  = where the catalogue says the target is at this visit
- *   •→ white dots + arrow = the target's position at each visit, first → last (yellow dot = this visit)
+ *   •→ white dots + arrow = the target's position at each visit, first → last (yellow ring = this visit)
  *   (white, not blue: the no-data mask is sky blue or orange, see lib/palette maskRgb)
  *   ◯ blue circles      = Gaia DR3 stars, moved to this visit's date
  *   □ orange squares    = AllWISE sources, where WISE saw them (~2010)
@@ -13,6 +13,12 @@ import type { GaiaJson, Manifest } from '../lib/contracts';
 import { skyToPixel, formatMjdLong } from '../lib/astro';
 
 export const MK = { cross: '#f0e442', track: '#ffffff', gaia: '#56b4e9', wise: '#e69f00' };
+
+/** A path is only worth drawing when the target actually moves (a variable star's dots sit on one spot). */
+export const trackMoves = (m: Manifest) => {
+  const t = m.target_track ?? [];
+  return t.length > 1 && Math.hypot(t[t.length - 1].x - t[0].x, t[t.length - 1].y - t[0].y) > 0.3;
+};
 
 type Show = { crosshair: boolean; track: boolean; gaia: GaiaJson | null; wise: GaiaJson | null };
 
@@ -83,15 +89,15 @@ export function MarkerOverlay({ manifest, frame, show }: { manifest: Manifest; f
               </g>
             );
           })()}
-          {show.track && tr.length > 1 && (
+          {show.track && trackMoves(manifest) && (
             <g className="mk mk--track" style={{ ['--k' as string]: MK.track }}>
-              <title>{`Path across visits: ${formatMjdLong(tr[0].mjd)} → ${formatMjdLong(tr[tr.length - 1].mjd)} (dot = each visit, arrow = direction of motion)`}</title>
+              <title>{`Path across visits: ${formatMjdLong(tr[0].mjd)} → ${formatMjdLong(tr[tr.length - 1].mjd)} (ring = each visit, yellow = this visit, arrow = direction of motion)`}</title>
               <polyline points={tr.map((t) => P(t.x, t.y).join(',')).join(' ')} />
               <polyline className="mk__hit" points={tr.map((t) => P(t.x, t.y).join(',')).join(' ')} />
               {arrow && <path className="mk__arrow" d={arrow} />}
               {tr.map((t, i) => {
                 const [x, y] = P(t.x, t.y);
-                return <circle key={i} className={i === frame ? 'mk__now' : 'mk__dot'} cx={x} cy={y} r={i === frame ? 3.2 : 2.2} />;
+                return <circle key={i} className={i === frame ? 'mk__now' : 'mk__dot'} cx={x} cy={y} r={i === frame ? 3.5 : 2.5} />;
               })}
             </g>
           )}
@@ -110,7 +116,7 @@ export function MarkerLegend({ crosshair, track, gaia, wise, firstFrame, mask }:
   if (gaia) items.push(['Gaia star', sw(<circle cx="8" cy="6" r="4.5" fill="none" stroke={MK.gaia} strokeWidth="1.4" />)]);
   if (wise) items.push(['WISE source (2010)', sw(<rect x="3.5" y="1.5" width="9" height="9" fill="none" stroke={MK.wise} strokeWidth="1.4" />)]);
   if (mask) items.push(['No usable data (e.g. saturated)', sw(<rect x="4" y="2" width="8" height="8" fill={mask} />)]);
-  if (firstFrame) items.push(['Dashed border: first visit', sw(<path d="M1 6H5M7 6H11M13 6H15" stroke="#fff" strokeWidth="1.4" />)]);
+  if (firstFrame) items.push(['Dashed border = first visit of the loop', sw(<path d="M1 6H5M7 6H11M13 6H15" stroke="#fff" strokeWidth="1.4" />)]);
   if (!items.length) return null;
   return (
     <ul className="mlegend small" aria-label="Map key">
