@@ -76,11 +76,12 @@ export function formatDec(deg: number): string {
 
 /**
  * Pixel (top-left origin, as in the .f32 files) → sky, gnomonic (TAN) projection.
- * crpix is FITS 1-based with bottom-left origin, so we convert: fitsY = ny - y.
+ * The exported WCS already describes the top-down rows (processing/export.py flips the array and negates CDELT2),
+ * so fitsY = y + 1. `ny` is kept for callers.
  */
 export function pixelToSky(wcs: Wcs, x: number, y: number, ny: number): { ra: number; dec: number } {
   const fx = x + 1; // 0-based → 1-based
-  const fy = ny - y; // top-left → bottom-left, 1-based
+  const fy = y + 1; void ny;
   const xi = (fx - wcs.crpix[0]) * wcs.cdelt[0] * D2R;
   const eta = (fy - wcs.crpix[1]) * wcs.cdelt[1] * D2R;
   const ra0 = wcs.crval[0] * D2R;
@@ -89,6 +90,16 @@ export function pixelToSky(wcs: Wcs, x: number, y: number, ny: number): { ra: nu
   const ra = ra0 + Math.atan2(xi, denom);
   const dec = Math.atan2(Math.sin(dec0) + eta * Math.cos(dec0), Math.sqrt(xi * xi + denom * denom));
   return { ra: ((ra / D2R) % 360 + 360) % 360, dec: dec / D2R };
+}
+
+/** Sky → pixel (top-left origin), inverse of pixelToSky. */
+export function skyToPixel(wcs: Wcs, ra: number, dec: number, ny: number): { x: number; y: number } {
+  const a = (ra - wcs.crval[0]) * D2R, d = dec * D2R, d0 = wcs.crval[1] * D2R;
+  const c = Math.sin(d0) * Math.sin(d) + Math.cos(d0) * Math.cos(d) * Math.cos(a);
+  const xi = (Math.cos(d) * Math.sin(a)) / c / D2R;
+  const eta = (Math.cos(d0) * Math.sin(d) - Math.sin(d0) * Math.cos(d) * Math.cos(a)) / c / D2R;
+  void ny;
+  return { x: xi / wcs.cdelt[0] + wcs.crpix[0] - 1, y: eta / wcs.cdelt[1] + wcs.crpix[1] - 1 };
 }
 
 /** MJD → "Aug 2025" style. */

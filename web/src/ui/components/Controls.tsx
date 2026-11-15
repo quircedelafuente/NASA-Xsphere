@@ -101,6 +101,8 @@ export function AdvancedDrawer(p: {
   flags: boolean; onFlags: (v: boolean) => void;
   crosshair: boolean; onCrosshair: (v: boolean) => void;
   track: boolean; onTrack: (v: boolean) => void;
+  gaia?: boolean; onGaia?: (v: boolean) => void;
+  wise?: boolean; onWise?: (v: boolean) => void;
   frames: ManifestFrame[]; excluded: number[]; onExclude: (i: number) => void;
 }) {
   return (
@@ -131,6 +133,8 @@ export function AdvancedDrawer(p: {
         <label className="check"><input type="checkbox" checked={p.flags} onChange={(e) => p.onFlags(e.target.checked)} /> Show problem pixels</label>
         <label className="check"><input type="checkbox" checked={p.crosshair} onChange={(e) => p.onCrosshair(e.target.checked)} /> Crosshair</label>
         <label className="check"><input type="checkbox" checked={p.track} onChange={(e) => p.onTrack(e.target.checked)} /> Predicted track</label>
+        {p.onGaia && <label className="check"><input type="checkbox" checked={Boolean(p.gaia)} onChange={(e) => p.onGaia!(e.target.checked)} /> Gaia DR3 stars (blue circles, moved to each visit's date)</label>}
+        {p.onWise && <label className="check"><input type="checkbox" checked={Boolean(p.wise)} onChange={(e) => p.onWise!(e.target.checked)} /> WISE sources (orange squares, where WISE saw them in 2010)</label>}
         <fieldset className="advanced__epochs">
           <legend>Visits in the loop</legend>
           {p.frames.map((f, i) => (
