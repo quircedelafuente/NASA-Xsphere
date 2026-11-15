@@ -1,5 +1,5 @@
 """A2 · Turn what the user typed into sky coordinates: known target names (fuzzy), coordinates, or any name via CDS Sesame."""
-import difflib, math, re, time, urllib.parse, urllib.request
+import difflib, json, math, re, time, urllib.parse, urllib.request
 from . import config
 
 def _norm(s):
@@ -137,6 +137,8 @@ def name_variants(q):
     out = [q.strip()]
     if len(parts) == 1 and parts[0].isalpha() and len(parts[0]) >= 6 and parts[0] == q.strip():
         return out + _split_word(parts[0])
+    if parts and parts[0].lower() in ('gliese', 'gl') and len(parts) >= 2:
+        return out + ['GJ ' + ' '.join(parts[1:])]   # the catalogues file Gliese stars under GJ
     if len(parts) >= 2 and not re.search(r'[^\w\s\-.]', q):   # leave J-names and anything with + or other signs alone
         for v in (' '.join(parts), '-'.join(parts), ''.join(parts), parts[0] + '-' + ' '.join(parts[1:]),
                   parts[0].upper() + ' ' + ' '.join(parts[1:])):   # some catalogue prefixes only work in capitals (GJ, HIP)
@@ -150,6 +152,29 @@ def sesame_any(q):
         s = sesame(v)
         if s:
             return s
+    return None
+
+_common = None
+
+def common_name(q):
+    """A well-known name typed with a typo ('betelgeuze', 'sirus', 'andromeda galxy') -> (proper name, ra, dec) or None.
+    The catalogues do no fuzzy matching, so we keep our own list (data/common_names.json, every entry checked in Sesame).
+    Short names and numbers must be exact: 'vega' never becomes something else, 'kepler 187' is not Kepler-186."""
+    global _common
+    if _common is None:
+        try:
+            names = json.loads((config.ROOT / 'data' / 'common_names.json').read_text())['names']
+        except Exception:
+            names = {}
+        _common = {_norm(n): (n, p[0], p[1]) for n, p in names.items()}
+    nq = _norm(q)
+    if nq in _common:
+        return _common[nq]
+    if len(nq) < 5:
+        return None
+    for k in difflib.get_close_matches(nq, list(_common), n=3, cutoff=0.8):
+        if _nums(k) == _nums(nq):
+            return _common[k]
     return None
 
 def resolve(q, year=2026.0):
@@ -178,4 +203,9 @@ def resolve(q, year=2026.0):
         s = sesame_any(q)
         if s:
             out.insert(0, dict(name=q, ra_deg=s[0], dec_deg=s[1], source='CDS Sesame (J2000 catalogue position; no proper motion applied)'))
+        elif not out or out[0]['score'] < 0.8:   # no catalogue knows it as typed: a well-known name with a typo?
+            c = common_name(q)
+            if c:
+                out.insert(0, dict(name=c[0], ra_deg=c[1], dec_deg=c[2], corrected_from=q,
+                                   source='well-known name, spelling corrected (J2000 catalogue position from CDS Sesame; no proper motion applied)'))
     return {'matches': out[:5]}

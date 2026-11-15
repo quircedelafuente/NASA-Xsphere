@@ -57,9 +57,18 @@ def test_wrong_number_is_not_a_target(monkeypatch=None):
     finally:
         R.sesame = keep
 
+def test_common_names_with_typos():
+    from engine.resolve import common_name
+    for q, want in [('betelgeuze', 'Betelgeuse'), ('sirus', 'Sirius'), ('aldebaren', 'Aldebaran'), ('polarus', 'Polaris'),
+                    ('andromeda galxy', 'Andromeda Galaxy'), ('orion nebulla', 'Orion Nebula'), ('proxima centuri', 'Proxima Centauri'),
+                    ('BETELGEUSE', 'Betelgeuse'), ('plieades', 'Pleiades')]:
+        assert common_name(q) and common_name(q)[0] == want, (q, common_name(q))
+    for q in ['vego', 'kepler 187', 'qqqzzzxxx', 'my house', 'star']:
+        assert common_name(q) is None, (q, common_name(q))
+
 def test_motion_applied():
     m = first('barnard')      # Barnard at 2026 is ~104″ north of its 2016 Gaia position
     assert 4.766 < m['dec_deg'] < 4.770, m
 
 if __name__ == '__main__':
-    test_coordinates(); test_coordinates_forgiving(); test_names_fuzzy(); test_name_variants(); test_wrong_number_is_not_a_target(); test_motion_applied(); print('resolve: all tests passed')
+    test_coordinates(); test_coordinates_forgiving(); test_names_fuzzy(); test_name_variants(); test_wrong_number_is_not_a_target(); test_common_names_with_typos(); test_motion_applied(); print('resolve: all tests passed')
