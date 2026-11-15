@@ -40,7 +40,9 @@ def _cached(key, fn):
 # CATS column names, so the matching below does not care where they came from.
 IRSA_TIMEOUT = 30                                          # s; then try the backup instead of retrying for minutes
 VIZIER = "https://vizier.cfa.harvard.edu/viz-bin/asu-tsv"   # Harvard mirror (Strasbourg timed out on IE Wi-Fi)
-VIZ = {"CatWISE2020": ("II/365/catwise", {"source_name": "Name", "ra": "RA_ICRS", "dec": "DE_ICRS", "pmra": "pmRA",
+VIZ = {"Gaia DR3": ("I/355/gaiadr3", {"source_id": "Source", "ra": "RA_ICRS", "dec": "DE_ICRS", "pmra": "pmRA", "pmdec": "pmDE",
+                                     "parallax": "Plx", "phot_g_mean_mag": "Gmag", "bp_rp": "BP-RP"}, ("Gmag", "<19.5")),
+       "CatWISE2020": ("II/365/catwise", {"source_name": "Name", "ra": "RA_ICRS", "dec": "DE_ICRS", "pmra": "pmRA",
                                           "pmdec": "pmDE", "w1mpro": "W1mproPM", "w2mpro": "W2mproPM", "meanobsmjd": "MJD"},
                        ("W2mproPM", "<16")),
        "AllWISE": ("II/328/allwise", {"designation": "AllWISE", "ra": "RAJ2000", "dec": "DEJ2000", "pmra": "pmRA",
@@ -61,6 +63,26 @@ def _num(x):
     return x
 
 
+# Circuit breakers: once a service fails, skip it for a while instead of making every request wait for its timeout
+# (IRSA answered 502 for a whole day; each viewer popup asks for Gaia + AllWISE).
+_DOWN = {}
+DOWN_FOR = 600   # s
+
+
+def _up(svc):
+    return time.time() - _DOWN.get(svc, 0) > DOWN_FOR
+
+
+def _try(svc, fn):
+    if not _up(svc):
+        raise RuntimeError(f"{svc} marked down")
+    try:
+        return fn()
+    except Exception:
+        _DOWN[svc] = time.time()
+        raise
+
+
 def _irsa(q):
     from concurrent.futures import ThreadPoolExecutor
     from astroquery.ipac.irsa import Irsa
@@ -75,7 +97,7 @@ def _irsa(q):
 
 def _esa_gaia(q):
     import csv, io
-    r = requests.get("https://gea.esac.esa.int/tap-server/tap/sync", timeout=60,
+    r = requests.get("https://gea.esac.esa.int/tap-server/tap/sync", timeout=20,
                      params={"REQUEST": "doQuery", "LANG": "ADQL", "FORMAT": "csv",
                              "QUERY": q.replace("gaia_dr3_source", "gaiadr3.gaia_source")})
     r.raise_for_status()
@@ -84,7 +106,7 @@ def _esa_gaia(q):
 
 def _vizier(name, ra, dec, radius_deg):
     src, cols, (ck, cv) = VIZ[name]
-    r = requests.get(VIZIER, timeout=60, params={"-source": src, "-c": f"{ra:.6f} {dec:+.6f}", "-c.rd": f"{radius_deg:.5f}",
+    r = requests.get(VIZIER, timeout=30, params={"-source": src, "-c": f"{ra:.6f} {dec:+.6f}", "-c.rd": f"{radius_deg:.5f}",
                                                  "-out": ",".join(cols.values()), "-out.max": "unlimited", "-mime": "tsv", ck: cv})
     r.raise_for_status()
     lines = [ln for ln in r.text.splitlines() if ln.strip() and not ln.startswith("#")]
@@ -104,13 +126,15 @@ def query_catalog(name, ra, dec, radius_deg):
     old = CACHE / (hashlib.md5(key.encode()).hexdigest() + ".json")   # IRSA results cached before backups existed
     if old.exists():
         return json.loads(old.read_text()), "IRSA"
-    backup = ("ESA Gaia archive", lambda: _esa_gaia(q)) if name == "Gaia DR3" else \
-             ("VizieR (Harvard mirror)", lambda: _vizier(name, ra, dec, radius_deg))
+    tries = [("IRSA", lambda: _irsa(q)), ("VizieR (Harvard mirror)", lambda: _vizier(name, ra, dec, radius_deg)),
+             ("VizieR (Harvard mirror)", lambda: _vizier(name, ra, dec, radius_deg))]   # twice: the mirror sometimes fails once
+    if name == "Gaia DR3":
+        tries.append(("ESA Gaia archive", lambda: _esa_gaia(q)))
 
     def run():
-        for src, fn in (("IRSA", lambda: _irsa(q)), backup, backup):   # backup twice: the mirror sometimes fails once
+        for src, fn in tries:
             try:
-                return {"rows": fn(), "source": src}
+                return {"rows": _try(src, fn), "source": src}
             except Exception:
                 continue
         return None
