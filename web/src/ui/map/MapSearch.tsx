@@ -1,6 +1,6 @@
-import { forwardRef, useMemo, useState } from 'react';
+import { forwardRef, useMemo, useRef, useState } from 'react';
 import { parseCoords, formatDec, formatRa } from '../lib/astro';
-import { matchTarget } from '../lib/data';
+import { matchTarget, resolveName } from '../lib/data';
 import { searchTargets } from '../lib/search';
 import type { Catalog } from '../lib/useCatalog';
 import { KIND_LABEL, STATES } from '../copy';
@@ -18,6 +18,8 @@ export const MapSearch = forwardRef<HTMLInputElement, { catalog: Catalog | null;
     const [open, setOpen] = useState(false);
     const [err, setErr] = useState<string | null>(null);
     const [active, setActive] = useState(-1);
+    const [busy, setBusy] = useState(false);
+    const lookup = useRef(0);
 
     const suggestions = useMemo(() => {
       if (!catalog) return [];
@@ -45,8 +47,20 @@ export const MapSearch = forwardRef<HTMLInputElement, { catalog: Catalog | null;
       if (coords) { go({ kind: 'coords', ...coords }); return; }
       if (!catalog) return;
       const hit = matchTarget(text, catalog.index, catalog.metas);
-      if (hit) { setQ(hit.name); go({ kind: 'target', id: hit.id }); }
-      else { setErr(STATES['name-not-found'].body); setOpen(false); }
+      if (hit) { setQ(hit.name); go({ kind: 'target', id: hit.id }); return; }
+      // Not one of our prepared targets: ask the engine, which knows every catalogued name (CDS Sesame: SIMBAD, NED, VizieR).
+      setOpen(false);
+      setErr(null);
+      setBusy(true);
+      const ticket = ++lookup.current;
+      resolveName(text).then((m) => {
+        if (ticket !== lookup.current) return; // the visitor typed something else meanwhile
+        setBusy(false);
+        if (!m) { setErr(STATES['name-not-found'].body); return; }
+        const known = m.id ? catalog.index.find((e) => e.id === m.id) : undefined;
+        if (known) { setQ(known.name); go({ kind: 'target', id: known.id }); }
+        else go({ kind: 'coords', ra: m.ra, dec: m.dec });
+      });
     };
 
     const onKeyDown = (e: React.KeyboardEvent) => {
@@ -66,7 +80,7 @@ export const MapSearch = forwardRef<HTMLInputElement, { catalog: Catalog | null;
             ref={ref}
             id="map-search"
             value={q}
-            onChange={(e) => { setQ(e.target.value); setErr(null); setOpen(true); setActive(-1); }}
+            onChange={(e) => { setQ(e.target.value); setErr(null); setOpen(true); setActive(-1); lookup.current++; setBusy(false); }}
             onFocus={() => setOpen(true)}
             onBlur={() => window.setTimeout(() => setOpen(false), 150)}
             onKeyDown={onKeyDown}
@@ -106,6 +120,7 @@ export const MapSearch = forwardRef<HTMLInputElement, { catalog: Catalog | null;
             ))}
           </ul>
         )}
+        {busy && <p className="msearch__err" role="status">Looking up “{q.trim()}” in the star catalogues…</p>}
         {err && <p id="map-search-err" className="msearch__err" role="alert"><strong>{STATES['name-not-found'].title}.</strong> {err}</p>}
       </form>
     );

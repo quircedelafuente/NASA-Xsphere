@@ -82,6 +82,22 @@ export function matchTarget(q: string, index: IndexEntry[], metas: Record<string
   return searchTargets(q, index, metas)[0] ?? null;
 }
 
+/**
+ * Any catalogued name → sky position, through the engine's /resolve (our targets first, then CDS Sesame).
+ * null when the name is unknown, or when the site runs without the engine (static hosting): the caller shows "not found".
+ */
+export async function resolveName(q: string): Promise<{ ra: number; dec: number; name: string; id?: string } | null> {
+  try {
+    const r = await fetch(`/resolve?q=${encodeURIComponent(q)}`);
+    if (!r.ok || !(r.headers.get('content-type') ?? '').includes('json')) return null;
+    const m = (await r.json())?.matches?.[0];
+    if (m?.id && m.score < 0.8) return null; // a loose guess at one of our targets, and no catalogue knew the name
+    return m && Number.isFinite(m.ra_deg) && Number.isFinite(m.dec_deg) ? { ra: m.ra_deg, dec: m.dec_deg, name: m.name, id: m.id } : null;
+  } catch {
+    return null;
+  }
+}
+
 /** Find a processed target near given coordinates (within radius, deg). */
 export function nearestTarget(ra: number, dec: number, metas: TargetMeta[], radiusDeg = 0.06): TargetMeta | null {
   let best: TargetMeta | null = null;
