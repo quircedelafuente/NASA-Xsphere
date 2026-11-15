@@ -55,6 +55,7 @@ class ScanReq(BaseModel):
     box: Box
     band: str = 'D4'
     per_epoch: int = Field(6, ge=1, le=30)
+    classify: bool = True   # False: only the photos (no object recognition) — much faster, frees the worker
 
 def _target(tid):
     for t in config.targets():
@@ -91,7 +92,7 @@ def scan(req: ScanReq):
     b = req.box
     if max(b.w_arcmin, b.h_arcmin) > config.MAX_ZONE_ARCMIN:
         raise HTTPException(422, dict(error='zone-too-large', message=f'Draw a zone up to {config.MAX_ZONE_ARCMIN}′ wide for now.'))
-    return {'job': jobs.start_scan(b.ra_deg, b.dec_deg, b.w_arcmin, b.h_arcmin, req.band, req.per_epoch)}
+    return {'job': jobs.start_scan(b.ra_deg, b.dec_deg, b.w_arcmin, b.h_arcmin, req.band, req.per_epoch, req.classify)}
 
 @app.get('/object/{tid}')
 def obj(tid: str):

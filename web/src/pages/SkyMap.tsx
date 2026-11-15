@@ -943,6 +943,7 @@ export function SkyMap({ loc }: { loc: string }) {
       if (e.key === '+' || e.key === '=') { e.preventDefault(); zoomKey(1 / 1.8); return; }
       if (e.key === '-' || e.key === '_') { e.preventDefault(); zoomKey(1.8); return; }
       if (e.key === 'Escape') {
+        if (areaMode) { setAreaMode(false); setAreaRect(null); return; }
         if (about) setAbout(false);
         else if (intro) dismissIntro();
         else if (sheet) setSheet(false);
@@ -964,7 +965,7 @@ export function SkyMap({ loc }: { loc: string }) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [ready, step, mode, sheet, selectedId, closePatch, zoomKey, panBy, about, intro, dismissIntro]);
+  }, [ready, step, mode, sheet, selectedId, closePatch, zoomKey, panBy, about, intro, dismissIntro, areaMode]);
 
   useEffect(() => {
     if (!hint) return;
@@ -1003,7 +1004,7 @@ export function SkyMap({ loc }: { loc: string }) {
   const startAreaMode = useCallback(() => {
     setHint(false); setNotice(null); dismissIntro(); setTourEnd(false); setTour(false);
     if (selectedId) closePatch(false);
-    setAreaJob(null); setAreaRect(null); setAreaMode(true);
+    areaRun.current++; setAreaJob(null); setAreaRect(null); setAreaMode(true);   // a new box replaces any area still loading
     // a box drawn on the whole-sky view would be far too big: get close enough first
     if (camRef.current.fov > 2) flyTo({ ...camRef.current, fov: 1.2 });
   }, [selectedId, closePatch, flyTo, dismissIntro]);
@@ -1019,7 +1020,7 @@ export function SkyMap({ loc }: { loc: string }) {
     setAreaJob({ title: STATUS.listing, detail: label, progress: 0.02 });
     try {
       const r = await fetch('/scan', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ box: { ra_deg: a.ra, dec_deg: a.dec, w_arcmin: a.w, h_arcmin: a.h }, band: 'D4' }) });
+        body: JSON.stringify({ box: { ra_deg: a.ra, dec_deg: a.dec, w_arcmin: a.w, h_arcmin: a.h }, band: 'D4', classify: false }) });
       const start = await r.json().catch(() => ({}));
       if (!r.ok || !start.job) throw new Error(start?.detail?.message || 'The live engine is not connected here.');
       const key: string = start.job;
@@ -1054,6 +1055,8 @@ export function SkyMap({ loc }: { loc: string }) {
   }, [catalog, getBundle, select]);
 
   const areaHandlers = {
+    // the scroll wheel still zooms the map while choosing, so any spot can be reached
+    onWheel: (e: React.WheelEvent<HTMLDivElement>) => { stageRef.current?.dispatchEvent(new WheelEvent('wheel', e.nativeEvent)); },
     onPointerDown: (e: React.PointerEvent<HTMLDivElement>) => {
       const b = stageRef.current!.getBoundingClientRect(), x = e.clientX - b.left, y = e.clientY - b.top;
       e.currentTarget.setPointerCapture(e.pointerId);
@@ -1292,7 +1295,7 @@ export function SkyMap({ loc }: { loc: string }) {
               {areaLive && <span className="area-rect__size mono">{areaLive.w.toFixed(1)}′ × {areaLive.h.toFixed(1)}′{areaLive.capped ? ' (max 30′)' : ''}</span>}
             </div>
           )}
-          {!areaRect && <p className="area-hint">Drag a box on the sky (up to 30′ wide). Its SPHEREx photos will open here, visit by visit.</p>}
+          {!areaRect && <p className="area-hint">Drag a box on the sky (up to 30′ wide) · scroll to zoom · Esc or the button above to cancel</p>}
         </div>
       )}
       {areaJob && (

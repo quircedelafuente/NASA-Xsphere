@@ -6,7 +6,7 @@ import astropy.units as u
 from astropy.coordinates import SkyCoord
 from . import inventory, pipeline
 
-def run_scan(job, ra, dec, w_arcmin, h_arcmin, band, per_epoch):
+def run_scan(job, ra, dec, w_arcmin, h_arcmin, band, per_epoch, classify=True):
     from . import jobs
     from processing.discovery.scan import scan as discover
     try:
@@ -24,6 +24,8 @@ def run_scan(job, ra, dec, w_arcmin, h_arcmin, band, per_epoch):
             raise RuntimeError('outside-coverage: fewer than 2 visits of this zone, nothing to compare')
         job.update(status='checking catalogues', progress=0.8, n_photos_band=z['n_exposures'],
                    bundle=f"/live/{job['key']}/D4/manifest.json" if z['manifest'] else None)
+        if not classify:   # photos only: done as soon as the blink bundle exists
+            job.update(status='done', progress=1.0, report=None); jobs._save(job); return
         report = json.loads(json.dumps(discover(z['stacks_dir'], log=jobs._log(job)), default=float))
         report.update(photos_used=z['n_exposures'], photos_available=len(rows), bundle=job.get('bundle'))
         (out / 'report.json').write_text(json.dumps(report, indent=1))

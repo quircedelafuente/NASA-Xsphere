@@ -76,11 +76,11 @@ def start_view(ra, dec, bands=None, per_epoch=None, target=None):
     return _start(key, dict(kind='view', center=dict(ra_deg=ra, dec_deg=dec), target=target, per_epoch=per_epoch),
                   run_view, ra, dec, bands, per_epoch, target)
 
-def start_scan(ra, dec, w_arcmin, h_arcmin, band='D4', per_epoch=6):
+def start_scan(ra, dec, w_arcmin, h_arcmin, band='D4', per_epoch=6, classify=True):
     from . import scan
-    key = _key('s', round(ra, 4), round(dec, 4), round(w_arcmin, 2), round(h_arcmin, 2), band, per_epoch)
+    key = _key('s', round(ra, 4), round(dec, 4), round(w_arcmin, 2), round(h_arcmin, 2), band, per_epoch, *([] if classify else ['photos']))
     return _start(key, dict(kind='scan', box=dict(ra_deg=ra, dec_deg=dec, w_arcmin=w_arcmin, h_arcmin=h_arcmin), band=band),
-                  scan.run_scan, ra, dec, w_arcmin, h_arcmin, band, per_epoch)
+                  scan.run_scan, ra, dec, w_arcmin, h_arcmin, band, per_epoch, classify)
 
 def _start(key, meta, fn, *args):
     hit = cached(key)
