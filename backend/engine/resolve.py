@@ -1,5 +1,5 @@
 """A2 · Turn what the user typed into sky coordinates: known target names (fuzzy), coordinates, or any name via CDS Sesame."""
-import difflib, math, re, urllib.parse, urllib.request
+import difflib, math, re, time, urllib.parse, urllib.request
 from . import config
 
 def _norm(s):
@@ -67,15 +67,27 @@ def parse_coords(q):
     ra, dec = _group(tokens[:k], True), _group(tokens[k:], False)
     return (ra, dec) if ra is not None and dec is not None else None
 
+SESAME = ['https://cds.unistra.fr/cgi-bin/nph-sesame/-oI/SNV?',            # CDS Strasbourg
+          'https://vizier.cfa.harvard.edu/viz-bin/nph-sesame/-oI/SNV?']    # same service, Harvard mirror (used when CDS is unreachable)
+
+_down = {}   # mirror -> time of its last failure
+
 def sesame(name):
-    """CDS name resolver (SIMBAD, NED, VizieR). Returns (ra, dec) or None."""
-    url = 'https://cds.unistra.fr/cgi-bin/nph-sesame/-oI/SNV?' + urllib.parse.quote(name)
-    try:
-        txt = urllib.request.urlopen(url, timeout=20).read().decode('utf-8', 'replace')
-    except Exception:
-        return None
-    m = re.search(r'%J\s+([\d.]+)\s+([+\-][\d.]+)', txt)
-    return (float(m.group(1)), float(m.group(2))) if m else None
+    """CDS name resolver (SIMBAD, NED, VizieR). Returns (ra, dec) or None. Tries the mirrors in turn; a clear
+    'nothing found' from one of them is final."""
+    now = time.time()
+    for base in sorted(SESAME, key=lambda b: now - _down.get(b, 0) < 600):   # a mirror that just failed goes last for 10 min
+        try:
+            txt = urllib.request.urlopen(base + urllib.parse.quote(name), timeout=6).read().decode('utf-8', 'replace')
+        except Exception:
+            _down[base] = now
+            continue   # this mirror is down or slow: try the next
+        m = re.search(r'%J\s+([\d.]+)\s+([+\-][\d.]+)', txt)
+        if m:
+            return float(m.group(1)), float(m.group(2))
+        if 'othing found' in txt:
+            return None
+    return None
 
 def resolve(q, year=2026.0):
     """Returns {'matches': [...]}: best first. Each match: name, id (if a known target), ra_deg, dec_deg, source."""
