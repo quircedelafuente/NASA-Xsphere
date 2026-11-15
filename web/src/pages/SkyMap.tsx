@@ -761,7 +761,22 @@ export function SkyMap({ loc }: { loc: string }) {
     el.addEventListener('pointerup', up);
     el.addEventListener('pointercancel', up);
     el.addEventListener('wheel', wheel, { passive: false });
+    // A trackpad pinch arrives as ctrl+wheel. Over the cards, search bar or popups it used to zoom the whole PAGE
+    // (browser zoom): everything got huge, the controls left the screen and it looked stuck. Pinch now always zooms
+    // the sky map instead, wherever the pointer is; plain scrolling over a card still scrolls the card.
+    const pagePinch = (e: WheelEvent) => {
+      if (!e.ctrlKey || el.contains(e.target as Node)) return;
+      e.preventDefault();
+      wheel(e);
+    };
+    const noGesture = (e: Event) => e.preventDefault();   // Safari's own pinch events
+    window.addEventListener('wheel', pagePinch, { passive: false, capture: true });
+    document.addEventListener('gesturestart', noGesture);
+    document.addEventListener('gesturechange', noGesture);
     return () => {
+      window.removeEventListener('wheel', pagePinch, { capture: true });
+      document.removeEventListener('gesturestart', noGesture);
+      document.removeEventListener('gesturechange', noGesture);
       el.removeEventListener('pointerdown', down);
       el.removeEventListener('pointermove', move);
       el.removeEventListener('pointerup', up);
