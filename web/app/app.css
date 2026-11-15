@@ -68,3 +68,8 @@ button[aria-pressed="true"]{border-color:var(--ir);background:rgba(240,164,58,.1
 .error{border-color:var(--bad)}
 .foot{font-size:11.5px;color:var(--mute);padding:8px max(16px,env(safe-area-inset-left,0px));border-top:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* the zone's SPHEREx photos play on the map, inside the box that was drawn */
+#zoneBox{position:absolute;z-index:5;pointer-events:none;outline:2px solid var(--ir);box-shadow:0 0 0 1px rgba(0,0,0,.6),0 8px 30px rgba(0,0,0,.5)}
+#zoneCv{display:block;width:100%;height:100%;image-rendering:pixelated;background:#000}
+.zcap{position:absolute;left:0;top:-24px;font-size:12px;white-space:nowrap;background:rgba(7,11,19,.85);padding:3px 7px;border-radius:6px}

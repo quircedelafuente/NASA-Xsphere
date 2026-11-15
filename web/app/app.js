@@ -50,6 +50,8 @@ async function initMap() {
     setSurvey('dss');   // SPHEREx cube tiles render near-black with the default stretch
     overlay = A.graphicOverlay({ color: '#f0a43a', lineWidth: 2 }); aladin.addOverlay(overlay);
     cat = A.catalog({ name: 'Scan', sourceSize: 16, color: '#c792ff', shape: 'circle' }); aladin.addCatalog(cat);
+    for (const ev of ['positionChanged', 'zoomChanged']) try { aladin.on(ev, placeZone); } catch { /* older Aladin */ }
+    addEventListener('resize', placeZone);
   } catch (e) { $('#maphint').textContent = 'The sky map could not load (check the internet connection). Search still works.'; }
 }
 function setSurvey(k) {
@@ -83,7 +85,7 @@ document.addEventListener('click', e => { if (!e.target.closest('.search')) show
 let pollId = 0;
 async function runJob(startPromise, onDone) {
   const my = ++pollId; let tick = 0;
-  show('#intro', false); show('#result', false); show('#error', false); show('#wait');
+  show('#intro', false); show('#result', false); show('#error', false); show('#wait'); show('#zoneBox', false); V = null;
   $('#bar').style.width = '2%'; $('#waitTitle').textContent = 'Asking NASA which photos cover this spot…';
   try {
     const { job } = await startPromise;
@@ -144,7 +146,8 @@ function scanZone(ra, dec, w, h) {
   overlay?.add(A.polygon([[ra - dra, dec - ddec], [ra + dra, dec - ddec], [ra + dra, dec + ddec], [ra - dra, dec + ddec]]));
   runJob(post('/scan', { box: { ra_deg: ra, dec_deg: dec, w_arcmin: w, h_arcmin: h }, band: 'D4' }), async j => {
     const bands = j.report.bundle ? { D4: await loadBundle(j.report.bundle) } : {};
-    cat?.addSources(j.report.sources.filter(s => s.class !== 'artefact').map(s => { const p = s.positions?.[0] || s; return A.source(p.ra_deg, p.dec_deg, { name: s.id }); }));
+    const side = bands.D4 ? bands.D4.man.grid.nx * bands.D4.man.grid.pix_arcsec / 3600 : Math.max(w, h) / 60;
+    mapGo(ra, dec, side * 1.6); overlay?.removeAll();
     present({ kind: 'scan', title: `Zone ${w.toFixed(1)}′ × ${h.toFixed(1)}′`, bands, report: j.report, warnings: catalogWarnings(j.report), center: { ra_deg: ra, dec_deg: dec } });
   });
 }
@@ -198,7 +201,7 @@ function draw() {
       m.target_track.forEach((p, i) => { const X = (p.x + .5) * S, Y = (p.y + .5) * S; i ? g.lineTo(X, Y) : g.moveTo(X, Y); }); g.stroke(); g.setLineDash([]);
     }
     if (V.report) for (const s of V.report.sources) {
-      if (s.class === 'artefact' && picked !== s.id) continue;
+      if (picked !== s.id) continue;   // no rings on everything: only the object picked in the list
       const [sx, sy] = srcXY(s, ep); const k = N / (V.report.zone ? Math.round(V.report.zone.w_arcmin * 60 / 3.075) : N);
       const X = (sx * k + .5) * S, Y = (N - 1 - sy * k + .5) * S;
       g.strokeStyle = picked === s.id ? '#f0a43a' : (s.class.startsWith('candidate') ? '#c792ff' : 'rgba(92,196,137,.8)');
@@ -206,12 +209,37 @@ function draw() {
     }
     $('#hud').innerHTML = `Visit <b>${ep + 1}/${m.frames.length}</b> · ${f.date}<br>${V.band} · <b>${m.lam_range_um[0].toFixed(2)}–${m.lam_range_um[1].toFixed(2)} µm</b>`;
   }
+  drawZone();
   $('#legend').textContent = mode === 'diff' ? 'red = brighter now · blue = fainter now (σ)' : `${(N * m.grid.pix_arcsec / 60).toFixed(1)}′ across · north up`;
   document.querySelectorAll('#strip button').forEach(x => x.setAttribute('aria-current', +x.dataset.e === ep));
   $('#modeHelp').textContent = { blink: 'Blink: the same patch at each visit, oldest first. Things that move jump; distant stars stay put.',
     diff: 'Changes only: each visit minus visit 1, measured against the photo noise. A mover leaves a red spot where it is now next to a blue spot where it was.',
     pair: 'First vs last: the first and latest visit side by side, for anyone who prefers no motion.' }[mode];
   setUrl();
+}
+// ---------- the zone on the map ----------
+function placeZone() {
+  const box = $('#zoneBox');
+  if (!aladin || !V || V.kind !== 'scan' || !cur()) { box.hidden = true; return; }
+  const g = cur().man.grid, half = g.nx * g.pix_arcsec / 7200, [ra, dec] = g.wcs.crval, cd = Math.cos(dec * Math.PI / 180);
+  const pts = [[ra + half / cd, dec + half], [ra - half / cd, dec + half], [ra - half / cd, dec - half], [ra + half / cd, dec - half]].map(p => aladin.world2pix(p[0], p[1]));
+  if (pts.some(p => !p)) { box.hidden = true; return; }
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), l = Math.min(...xs), t = Math.min(...ys);
+  Object.assign(box.style, { left: l + 'px', top: t + 'px', width: (Math.max(...xs) - l) + 'px', height: (Math.max(...ys) - t) + 'px' });
+  box.hidden = false;
+}
+function drawZone() {
+  if (!V || V.kind !== 'scan') return;
+  const c = $('#zoneCv'), b = cur(), m = b.man, N = m.grid.nx;
+  if (c.width !== N) { c.width = N; c.height = N; }
+  const g = c.getContext('2d'); g.imageSmoothingEnabled = false; g.fillStyle = '#000'; g.fillRect(0, 0, N, N);
+  const im = mode === 'diff' ? b.diffs[ep] : b.imgs[mode === 'pair' ? 0 : ep];
+  if (im) g.drawImage(im, 0, 0, N, N);
+  const s = picked && V.report?.sources.find(x => x.id === picked);
+  if (s) { const [sx, sy] = srcXY(s, ep); g.strokeStyle = '#f0a43a'; g.lineWidth = Math.max(1, N / 120); g.beginPath(); g.arc(sx + .5, N - 1 - sy + .5, N / 30, 0, 7); g.stroke(); }
+  const f = m.frames[ep];
+  $('#zoneCap').innerHTML = mode === 'diff' ? (ep ? `Changes · visit ${ep + 1} minus visit 1` : 'Visit 1 = reference') : `Visit <b>${ep + 1}/${m.frames.length}</b> · ${f.date} · ${V.band}`;
+  placeZone();
 }
 function loop() { clearInterval(timer); if (playing && mode !== 'pair') timer = setInterval(() => { ep = (ep + 1) % cur().man.frames.length; draw(); }, 1000 / +$('#speed').value);
   $('#play').textContent = playing ? 'Pause' : 'Play'; }
