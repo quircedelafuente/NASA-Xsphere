@@ -158,6 +158,8 @@ export function SkyMap({ loc }: { loc: string }) {
   const [areaRect, setAreaRect] = useState<{ x0: number; y0: number; x1: number; y1: number } | null>(null);
   const [areaJob, setAreaJob] = useState<{ title: string; detail: string; progress: number; error?: boolean } | null>(null);
   const areaRun = useRef(0);
+  const [emptyDismissed, setEmptyDismissed] = useState(false);
+  useEffect(() => { setEmptyDismissed(false); }, [selectedId]);
 
   const [manifest, setManifest] = useState<Manifest | null>(null);
   const [frames, setFrames] = useState<Float32Array[] | null>(null);
@@ -1374,14 +1376,19 @@ export function SkyMap({ loc }: { loc: string }) {
         <p className="skymap__offline small" role="status">Survey imagery couldn’t load (it needs the CDS Aladin service). The blink still works.</p>
       )}
 
-      {empty && !selectedId && (
+      {empty && !selectedId && !areaMode && !areaJob && !emptyDismissed && (
         <div className="toast" role="status">
-          <strong>{STATES['live-not-available'].title}</strong>
-          <p>We only have SPHEREx blinks ready for five demo objects so far — this patch hasn’t been processed.</p>
+          <button className="toast__x" onClick={() => setEmptyDismissed(true)} aria-label="Dismiss">✕</button>
+          <strong>No blink here yet</strong>
+          <p>This patch hasn’t been loaded. Fetch its SPHEREx photos live from NASA (about 1–2 minutes), or draw your own area.</p>
           <p className="mono small muted">{formatRa(view.ra)} {formatDec(view.dec)}</p>
           <div className="toast__actions">
-            {nearest && <button className="btn" onClick={() => select(nearest.id)}>Fly to {nearest.name}</button>}
-            <a className="btn btn--ghost" href="https://irsa.ipac.caltech.edu/Missions/spherex.html" target="_blank" rel="noreferrer">Raw images at IRSA ↗</a>
+            <button className="btn" onClick={() => {
+              const side = Math.min(AREA_MAX_ARCMIN, Math.max(3, view.fov * 60 * 0.5));
+              runArea({ ra: view.ra, dec: view.dec, w: side, h: side });
+            }}>Load SPHEREx photos here</button>
+            <button className="btn btn--ghost" onClick={startAreaMode}>Select an area</button>
+            {nearest && <button className="link small" onClick={() => select(nearest.id)}>or fly to {nearest.name}</button>}
           </div>
         </div>
       )}
