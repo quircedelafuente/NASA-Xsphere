@@ -5,6 +5,7 @@
  */
 import type { BandId, IndexEntry, Manifest, SpectrumJson, TargetMeta, GaiaJson, FlagsJson } from './contracts';
 import { mock } from '../mock/mockBundle';
+import { searchTargets } from './search';
 
 const BASE = '/bundles';
 let useMock: boolean | null = null;
@@ -76,20 +77,9 @@ export async function loadFlags(): Promise<FlagsJson | null> {
   }
 }
 
-/** Resolve free text against the target index (ids, names, aliases). */
+/** Resolve free text against the target index (ids, names, aliases). Forgiving: see ./search.ts. */
 export function matchTarget(q: string, index: IndexEntry[], metas: Record<string, { aliases?: string[] }>): IndexEntry | null {
-  const norm = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[ε]/g, 'eps').replace(/[^a-z0-9]/g, '');
-  const n = norm(q.replace(/^epsilon/i, 'eps'));
-  if (!n) return null;
-  for (const e of index) {
-    const names = [e.id, e.name, ...(metas[e.id]?.aliases ?? [])].map(norm);
-    if (names.some((a) => a === n)) return e;
-  }
-  for (const e of index) {
-    const names = [e.id, e.name, ...(metas[e.id]?.aliases ?? [])].map(norm);
-    if (names.some((a) => a.startsWith(n) || (n.length >= 4 && a.includes(n)))) return e;
-  }
-  return null;
+  return searchTargets(q, index, metas)[0] ?? null;
 }
 
 /** Find a processed target near given coordinates (within radius, deg). */

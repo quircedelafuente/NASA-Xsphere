@@ -30,48 +30,72 @@ export function parseDec(s: string): number | null {
   return v >= -90 && v <= 90 ? v : null;
 }
 
-/** Try to read a free-text box as coordinates. Accepts "269.45 4.74", "269.45, 4.74", "08h55m10.8s -7d14m42s", "08:55:10.8 -07:14:42". */
+/**
+ * Try to read a free-text box as coordinates. Forgiving about how they are typed:
+ *   decimal degrees      "269.45 4.74"  "269.45,+4.74"  "269.45° −4.74°"  "269.45 deg, 4.74 deg"  "(269.45; 4.74)"
+ *   with labels          "RA 269.45 Dec 4.74"  "ra=269.45, dec=-4.74"
+ *   hours / degrees      "17 57 48.5 +04 41 36"  "17:57:48.5 +04:41:36"  "17h57m48.5s +04d41m36s"  "17h57m48.5s +04°41′36″"
+ *   shorter              "17h57m +04d41m"  "17:57 +04:41"  "17h57m48.5s 4.74"
+ *   catalogue style      "J175748.5+044136"
+ * Any minus sign works (-, −, –). Anything with other letters in it is a name, not coordinates.
+ * Mirror of parse_coords in backend/engine/resolve.py: keep the two in sync.
+ */
 export function parseCoords(input: string): { ra: number; dec: number } | null {
-  const t = input.trim().replace(/,/g, ' ').replace(/\s+/g, ' ');
-  // Two decimal numbers
-  let m = t.match(/^([+-]?\d+(?:\.\d+)?)\s([+-]?\d+(?:\.\d+)?)$/);
-  if (m) {
-    const ra = parseRa(m[1]);
-    const dec = parseDec(m[2]);
-    return ra !== null && dec !== null ? { ra, dec } : null;
-  }
-  // Sexagesimal with letters or colons: split where the Dec sign starts or after the "s"/third field
-  m = t.match(/^(\d{1,2}[h:\s]\d{1,2}[m:\s]\d{1,2}(?:\.\d+)?s?)\s?([+-−]?\d{1,2}[d:\s°]\d{1,2}[m:\s′']\d{1,2}(?:\.\d+)?[s″"]?)$/i);
-  if (m) {
-    const ra = parseRa(m[1]);
-    const dec = parseDec(m[2]);
-    return ra !== null && dec !== null ? { ra, dec } : null;
-  }
-  // Six space-separated numbers
-  const parts = t.split(' ');
-  if (parts.length === 6) {
-    const ra = parseRa(parts.slice(0, 3).join(' '));
-    const dec = parseDec(parts.slice(3).join(' '));
-    return ra !== null && dec !== null ? { ra, dec } : null;
-  }
-  return null;
+  let t = input.trim().toLowerCase().replace(/[−–—]/g, '-');
+  if (!t) return null;
+  // J175748.5+044136 → 17 57 48.5 +04 41 36
+  const j = t.replace(/\s+/g, '').match(/^j(\d{2})(\d{2})(\d{2}(?:\.\d+)?)([+-])(\d{2})(\d{2})(\d{2}(?:\.\d+)?)$/);
+  if (j) t = `${j[1]} ${j[2]} ${j[3]} ${j[4]}${j[5]} ${j[6]} ${j[7]}`;
+  t = t
+    .replace(/(?:right ascension|declination|\b(?:ra|decl?)\b|[αδ])\s*[:=]?/g, ' ')
+    .replace(/degrees?|deg|º/g, '°')
+    .replace(/[()[\]=]/g, ' ');
+  // numbers with an optional sign and unit; nothing else may be left over
+  const tokens: { neg: boolean; signed: boolean; v: number; int: boolean; unit: string }[] = [];
+  const rest = t.replace(/([+-]?)\s*(\d+(?:\.\d*)?|\.\d+)\s*([hd°m′'s″":]?)/g, (_, sg: string, num: string, unit: string) => {
+    tokens.push({ neg: sg === '-', signed: sg !== '', v: Number(num), int: /^\d+$/.test(num), unit });
+    return ' ';
+  });
+  if (/[^\s,;/]/.test(rest) || tokens.length < 2 || tokens.length > 6) return null;
+  // where does the declination start? at a sign, at a degree mark, after the seconds of RA, or half-way
+  let k = tokens.findIndex((x, i) => i > 0 && x.signed);
+  if (k < 0) k = tokens.findIndex((x, i) => i > 0 && (x.unit === 'd' || x.unit === '°'));
+  if (k < 0) { const s = tokens.findIndex((x) => x.unit === 's' || x.unit === '″' || x.unit === '"'); if (s >= 0 && s < tokens.length - 1) k = s + 1; }
+  if (k < 0 && tokens.length % 2 === 0) k = tokens.length / 2;
+  if (k < 1) return null;
+  const UNITS = [['', 'h', 'd', '°', ':'], ['', 'm', '′', "'", ':'], ['', 's', '″', '"']];
+  const group = (g: typeof tokens, isRa: boolean): number | null => {
+    if (g.length < 1 || g.length > 3) return null;
+    if (g.some((x, i) => (i > 0 && (x.signed || x.v >= 60)) || (i < g.length - 1 && !x.int) || !UNITS[i].includes(x.unit))) return null;
+    const u = g[0].unit;
+    if (g.length === 1 && u === ':') return null;
+    if (isRa ? g[0].neg : u === 'h') return null;
+    const v = g[0].v + (g[1]?.v ?? 0) / 60 + (g[2]?.v ?? 0) / 3600;
+    if (!isRa) return v <= 90 ? (g[0].neg ? -v : v) : null;
+    const hours = u === 'h' || (g.length > 1 && u !== 'd' && u !== '°'); // "17 57 48" is hours, "269.45" is degrees
+    const deg = hours ? v * 15 : v;
+    return deg < 360 ? deg : null;
+  };
+  const ra = group(tokens.slice(0, k), true);
+  const dec = group(tokens.slice(k), false);
+  return ra !== null && dec !== null ? { ra, dec } : null;
 }
 
 export function formatRa(deg: number): string {
-  const h = deg / 15;
-  const hh = Math.floor(h);
-  const mm = Math.floor((h - hh) * 60);
-  const ss = ((h - hh) * 60 - mm) * 60;
+  const t = Math.round((deg / 15) * 36000); // tenths of a second, rounded first so 59.96 s never prints as "60.0s"
+  const hh = Math.floor(t / 36000) % 24;
+  const mm = Math.floor((t % 36000) / 600);
+  const ss = (t % 600) / 10;
   return `${String(hh).padStart(2, '0')}h${String(mm).padStart(2, '0')}m${ss.toFixed(1).padStart(4, '0')}s`;
 }
 
 export function formatDec(deg: number): string {
   const sign = deg < 0 ? '−' : '+';
-  const a = Math.abs(deg);
-  const dd = Math.floor(a);
-  const mm = Math.floor((a - dd) * 60);
-  const ss = ((a - dd) * 60 - mm) * 60;
-  return `${sign}${String(dd).padStart(2, '0')}°${String(mm).padStart(2, '0')}′${ss.toFixed(0).padStart(2, '0')}″`;
+  const t = Math.round(Math.abs(deg) * 3600); // whole arcseconds, rounded first
+  const dd = Math.floor(t / 3600);
+  const mm = Math.floor((t % 3600) / 60);
+  const ss = t % 60;
+  return `${sign}${String(dd).padStart(2, '0')}°${String(mm).padStart(2, '0')}′${String(ss).padStart(2, '0')}″`;
 }
 
 /**

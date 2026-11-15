@@ -1,6 +1,7 @@
 import { forwardRef, useMemo, useState } from 'react';
 import { parseCoords, formatDec, formatRa } from '../lib/astro';
 import { matchTarget } from '../lib/data';
+import { searchTargets } from '../lib/search';
 import type { Catalog } from '../lib/useCatalog';
 import { KIND_LABEL, STATES } from '../copy';
 import { BlinkMark } from '../components/Chrome';
@@ -23,9 +24,7 @@ export const MapSearch = forwardRef<HTMLInputElement, { catalog: Catalog | null;
       const t = q.trim();
       if (!t) return catalog.index;
       if (parseCoords(t)) return [];
-      const n = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[ε]/g, 'eps').replace(/[^a-z0-9]/g, '');
-      const qq = n(t.replace(/^epsilon/i, 'eps'));
-      return catalog.index.filter((e) => [e.id, e.name, ...(catalog.metas[e.id]?.aliases ?? [])].some((a) => n(a).includes(qq)));
+      return searchTargets(t, catalog.index, catalog.metas); // forgiving: case, apostrophes, word order, small typos
     }, [q, catalog]);
 
     const coords = parseCoords(q.trim());
