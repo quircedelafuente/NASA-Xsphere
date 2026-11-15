@@ -1,34 +1,16 @@
-# Status (hill chart)
+# Status: submitted state, 15 Nov 2026
 
-Update your own rows only. `uphill` = still figuring it out · `downhill` = just executing · `done` = merged to `main` and working.
-If your row hasn't moved in 3 h, write what's blocking you in the last column.
+What shipped, checked against the code on `main`. The planning hill chart from 14 Nov is kept in
+[docs/status-hill-chart-planning.md](docs/status-hill-chart-planning.md).
 
-| Scope | Owner | State | Last update | Blocker / note |
-|---|---|---|---|---|
-| D-1 Target catalogue | Yasen | not started | | |
-| D-2 Coverage inventory | Yasen | not started | | |
-| D-3 Flag dictionary | Sean | done | 2026-11-14 | checked vs real FLAGS header; awaiting Quirce on hard-mask vs saturation |
-| D-4 Science notes | Sean | downhill | 2026-11-14 | most facts verified; open: Barnard type, eps Indi separation, R Dra period (VSX), Taurus |
-| D-5 Band/molecule windows | Sean | downhill | 2026-11-14 | ice lines verified; NIR H2O/CH4 windows + edges still approximate |
-| C3 Class rules `science/classes.json` (+ `science/notes/`) | Sean | downhill | 2026-11-14 | on branch c/science-layer; classifier thresholds unchanged; Mira sources + asteroid numbers still to open/check |
-| D-6 Archival positions (+ ~Gaia field) | Yasen | not started | | |
-| D-7 Release script + bundle QA | Yasen + Sean | not started | | |
-| P0 Spike Barnard | Quirce | not started | | |
-| P1 Frame engine | Quirce | not started | | |
-| P2 Diff, track, Gaia | Giorgi | not started | | |
-| P3 Spectrum | Giorgi | not started | | |
-| P4 Precompute & publish | Quirce | not started | | |
-| P5 `<BlinkCanvas>` | Giorgi | not started | | |
-| P6 ~ Live API | Quirce | not started | | |
-| P7 ~ λ slider / cube | Giorgi | not started | | |
-| P8 ~ Molecule filters | Quirce | not started | | |
-| U0 Breadboard + URL scheme | Niklas | not started | | |
-| U1 Shell + landing | Niklas | not started | | |
-| U2 Viewer page | Niklas | not started | | |
-| U3 Explain layer | Niklas | not started | | |
-| U4 Guided tour | Niklas (text: Yasen) | not started | | |
-| U5 Spectrum panel | Niklas | not started | | |
-| U6 Share / embed | Niklas | not started | | |
-| U7 ~ Flag a candidate | Niklas | not started | | |
-| U9 Submission + video | Niklas (texts: Sean, Quirce) | not started | | |
-| U10 Deploy | Niklas | not started | | |
+## Shipped
+- **Live app** at https://spherex.79-72-55-161.sslip.io/: sky map (Aladin Lite imagery), search by name or coordinates, blink / difference / side-by-side viewer, guided tour of the five targets, share and embed links (`web/`).
+- **Engine** (`backend/engine/`): name and coordinate resolver with typo-tolerant names and CDS Sesame fallback; live IRSA SIA inventory with an S3-header index fallback; background jobs with caching; HTTP API (`/resolve`, `/view`, `/scan`, `/targets`, bundles, reports); pre-warm of the five targets; weekly re-check for new SPHEREx photos (`watch.py`); MCP server exposing the engine as tools.
+- **Frame pipeline** (`processing/`): S3 section reads, zodi and background subtraction, flag masking, reprojection to a common grid, inverse-variance co-add per detector per visit, σ differences, C4 bundles; spectrum with one point per exposure; 2MASS / AllWISE / NEOWISE context frames.
+- **Zone scan** (`processing/discovery/`): detection (incl. red-only pass), motion linking with chance-line test, cross-match with Gaia DR3, CatWISE2020, AllWISE, 2MASS, SIMBAD and SkyBoT, rule-based classes, aperture photometry, JSON report; fake-mover injection test.
+- **Five targets** pre-built in `web/public/bundles/` (3–4 visits each). Measured motions in `processing/discovery/README.md` match Gaia DR3 / CatWISE2020.
+- **Data layer** (`data/`, `science/`): target catalogue, flag dictionary, band windows, science notes, class rules.
+
+## Not finished
+- ML classifier: training-data collector exists (`processing/dataset/collect.py`); the model is in progress and not used by the app.
+- Known limits of the candidate search (one-year baseline, slow movers, saturated photometry) are listed in `processing/discovery/README.md`.
