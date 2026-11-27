@@ -1,5 +1,18 @@
 # Putting SPHEREx Blink online
 
+## Current setup (27 Nov 2026) · https://nasa-xsphere.vercel.app
+- **Front end on Vercel** (project `nasa-xsphere`, static): the product UI plus the 5 challenge targets exported as static
+  files (`deploy/export_static.py`), so the targets open instantly and keep working even if the engine is down.
+- **Live engine** (name lookup, "Load SPHEREx photos here", "Select an area", `/explore`) runs on a small server and is reached
+  through Vercel rewrites. Vercel serves its own files first and forwards only the engine paths
+  (`/resolve`, `/view`, `/scan`, `/targets`, `/object`, `/live`, `/reports`, `/lib3d`, and `/bundles` that are not static).
+- Publish / update: `deploy/vercel_site.sh https://<engine-url>` (builds the UI, exports the bundles, writes the rewrites into
+  the site's `vercel.json`, deploys to production). `SKIP_BUILD=1` reuses the last build.
+- The engine host runs the engine as an unprivileged, sandboxed service that only listens on a unix socket and can only
+  open connections to the public internet (NASA/IRSA, S3, CDS); a Cloudflare tunnel is its only public entry.
+
+---
+
 **Why a host near NASA's data matters:** the engine reads small pieces of each SPHEREx photo from NASA's public copy on Amazon S3 in **us-east-1 (Virginia)**. From the IE Wi-Fi one photo takes ~10 s; from a server in Virginia the team measured 0.5–2.5 s. Pick a host region in or next to us-east-1.
 
 ## Option A · Render (simplest, free tier exists) ⚠ needs an account (Yasen's yes)
